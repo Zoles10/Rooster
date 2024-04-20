@@ -2,6 +2,27 @@
 
 Robené počas akademického roku 2023/24 letný semester
 
+## Návod na prácu
+
+### Predtým ako začneš
+
+1. `sudo apt update && sudo apt -y upgrade`
+2. `sudo add-apt-repository ppa:ondrej/php`
+3. `sudo apt update && sudo apt -y upgrade`
+4. `sudo apt install php-fpm`
+
+### Návod na prácu s dockerom a laravel projektom
+
+1. Git clone na WSL2
+2. Otvoriť VSCode na WSL a otvoriť projekt (daj ho do /home/user)
+3. Otvoriť terminal a vnoriť sa do cd src/
+4. Napíš `composer install`
+5. Choď späť pomocou cd ..
+6. `docker-compose build` následne `docker-compose up -d` na zastavenie `docker-compose down`
+7. Pre aktualizovanie laravelu cez artisan použi `docker exec -it php /bin/sh` (napojenie sa do terminalu containeru PHP)
+8. `php artisan {PRIKAZ}` v PHP containeri keď niečo chceš robiť s laravelom
+9. `exit` na opustenie PHP container terminalu
+
 ## Autori
 
 -   Matej Ištok (frontend)
