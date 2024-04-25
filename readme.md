@@ -19,9 +19,10 @@ Robené počas akademického roku 2023/24 letný semester
 4. Napíš `composer install`
 5. Choď späť pomocou cd ..
 6. `docker-compose build` následne `docker-compose up -d` na zastavenie `docker-compose down`
-7. Pre aktualizovanie laravelu cez artisan použi `docker exec -it php /bin/sh` (napojenie sa do terminalu containeru PHP)
-8. `php artisan {PRIKAZ}` v PHP containeri keď niečo chceš robiť s laravelom
-9. `exit` na opustenie PHP container terminalu
+7. <b>VEĽMI PODSTATNÉ (TAKMER SOM TO STRATIL)</b> ideš `docker exec -it php /bin/sh` a napíšeš `chmod -R 777 storage` a vystúpiš z php containeru pomocou `exit`
+8. Pre aktualizovanie laravelu cez artisan použi `docker exec -it php /bin/sh` (napojenie sa do terminalu containeru PHP)
+9. `php artisan {PRIKAZ}` v PHP containeri keď niečo chceš robiť s laravelom
+10. `exit` na opustenie PHP container terminalu
 
 ## Autori
 
