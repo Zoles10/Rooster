@@ -75,32 +75,32 @@
     </div> -->
     <div class="container mt-5">
         <div class="accordion" id="accordionExample">
-            <div class="accordion-item m-4">
+            <div class="accordion-item m-4 mb-0">
                 <h2 class="accordion-header" id="headingOne">
                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                         Enter Access Code
                     </button>
                 </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <div class="main-content p-4 shadow">
                             <h2 class="mb-3 fs-3 fw-bold">Enter Access Code</h2>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" placeholder="Enter Code" id="access-code">
-                                <button class="btn btn-outline-secondary btn-submit" type="button" id="submit-code">Submit</button>
+                                <button class="btn btn-primary" type="button" id="submit-code">Submit</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="accordion-item m-4">
+
+            <div class="accordion-item m-4 mt-0">
                 <h2 class="accordion-header" id="headingTwo">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         Scan QR Code
-
                     </button>
                 </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <div class="main-content p-4 mt-4 shadow">
                             <h2 class="mb-3 fs-3 fw-bold">Scan QR Code</h2>
@@ -110,13 +110,16 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="accordion" id="accordionExample2">
             <div class="accordion-item m-4">
                 <h2 class="accordion-header" id="headingThree">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                         Login for More Options
                     </button>
                 </h2>
-                <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree">
+                <div id="collapseThree" class="accordion-collapse collapse show">
                     <div class="accordion-body">
                         <div class="login-form mt-4 p-4 shadow-sm">
                             <h4 class="mb-4 fw-bold">Login for More Options</h4>

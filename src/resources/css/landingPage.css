@@ -83,3 +83,28 @@ body {
     color: #31334D;
     border: #31334D;
 }
+
+#qr-reader a {
+    color: #31334D;
+    font-size: 1.2rem;
+    margin: .3rem !important;
+}
+
+#qr-reader a:hover {
+    color: #F2F4FF;
+}
+
+#qr-reader button,
+input {
+    background-color: #31334D;
+    color: #F2F4FF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: .4rem;
+    cursor: pointer;
+}
+
+#qr-reader img {
+
+    display: none;
+}
