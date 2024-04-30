@@ -1,0 +1,85 @@
+/* COLOR PALLETTE */
+/* https: //coolors.co/31334d-93acb5-96c5f7-a9d3ff-f2f4ff */
+@font-face {
+    font-family: 'Mooli-Regular';
+    src: url(../fonts/Mooli-Regular.ttf);
+}
+
+
+
+body {
+    background-color: #96C5F7;
+    color: #31334d;
+    font-family: 'Mooli-Regular', sans-serif;
+}
+
+.site-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #F2F4FF;
+}
+
+.site-header {
+    background-color: #93acb5;
+    color: white;
+    padding: 10px 0;
+}
+
+.main-content {
+    background-color: #93ACB597;
+    border-radius: .4rem;
+    border: .2rem solid #31334D;
+}
+
+.login-form {
+    background-color: #93ACB597;
+    border-radius: .4rem;
+    font-size: 0.9rem;
+    border: .2rem solid #31334D;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.qr-code-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+.btn-submit {
+    background-color: #31334D;
+    color: #F2F4FF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: .4rem;
+    cursor: pointer;
+}
+
+.btn-link {
+    color: #31334D;
+    border: dashed .15rem #31334D;
+    font-weight: bolder;
+    letter-spacing: .2rem;
+    text-decoration: none;
+    border-radius: .3rem;
+}
+
+.btn-link:hover {
+    color: #F2F4FF;
+    border: dashed .15rem #F2F4FF;
+}
+
+.btn-primary {
+    background-color: #31334D;
+    font-weight: bold;
+    letter-spacing: .2rem;
+    color: #F2F4FF;
+    border: #31334D;
+}
+
+.btn-primary:hover {
+    background-color: #F2F4FF;
+    color: #31334D;
+    border: #31334D;
+}
