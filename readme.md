@@ -39,7 +39,7 @@ Robené počas akademického roku 2023/24 letný semester
 
 -   [ ] dvojjazyčnosť
 -   [ ] responzivita
--   [ ] 3 role: neprihlásený, prihlásený a admin
+-   [x] 3 role: neprihlásený, prihlásený a admin
 -   [ ] príručka exportovateľnná do pdf, čo robí ktorá rola
 -   [ ] videoprezentácia
 -   [ ] Titulná stránka s prihlásením a zadaním kódu pre anketu/kvíz/otázku
@@ -48,7 +48,7 @@ Robené počas akademického roku 2023/24 letný semester
 
 ### Neprihlásený používateľ:
 
--   [ ] možnosť registrácie
+-   [x] možnosť registrácie
 -   [ ] zadanie kódu:
     -   [ ] na titulnej stránkeň
     -   [ ] naskenovaním QR kódu na titulnej strane
@@ -62,9 +62,9 @@ Robené počas akademického roku 2023/24 letný semester
 
 ### Prihlásený používateľ:
 
--   [ ] prihlásenie
--   [ ] odhlásenie
--   [ ] zmena hesla
+-   [x] prihlásenie
+-   [x] odhlásenie
+-   [x] zmena hesla
 -   [ ] zadefinovanie viacerých hlasovacích otázok
 -   [ ] definovanie, ktoré otázky sú aktívne a ktoré nie
 -   [ ] generovanie kódu pre otázku:
