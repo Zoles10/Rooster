@@ -62,40 +62,54 @@
                 </div>
             </div>
         </div>
-
-        <div class="accordion" id="accordionExample2">
-            <div class="accordion-item m-4">
-                <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                        Login for More Options
-                    </button>
-                </h2>
-                <div id="collapseThree" class="accordion-collapse collapse show">
-                    <div class="accordion-body">
-                        <div class="login-form mt-4 p-4 shadow-sm">
-                            <h4 class="mb-4 fw-bold">Login for More Options</h4>
-                            <form>
-                                <div class="mb-2">
-                                    <label for="username" class="form-label mb-1 fs-6">Username:</label>
-                                    <input type="text" class="form-control" id="username" placeholder="Username">
-                                </div>
-                                <div class="mb-2">
-                                    <label for="password" class="form-label mb-1 fs-6">Password:</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Password">
-                                </div>
+        <!--- TODO: @Bruchac @Jakub spravte styl -->
+        @if (Auth::guest())
+            <div class="accordion" id="accordionExample2">
+                <div class="accordion-item m-4">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                            Login for More Options
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            <div class="login-form mt-4 p-4 shadow-sm">
                                 <div class="d-flex justify-content-center align-items-center login-container mt-4">
                                     <div class="w-50 d-flex flex-column align-items-center">
-                                        <button type="submit" class="btn btn-primary w-100 mb-3">Login</button>
+                                        <a href="{{ route("login") }}" class="btn btn-primary w-100 mb-3">Login</a>
                                         <hr class="m-1" style="background-color: #000; width: 75%;">
-                                        <a href="/register" class="btn btn-link w-100 mt-3">Register</a>
+                                        <a href="{{ route("register") }}" class="btn btn-primary w-100 mb-3">Register</a>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @else
+            <div class="accordion" id="accordionExample2">
+                <div class="accordion-item m-4">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseThree">
+                            My profile
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse show">
+                        <div class="accordion-body">
+                            <div class="login-form mt-4 p-4 shadow-sm">
+                                <div class="d-flex justify-content-center align-items-center login-container mt-4">
+                                    <div class="w-50 d-flex flex-column align-items-center">
+                                        <a href="{{ route("dashboard") }}" class="btn btn-primary w-100 mb-3">Dashboard</a>
+                                        <hr class="m-1" style="background-color: #000; width: 75%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+        <!--- END-TODO: spravte styl -->
     </div>
 
     <!-- Scripts -->
