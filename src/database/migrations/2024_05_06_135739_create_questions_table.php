@@ -15,23 +15,25 @@ return new class extends Migration
             $table->id();
             $table->string('question', 1023);
             $table->enum('question_type', ['multiple_choice', 'open_ended']);
-            $table->integer('owner_id')->constrained('users');
-            $table->integer('subject_id')->constrained('subjects');
-            $table->integer('poll_id')->constrained('polls');
+            $table->foreignId('owner_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('subject')->constrained('subjects')->onDelete('cascade');
+            $table->foreignId('poll_id')->constrained('polls');
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
 
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
-            $table->integer('question_id')->constrained('questions');
-            $table->longText('user_text');
+            $table->foreignId('question_id')->constrained('questions')->onDelete('cascade');
+            $table->text('user_text');
+            $table->timestamps();
         });
 
         Schema::create('options', function (Blueprint $table) {
             $table->id();
-            $table->integer('question_id')->constrained('questions');
+            $table->foreignId('question_id')->constrained('questions')->onDelete('cascade');
             $table->string('option_text', 511);
-            $table->tinyInteger('correct');
+            $table->boolean('correct')->default(false);
         });
 
         Schema::create('subjects', function (Blueprint $table) {
@@ -42,8 +44,8 @@ return new class extends Migration
         Schema::create('options_history', function (Blueprint $table) {
             $table->id();
             $table->integer('year');
-            $table->integer('times_answered');
-            $table->integer('option_id')->constrained('options');
+            $table->integer('times_answered')->unsigned();
+            $table->foreignId('option_id')->constrained('options')->onDelete('cascade');
         });
     }
 
