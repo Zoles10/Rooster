@@ -100,6 +100,6 @@ Robené počas akademického roku 2023/24 letný semester
 -   [ ] vytváranie otázky:
     -   [ ] v svojom mene
     -   [ ] v mene iného užívateľa
--   [ ] správa prihlásných užívateľov (**CRUD**)
--   [ ] zmena hesla užívateľov
--   [ ] zmena role užívateľa
+-   [x] správa prihlásných užívateľov (**CRUD**)
+-   [x] zmena hesla užívateľov
+-   [x] zmena role užívateľa
