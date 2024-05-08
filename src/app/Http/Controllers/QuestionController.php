@@ -21,7 +21,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        return view('question.create');
     }
 
     /**
@@ -31,14 +31,14 @@ class QuestionController extends Controller
     {
         $question = new Question;
         $validatedData = $request->validate([
-            'question_text' => 'required|string|max:1023',
-            'type' => 'required|string|in:multiple_choice,open_ended',
+            'question' => 'required|string|max:1023',
+            'question_type' => 'required|string|in:multiple_choice,open_ended',
         ]);
-        $question->question_text = $validatedData['question_text'];
-        $question->type = $validatedData['type'];
+        $question->question = $validatedData['question'];
+        $question->question_type = $validatedData['question_type'];
         $question->owner_id = Auth::id();
-        $question->subject_id = $request->input('subject_id');
-        $question->poll_id = null;
+        // $question->subject = $request->input('subject');
+        // $question->poll_id = null;
 
         $question->save();
 
@@ -67,9 +67,9 @@ class QuestionController extends Controller
     public function update(Request $request, Question $question)
     {
         $validatedData = $request->validate([
-            'question_text' => 'sometimes|required|string|max:1023',
-            'type' => 'sometimes|required|string|in:multiple_choice,open_ended',
-            'poll_id' => 'sometimes|required|integer|exists:polls,id',
+            'question' => 'sometimes|required|string|max:1023',
+            'question_type' => 'sometimes|required|string|in:multiple_choice,open_ended',
+            // 'poll_id' => 'sometimes|required|integer|exists:polls,id',
         ]);
 
         $question->update($validatedData);

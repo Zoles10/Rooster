@@ -2,13 +2,16 @@
 
 use App\Http\Controllers\PollController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
 
-Route::get('/poll/{id}', [PollController::class, 'show'])->name('poll.show');
+// Route::get('/question/create', [PollController::class, 'create'])->name('question.create');
+
+Route::resource('question', QuestionController::class);
 
 //Route::resource('poll', PollController::class);
 
