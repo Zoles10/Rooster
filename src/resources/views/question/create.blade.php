@@ -2,13 +2,13 @@
     <div class="bg-white min-h-screen flex items-center justify-center text-white">
         <div class="max-w-xl w-full p-6 md:p-8 bg-gray-500 rounded-lg shadow-lg" style="margin: 0 .4rem;">
             <h1 class="text-2xl font-bold mb-5 text-center">Create Question</h1>
-            <form method="POST" action="{{ route('question.store') }}" class="bg-gray-500 p-6 rounded-lg">
+            <form id="main-form"method="POST" action="{{ route('question.store') }}" class="bg-gray-500 p-4 rounded-lg">
                 @csrf
                 <div class="mb-4">
                     <label for="question" class="block text-sm font-medium text-white">Question:</label>
                     <input type="text"
                         class="form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        id="question" name="question" required style="color: rgb(15, 15, 15);">
+                        id="question" name="question" placeholder="Enter question" style="color: rgb(15, 15, 15);">
                 </div>
 
                 <!-- Type of Question -->
@@ -36,7 +36,8 @@
                 <div class="mb-4">
                     <label for="subject" class="block text-sm font-medium text-white">Subject:</label>
                     <select id="subject" name="subject"
-                        class="form-control mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        class="form-control mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        style="color: rgb(15, 15, 15);">
                         <option value="1" selected>Work in progress</option>
                         <option value="0">Other</option>
                     </select>
@@ -44,9 +45,11 @@
 
                 <!-- Additional Input Field (Initially Hidden) -->
                 <div id="other-subject-container" class="hidden mt-4">
-                    <label for="other-subject" class="block text-sm font-medium text-white">Specify subject name:</label>
-                    <input type="text" id="other-subject" name="other_subject"
-                        class="form-control mt-1 block w-full px-3 py-2 bg-gray-500 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    <label for="other-subject" class="block text-sm font-medium text-white">Specify subject
+                        name:</label>
+                    <input type="text" id="other-subject" name="other_subject" placeholder="Subject name"
+                        class="form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        style="color: rgb(15, 15, 15);">
                 </div>
 
                 <!-- Options Container -->
@@ -57,13 +60,17 @@
                 <!-- Add Option Button with Inline Styles -->
                 <div id="add-option-btn" class="hidden flex justify-center">
                     <button type="button" class="mt-2 p-2 bg-green-500 rounded-md text-white hover:bg-green-600"
-                            style="background-color: green; color: white; border-radius: 4px;"
-                            onclick="addOption()">Add Option</button>
+                        style="background-color: green; color: white; border-radius: 4px;" onclick="addOption()">Add
+                        Option</button>
                 </div>
 
                 <div class="flex justify-between mt-4">
-                    <a href="#" class="btn btn-secondary">Cancel</a>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <!-- Cancel Button -->
+                    <button type="button" class="px-4 py-2 rounded-md text-white hover:bg-gray-600" style="background: rgb(218, 141, 0);"
+                        onclick="resetForm()">Cancel</button>
+                    <!-- Submit Button -->
+                    <button type="submit"
+                        class="px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600" style="background: rgb(79, 70, 229);">Submit</button>
                 </div>
             </form>
         </div>
@@ -80,18 +87,20 @@
         // Handles the Change Between Open Ended and Multiple Choice
         function handleQuestionTypeChange() {
             var container = document.getElementById('options-container');
-            container.innerHTML = '<label class="block text-sm font-medium text-grey">Correct:</label>'; // Clear existing inputs
+            container.innerHTML = ''; // Clear existing inputs
             var addOptionBtn = document.getElementById('add-option-btn');
             optionCount = 4; // Reset to the default number of options
 
             if (this.value === 'multiple_choice') {
                 addOptionBtn.classList.remove('hidden'); // Show "Add Option" button
-
+                container.innerHTML =
+                    '<label class="block text-sm font-medium text-grey">Correct:</label>'; // Clear existing inputs
                 // Add default 4 options
                 for (var i = 0; i < optionCount; i++) {
                     addOption(i + 1);
                 }
             } else {
+                container.innerHTML = ''; // Clear existing inputs
                 addOptionBtn.classList.add('hidden'); // Hide "Add Option" button
             }
         }
@@ -107,7 +116,7 @@
             input.placeholder = 'Option text';
             input.className =
                 'form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm';
-
+            input.style = 'color: black;'
             // Create a new checkbox for correct option
             var checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
@@ -119,7 +128,8 @@
             var removeButton = document.createElement('button');
             removeButton.type = 'button';
             removeButton.innerHTML = '&times;';
-            removeButton.style = 'background-color: red; margin-top: .25rem; color: #f2f2f2; border-radius: 4px; padding: 8px; margin-left: 8px; line-height: .7;';
+            removeButton.style =
+                'background-color: red; margin-top: .25rem; color: #f2f2f2; border-radius: 4px; padding: 8px; margin-left: 8px; line-height: .7;';
             removeButton.onclick = function() {
                 container.removeChild(optionWrapper);
             };
@@ -145,5 +155,16 @@
                 otherSubjectContainer.classList.add('hidden');
             }
         });
+
+        function resetForm() {
+            const form = document.getElementById('main-form'); // Adjust the selector to target the specific form
+            var container = document.getElementById('options-container');
+            container.innerHTML = ''; // Clear existing inputs
+            const otherSubjectContainer = document.getElementById('other-subject-container');
+            otherSubjectContainer.classList.add('hidden')
+            var addOptionBtn = document.getElementById('add-option-btn');
+            addOptionBtn.classList.add('hidden'); // Hide "Add Option" button
+            form.reset(); // Clear out all form fields
+        }
     </script>
 </x-app-layout>
