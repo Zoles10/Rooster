@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-     width="800"
-     height="600"
+     width="160"
+     height="120"
      zoomAndPan="magnify"
      viewBox="0 0 224.87999 74.999997"
      preserveAspectRatio="xMidYMid meet"
