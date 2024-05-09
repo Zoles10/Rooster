@@ -38,11 +38,10 @@
                     <select id="subject" name="subject"
                         class="form-control mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         style="color: rgb(15, 15, 15);">
-                        <option value="1" selected>Work in progress</option>
-                        <option value="0">Other</option>
                         @foreach ($subjects as $subject)
                             <option value="{{ $subject->id }}">{{ $subject->subject }}</option>
                         @endforeach
+                        <option value="0">Other</option>
                     </select>
                 </div>
 
@@ -73,7 +72,7 @@
                         onclick="resetForm()">Cancel</button>
                     <!-- Submit Button -->
                     <button type="submit"
-                        class="px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600" style="background: rgb(79, 70, 229);">Submit</button>
+                        class="px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600" style="background: rgb(79, 70, 229);" onclick="handleSubmit()">Submit</button>
                 </div>
             </form>
         </div>
@@ -168,6 +167,11 @@
             var addOptionBtn = document.getElementById('add-option-btn');
             addOptionBtn.classList.add('hidden'); // Hide "Add Option" button
             form.reset(); // Clear out all form fields
+            window.location.href = "{{ route('question.index') }}";
+        }
+
+        function handleSubmit() {
+            window.location.href = "{{ route('question.index') }}";
         }
     </script>
 </x-app-layout>

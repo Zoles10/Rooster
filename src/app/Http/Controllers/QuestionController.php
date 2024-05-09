@@ -14,7 +14,11 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        $questions = Question::query()
+            ->where('owner_id', request()->user()->index)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+        return view('question.index', ['questions' => $questions]);
     }
 
     /**
@@ -47,22 +51,20 @@ class QuestionController extends Controller
             $question->subject()->associate($subject);
         }
 
+        $question->save();
+
         if ($validatedData['question_type'] === 'multiple_choice') {
             $i = 1;
             foreach ($request->all() as $key => $value) {
                 if (str_starts_with($key, 'option')) {
-                    $option = $request->input('option' . $i);
                     $correct = $request->input('isCorrect' . $i);
                     $correct = isset($correct) ? true : false;
-                    if ($option) {
-                        $question->options()->create(['option_text' => $option, 'correct' => $correct]);
-                    }
+                    $question->options()->create(['option_text' => $value, 'correct' => $correct]);
+                    $i++;
                 }
-                $i++;
             }
         }
-        $question->save();
-        return response()->json(['message' => 'Question created successfully'], 201);
+        return redirect()->route('question.index', $question);
     }
 
     /**
@@ -70,7 +72,7 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        //
+        return view('question.show', ['question' => $question]);
     }
 
     /**
@@ -78,7 +80,7 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
-        return view('question.edit', compact('question'));
+        return view('question.edit', ['question' => $question]);
     }
 
     /**
@@ -93,7 +95,7 @@ class QuestionController extends Controller
 
         $question->update($validatedData);
 
-        return redirect()->route('dashboard', $question);
+        return redirect()->route('question.show', $question);
     }
 
     /**
@@ -101,6 +103,8 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        //
+        $question->delete();
+
+        return to_route('question.index')->with('message', ('Question was destroyed'));
     }
 }

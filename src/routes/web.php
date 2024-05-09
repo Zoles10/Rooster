@@ -17,9 +17,11 @@ Route::resource('question', QuestionController::class);
 
 Route::post('/answer', [AnswerController::class, 'store'])->name('answer.store');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::redirect('/dashboard','/question')->name('dashboard');
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/adminBoard', [UserController::class, 'index'])->middleware(['auth', 'verified'])->name('adminBoard');
 

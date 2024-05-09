@@ -10,4 +10,6 @@ class Option extends Model
     use HasFactory;
 
     protected $fillable = ['question_id', 'option_text', 'correct'];
+
+    public $timestamps = false;
 }
