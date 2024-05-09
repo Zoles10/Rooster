@@ -9,4 +9,5 @@ class Subject extends Model
 {
     use HasFactory;
     protected $fillable = ['subject'];
+    public $timestamps = false;
 }

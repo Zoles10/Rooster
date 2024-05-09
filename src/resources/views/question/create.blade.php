@@ -40,6 +40,9 @@
                         style="color: rgb(15, 15, 15);">
                         <option value="1" selected>Work in progress</option>
                         <option value="0">Other</option>
+                        @foreach ($subjects as $subject)
+                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                        @endforeach
                     </select>
                 </div>
 

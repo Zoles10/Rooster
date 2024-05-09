@@ -22,7 +22,8 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        return view('question.create');
+        $subjects = Subject::all();
+        return view('question.create', ['subjects' => $subjects]);
     }
 
     /**
@@ -39,14 +40,12 @@ class QuestionController extends Controller
         $question->question_type = $validatedData['question_type'];
         $question->owner_id = Auth::id();
 
-        if($request->has('subject')) {
-            $subject = $request->input('subject');
+        if($request->input('subject') != 0) {
+            $question->subject()->associate($request->input('subject'));
         } else {
-            $subject = $request->input('other_subject');
+            $subject = Subject::firstOrCreate(['subject' => $request->input('other_subject')]);
+            $question->subject()->associate($subject);
         }
-
-        $subject = Subject::firstOrCreate(['subject' => $subject]);
-        $question->subject()->associate($subject);
 
         if ($validatedData['question_type'] === 'multiple_choice') {
             $i = 1;
@@ -62,6 +61,7 @@ class QuestionController extends Controller
                 $i++;
             }
         }
+        $question->save();
         return response()->json(['message' => 'Question created successfully'], 201);
     }
 
