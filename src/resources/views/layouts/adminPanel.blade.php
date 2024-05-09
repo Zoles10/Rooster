@@ -1,6 +1,9 @@
-<p>
-    Admin
-</p>
+<!--
+    TODO:
+    @Bruchac @Jakub
+    Vsetky style="color:black" musia ist prec a nahradit ich tailwindom tak aby to aj fungovalo
+    A ostatne uz necham na vas nech to nejak vyzera
+-->
 <table class="table table-striped table-hover mt-4">
     <thead>
         <tr class="bg-blue-500 text-white">
@@ -8,7 +11,6 @@
             <th class="px-4 py-2">Email</th>
             <th class="px-4 py-2">Is Admin</th>
             <th class="px-4 py-2">Password</th>
-            <!-- Add more columns as needed -->
         </tr>
     </thead>
     <tbody>

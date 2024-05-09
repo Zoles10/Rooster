@@ -19,6 +19,9 @@
     </style>
 </head>
 <body>
+    <!-- @Jakub
+    fix boostrap+tailwind errors vymaztentotextpredat@include('layouts.navigation')
+        --->
     <header class="site-header">
         <div class="container d-flex justify-content-center">
             <h1 class="site-title">TeachRate</h1>

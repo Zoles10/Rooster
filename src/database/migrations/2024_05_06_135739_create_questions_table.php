@@ -4,12 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up() : void
     {
         // Ensure that the subjects table is created first
         Schema::create('subjects', function (Blueprint $table) {
@@ -17,13 +16,13 @@ return new class extends Migration
             $table->string('subject', 255);
         });
 
-        // Now create the questions table with foreign keys
+        // Now create the questions table with foreign keyss
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->string('question', 1023);
             $table->enum('question_type', ['multiple_choice', 'open_ended']);
             $table->foreignId('owner_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('subject')->constrained('subjects')->onDelete('cascade');
+            $table->foreignId('subject')->nullable()->constrained('subjects')->onDelete('cascade');
             $table->boolean('active')->default(true);
             $table->timestamps();
         });
@@ -54,15 +53,15 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
+    public function down() : void
     {
-            // Drop dependent tables first
-    Schema::dropIfExists('options_history');
-    Schema::dropIfExists('options');
+        // Drop dependent tables first
+        Schema::dropIfExists('options_history');
+        Schema::dropIfExists('options');
 
-    // Now drop other tables like questions, answers, etc.
-    Schema::dropIfExists('answers');
-    Schema::dropIfExists('questions');
-    Schema::dropIfExists('subjects');
+        // Now drop other tables like questions, answers, etc.
+        Schema::dropIfExists('answers');
+        Schema::dropIfExists('questions');
+        Schema::dropIfExists('subjects');
     }
 };
