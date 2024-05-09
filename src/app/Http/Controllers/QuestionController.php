@@ -15,7 +15,7 @@ class QuestionController extends Controller
     public function index()
     {
         $questions = Question::query()
-            ->where('owner_id', request()->user()->index)
+            ->where('owner_id', request()->user()->id)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
         return view('question.index', ['questions' => $questions]);

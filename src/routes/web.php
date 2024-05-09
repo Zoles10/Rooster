@@ -13,15 +13,12 @@ Route::get('/question/create', [QuestionController::class, 'create'])->middlewar
 
 Route::post('/question', [QuestionController::class, 'store'])->middleware(['auth', 'verified'])->name('question.store');
 
+Route::get('/dashboard', [QuestionController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::resource('question', QuestionController::class);
 
 Route::post('/answer', [AnswerController::class, 'store'])->name('answer.store');
 
-Route::redirect('/dashboard','/question')->name('dashboard');
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/adminBoard', [UserController::class, 'index'])->middleware(['auth', 'verified'])->name('adminBoard');
 
