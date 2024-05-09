@@ -41,7 +41,7 @@
                         <option value="1" selected>Work in progress</option>
                         <option value="0">Other</option>
                         @foreach ($subjects as $subject)
-                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                            <option value="{{ $subject->id }}">{{ $subject->subject }}</option>
                         @endforeach
                     </select>
                 </div>
