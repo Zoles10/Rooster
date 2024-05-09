@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\PollController;
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\WelcomeController;
@@ -9,11 +9,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
 
-// Route::get('/question/create', [PollController::class, 'create'])->name('question.create');
+Route::get('/question/create', [QuestionController::class, 'create'])->middleware(['auth', 'verified'])->name('question.create');
+
+Route::post('/question', [QuestionController::class, 'store'])->middleware(['auth', 'verified'])->name('question.store');
 
 Route::resource('question', QuestionController::class);
 
-//Route::resource('poll', PollController::class);
+Route::post('/answer', [AnswerController::class, 'store'])->name('answer.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

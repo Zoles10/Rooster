@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->string('question', 1023);
             $table->enum('question_type', ['multiple_choice', 'open_ended']);
             $table->foreignId('owner_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('subject')->nullable()->constrained('subjects')->onDelete('cascade');
+            $table->foreignId('subject_id')->nullable()->constrained('subjects')->onDelete('cascade');
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,11 +38,30 @@ class QuestionController extends Controller
         $question->question = $validatedData['question'];
         $question->question_type = $validatedData['question_type'];
         $question->owner_id = Auth::id();
-        // $question->subject = $request->input('subject');
-        // $question->poll_id = null;
 
-        $question->save();
+        if($request->has('subject')) {
+            $subject = $request->input('subject');
+        } else {
+            $subject = $request->input('other_subject');
+        }
 
+        $subject = Subject::firstOrCreate(['subject' => $subject]);
+        $question->subject()->associate($subject);
+
+        if ($validatedData['question_type'] === 'multiple_choice') {
+            $i = 1;
+            foreach ($request->all() as $key => $value) {
+                if (str_starts_with($key, 'option')) {
+                    $option = $request->input('option' . $i);
+                    $correct = $request->input('isCorrect' . $i);
+                    $correct = isset($correct) ? true : false;
+                    if ($option) {
+                        $question->options()->create(['option_text' => $option, 'correct' => $correct]);
+                    }
+                }
+                $i++;
+            }
+        }
         return response()->json(['message' => 'Question created successfully'], 201);
     }
 
@@ -69,7 +89,6 @@ class QuestionController extends Controller
         $validatedData = $request->validate([
             'question' => 'sometimes|required|string|max:1023',
             'question_type' => 'sometimes|required|string|in:multiple_choice,open_ended',
-            // 'poll_id' => 'sometimes|required|integer|exists:polls,id',
         ]);
 
         $question->update($validatedData);

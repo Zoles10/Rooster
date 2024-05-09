@@ -4,14 +4,33 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Poll;
+use App\Models\Option;
+
 
 class Question extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'question',
+        'question_type',
+        'owner_id',
+        'subject',
+        'active'
+    ];
 
-    public function scopeWithPollId($query, $pollId)
+    public function answers()
     {
-        return $query->where('poll_id', $pollId);
+        return $this->hasMany(Answer::class);
     }
+
+    public function options()
+    {
+        return $this->hasMany(Option::class);
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
+
 }
