@@ -41,4 +41,8 @@ class User extends Authenticatable
     {
         return $this->admin;
     }
+    public function questions()
+    {
+        return $this->hasMany(Question::class, 'owner_id');
+    }
 }

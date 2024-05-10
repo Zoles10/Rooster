@@ -2,24 +2,62 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
+use Carbon\Traits\ToStringFormat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Used to get Users and Their Questions
+    public function getAll()
+    {
+        return User::all();
+    }
+
+    public function getById(string $id)
+    {
+        $user = User::find($id);
+        if (! $user)
+            return null;
+        return $user;
+    }
+
+    public function getUserQuestionsByUserId(string $id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            return $user->questions;
+        }
+        return null;
+    }
+
+    // used for displaying all user questions
+
+    public function indexQuestions()
+    {
+        $users = User::all();
+        $questions = [];
+        foreach ($users as $user) {
+            $userQuestions = UserController::getUserQuestionsByUserId($user->id);
+            foreach ($userQuestions as $question) {
+                $question->user_name = $user->name;
+                $question->subject;
+            }
+            $questions = array_merge($questions, $userQuestions->toArray());
+        }
+        //return $questions;
+        return view('admin.adminQuestionBoard', ["questions" => $questions]);
+    }
+
+    // used for displaying all users in User Management view
     public function index()
     {
         $users = User::all();
-        return view('adminBoard', ["users" => $users]);
+        return view('admin.adminUserBoard', ["users" => $users]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(Request $request)
     {
         $request->validate([
@@ -37,25 +75,6 @@ class UserController extends Controller
         return back();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Request $request, User $user)
     {
         $request->validate([
@@ -80,9 +99,6 @@ class UserController extends Controller
         return back();
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, User $user)
     {
         $user->admin = $request->has('admin');
@@ -91,9 +107,6 @@ class UserController extends Controller
         return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(User $user)
     {
         $user->delete();

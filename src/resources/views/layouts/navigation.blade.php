@@ -18,8 +18,13 @@
                 </div>
                 @if (auth()->user()->isAdmin())
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex ">
-                        <x-nav-link :href="route('adminBoard')" class="text-black" :active="request()->routeIs('adminBoard')">
-                            {{ __('Admin Panel') }}
+                        <x-nav-link :href="route('adminUserControl')" class="text-black" :active="request()->routeIs('adminUserControl')">
+                            {{ __('Users') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex ">
+                        <x-nav-link :href="route('adminQuestionControl')" class="text-black" :active="request()->routeIs('adminQuestionControl')">
+                            {{ __('User Questions') }}
                         </x-nav-link>
                     </div>
                 @endif
@@ -80,8 +85,13 @@
         </div>
         @if (auth()->user()->isAdmin())
             <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link :href="route('adminBoard')" :active="request()->routeIs('adminBoard')">
-                    {{ __('Admin Panel') }}
+                <x-responsive-nav-link :href="route('adminUserControl')" :active="request()->routeIs('adminUserControl')">
+                    {{ __('Users') }}
+                </x-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('adminQuestionControl')" :active="request()->routeIs('adminQuestionControl')">
+                    {{ __('User Questions') }}
                 </x-responsive-nav-link>
             </div>
         @endif

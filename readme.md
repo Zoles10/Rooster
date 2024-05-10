@@ -96,10 +96,10 @@ Robené počas akademického roku 2023/24 letný semester
 ### Admin:
 
 -   [ ] prístup k hlasovacím otázkam všetkých užívateľov
--   [ ] možnosť filtrovania nad vybraným užívateľom
--   [ ] vytváranie otázky:
-    -   [ ] v svojom mene
-    -   [ ] v mene iného užívateľa
+-   [x] možnosť filtrovania nad vybraným užívateľom
+-   [x] vytváranie otázky:
+    -   [x] v svojom mene
+    -   [x] v mene iného užívateľa
 -   [x] správa prihlásných užívateľov (**CRUD**)
 -   [x] zmena hesla užívateľov
 -   [x] zmena role užívateľa

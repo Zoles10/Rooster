@@ -20,7 +20,9 @@ Route::resource('question', QuestionController::class);
 Route::post('/answer', [AnswerController::class, 'store'])->name('answer.store');
 
 
-Route::get('/adminBoard', [UserController::class, 'index'])->middleware(['auth', 'verified'])->name('adminBoard');
+Route::get('/admin/Users', [UserController::class, 'index'])->middleware(['auth', 'verified'])->name('adminUserControl');
+Route::get('/admin/AllQuestions', [UserController::class, 'indexQuestions'])->middleware(['auth', 'verified'])->name('adminQuestionControl');
+Route::delete('/question/{id}/admin', [QuestionController::class, 'destroyAdmin'])->middleware(['auth', 'verified'])->name('question.destroyAdmin');
 
 Route::post('/user/{user}/admin', [UserController::class, 'update'])->middleware(['auth', 'verified'])->name('user.update');
 Route::post('/user/{user}/password', [UserController::class, 'edit'])->middleware(['auth', 'verified'])->name('user.updatePassword');

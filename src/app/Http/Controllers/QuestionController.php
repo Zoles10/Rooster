@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Models\Subject;
+use App\Models\User;
 use App\Models\OptionsHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,15 @@ class QuestionController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function getAllByUserId(string $id)
+    {
+        $questions = Question::query()
+            ->where('owner_id', $id)
+            ->get();
+        return $questions;
+    }
+
     public function index()
     {
         $questions = Question::query()
@@ -28,7 +38,8 @@ class QuestionController extends Controller
     public function create()
     {
         $subjects = Subject::all();
-        return view('question.create', ['subjects' => $subjects]);
+        $users = User::all();
+        return view('question.create', ["users" => $users, 'subjects' => $subjects]);
     }
 
     /**
@@ -43,7 +54,17 @@ class QuestionController extends Controller
         ]);
         $question->question = $validatedData['question'];
         $question->question_type = $validatedData['question_type'];
-        $question->owner_id = Auth::id();
+
+        $dropdownValue = $request->input('ownerInput');
+        if (! empty($dropdownValue) && $dropdownValue != '0') {
+            $user = User::where('name', $dropdownValue)->first();
+            if ($user) {
+                $question->owner_id = $user->id;
+            } else {
+                $question->owner_id = Auth::id();
+            }
+        } else
+            $question->owner_id = Auth::id();
 
         if ($request->input('subject') != 0) {
             $question->subject()->associate($request->input('subject'));
@@ -112,5 +133,12 @@ class QuestionController extends Controller
         $question->delete();
 
         return to_route('question.index')->with('message', ('Question was destroyed'));
+    }
+
+    public function destroyAdmin(string $question_id)
+    {
+        $question = Question::find($question_id);
+        $question->delete();
+        return back();
     }
 }
