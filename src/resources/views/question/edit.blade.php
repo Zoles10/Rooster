@@ -1,14 +1,23 @@
 <x-app-layout>
-    <div class="question-container single-question">
-        <h1>Edit you note</h1>
-        <form action="{{ route('question.update', $question)}}" method="POST" class="question">
+   <div class="bg-white min-h-screen flex items-center justify-center text-white">
+    <div class="max-w-xl w-full p-6 md:p-8 bg-gray-500 rounded-lg shadow-lg" style="margin: 0 .4rem;">
+        <h1 class="text-2xl font-bold mb-5 text-center">Edit your question</h1>
+        <form action="{{ route('question.update', $question) }}" method="POST" class="bg-gray-500 p-4 rounded-lg">
             @csrf
             @method('PUT')
-            <textarea name="question" cols="30" rows="10" class="question-body" placeholder="Enter your question">{{ $question->question}}</textarea>
-            <div class="question-buttons">
-                <a href="{{ route('question.index')}}" class="question-cancel-button">Cancel</a>
-                <button class="question-submit-button">Submit</button>
+            <div class="mb-4">
+                <textarea name="question" cols="30" rows="10"
+                    class="form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    placeholder="Enter your question" style="color: rgb(15, 15, 15);">{{ $question->question }}</textarea>
+            </div>
+            <div class="flex justify-between mt-4">
+                <a href="{{ route('question.index') }}"
+                    style="background: orange;"
+                    class="px-4 py-2 hover:bg-gray-700 rounded-md text-white font-semibold text-xs">Cancel</a>
+                <button class="px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600 font-semibold text-xs"
+                    style="background: rgb(79, 70, 229);">Submit</button>
             </div>
         </form>
     </div>
+</div>
 </x-app-layout>

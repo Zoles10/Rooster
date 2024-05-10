@@ -30,7 +30,7 @@
                     </div>
                 @endif
                 <!-- Type of Question -->
-                <div class="">
+                <div>
                     <label class="block text-sm font-medium text-white">Type of the question:</label>
                     <div class="mt-3 p-2">
                         <div class="mb-3">
@@ -80,7 +80,7 @@
                 </div>
                 <span id="option-err" style="display: none; font-size: .7rem; color:red;"></span>
                 <!-- Add Option Button with Inline Styles -->
-                <div id="add-option-btn" class="hidden justify-center">
+                <div id="add-option-btn" class="hidden flex justify-center">
                     <button type="button" class="mt-2 p-2 bg-green-500 rounded-md text-white hover:bg-green-600"
                         style="background-color: green; color: white; border-radius: 4px;" onclick="addOption()">Add
                         Option</button>

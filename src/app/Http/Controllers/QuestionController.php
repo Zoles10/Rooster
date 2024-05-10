@@ -122,7 +122,7 @@ class QuestionController extends Controller
 
         $question->update($validatedData);
 
-        return redirect()->route('question.show', $question);
+        return redirect()->route('question.index', $question);
     }
 
     /**
