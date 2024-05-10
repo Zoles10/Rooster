@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
+use App\Models\Question;
 use Illuminate\Http\Request;
 
 class AnswerController extends Controller
@@ -28,17 +29,36 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
-        $answer = new Answer;
-        $validatedData = $request->validate([
-            'question_id' => 'required|integer',
-            'user_text' => 'required|string|max:1023',
+        $request->validate([
+            'question_id' => 'required|integer'
         ]);
-        $answer->question_id = $validatedData['question_id'];
-        $answer->user_text = $validatedData['user_text'];
 
-        $answer->save();
+        $question = Question::findOrFail($request->question_id);
 
-        return response()->json(['message' => 'Answer created successfully'], 201);
+        if($question['active'] == true) {
+            if($question['question_type'] == 'open_ended') {
+                $request->validate([
+                    'user_text' => 'required|string|max:1023'
+                ]);
+                $question->answers()->create($request->all());
+            } else {
+                $options = $question->options()->get();
+                $i = 1;
+                foreach ($options as $option) {
+                    if (isset($request['selected' . $i])) {
+                        $optionsHistory = $option->optionsHistory()->first();
+                        if($optionsHistory) {
+                            $optionsHistory->increment('number_answered');
+                        }
+                    }
+                    $i++;
+                }
+            }
+
+            return response()->json(['message' => 'Answer created successfully'], 201);
+        }
+
+        return to_route('welcome')->with('message', ('Question is not active'));
     }
 
     /**

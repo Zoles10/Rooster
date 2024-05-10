@@ -12,4 +12,9 @@ class Option extends Model
     protected $fillable = ['question_id', 'option_text', 'correct'];
 
     public $timestamps = false;
+
+    public function optionsHistory()
+    {
+        return $this->belongsTo(OptionsHistory::class);
+    }
 }

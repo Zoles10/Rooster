@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Models\Subject;
+use App\Models\OptionsHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -59,7 +60,10 @@ class QuestionController extends Controller
                 if (str_starts_with($key, 'option')) {
                     $correct = $request->input('isCorrect' . $i);
                     $correct = isset($correct) ? true : false;
-                    $question->options()->create(['option_text' => $value, 'correct' => $correct]);
+                    $option = $question->options()->create(['option_text' => $value, 'correct' => $correct]);
+                    $optionsHistory = OptionsHistory::create(['year' => date('Y'), 'times_answered' => 0]);
+                    $option->optionsHistory()->associate($optionsHistory);
+                    $option->save();
                     $i++;
                 }
             }
@@ -72,6 +76,8 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
+        //options budu v $question->options
+        $question->load('options');
         return view('question.show', ['question' => $question]);
     }
 
