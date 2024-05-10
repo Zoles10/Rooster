@@ -9,5 +9,14 @@ class OptionsHistory extends Model
 {
     use HasFactory;
 
+    protected $table = "options_history";
+
+    protected $fillable = ['year', 'times_answered', 'option_id'];
+
     public $timestamps = false;
+
+    public function optionsHistory()
+    {
+        return $this->belongsTo(OptionsHistory::class);
+    }
 }

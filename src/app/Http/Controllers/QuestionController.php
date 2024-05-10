@@ -45,7 +45,7 @@ class QuestionController extends Controller
         $question->question_type = $validatedData['question_type'];
         $question->owner_id = Auth::id();
 
-        if($request->input('subject') != 0) {
+        if ($request->input('subject') != 0) {
             $question->subject()->associate($request->input('subject'));
         } else {
             $subject = Subject::firstOrCreate(['subject' => $request->input('other_subject')]);
@@ -61,8 +61,8 @@ class QuestionController extends Controller
                     $correct = $request->input('isCorrect' . $i);
                     $correct = isset($correct) ? true : false;
                     $option = $question->options()->create(['option_text' => $value, 'correct' => $correct]);
-                    $optionsHistory = OptionsHistory::create(['year' => date('Y'), 'times_answered' => 0]);
-                    $option->optionsHistory()->associate($optionsHistory);
+                    $optionsHistory = OptionsHistory::create(['year' => date('Y'), 'times_answered' => 0, 'option_id' => $option->id]);
+                    //$option->optionsHistory()->associate($optionsHistory);
                     $option->save();
                     $i++;
                 }

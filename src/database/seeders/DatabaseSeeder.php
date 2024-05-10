@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Subject;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,8 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run() : void
     {
-        // User::factory(10)->create();
-
+        // Dummy Users
         User::factory()->create([
             "name" => "admin",
             "email" => "admin@admin.sk",
@@ -36,5 +36,17 @@ class DatabaseSeeder extends Seeder
             "password" => \Illuminate\Support\Facades\Hash::make('12345678'),
         ]);
 
+        // Subjects
+        Subject::factory()->create([
+            "subject" => "WEBTE2",
+        ]);
+
+        Subject::factory()->create([
+            "subject" => "VSA",
+        ]);
+
+        Subject::factory()->create([
+            "subject" => "UHD",
+        ]);
     }
 }
