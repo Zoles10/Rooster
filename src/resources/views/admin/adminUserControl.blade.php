@@ -21,12 +21,12 @@
             @continue
             @endif
             <tr>
-                <td class="border px-4 py-2 border-blue-300">
+                <td class="border px-4 py-2">
                     <form method="POST" action="{{ route('user.updateName', $user) }}">
                         @csrf
                         <div class="flex flex-row">
                             <input type="text" id="name" name="name" class="w-full px-4 py-2 rounded-lg border-blue-300 focus:border-indigo-600 focus:ring focus:ring-blue-200 focus:ring-opacity-50" value="{{ $user->name }}" required>
-                            <button type="submit" class="px-4 py-2 mx-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-600">Update Name</button>
+                            <button type="submit" class="px-4 py-2 mx-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-600">Update</button>
                         </div>
                     </form>
                 </td>
@@ -41,9 +41,8 @@
                     <form method="POST" action="{{ route('user.updatePassword', $user) }}" class="my-4">
                         @csrf
                         <div>
-                            <label for="password" class="block text-sm font-medium text-gray-700">New Password:</label>
                             <div class="flex flex-row">
-                                <input type="password" id="password" name="password" class="mt-1 block w-full rounded-md border-blue-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-100" required>
+                                <input type="password" id="password" name="password" placeholder="Enter new password" class="mt-1 block w-full rounded-md border-blue-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-100" required>
                                 <button type="submit" class="px-4 py-2 mx-2 rounded-md text-white bg-indigo-600 mt-1  hover:bg-indigo-600">Submit</button>
                             </div>
                         </div>
