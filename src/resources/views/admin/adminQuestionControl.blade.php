@@ -54,3 +54,4 @@ function filterTable() {
         @endforeach
     </tbody>
 </table>
+{{ $questions->links() }}

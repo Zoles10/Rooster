@@ -37,17 +37,13 @@ class UserController extends Controller
 
     public function indexQuestions()
     {
-        $users = User::all();
-        $questions = [];
-        foreach ($users as $user) {
-            $userQuestions = UserController::getUserQuestionsByUserId($user->id);
-            foreach ($userQuestions as $question) {
-                $question->user_name = $user->name;
-                $question->subject;
-            }
-            $questions = array_merge($questions, $userQuestions->toArray());
+        $questions = Question::with('user')->paginate(10);
+
+        foreach ($questions as $question) {
+            $question->user_name = $question->user->name;
+            $question->subject;
         }
-        //return $questions;
+
         return view('admin.adminQuestionBoard', ["questions" => $questions]);
     }
 

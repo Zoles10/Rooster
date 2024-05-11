@@ -7,3 +7,8 @@
     padding: 10px;
     margin: 10px 0;
 }
+
+.dark .page-link {
+    background-color: white !important;
+    color: black !important;
+}
