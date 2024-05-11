@@ -36,6 +36,20 @@ class DatabaseSeeder extends Seeder
             "password" => \Illuminate\Support\Facades\Hash::make('12345678'),
         ]);
 
+        User::factory()->create([
+            "name" => "user3",
+            "email" => "user3@imp.sk",
+            "admin" => 0,
+            "password" => \Illuminate\Support\Facades\Hash::make('12345678'),
+        ]);
+
+        User::factory()->create([
+            "name" => "user4",
+            "email" => "user4@imp.sk",
+            "admin" => 0,
+            "password" => \Illuminate\Support\Facades\Hash::make('12345678'),
+        ]);
+
         // Subjects
         Subject::factory()->create([
             "subject" => "WEBTE2",
