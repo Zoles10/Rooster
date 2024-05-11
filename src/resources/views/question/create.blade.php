@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="bg-white min-h-screen flex items-center justify-center text-white">
+    <div class="bg-white min-h-screen flex flex-col items-center justify-center text-white">
         <div class="max-w-xl w-full p-6 md:p-8 bg-gray-500 rounded-lg shadow-lg" style="margin: 0 .4rem;">
             <h1 class="text-2xl font-bold mb-5 text-center">Create Question</h1>
             <form id="main-form" method="POST" action="{{ route('question.store') }}" class="bg-gray-500 p-4 rounded-lg">
@@ -95,6 +95,9 @@
                         style="background: rgb(79, 70, 229);" id="submit-btn">Submit</button>
                 </div>
             </form>
+        </div>
+        <div style="background: blue;" class="mt-3 px-4 py-2 rounded-md text-white hover:bg-gray-600">
+            <a href={{ route('question.index') }}>Späť na otázky</a>
         </div>
     </div>
 

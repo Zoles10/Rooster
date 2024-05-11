@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <div class="flex justify-center items-center">
             <a href="{{ route('question.create') }}" style="background: rgb(79, 70, 229);"
-                class="inline-flex items-center px-4 py-2 bg-purple-800 border border-transparent rounded-md font-semibold text-m text-white uppercase tracking-widest hover:bg-purple-700 active:bg-purple-900 focus:outline-none focus:border-purple-900 focus:ring ring-purple-300 disabled:opacity-25 transition ease-in-out duration-150">
+                class="inline-flex items-center px-4 py-2 hover:text-gray-300 bg-purple-800 border border-transparent rounded-md font-semibold text-m text-white uppercase tracking-widest hover:bg-purple-700 active:bg-purple-900 focus:outline-none focus:border-purple-900 focus:ring ring-purple-300 disabled:opacity-25 transition ease-in-out duration-150">
                 Create question
             </a>
         </div>
@@ -10,7 +10,7 @@
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 w-full">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="shadow-lg overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                        <table class="w-full divide-y divide-gray-200">
+                        <table class="w-full divide-y divide-gray-200 mb-2">
                             <thead class="p-2" style="background: rgb(235, 226, 255);">
                                 <tr>
                                     <th
@@ -22,11 +22,11 @@
                                         Created at
                                     </th>
                                     <th
-                                        class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider text-center ">
+                                        class="px-6 py-4 text-m font-medium text-gray-800 uppercase tracking-wider text-center ">
                                         Active
                                     </th>
                                     <th
-                                        class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider text-center">
+                                        class="px-6 py-4 text-m font-medium text-gray-800 uppercase tracking-wider text-center">
                                         Actions
                                     </th>
                                 </tr>
@@ -47,7 +47,7 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <input type="hidden" name="active" value="{{ $question->active ? '0' : '1' }}">
-                                                <input type="checkbox" name="active_checkbox" onchange="this.form.submit()" value="{{ $question->id }}" {{     $question->active ? 'checked' : '' }}>
+                                                <input type="checkbox" name="active_checkbox" class="form-checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded" onchange="this.form.submit()" value="{{ $question->id }}" {{     $question->active ? 'checked' : '' }}>
                                             </form>
                                             </div>
                                         </td>
@@ -55,7 +55,7 @@
                                             <div class="flex flex-col space-y-2 justify-center items-center">
                                                 <a href="{{ route('question.edit', $question->id) }}"
                                                     style="background: rgb(79, 70, 229); width: 50%; text-align: center;"
-                                                    class="text-white p-2 hover:text-red-900 m-1 border border-transparent rounded-md font-semibold text-xs text-white text-center">Edit</a>
+                                                    class="text-white p-2 hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs text-white text-center">Edit</a>
                                             </div>
                     </div>
 
@@ -64,7 +64,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit"
-                            class="text-white p-2 hover:text-red-900 m-1 border border-transparent rounded-md font-semibold text-xs text-white"
+                            class="text-white p-2 hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs text-white"
                             style="background: red; width: 50%;">Delete</button>
                     </form>
                     </td>
