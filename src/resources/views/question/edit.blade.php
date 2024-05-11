@@ -13,7 +13,7 @@
             <div class="flex justify-between mt-4">
                 <a href="{{ route('question.index') }}"
                     style="background: orange;"
-                    class="px-4 py-2 hover:bg-gray-700 rounded-md text-white font-semibold text-xs">Cancel</a>
+                    class="px-4 py-2 hover:bg-gray-700 rounded-md text-white font-semibold text-xs">Back</a>
                 <button class="px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600 font-semibold text-xs"
                     style="background: rgb(79, 70, 229);">Submit</button>
             </div>

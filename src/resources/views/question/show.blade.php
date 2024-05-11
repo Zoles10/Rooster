@@ -26,7 +26,7 @@
                     @endforeach
                 @endif
 
-                <button type="button" onclick="submitForm()" class="px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600">Send</button>
+                <button type="button" onclick="submitForm()" style="background: rgb(79, 70, 229);" class="px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600">Send</button>
                 <button type="reset" class="px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600">Clear</button>
             </form>
         </div>

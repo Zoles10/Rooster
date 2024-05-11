@@ -55,7 +55,7 @@
                     <label for="subject" class="block text-sm font-medium text-white">Subject:</label>
                     <span id="subject-err" style="display: none; font-size: .7rem; color:red;"></span>
                     <select id="subject" name="subject"
-                        class="form-control mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        class="form-control mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         style="color: rgb(15, 15, 15);">
                         @foreach ($subjects as $subject)
                             <option value="{{ $subject->id }}">{{ $subject->subject }}</option>

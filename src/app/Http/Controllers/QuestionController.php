@@ -115,10 +115,15 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-        $validatedData = $request->validate([
+          $validatedData = $request->validate([
             'question' => 'sometimes|required|string|max:1023',
             'question_type' => 'sometimes|required|string|in:multiple_choice,open_ended',
+            'active' => 'sometimes|boolean',
         ]);
+
+        if (! isset($validatedData['active'])) {
+            $validatedData['active'] = 0;
+        }
 
         $question->update($validatedData);
 
