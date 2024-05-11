@@ -12,9 +12,13 @@
                         <input type="text" id="user_text" name="user_text" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     </div>
                 @else
+                    @php
+                        $correctOptionsCount = $question->options->where('correct', 1)->count();
+                    @endphp
+                    <input type="hidden" id="correctOptionsCount" value="{{ $correctOptionsCount }}">
                     @foreach($question->options as $index => $option)
                         <div class="border p-3 m-2 rounded bg-light">
-                            <input class="form-check-input" type="checkbox" name="user_text[]" id="option{{ $index + 1 }}" value="{{ $option->option_text }}">
+                            <input class="form-check-input" type="checkbox" name="user_text[]" id="option{{ $index + 1 }}" value="{{ $option->option_text }}" onclick="limitCheckboxes()">
                             <label class="form-check-label" for="option{{ $index + 1 }}">
                                 {{ $option->option_text }}
                             </label>
@@ -29,6 +33,23 @@
     </div>
 
     <script>
+        function limitCheckboxes() {
+            let correctOptionsCount = document.getElementById('correctOptionsCount').value;
+            let checkedCount = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            if (checkedCount >= correctOptionsCount) {
+                checkboxes.forEach((checkbox) => {
+                    if (!checkbox.checked) {
+                        checkbox.disabled = true;
+                    }
+                });
+            } else {
+                checkboxes.forEach((checkbox) => {
+                    checkbox.disabled = false;
+                });
+            }
+        }
+
         function submitForm() {
             document.getElementById('answer-form').submit();
         }
