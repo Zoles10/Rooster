@@ -18,7 +18,7 @@
                     <input type="hidden" id="correctOptionsCount" value="{{ $correctOptionsCount }}">
                     @foreach($question->options as $index => $option)
                         <div class="border p-3 m-2 rounded bg-light">
-                            <input class="form-check-input" type="checkbox" name="user_text[]" id="option{{ $index + 1 }}" value="{{ $option->option_text }}" onclick="limitCheckboxes()">
+                            <input class="form-check-input" type="checkbox" name="selected{{ $index + 1 }}" id="option{{ $index + 1 }}" value="{{ $option->option_text }}" onclick="limitCheckboxes()">
                             <label class="form-check-label" for="option{{ $index + 1 }}">
                                 {{ $option->option_text }}
                             </label>
