@@ -146,7 +146,7 @@
             var checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.name = 'isCorrect' + (optionNumber || optionCount);
-            checkbox.className = 'form-checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2';
+            checkbox.className = 'form-checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded';
             checkbox.style = 'margin: .25rem 2.7rem 0 .8rem; border-radius: 4px;'
 
             // Add a red "Remove" button
