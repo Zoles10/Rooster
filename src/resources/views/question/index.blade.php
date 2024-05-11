@@ -23,6 +23,10 @@
                                     </th>
                                     <th
                                         class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
+                                        Active
+                                    </th>
+                                    <th
+                                        class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
                                         Actions
                                     </th>
                                 </tr>
@@ -37,6 +41,9 @@
                                             </a>
                                         </td>
                                         <td class="px-4 py-2">{{ $question["created_at"] }}</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <input type="checkbox" name="active_checkbox" value="{{ $question->id }}">
+                                        </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             <div class="flex flex-col space-y-2 justify-center items-center">
                                                 <a href="{{ route('question.edit', $question->id) }}"
