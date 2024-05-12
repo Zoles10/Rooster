@@ -74,6 +74,27 @@
                         style="color: rgb(15, 15, 15);">
                 </div>
 
+                <div id="result-option-container" class="mb-4 mt-4">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-white">Result Option:</label>
+                        <div class="mt-3 p-2">
+                            <div class="mb-3">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" id="list" name="word_cloud" value="0"
+                                        class="form-radio text-indigo-600" checked>
+                                    <span class="ml-2">&nbsp;&nbsp;List</span>
+                                </label>
+                            </div>
+                            <div class="mb-3">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" id="word-cloud" name="word_cloud" value="1"
+                                        class="form-radio text-indigo-600">
+                                    <span class="ml-2">&nbsp;&nbsp;WordCloud</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- Options Container -->
                 <div id="options-container" class="mb-4 mt-4">
 
@@ -117,6 +138,7 @@
             optionCount = 4; // Reset to the default number of options
 
             if (this.value === 'multiple_choice') {
+                document.getElementById('result-option-container').classList.add('hidden');
                 addOptionBtn.classList.remove('hidden'); // Show "Add Option" button
                 container.innerHTML =
                     '<label class="block text-sm font-medium text-grey">Correct:</label>'; // Clear existing inputs
@@ -127,6 +149,8 @@
             } else {
                 container.innerHTML = ''; // Clear existing inputs
                 addOptionBtn.classList.add('hidden'); // Hide "Add Option" button
+                var resultoptioncontainer = document.getElementById('result-option-container');
+                resultoptioncontainer.classList.remove('hidden');
             }
         }
 

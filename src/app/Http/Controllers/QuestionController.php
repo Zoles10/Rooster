@@ -51,9 +51,11 @@ class QuestionController extends Controller
         $validatedData = $request->validate([
             'question' => 'required|string|max:1023',
             'question_type' => 'required|string|in:multiple_choice,open_ended',
+            'word_cloud' => 'required|boolean|in:0,1',
         ]);
         $question->question = $validatedData['question'];
         $question->question_type = $validatedData['question_type'];
+        $question->word_cloud = $validatedData['word_cloud'];
 
         $dropdownValue = $request->input('ownerInput');
         if (! empty($dropdownValue) && $dropdownValue != '0') {
