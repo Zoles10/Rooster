@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="bg-white min-h-screen flex flex-col items-center justify-center text-white">
-        <div class="max-w-xl w-full p-6 md:p-8 bg-gray-500 rounded-lg shadow-lg" style="margin: 0 .4rem;">
+        <div class="max-w-xl w-full p-6 md:p-8 bg-gray-500 rounded-lg shadow-lg shadow-gray-400" style="margin: 0 .4rem;">
             <h1 class="text-2xl font-bold mb-5 text-center">Create Question</h1>
             <form id="main-form" method="POST" action="{{ route('question.store') }}" class="bg-gray-500 p-4 rounded-lg">
                 @csrf

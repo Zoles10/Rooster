@@ -95,7 +95,7 @@
     </div>
     <!-- Tailwind Modal -->
     <div id="codeModal" class="hidden fixed inset-0 flex items-center justify-center z-50">
-        <div class="bg-white rounded-lg p-8 flex flex-col justify-center">
+        <div class="bg-white border border-indigo-300 rounded-lg p-8 flex flex-col justify-center">
             <div class="flex flex-col justify-center items-center">
 
                 <h2 class="text-2xl font-bold mb-4">Scan Me</h2>
