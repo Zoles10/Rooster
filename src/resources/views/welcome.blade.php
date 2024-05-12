@@ -173,7 +173,6 @@
                 </div>
             </div>
         </div>
-        <!--- TODO: @Bruchac @Jakub spravte styl -->
         @if (Auth::guest())
             <div class="accordion" id="accordionExample2">
                 <div class="accordion-item m-4">
@@ -192,6 +191,9 @@
                                         <hr class="m-1" style="background-color: #000; width: 75%;">
                                         <a href="{{ route('register') }}"
                                             class="btn btn-primary w-100 mt-3 mb-3">Register</a>
+                                        <hr class="m-1" style="background-color: #000; width: 75%;">
+                                        <a href="{{ route('manual') }}"
+                                            class="btn btn-primary w-100 mt-3 mb-3">Manual</a>
                                     </div>
                                 </div>
                             </div>
@@ -224,7 +226,6 @@
                 </div>
             </div>
         @endif
-        <!--- END-TODO: spravte styl -->
     </div>
 
     <!-- Scripts -->
