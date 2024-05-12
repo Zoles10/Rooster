@@ -59,6 +59,11 @@
                     @method('DELETE')
                     <button type="submit" class="my-2 mr-2 px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600">Delete</button>
                 </form>
+                <form action="{{ route('question.multiply', $question) }}" method="POST" class="my-2">
+                    @csrf
+                    @method('POST')
+                    <button type="submit" class="my-2 mr-2 px-4 py-2 bg-purple-500 rounded-md text-white hover:bg-purple-600">Clone</button>
+                </form>
                 </div>
             @endif
         </div>

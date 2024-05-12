@@ -50,7 +50,6 @@
                                                 {{ $question->id }}
                                             </button>
                                         </td>
-                                        </td>
                                         <td
                                             class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 justify-center items-center">
                                             <div class="flex justify-center items-center">
@@ -72,20 +71,25 @@
                                                     style="background: rgb(79, 70, 229); width: 50%; text-align: center;"
                                                     class="text-white p-2 hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs text-center">Edit</a>
                                             </div>
-                    </div>
+                                            <form action="{{ route('question.multiply', $question) }}" method="POST" class="mt-1 flex justify-center items-center">
+                                                @csrf
+                                                @method('POST')
 
-                    <form action="{{ route('question.destroy', $question->id) }}" method="POST"
-                        class="mt-1 flex justify-center items-center">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit"
-                            class="text-white p-2 hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs"
-                            style="background: red; width: 50%;">Delete</button>
-                    </form>
-                    </td>
-                    </tr>
-                    @endforeach
-                    </tbody>
+                                                    <button type="submit" class="text-white p-2 hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs"
+                                                    style="background: rgb(70, 200, 229); width: 50%; text-align: center;">Clone</button>
+                                            </form>
+                                            <form action="{{ route('question.destroy', $question->id) }}" method="POST"
+                                                class="mt-1 flex justify-center items-center">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="text-white p-2 hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs"
+                                                    style="background: red; width: 50%;">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
                     </table>
                     {{ $questions->links() }}
                 </div>

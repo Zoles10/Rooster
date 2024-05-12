@@ -21,6 +21,8 @@ Route::get('/manual', function () {
 
 
 Route::resource('question', QuestionController::class);
+Route::post('/question/{question}', [QuestionController::class, 'multiply'])->middleware(['auth', 'verified'])->name('question.multiply');
+
 
 Route::post('/answer', [AnswerController::class, 'store'])->name('answer.store');
 

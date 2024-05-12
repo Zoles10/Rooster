@@ -131,10 +131,24 @@ class QuestionController extends Controller
         }
 
         $question->update($validatedData);
-
         return redirect()->route('question.index', $question);
     }
 
+    public function multiply(Question $question)
+    {
+        $newQuestion = $question->replicate();
+        $newQuestion->save();
+
+        // Copy related models
+        $options = $question->options()->get();
+        foreach ($options as $option) {
+            $newOption = $option->replicate();
+            $newOption->question_id = $newQuestion->id;
+            $newOption->save();
+        }
+
+        return redirect()->route('question.index', $newQuestion);
+    }
     /**
      * Remove the specified resource from storage.
      */
