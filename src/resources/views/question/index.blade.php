@@ -1,5 +1,8 @@
 @section("title", "My Questions")
 <x-app-layout>
+    @push('scripts')
+        @vite('resources/js/dashboard.js')
+    @endpush
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <div class="flex justify-center items-center">
             <a href="{{ route('question.create') }}" style="background: rgb(79, 70, 229);"
@@ -42,7 +45,7 @@
                                             </a>
                                         </td>
                                         <td class="px-4 py-2">
-                                            <button class="text-blue-500 hover:text-blue-700"  @click="open = true">
+                                            <button id="{{ $question->id }}btn" class="text-blue-500 hover:text-blue-700">
                                                 {{ $question->id }}
                                             </button>
                                         </td>
@@ -85,24 +88,12 @@
     </div>
     </div>
     <!-- Tailwind Modal -->
-    <button x-data="{ open: false }" @click="open = true">Open Modal</button>
-
-    <!-- Modal -->
-    <div x-data="{ open: false }" x-show="open" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="flex items-end justify-center min-h-screen">
-            <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                        Modal Title
-                    </h3>
-                    <!-- Modal content goes here -->
-                </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <!-- Button to close the modal -->
-                    <button @click="open = false">
-                        Close
-                    </button>
-                </div>
+    <div id="codeModal" class="fixed inset-0 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8">
+            <h2 class="text-2xl font-bold mb-4">Modal Title</h2>
+            <p class="mb-4">Modal content goes here.</p>
+            <div class="flex justify-end">
+                <button id="hideModalButton" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md mr-2">Cancel</button>
             </div>
         </div>
     </div>
