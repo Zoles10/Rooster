@@ -12,3 +12,7 @@
     background-color: white !important;
     color: black !important;
 }
+
+.imp_admin_td {
+    border: 1px solid black;
+}

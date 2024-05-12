@@ -4,7 +4,7 @@
     Vsetky style="color:black" musia ist prec a nahradit ich tailwindom tak aby to aj fungovalo
     A ostatne uz necham na vas nech to nejak vyzera
 -->
-<div class="bg-gray-400 p-4 rounded-lg mt-4 mb-4">
+<div class="bg-gray-400 p-4 rounded-lg mt-4 mb-4 flex justify-center">
     <table class="table table-striped table-hover mt-4 mb-4 p-4 border-blue-300 rounded-lg">
         <thead>
             <tr class="bg-indigo-600 text-white">
@@ -63,19 +63,19 @@
 </div>
 
 <div class="bg-gray-400 p-4 rounded-lg mt-4 mb-4">
-    <h3 class="text-xl font-bold mb-4 text-gray-800">Create New User</h3>
+    <h3 class="text-xl font-bold mb-4 text-gray-100">Create New User</h3>
     <form method="POST" action="{{ route('admin.create') }}">
         @csrf
         <div class="mb-4">
-            <label for="name" class="text-gray-800">Name</label>
+            <label for="name" class="text-gray-100">Name</label>
             <input type="text" id="name" name="name" class="w-full px-4 py-2 rounded-lg border-blue-300 focus:border-indigo-600 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required>
         </div>
         <div class="mb-4">
-            <label for="email" class="text-gray-800">Email</label>
+            <label for="email" class="text-gray-100">Email</label>
             <input type="email" id="email" name="email" class="w-full px-4 py-2 rounded-lg border-blue-300 focus:border-indigo-600 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required>
         </div>
         <div class="mb-4">
-            <label for="password" class="text-gray-800">Password</label>
+            <label for="password" class="text-gray-100">Password</label>
             <input type="password" id="password" name="password" class="w-full px-4 py-2 rounded-lg border-blue-300 focus:border-indigo-600 focus:ring focus:ring-blue-200 focus:ring-opacity-50" required>
         </div>
         <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-600">Create User</button>

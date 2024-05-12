@@ -21,21 +21,23 @@ function filterTable() {
 }
 </script>
 <div class="bg-gray-400 p-4 rounded-lg mt-4 mb-4">
-    <table class="table bg-white table-striped w-full table-hover mt-4 rounded" style="border: 1px solid black;">
+    <table class="imp_admin_td table bg-white table-striped w-full table-hover mt-4 rounded">
     <thead>
         <tr class="bg-indigo-600 text-white">
-            <th class="px-4 py-2 text-center" style="border: 1px solid black;">Question</th>
-            <th class="px-4 py-2 text-center" style="border: 1px solid black;">Subject</th>
-            <th class="px-4 py-2 text-center" style="border: 1px solid black;">Owner</th>
-            <th class="px-4 py-2 text-center" style="border: 1px solid black;">Active</th>
-            <th class="px-4 py-2 text-center" style="border: 1px solid black;">Edit</th>
-            <th class="px-4 py-2 text-center" style="border: 1px solid black;">Delete</th>
+            <th class="imp_admin_td px-4 py-2 text-center">Question</th>
+            <th class="imp_admin_td px-4 py-2 text-center">Question Code</th>
+            <th class="imp_admin_td px-4 py-2 text-center">Subject</th>
+            <th class="imp_admin_td px-4 py-2 text-center">Owner</th>
+            <th class="imp_admin_td px-4 py-2 text-center">Active</th>
+            <th class="imp_admin_td px-4 py-2 text-center">Edit</th>
+            <th class="imp_admin_td px-4 py-2 text-center">Delete</th>
         </tr>
     </thead>
     <tbody>
         @foreach($questions as $question)
-            <tr style="border: 1px solid black;">
+            <tr class="imp_admin_td">
                 <td class="px-4 py-2 text-center">{{ $question["question"] }}</td>
+                <td class="px-4 py-2 text-center">{{ $question["id"] }}</td>
                 <td class="px-4 py-2 text-center">{{ $question["subject"]["subject"] }}</td>
                 <td class="px-4 py-2 text-center">{{ $question["user_name"] }}</td>
                 <td class="px-4 py-2 text-center">

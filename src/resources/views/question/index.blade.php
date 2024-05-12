@@ -1,3 +1,4 @@
+@section("title", "My Questions")
 <x-app-layout>
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <div class="flex justify-center items-center">
@@ -15,11 +16,11 @@
                                 <tr>
                                     <th
                                         class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
-                                        My questions
+                                        Question
                                     </th>
                                     <th
                                         class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
-                                        Created at
+                                        Question Code
                                     </th>
                                     <th
                                         class="px-6 py-4 text-m font-medium text-gray-800 uppercase tracking-wider text-center ">
@@ -40,10 +41,10 @@
                                                 {{ $question->question }}
                                             </a>
                                         </td>
-                                        <td class="px-4 py-2">{{ $question["created_at"] }}</td>
+                                        <td class="px-4 py-2">{{ $question["id"] }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 justify-center items-center">
                                             <div class="flex justify-center items-center">
-                                                 <form method="POST" action="{{ route('question.update', $question) }}">
+                                            <form method="POST" action="{{ route('question.update', $question) }}">
                                                 @csrf
                                                 @method('PUT')
                                                 <input type="hidden" name="active" value="{{ $question->active ? '0' : '1' }}">
@@ -55,16 +56,16 @@
                                             <div class="flex flex-col space-y-2 justify-center items-center">
                                                 <a href="{{ route('question.edit', $question->id) }}"
                                                     style="background: rgb(79, 70, 229); width: 50%; text-align: center;"
-                                                    class="text-white p-2 hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs text-white text-center">Edit</a>
+                                                    class="text-white p-2 hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs text-center">Edit</a>
                                             </div>
                     </div>
 
                     <form action="{{ route('question.destroy', $question->id) }}" method="POST"
-                        class="inline mt-1 flex justify-center items-center">
+                        class="mt-1 flex justify-center items-center">
                         @csrf
                         @method('DELETE')
                         <button type="submit"
-                            class="text-white p-2 hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs text-white"
+                            class="text-white p-2 hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs"
                             style="background: red; width: 50%;">Delete</button>
                     </form>
                     </td>

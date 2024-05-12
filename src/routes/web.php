@@ -36,4 +36,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/{any}', function ($any) {
+    if (App\Models\Question::where('id', $any)->exists()) {
+        return redirect("/question/$any");
+    }
+    abort(404);
+})->where('any', '^(?!login$|register$|forgot-password$)[a-zA-Z0-9]{5}$');
+
 require __DIR__ . '/auth.php';

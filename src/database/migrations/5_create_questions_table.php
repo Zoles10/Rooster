@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->foreignId('owner_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('subject_id')->nullable()->constrained('subjects')->onDelete('cascade');
             $table->boolean('active')->default(true);
+            $table->boolean('word_cloud')->default(false);
             $table->timestamps();
         });
 

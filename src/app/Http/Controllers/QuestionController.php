@@ -97,6 +97,9 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
+        if (! $question->active) {
+            return redirect()->back();
+        }
         //options budu v $question->options
         $question->load('options');
         return view('question.show', ['question' => $question]);
@@ -115,7 +118,7 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
-          $validatedData = $request->validate([
+        $validatedData = $request->validate([
             'question' => 'sometimes|required|string|max:1023',
             'question_type' => 'sometimes|required|string|in:multiple_choice,open_ended',
             'active' => 'sometimes|boolean',
