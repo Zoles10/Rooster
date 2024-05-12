@@ -34,13 +34,13 @@
         }
 
         .main-content {
-            background-color: #ebe2ff;
+            background-color: #cfe2ff;
             border-radius: .4rem;
             border: .2rem solid #31334D;
         }
 
         .login-form {
-            background-color: #ebe2ff;
+            background-color: #cfe2ff;
             border-radius: .4rem;
             font-size: 0.9rem;
             border: .2rem solid #31334D;
@@ -191,7 +191,7 @@
                                         <a href="{{ route('login') }}" class="btn btn-primary w-100 mb-3">Login</a>
                                         <hr class="m-1" style="background-color: #000; width: 75%;">
                                         <a href="{{ route('register') }}"
-                                            class="btn btn-primary w-100 mb-3">Register</a>
+                                            class="btn btn-primary w-100 mt-3 mb-3">Register</a>
                                     </div>
                                 </div>
                             </div>
