@@ -49,12 +49,12 @@ Robené počas akademického roku 2023/24 letný semester
 ### Neprihlásený používateľ:
 
 -   [x] možnosť registrácie
--   [ ] zadanie kódu:
+-   [x] zadanie kódu:
     -   [x] na titulnej stránkeň
-    -   [ ] naskenovaním QR kódu na titulnej strane
+    -   [x] naskenovaním QR kódu na titulnej strane
     -   [x] do url v tvare ...webte.fei.stuba.sk/kod
--   [] presmerovanie po zadaní kódu na otázky
--   [ ] na stránke s otázkami umožniť návrat na titulnú stránku
+-   [x] presmerovanie po zadaní kódu na otázky
+-   [x] na stránke s otázkami umožniť návrat na titulnú stránku
 -   [ ] pri zobrazení výsledkov na otázku, kde je možné odpovedať rôznym textom, vytvoriť word cloud, ktorý vytvoríme **samostatne**, nepoužívať kódy z internetu :skull:!!!
 -   [ ] velkosť textu v word cloude, na základe počtu rovnakých odpovedí
 
@@ -67,9 +67,9 @@ Robené počas akademického roku 2023/24 letný semester
 -   [x] zmena hesla
 -   [x] zadefinovanie viacerých hlasovacích otázok
 -   [x] definovanie, ktoré otázky sú aktívne a ktoré nie
--   [] generovanie kódu pre otázku:
+-   [x] generovanie kódu pre otázku:
     -   [x] textový kód
-    -   [ ] QR kód z textového kódu
+    -   [x] QR kód z textového kódu
 -   [x] otázka:
     -   [x] s možnosťami, kde môže byť správna jedna alebo viac možností
     -   [x] s otvorenou krátkou odpoveďou (text)
@@ -79,7 +79,7 @@ Robené počas akademického roku 2023/24 letný semester
 -   [ ] existujúca otázka:
     -   [ ] úprava
     -   [x] vymazanie
-    -   [ ] duplikácia
+    -   [x] duplikácia
 -   [x] ku každej otázke definovať k akému predmetu patrí
 -   [ ] filtrácia otázok na základe predmetu
 -   [ ] filtrácia otázok na základe dátumu vytvorenia

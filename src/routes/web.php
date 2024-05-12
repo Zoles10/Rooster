@@ -24,7 +24,8 @@ Route::resource('question', QuestionController::class);
 Route::post('/question/{question}', [QuestionController::class, 'multiply'])->middleware(['auth', 'verified'])->name('question.multiply');
 
 
-Route::post('/answer', [AnswerController::class, 'store'])->name('answer.store');
+Route::post('/answer/{id}', [AnswerController::class, 'store'])->name('answer.store');
+Route::get('/answer/{id}', [AnswerController::class, 'show'])->name('answer.show');
 
 Route::get('/user/{id}', [UserController::class, 'getById'])->middleware(['auth', 'verified'])->name('getById');
 

@@ -23,6 +23,10 @@
                                     </th>
                                     <th
                                         class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
+                                        Results
+                                    </th>
+                                    <th
+                                        class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
                                         Question Code
                                     </th>
                                     <th
@@ -42,6 +46,12 @@
                                             <a href="{{ route('question.show', $question->id) }}"
                                                 class="text-sm text-gray-900">
                                                 {{ $question->question }}
+                                            </a>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <a href="{{ route('answer.show', $question->id) }}"
+                                                class="text-sm text-gray-900">
+                                                Goto Results
                                             </a>
                                         </td>
                                         <td class="px-4 py-2">

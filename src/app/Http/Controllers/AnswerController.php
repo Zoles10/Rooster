@@ -27,16 +27,12 @@ class AnswerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $question_id)
     {
-        $request->validate([
-            'question_id' => 'required|integer'
-        ]);
+        $question = Question::findOrFail($question_id);
 
-        $question = Question::findOrFail($request->question_id);
-
-        if($question['active'] == true) {
-            if($question['question_type'] == 'open_ended') {
+        if ($question['active'] == true) {
+            if ($question['question_type'] == 'open_ended') {
                 $request->validate([
                     'user_text' => 'required|string|max:1023'
                 ]);
@@ -47,7 +43,7 @@ class AnswerController extends Controller
                 foreach ($options as $option) {
                     if (isset($request['selected' . $i])) {
                         $optionsHistory = $option->optionsHistory()->first();
-                        if($optionsHistory) {
+                        if ($optionsHistory) {
                             $optionsHistory->increment('number_answered');
                         }
                     }
@@ -55,7 +51,7 @@ class AnswerController extends Controller
                 }
             }
 
-            return response()->json(['message' => 'Answer created successfully'], 201);
+            return view("answer.showAnswer");
         }
 
         return to_route('welcome')->with('message', ('Question is not active'));
@@ -66,7 +62,7 @@ class AnswerController extends Controller
      */
     public function show(Answer $answer)
     {
-        //
+        return view("answer.showAnswer");
     }
 
     /**
