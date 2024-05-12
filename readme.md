@@ -42,7 +42,7 @@ Robené počas akademického roku 2023/24 letný semester
 -   [x] 3 role: neprihlásený, prihlásený a admin
 -   [ ] príručka exportovateľnná do pdf, čo robí ktorá rola
 -   [ ] videoprezentácia
--   [ ] Titulná stránka s prihlásením a zadaním kódu pre anketu/kvíz/otázku
+-   [x] Titulná stránka s prihlásením a zadaním kódu pre anketu/kvíz/otázku
 
 ---
 
@@ -50,10 +50,10 @@ Robené počas akademického roku 2023/24 letný semester
 
 -   [x] možnosť registrácie
 -   [ ] zadanie kódu:
-    -   [ ] na titulnej stránkeň
+    -   [x] na titulnej stránkeň
     -   [ ] naskenovaním QR kódu na titulnej strane
-    -   [ ] do url v tvare ...webte.fei.stuba.sk/kod
--   [ ] presmerovanie po zadaní kódu na otázky
+    -   [x] do url v tvare ...webte.fei.stuba.sk/kod
+-   [] presmerovanie po zadaní kódu na otázky
 -   [ ] na stránke s otázkami umožniť návrat na titulnú stránku
 -   [ ] pri zobrazení výsledkov na otázku, kde je možné odpovedať rôznym textom, vytvoriť word cloud, ktorý vytvoríme **samostatne**, nepoužívať kódy z internetu :skull:!!!
 -   [ ] velkosť textu v word cloude, na základe počtu rovnakých odpovedí
@@ -65,22 +65,22 @@ Robené počas akademického roku 2023/24 letný semester
 -   [x] prihlásenie
 -   [x] odhlásenie
 -   [x] zmena hesla
--   [ ] zadefinovanie viacerých hlasovacích otázok
--   [ ] definovanie, ktoré otázky sú aktívne a ktoré nie
--   [ ] generovanie kódu pre otázku:
-    -   [ ] textový kód
+-   [x] zadefinovanie viacerých hlasovacích otázok
+-   [x] definovanie, ktoré otázky sú aktívne a ktoré nie
+-   [] generovanie kódu pre otázku:
+    -   [x] textový kód
     -   [ ] QR kód z textového kódu
--   [ ] otázka:
-    -   [ ] s možnosťami, kde môže byť správna jedna alebo viac možností
-    -   [ ] s otvorenou krátkou odpoveďou (text)
+-   [x] otázka:
+    -   [x] s možnosťami, kde môže byť správna jedna alebo viac možností
+    -   [x] s otvorenou krátkou odpoveďou (text)
 -   [ ] pri otázke s otvorenou odpoveďou:
     -   [ ] výsledok vo forme word cloudu
     -   [ ] výsledok vo forme zoznamu
 -   [ ] existujúca otázka:
     -   [ ] úprava
-    -   [ ] vymazanie
+    -   [x] vymazanie
     -   [ ] duplikácia
--   [ ] ku každej otázke definovať k akému predmetu patrí
+-   [x] ku každej otázke definovať k akému predmetu patrí
 -   [ ] filtrácia otázok na základe predmetu
 -   [ ] filtrácia otázok na základe dátumu vytvorenia
 -   [ ] uzatvorenie hlasovania pre danú otázku
@@ -95,7 +95,7 @@ Robené počas akademického roku 2023/24 letný semester
 
 ### Admin:
 
--   [ ] prístup k hlasovacím otázkam všetkých užívateľov
+-   [x] prístup k hlasovacím otázkam všetkých užívateľov
 -   [x] možnosť filtrovania nad vybraným užívateľom
 -   [x] vytváranie otázky:
     -   [x] v svojom mene
