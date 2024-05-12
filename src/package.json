@@ -19,5 +19,8 @@
         "prettier": "^2.8.4",
         "tailwindcss": "^3.4.3",
         "vite": "^5.0"
+    },
+    "dependencies": {
+        "jquery": "^3.7.1"
     }
 }

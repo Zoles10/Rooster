@@ -19,6 +19,7 @@ Route::resource('question', QuestionController::class);
 
 Route::post('/answer', [AnswerController::class, 'store'])->name('answer.store');
 
+Route::get('/user/{id}', [UserController::class, 'getById'])->middleware(['auth', 'verified'])->name('getById');
 
 Route::get('/admin/Users', [UserController::class, 'index'])->middleware(['auth', 'verified'])->name('adminUserControl');
 Route::get('/admin/AllQuestions', [UserController::class, 'indexQuestions'])->middleware(['auth', 'verified'])->name('adminQuestionControl');

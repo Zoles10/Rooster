@@ -41,7 +41,12 @@
                                                 {{ $question->question }}
                                             </a>
                                         </td>
-                                        <td class="px-4 py-2">{{ $question["id"] }}</td>
+                                        <td class="px-4 py-2">
+                                            <button class="text-blue-500 hover:text-blue-700"  @click="open = true">
+                                                {{ $question->id }}
+                                            </button>
+                                        </td>
+                                        </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 justify-center items-center">
                                             <div class="flex justify-center items-center">
                                             <form method="POST" action="{{ route('question.update', $question) }}">
@@ -78,5 +83,27 @@
             </div>
         </div>
     </div>
+    </div>
+    <!-- Tailwind Modal -->
+    <button x-data="{ open: false }" @click="open = true">Open Modal</button>
+
+    <!-- Modal -->
+    <div x-data="{ open: false }" x-show="open" class="fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen">
+            <div class="bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                        Modal Title
+                    </h3>
+                    <!-- Modal content goes here -->
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <!-- Button to close the modal -->
+                    <button @click="open = false">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </x-app-layout>

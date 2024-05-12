@@ -2,6 +2,9 @@
     <div class="container mx-auto my-5 p-5">
         <div class="bg-white shadow rounded-lg p-6">
             <h2 class="text-xl mb-3">{{ $question->question }}</h2>
+            @if (Auth::id() == $question->owner_id)
+                <h2 class="text-xl mb-3">User viewing is the owner</h2>
+            @endif
             <form id="answer-form" action="{{ route('answer.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="question_id" value="{{ $question->id }}">
@@ -30,10 +33,9 @@
                     @endforeach
                 @endif
 
-                <button type="button" style="background: rgb(79, 70, 229);" id="submit-btn"
-                    class="mt-2 mr-2 px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600">Send</button>
-                <button type="reset"
-                    class="mt-2 mr-2 px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600">Clear</button>
+                <button type="button" id="submit-btn" class="mt-2 mr-2 px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600">Send</button>
+                <button type="reset" class="mt-2 mr-2 px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600">Clear</button>
+                <a href="/" class="inline-block px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600">Back</a>
             </form>
         </div>
     </div>

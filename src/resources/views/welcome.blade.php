@@ -231,11 +231,16 @@
     <script src="https://cdn.jsdelivr.net/npm/html5-qrcode/minified/html5-qrcode.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // QR code and other functionality scripts here
+        document.getElementById('submit-code').addEventListener('click', function() {
+            var code = document.getElementById('access-code').value;
+            window.location.href = '/' + code;
+        });
+            // QR code and other functionality scripts here
         function onScanSuccess(decodedText, decodedResult) {
             // handle success
             document.getElementById('qr-result').textContent = 'QR Code result: ' + decodedText;
             document.getElementById('qr-result').classList.remove('d-none');
+            window.location.href = '/' + decodedText;
         }
 
         function onScanError(errorMessage) {
