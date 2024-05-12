@@ -1,4 +1,4 @@
-@section("title", "My Questions")
+@section('title', 'My Questions')
 <x-app-layout>
     @push('scripts')
         @vite('resources/js/dashboard.js')
@@ -45,19 +45,25 @@
                                             </a>
                                         </td>
                                         <td class="px-4 py-2">
-                                            <button id="{{ $question->id }}btn" class="text-blue-500 hover:text-blue-700">
+                                            <button id="{{ $question->id }}btn"
+                                                class="text-blue-500 hover:text-blue-700">
                                                 {{ $question->id }}
                                             </button>
                                         </td>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 justify-center items-center">
+                                        <td
+                                            class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 justify-center items-center">
                                             <div class="flex justify-center items-center">
-                                            <form method="POST" action="{{ route('question.update', $question) }}">
-                                                @csrf
-                                                @method('PUT')
-                                                <input type="hidden" name="active" value="{{ $question->active ? '0' : '1' }}">
-                                                <input type="checkbox" name="active_checkbox" class="form-checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded" onchange="this.form.submit()" value="{{ $question->id }}" {{     $question->active ? 'checked' : '' }}>
-                                            </form>
+                                                <form method="POST" action="{{ route('question.update', $question) }}">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <input type="hidden" name="active"
+                                                        value="{{ $question->active ? '0' : '1' }}">
+                                                    <input type="checkbox" name="active_checkbox"
+                                                        class="form-checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded"
+                                                        onchange="this.form.submit()" value="{{ $question->id }}"
+                                                        {{ $question->active ? 'checked' : '' }}>
+                                                </form>
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -88,13 +94,21 @@
     </div>
     </div>
     <!-- Tailwind Modal -->
-    <div id="codeModal" class="fixed inset-0 flex items-center justify-center z-50">
-        <div class="bg-white rounded-lg p-8">
-            <h2 class="text-2xl font-bold mb-4">Modal Title</h2>
-            <p class="mb-4">Modal content goes here.</p>
-            <div class="flex justify-end">
-                <button id="hideModalButton" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md mr-2">Cancel</button>
+    <div id="codeModal" class="hidden fixed inset-0 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 flex flex-col justify-center">
+            <div class="flex flex-col justify-center items-center">
+
+                <h2 class="text-2xl font-bold mb-4">Scan Me</h2>
+                <div id="qr-code">
+
+                </div>
+                <hr class="mx-3 my-auto">
+                <p class="mb-1 mt-3">Or copy this code: <span id="code"></span></p>
+                <div class="mt-6 flex justify-center">
+                    <button id="hideModalButton" class="px-4 py-2 bg-red-600 text-white rounded-md mr-2">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 </x-app-layout>
