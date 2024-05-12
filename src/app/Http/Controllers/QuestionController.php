@@ -99,7 +99,7 @@ class QuestionController extends Controller
      */
     public function show(Question $question)
     {
-        if (! $question->active) {
+        if (! $question->active && $question->owner_id !== Auth::id()) {
             return redirect()->back();
         }
         //options budu v $question->options
@@ -127,7 +127,7 @@ class QuestionController extends Controller
         ]);
 
         if (! isset($validatedData['active'])) {
-            $validatedData['active'] = 0;
+            $validatedData['active'] = $question->active;
         }
 
         $question->update($validatedData);

@@ -2,9 +2,6 @@
     <div class="container mx-auto my-5 p-5">
         <div class="bg-white shadow rounded-lg p-6">
             <h2 class="text-xl mb-3">{{ $question->question }}</h2>
-            @if (Auth::id() == $question->owner_id)
-                <h2 class="text-xl mb-3">You are the owner of the question</h2>
-            @endif
             <form id="answer-form" action="{{ route('answer.store') }}" method="POST">
                 @csrf
                 <input type="hidden" name="question_id" value="{{ $question->id }}">
@@ -32,11 +29,38 @@
                         </div>
                     @endforeach
                 @endif
-
                 <button type="button" id="submit-btn" class="mt-2 mr-2 px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600">Send</button>
                 <button type="reset" class="mt-2 mr-2 px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600">Clear</button>
                 <a href="/" class="inline-block px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600">Back</a>
             </form>
+            @if (Auth::id() == $question->owner_id)
+                <div>
+                <h2 class="text-xl mb-3">This is visible only to the owner</h2>
+                @if ($question->active == 0)
+                    <form method="POST" action="{{ route('question.update', $question) }}" class="my-2">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="active" value="1">
+                        <button type="submit" class="my-2 mr-2 px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600">Activate</button>
+                    </form>
+                @else
+                    <form method="POST" action="{{ route('question.update', $question) }}" class="my-2">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="active" value="0">
+                        <button type="submit" class="my-2 mr-2 px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600">Deactivate</button>
+                    </form>
+                @endif
+                <div class="my-2">
+                    <a href="{{ route('question.edit', $question->id) }}" type="submit" class="my-2 mr-2 px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600">Edit</a>
+                </div>
+                <form action="{{ route('question.destroy', $question->id) }}" method="POST" class="my-2">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="my-2 mr-2 px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600">Delete</button>
+                </form>
+                </div>
+            @endif
         </div>
     </div>
 

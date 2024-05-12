@@ -15,6 +15,11 @@ Route::post('/question', [QuestionController::class, 'store'])->middleware(['aut
 
 Route::get('/dashboard', [QuestionController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/manual', function () {
+    return view("manual");
+})->name('manual');
+
+
 Route::resource('question', QuestionController::class);
 
 Route::post('/answer', [AnswerController::class, 'store'])->name('answer.store');

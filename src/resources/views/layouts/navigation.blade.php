@@ -11,12 +11,18 @@
                 </div>
 
                 <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex ">
+                    <x-nav-link :href="route('manual')" class="text-black" :active="request()->routeIs('manual')">
+                        {{ __('Manual') }}
+                    </x-nav-link>
+                </div>
             @if (auth()->user())
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex ">
                     <x-nav-link :href="route('dashboard')" class="text-black" :active="request()->routeIs('dashboard')">
                         {{ __('My Questions') }}
                     </x-nav-link>
                 </div>
+
                     @if (auth()->user()->isAdmin())
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex ">
                         <x-nav-link :href="route('adminUserControl')" class="text-black" :active="request()->routeIs('adminUserControl')">
@@ -82,11 +88,16 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('manual')" :active="request()->routeIs('manual')">
+                {{ __('Manual') }}
+            </x-responsive-nav-link>
+        </div>
+        @if (auth()->user())
+        <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('My Questions') }}
             </x-responsive-nav-link>
         </div>
-        @if (auth()->user())
             @if (auth()->user()->isAdmin())
                 <div class="pt-2 pb-3 space-y-1">
                     <x-responsive-nav-link :href="route('adminUserControl')" :active="request()->routeIs('adminUserControl')">
