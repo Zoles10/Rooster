@@ -12,10 +12,10 @@
                     <a href="{{ url('/pdf/guest') }}" class="px-4 py-2 m-2 w-fit bg-blue-500 rounded-md text-white hover:bg-blue-600">Download PDF</a>
                 @elseif (!auth()->user()->isAdmin())
                     @include("pdf.userPDF")
-                    <a href="{{ url('/pdf/user') }}" class="px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600">Download PDF</a>
+                    <a href="{{ url('/pdf/user') }}" class="px-4 py-2 w-fit bg-blue-500 rounded-md text-white hover:bg-blue-600">Download PDF</a>
                 @elseif (auth()->user()->isAdmin())
                     @include("pdf.adminPDF")
-                    <a href="{{ url('/pdf/admin') }}" class="px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600">Download PDF</a>
+                    <a href="{{ url('/pdf/admin') }}" class="px-4 py-2 w-fit bg-blue-500 rounded-md text-white hover:bg-blue-600">Download PDF</a>
                 @endif
             </div>
         </div>
