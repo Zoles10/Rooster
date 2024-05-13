@@ -69,7 +69,8 @@ class QuestionController extends Controller
             $question->owner_id = Auth::id();
 
         if ($request->input('subject') != 0) {
-            $question->subject()->associate($request->input('subject'));
+            $subject = Subject::where('id', $request->input('subject'))->first();
+            $question->subject()->associate($subject);
         } else {
             $subject = Subject::firstOrCreate(['subject' => $request->input('other_subject')]);
             $question->subject()->associate($subject);
@@ -84,8 +85,6 @@ class QuestionController extends Controller
                     $correct = $request->input('isCorrect' . $i);
                     $correct = isset($correct) ? true : false;
                     $option = $question->options()->create(['option_text' => $value, 'correct' => $correct]);
-                    $optionsHistory = OptionsHistory::create(['year' => date('Y'), 'times_answered' => 0, 'option_id' => $option->id]);
-                    //$option->optionsHistory()->associate($optionsHistory);
                     $option->save();
                     $i++;
                 }
@@ -112,7 +111,9 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
-        return view('question.edit', ['question' => $question]);
+        $subjects = Subject::all();
+        $users = User::all();
+        return view('question.edit', ['question' => $question, "users" => $users, 'subjects' => $subjects]);
     }
 
     /**
@@ -122,25 +123,67 @@ class QuestionController extends Controller
     {
         $validatedData = $request->validate([
             'question' => 'sometimes|string|max:1023',
-            'question_type' => 'sometimes|string|in:multiple_choice,open_ended',
-            'owner_id' => 'sometimes|exists:users,id',
             'subject' => 'sometimes',
+            'other_subject' => 'sometimes|max:255',
             'active' => 'sometimes|boolean',
+            'word_cloud' => 'sometimes|boolean'
         ]);
 
-        if ($validatedData['subject'] != 0) {
-            $question->subject()->associate($request->input('subject'));
+        $dropdownValue = $request->input('ownerInput');
+        if (! empty($dropdownValue) && $dropdownValue != '0') {
+            $user = User::where('name', $dropdownValue)->first();
+            if ($user) {
+                $question->owner_id = $user->id;
+            } else {
+                $question->owner_id = Auth::id();
+            }
+        } else
+            $question->owner_id = Auth::id();
+
+        if ($request->input('subject') != 0) {
+            $subject = Subject::where('id', $request->input('subject'))->first();
+            $question->subject()->associate($subject);
         } else {
             $subject = Subject::firstOrCreate(['subject' => $request->input('other_subject')]);
             $question->subject()->associate($subject);
         }
 
-        if (isset($validatedData['owner_id']) && !$request->user()->isAdmin()) {
-            $validatedData['owner_id'] = Auth::id();
+        if (isset($validatedData['question'])) {
+            $question->question = $validatedData['question'];
         }
 
-        $question->update($validatedData);
-        return redirect()->route('question.index', $question);
+        if (isset($validatedData['active'])) {
+            $question->active = $validatedData['active'];
+        }
+
+        if (isset($validatedData['word_cloud'])) {
+            $question->word_cloud = $validatedData['word_cloud'] === '1' ? true : false;
+        }
+
+        $question->save();
+
+        if ($question->question_type === 'multiple_choice') {
+            $i = 1;
+            foreach ($request->all() as $key => $value) {
+                if (str_starts_with($key, 'option')) {
+                    $correct = $request->input('isCorrect' . $i);
+                    $correct = isset($correct) ? true : false;
+                    $option = $question->options()->skip($i - 1)->first();
+                    if ($option) {
+                        $option->update(['option_text' => $value, 'correct' => $correct]);
+                    } else {
+                        $option = $question->options()->create(['option_text' => $value, 'correct' => $correct]);
+                    }
+                    $i++;
+                }
+            }
+        }
+
+        $questions = Question::query()
+            ->where('owner_id', request()->user()->id)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+        return view('question.index', ['questions' => $questions]);
     }
 
     public function multiply(Question $question)

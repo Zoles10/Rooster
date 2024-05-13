@@ -27,7 +27,7 @@ class Question extends Model
         'question',
         'question_type',
         'owner_id',
-        'subject',
+        'subject_id',
         'active'
     ];
 
