@@ -81,8 +81,8 @@ Robené počas akademického roku 2023/24 letný semester
     -   [x] vymazanie
     -   [x] duplikácia
 -   [x] ku každej otázke definovať k akému predmetu patrí
--   [ ] filtrácia otázok na základe predmetu
--   [ ] filtrácia otázok na základe dátumu vytvorenia
+-   [x] filtrácia otázok na základe predmetu
+-   [x] filtrácia otázok na základe dátumu vytvorenia
 -   [ ] uzatvorenie hlasovania pre danú otázku
 -   [ ] pri uzavretí otázky:
     -   [ ] uložiť odpovede s dátumom uzavretia

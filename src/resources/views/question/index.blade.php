@@ -2,15 +2,44 @@
 <x-app-layout>
     @push('scripts')
         @vite('resources/js/dashboard.js')
+        @vite('resources/js/sortQuestions.js')
     @endpush
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <div class="flex justify-center items-center">
             <a href="{{ route('question.create') }}" style="background: rgb(79, 70, 229);"
-                class="inline-flex items-center px-4 py-2 hover:text-gray-300 bg-purple-800 border border-transparent rounded-md font-semibold text-m text-white uppercase tracking-widest hover:bg-purple-700 active:bg-purple-900 focus:outline-none focus:border-purple-900 focus:ring ring-purple-300 disabled:opacity-25 transition ease-in-out duration-150">
-                Create question
-            </a>
+            class="inline-flex items-center px-4 py-2 hover:text-gray-300 bg-purple-800 border border-transparent rounded-md font-semibold text-m text-white uppercase tracking-widest hover:bg-purple-700 active:bg-purple-900 focus:outline-none focus:border-purple-900 focus:ring ring-purple-300 disabled:opacity-25 transition ease-in-out duration-150">
+            Create question
+        </a>
+    </div>
+
+    <div class="flex flex-c</div>ol mt-5 w-full">
+        <div>
+            <label for="subjectSelect" class="block text-sm font-medium text-gray-700">Subject:</label>
+            <select id="subjectSelect" name="category" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <option value="all">All</option>
+                @php
+                    $subjects = [];
+                @endphp
+                @foreach($questions as $question)
+                    @if(!in_array($question->subject->subject, $subjects))
+                        @php
+                            $subjects[] = $question->subject->subject;
+                        @endphp
+                        <option value="{{ $question->subject->subject }}">{{ $question->subject->subject }}</option>
+                    @endif
+                @endforeach
+            </select>
+            </select>
         </div>
-        <div class="flex flex-col mt-5 w-full">
+        <div>
+            <label for="statusSelect" class="block text-sm font-medium text-gray-700">Status:</label>
+            <select id="statusSelect" name="status" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <option value="newest" selected>Newest</option>
+                <option value="oldest">Oldest</option>
+            </select>
+        </div>
+    </div>
+        <div class="flex flex-c</div>ol mt-5 w-full">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 w-full">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="shadow-lg overflow-hidden border-b border-gray-200 sm:rounded-lg">
@@ -20,6 +49,14 @@
                                     <th
                                         class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
                                         Question
+                                    </th>
+                                    <th
+                                        class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
+                                        Subject
+                                    </th>
+                                    <th
+                                        class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
+                                        Created At
                                     </th>
                                     <th
                                         class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
@@ -47,6 +84,12 @@
                                                 class="text-sm text-gray-900">
                                                 {{ $question->question }}
                                             </a>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ $question->subject->subject }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ $question->created_at->format('d.m.Y') }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <a href="{{ route('answer.show', $question->id) }}"
