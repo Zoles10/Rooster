@@ -77,8 +77,8 @@ Robené počas akademického roku 2023/24 letný semester
 -   [ ] pri otázke s otvorenou odpoveďou:
     -   [ ] výsledok vo forme word cloudu
     -   [ ] výsledok vo forme zoznamu
--   [ ] existujúca otázka:
-    -   [ ] úprava
+-   [x] existujúca otázka:
+    -   [x] úprava
     -   [x] vymazanie
     -   [x] duplikácia
 -   [x] ku každej otázke definovať k akému predmetu patrí
