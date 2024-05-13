@@ -22,7 +22,7 @@ Route::get('/manual', function () {
 
 Route::resource('question', QuestionController::class);
 Route::post('/question/{question}', [QuestionController::class, 'multiply'])->middleware(['auth', 'verified'])->name('question.multiply');
-
+Route::put('/question/{question}', [QuestionController::class, 'update'])->middleware(['auth', 'verified'])->name('question.update');
 
 Route::post('/answer/{id}', [AnswerController::class, 'store'])->name('answer.store');
 Route::get('/answer/{id}', [AnswerController::class, 'show'])->name('answer.show');

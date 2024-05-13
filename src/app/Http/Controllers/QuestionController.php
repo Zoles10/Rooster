@@ -121,13 +121,22 @@ class QuestionController extends Controller
     public function update(Request $request, Question $question)
     {
         $validatedData = $request->validate([
-            'question' => 'sometimes|required|string|max:1023',
-            'question_type' => 'sometimes|required|string|in:multiple_choice,open_ended',
+            'question' => 'sometimes|string|max:1023',
+            'question_type' => 'sometimes|string|in:multiple_choice,open_ended',
+            'owner_id' => 'sometimes|exists:users,id',
+            'subject' => 'sometimes',
             'active' => 'sometimes|boolean',
         ]);
 
-        if (! isset($validatedData['active'])) {
-            $validatedData['active'] = $question->active;
+        if ($validatedData['subject'] != 0) {
+            $question->subject()->associate($request->input('subject'));
+        } else {
+            $subject = Subject::firstOrCreate(['subject' => $request->input('other_subject')]);
+            $question->subject()->associate($subject);
+        }
+
+        if (isset($validatedData['owner_id']) && !$request->user()->isAdmin()) {
+            $validatedData['owner_id'] = Auth::id();
         }
 
         $question->update($validatedData);
