@@ -27,9 +27,10 @@ Robené počas akademického roku 2023/24 letný semester
 ## Autori
 
 -   Matej Ištok (frontend)
+-   Jakub Hubáček (frontend)
 -   Daniel Janík (backend)
 -   Michal Gregorovič (backend)
--   Jakub Hubáček (fullstack)
+
 
 ## Téma
 
