@@ -15,8 +15,8 @@ class OptionsHistory extends Model
 
     public $timestamps = false;
 
-    public function optionsHistory()
+    public function option()
     {
-        return $this->belongsTo(OptionsHistory::class);
+        return $this->belongsTo(Option::class);
     }
 }

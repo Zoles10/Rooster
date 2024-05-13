@@ -15,6 +15,6 @@ class Option extends Model
 
     public function optionsHistory()
     {
-        return $this->belongsTo(OptionsHistory::class);
+        return $this->hasOne(OptionsHistory::class);
     }
 }
