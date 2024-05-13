@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
             $table->text('user_text');
             $table->timestamps();
+            $table->integer('count')->default(0);
         });
     }
 
