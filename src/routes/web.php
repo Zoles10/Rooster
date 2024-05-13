@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\ManualController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -18,6 +19,10 @@ Route::get('/dashboard', [QuestionController::class, 'index'])->middleware(['aut
 Route::get('/manual', function () {
     return view("manual");
 })->name('manual');
+
+Route::get("/pdf/guest", [ManualController::class, 'downloadGuestPDF'])->name('downloadGuestPDF');
+Route::get("/pdf/user", [ManualController::class, 'downloadUserPDF'])->middleware(['auth', 'verified'])->name('downloadUserPDF');
+Route::get("/pdf/admin", [ManualController::class, 'downloadAdminPDF'])->middleware(['auth', 'verified'])->name('downloadAdminPDF');
 
 
 Route::post('/question/{question}', [QuestionController::class, 'multiply'])->middleware(['auth', 'verified'])->name('question.multiply');

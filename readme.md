@@ -40,7 +40,7 @@ Robené počas akademického roku 2023/24 letný semester
 -   [ ] dvojjazyčnosť
 -   [ ] responzivita
 -   [x] 3 role: neprihlásený, prihlásený a admin
--   [ ] príručka exportovateľnná do pdf, čo robí ktorá rola
+-   [x] príručka exportovateľnná do pdf, čo robí ktorá rola
 -   [ ] videoprezentácia
 -   [x] Titulná stránka s prihlásením a zadaním kódu pre anketu/kvíz/otázku
 
