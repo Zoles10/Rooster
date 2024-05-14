@@ -28,7 +28,7 @@ Robené počas akademického roku 2023/24 letný semester
 
 -   Matej Ištok (frontend)
 -   Jakub Hubáček (frontend)
--   Daniel Janík (backend)
+-   Daniel Janík (fullstack)
 -   Michal Gregorovič (backend)
 
 
@@ -39,7 +39,7 @@ Robené počas akademického roku 2023/24 letný semester
 ### Všeobecné:
 
 -   [ ] dvojjazyčnosť
--   [ ] responzivita
+-   [x] responzivita
 -   [x] 3 role: neprihlásený, prihlásený a admin
 -   [x] príručka exportovateľnná do pdf, čo robí ktorá rola
 -   [ ] videoprezentácia
@@ -56,8 +56,8 @@ Robené počas akademického roku 2023/24 letný semester
     -   [x] do url v tvare ...webte.fei.stuba.sk/kod
 -   [x] presmerovanie po zadaní kódu na otázky
 -   [x] na stránke s otázkami umožniť návrat na titulnú stránku
--   [ ] pri zobrazení výsledkov na otázku, kde je možné odpovedať rôznym textom, vytvoriť word cloud, ktorý vytvoríme **samostatne**, nepoužívať kódy z internetu :skull:!!!
--   [ ] velkosť textu v word cloude, na základe počtu rovnakých odpovedí
+-   [x] pri zobrazení výsledkov na otázku, kde je možné odpovedať rôznym textom, vytvoriť word cloud, ktorý vytvoríme **samostatne**, nepoužívať kódy z internetu :skull:!!!
+-   [x] velkosť textu v word cloude, na základe počtu rovnakých odpovedí
 
 ---
 
@@ -74,9 +74,9 @@ Robené počas akademického roku 2023/24 letný semester
 -   [x] otázka:
     -   [x] s možnosťami, kde môže byť správna jedna alebo viac možností
     -   [x] s otvorenou krátkou odpoveďou (text)
--   [ ] pri otázke s otvorenou odpoveďou:
-    -   [ ] výsledok vo forme word cloudu
-    -   [ ] výsledok vo forme zoznamu
+-   [x] pri otázke s otvorenou odpoveďou:
+    -   [x] výsledok vo forme word cloudu
+    -   [x] výsledok vo forme zoznamu
 -   [x] existujúca otázka:
     -   [x] úprava
     -   [x] vymazanie
