@@ -5,9 +5,8 @@
         </h2>
     </x-slot>
     @php
-        $id = request()->route('question');
-        $question = \App\Models\Question::find($id);
-        $question = \App\Models\Question::with(['options.optionsHistory'])->find($id);
+        $question = \App\Models\Question::find($question_id);
+        $question = \App\Models\Question::with(['options.optionsHistory'])->find($question_id);
     @endphp
     <style>
         html, body, #container {

@@ -66,7 +66,7 @@ class AnswerController extends Controller
             ->pluck('count', 'user_text')
             ->all();
 
-        return view("answer.showAnswer", ['answerCounts' => $answerCounts]);
+        return view("answer.showAnswer", ['answerCounts' => $answerCounts, 'question_id' => $question_id]);
     }
 
     /**
