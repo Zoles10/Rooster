@@ -6,8 +6,8 @@
     @endpush
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <div class="flex justify-center items-center">
-            <a href="{{ route('question.create') }}" style="background: rgb(79, 70, 229);"
-            class="inline-flex items-center px-4 py-2 hover:text-gray-300 bg-purple-800 border border-transparent rounded-md font-semibold text-m text-white uppercase tracking-widest hover:bg-purple-700 active:bg-purple-900 focus:outline-none focus:border-purple-900 focus:ring ring-purple-300 disabled:opacity-25 transition ease-in-out duration-150">
+            <a href="{{ route('question.create') }}"
+            class="imp_bg_purple inline-flex items-center px-4 py-2 hover:text-gray-300 bg-purple-800 border border-transparent rounded-md font-semibold text-m text-white uppercase tracking-widest hover:bg-purple-700 active:bg-purple-900 focus:outline-none focus:border-purple-900 focus:ring ring-purple-300 disabled:opacity-25 transition ease-in-out duration-150">
             Create question
         </a>
     </div>
@@ -44,7 +44,7 @@
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="shadow-lg overflow-hidden border-b border-gray-200 sm:rounded-lg">
                         <table class="w-full divide-y divide-gray-200 mb-2">
-                            <thead class="p-2" style="background: rgb(235, 226, 255);">
+                            <thead class="imp_bg_white p-2">
                                 <tr>
                                     <th
                                         class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
@@ -121,23 +121,20 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             <div class="flex flex-col space-y-2 justify-center items-center">
                                                 <a href="{{ route('question.edit', $question->id) }}"
-                                                    style="background: rgb(79, 70, 229); width: 50%; text-align: center;"
-                                                    class="text-white p-2 hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs text-center">Edit</a>
+                                                    class="imp_bg_purple imp_50_center text-white p-2 hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs text-center">Edit</a>
                                             </div>
                                             <form action="{{ route('question.multiply', $question) }}" method="POST" class="mt-1 flex justify-center items-center">
                                                 @csrf
                                                 @method('POST')
 
-                                                    <button type="submit" class="text-white p-2 hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs"
-                                                    style="background: rgb(70, 200, 229); width: 50%; text-align: center;">Clone</button>
+                                                    <button type="submit" class="text-white p-2 imp_multi_btn hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs">Clone</button>
                                             </form>
                                             <form action="{{ route('question.destroy', $question->id) }}" method="POST"
                                                 class="mt-1 flex justify-center items-center">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
-                                                    class="text-white p-2 hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs"
-                                                    style="background: red; width: 50%;">Delete</button>
+                                                    class="text-white p-2 imp_del_btn hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs">Delete</button>
                                             </form>
                                         </td>
                                     </tr>

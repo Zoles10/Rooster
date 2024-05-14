@@ -16,3 +16,67 @@
 .imp_admin_td {
     border: 1px solid black;
 }
+
+.imp_bg_purple {
+    background: rgb(79, 70, 229);
+}
+
+.imp_50_center {
+    width: 50%;
+    text-align: center;
+}
+
+.imp_bg_white {
+    background: rgb(235, 226, 255);
+}
+
+.imp_answer_err {
+    display: none;
+    font-size: .7rem;
+    color:red;
+}
+
+.imp_del_btn {
+    background: red;
+    width: 50%;
+}
+
+.imp_multi_btn {
+    background: rgb(70, 200, 229);
+    width: 50%;
+    text-align: center;
+}
+
+.imp_margin_04 {
+    margin: 0.4rem !important;
+}
+
+.imp_bg_orange {
+    background: rgb(218, 141, 0);
+}
+
+.imp_add_btn {
+    background-color: green;
+    color: white;
+    border-radius: 4px;
+}
+
+.imp_checkbox {
+    margin: .25rem 2.7rem 0 .8rem;
+    border-radius: 4px;
+}
+
+.imp_x_btn {
+    background-color: red;
+    margin-top: .25rem;
+    color: #f2f2f2;
+    border-radius: 4px;
+    padding: 8px;
+    margin-left: 8px;
+    line-height: .7;
+}
+
+.imp_invalid_input_text {
+    font-size: .7rem;
+    color:red;
+}

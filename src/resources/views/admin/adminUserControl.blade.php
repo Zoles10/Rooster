@@ -1,9 +1,3 @@
-<!--
-    TODO:
-    @Bruchac @Jakub
-    Vsetky style="color:black" musia ist prec a nahradit ich tailwindom tak aby to aj fungovalo
-    A ostatne uz necham na vas nech to nejak vyzera
--->
 <div class="bg-gray-400 p-4 rounded-lg mt-4 mb-4 flex justify-center">
     <table class="table table-striped table-hover mt-4 mb-4 p-4 border-blue-300 rounded-lg">
         <thead>
@@ -55,7 +49,6 @@
                         <button type="submit" class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600">Delete</button>
                     </form>
                 </td>
-                <!-- Add more columns as needed -->
             </tr>
             @endforeach
         </tbody>

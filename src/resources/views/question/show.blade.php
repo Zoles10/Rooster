@@ -7,7 +7,7 @@
                 @if ($question->question_type == 'open_ended')
                     <div>
                         <label for="user_text" class="block text-sm font-medium text-gray-700">Your Answer:</label>
-                        <span id="answer-err" style="display: none; font-size: .7rem; color:red;"></span>
+                        <span id="answer-err" class="imp_answer_err"></span>
                         <input type="text" id="user_text" name="user_text"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     </div>

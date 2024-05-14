@@ -1,24 +1,24 @@
 <x-app-layout>
     <div class="bg-white min-h-screen flex flex-col items-center justify-center text-white">
-        <div class="max-w-xl w-full p-6 md:p-8 bg-gray-500 rounded-lg shadow-lg shadow-gray-400" style="margin: 0 .4rem;">
+        <div class="imp_margin_04 max-w-xl w-full p-6 md:p-8 bg-gray-500 rounded-lg shadow-lg shadow-gray-400">
             <h1 class="text-2xl font-bold mb-5 text-center">Update Question</h1>
             <form id="main-form" method="POST"  action="{{ route('question.update', $question) }}" class="bg-gray-500 p-4 rounded-lg">
                 @csrf
                 @METHOD('PUT')
                 <div class="mb-4">
                     <label for="question" class="block text-sm font-medium text-white">Question:</label>
-                    <span id="question-err" style="display: none; font-size: .7rem; color:red;"></span>
+                    <span id="question-err" class="imp_invalid_input_text" style="display: none;"></span>
                     <input type="text"
-                        class="form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        id="question" name="question" placeholder="Enter question" style="color: rgb(15, 15, 15);"
+                        class="text-black form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        id="question" name="question" placeholder="Enter question"
                         value="{{ $question->question }}">
                 </div>
                 @if (auth()->user()->isAdmin())
                     <div class="mb-4">
                         <label for="ownerInput" class="block text-sm font-medium text-white">User:</label>
                         <select
-                            class="form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                            id="ownerInput" name="ownerInput" style="color: rgb(15, 15, 15);">
+                            class="text-black form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                            id="ownerInput" name="ownerInput">
                             <option value="" selected disabled>Select user</option>
                             @foreach ($users as $user)
                                 @if ($question->owner_id == $user->id)
@@ -35,10 +35,9 @@
                 <!-- Subject Dropdown -->
                 <div class="mb-4">
                     <label for="subject" class="block text-sm font-medium text-white">Subject:</label>
-                    <span id="subject-err" style="display: none; font-size: .7rem; color:red;"></span>
+                    <span id="subject-err" class="imp_invalid_input_text" style="display: none;"></span>
                     <select id="subject" name="subject"
-                        class="form-control mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        style="color: rgb(15, 15, 15);">
+                        class="text-black form-control mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                         @foreach ($subjects as $subject)
                             <option value="{{ $subject->id }}" @if ($question->subject_id == $subject->id) selected @endif>{{ $subject->subject }}</option>
                         @endforeach
@@ -50,10 +49,9 @@
                 <div id="other-subject-container" class="hidden mt-4">
                     <label for="other-subject" class="block text-sm font-medium text-white">Specify subject
                         name:</label>
-                    <span id="othersubject-err" style="display: none; font-size: .7rem; color:red;"></span>
+                    <span id="othersubject-err" class="imp_invalid_input_text" style="display: none;"></span>
                     <input type="text" id="other-subject" name="other_subject" placeholder="Subject name"
-                        class="form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        style="color: rgb(15, 15, 15);">
+                        class="text-black form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                     </div>
 
                     @if ($question->question_type === 'open_ended')
@@ -89,34 +87,32 @@
                         <label class="block text-sm font-medium text-grey">Correct:</label>
                         @foreach ($question->options as $option)
                             <div class="flex items-center mb-3">
-                                <input type="checkbox" name="isCorrect{{ $i }}" class="form-checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded"
-                                    style="margin: .25rem 2.7rem 0 .8rem; border-radius: 4px;" @if ($option->correct) checked @endif>
+                                <input type="checkbox" name="isCorrect{{ $i }}" class="form-checkbox imp_checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded"
+                                    @if ($option->correct) checked @endif>
                                 <input type="text" name="option{{ $i }}"
-                                    class="form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    style="color: black;" value="{{ $option->option_text }}" placeholder="Option text">
-                                <button type="button" onclick="this.parentElement.remove()" style="background-color: red; margin-top: .25rem; color: #f2f2f2; border-radius: 4px; padding: 8px; margin-left: 8px; line-height: .7;">&times;</button>
+                                    class="text-black form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                    value="{{ $option->option_text }}" placeholder="Option text">
+                                <button type="button" onclick="this.parentElement.remove()" class="imp_x_btn">&times;</button>
                             </div>
                             @php
                                 $i++;
                             @endphp
                         @endforeach
 
-                        <span id="option-err" style="display: none; font-size: .7rem; color:red;"></span>
+                        <span id="option-err" class="imp_invalid_input_text" style="display: none;"></span>
                         <!-- Add Option Button with Inline Styles -->
                     </div>
                     <div id="add-option-btn" class="hidden flex justify-center">
-                        <button type="button" class="mt-2 p-2 bg-green-500 rounded-md text-white hover:bg-green-600"
-                        style="background-color: green; color: white; border-radius: 4px;" onclick="addOption()">Add
+                        <button type="button" class="imp_add_btn mt-2 p-2 bg-green-500 rounded-md text-white hover:bg-green-600" onclick="addOption()">Add
                         Option</button>
                     </div>
                 @endif
                 <div id="buttonsContainer" class="flex justify-between mt-4">
                     <!-- Cancel Button -->
-                    <button type="button" class="px-4 py-2 rounded-md text-white hover:bg-gray-600"
-                        style="background: rgb(218, 141, 0);" onclick="resetForm()">Cancel</button>
+                    <button type="button" class="imp_bg_orange px-4 py-2 rounded-md text-white hover:bg-gray-600"
+                        onclick="resetForm()">Cancel</button>
                     <!-- Submit Button -->
-                    <button type="submit" class="px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600"
-                        style="background: rgb(79, 70, 229);" id="submit-btn">Submit</button>
+                    <button type="submit" class="px-4 py-2 imp_bg_purple rounded-md text-white" id="submit-btn">Submit</button>
                 </div>
                 @if ($question->question_type === 'multiple_choice')
                     <script>
@@ -134,7 +130,7 @@
                     </script>
                 @endif
             </form>
-            <div style="background: blue;" class="mt-3 px-4 py-2 rounded-md text-white hover:bg-gray-600">
+            <div class="bg-blue-700 mt-3 px-4 py-2 rounded-md text-white hover:bg-gray-600">
                 <a href={{ route('question.index') }}>Späť na otázky</a>
             </div>
         </div>
