@@ -19,23 +19,30 @@
     @if($question->question_type == 'open_ended')
         @if($question->word_cloud == 0)
             <!-- Display table with answers -->
-            <table>
-                <thead>
-                    <tr>
-                        <th>Answer Text</th>
-                        <th>Number</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <h1>answers table here</h1>
-                    {{-- @foreach($answers as $answer)
-                        <tr>
-                            <td>{{ $answer->text }}</td>
-                            <td>{{ $answer->number }}</td>
-                        </tr>
-                    @endforeach --}}
-                </tbody>
-            </table>
+            <div class="py-12">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6 text-gray-900 ">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Answer Text</th>
+                                        <th>Number</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($answerCounts as $index => $count)
+                                        <tr>
+                                            <td>{{ $index }}</td>
+                                            <td>{{ $count }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         @elseif($question->word_cloud == 1)
             <!-- Display wordcloud -->
             <div class="py-12">
@@ -49,23 +56,30 @@
         @endif
     @elseif($question->question_type == 'multiple_choice')
         <!-- Display table with options history -->
-        <table>
-            <thead>
-                <tr>
-                    <th>Option Text</th>
-                    <th>Number</th>
-                </tr>
-            </thead>
-            <tbody>
-                <h1>options table here</h1>
-                @foreach($question->options as $index => $option)
-                    <tr>
-                        <td>{{ $option->option_text }}</td>
-                        <td>{{ $option->optionsHistory->times_answered }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900 ">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Option Text</th>
+                                    <th>Number</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($question->options as $index => $option)
+                                    <tr>
+                                        <td>{{ $option->option_text }}</td>
+                                        <td>{{ $option->optionsHistory->times_answered }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     @endif
     <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
     <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
