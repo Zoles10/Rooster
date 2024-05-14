@@ -1,5 +1,5 @@
-<div id="guest" class="p-6 text-gray-900">
-    <div class="bg-blue-200 rounded p-3">
+<div id="guest" class="p-6 text-gray-900 w-full">
+    <div class="bg-blue-200 rounded p-5">
         <h1 class="font-bold text-3xl">GUEST</h1>
         <div class="p-3">
             <p class="m-3">This is the user manual for guests in our app. Here are things you can do

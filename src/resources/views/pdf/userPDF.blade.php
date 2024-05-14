@@ -1,5 +1,5 @@
-<div id="user" class="p-6 text-gray-900">
-    <div class="bg-green-200 rounded p-3">
+<div id="user" class="p-6 text-gray-900 w-full">
+    <div class="bg-green-200 rounded p-5">
         <h1 class="font-bold text-3xl">USER</h1>
         <div class="p-3">
             <p class="m-3">This is the user manual for users in our app. Here are things you can
