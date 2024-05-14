@@ -85,6 +85,12 @@ class QuestionController extends Controller
                     $correct = $request->input('isCorrect' . $i);
                     $correct = isset($correct) ? true : false;
                     $option = $question->options()->create(['option_text' => $value, 'correct' => $correct]);
+                    $optionHistory = $option->optionsHistory()->create([
+                        'option_id' => $option->id,
+                        'year' => date('Y'),
+                        'times_answered' => 0
+                    ]);
+                    $optionHistory->save();
                     $option->save();
                     $i++;
                 }
@@ -139,13 +145,14 @@ class QuestionController extends Controller
             }
         } else
             $question->owner_id = Auth::id();
-
         if ($request->input('subject') != 0) {
             $subject = Subject::where('id', $request->input('subject'))->first();
             $question->subject()->associate($subject);
         } else {
-            $subject = Subject::firstOrCreate(['subject' => $request->input('other_subject')]);
-            $question->subject()->associate($subject);
+            if (isset($subject)) {
+                $subject = Subject::firstOrCreate(['subject' => $request->input('other_subject')]);
+                $question->subject()->associate($subject);
+            }
         }
 
         if (isset($validatedData['question'])) {

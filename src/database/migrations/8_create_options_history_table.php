@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('options_history', function (Blueprint $table) {
             $table->id();
             $table->integer('year');
-            $table->integer('times_answered')->unsigned();
+            $table->integer('times_answered')->unsigned()->default(0);
             $table->foreignId('option_id')->constrained('options')->onDelete('cascade');
         });
     }

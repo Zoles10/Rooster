@@ -42,7 +42,7 @@ class AnswerController extends Controller
                 $i = 1;
                 foreach ($options as $option) {
                     if (isset($request['selected' . $i])) {
-                        $option->optionsHistory->increment('times_answered');
+                        $option->optionsHistory()->increment('times_answered');
                     }
                     $i++;
                 }
