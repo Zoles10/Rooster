@@ -20,9 +20,7 @@ Route::get('/manual', function () {
     return view("manual");
 })->name('manual');
 
-Route::get("/pdf/guest", [ManualController::class, 'downloadGuestPDF'])->name('downloadGuestPDF');
-Route::get("/pdf/user", [ManualController::class, 'downloadUserPDF'])->middleware(['auth', 'verified'])->name('downloadUserPDF');
-Route::get("/pdf/admin", [ManualController::class, 'downloadAdminPDF'])->middleware(['auth', 'verified'])->name('downloadAdminPDF');
+Route::get("/pdf/manual", [ManualController::class, 'downloadPDF'])->middleware(['auth', 'verified'])->name('downloadPDF');
 
 Route::post('/question/{question}', [QuestionController::class, 'multiply'])->middleware(['auth', 'verified'])->name('question.multiply');
 Route::put('/question/{question}', [QuestionController::class, 'update'])->middleware(['auth', 'verified'])->name('question.update');

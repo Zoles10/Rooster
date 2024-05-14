@@ -7,21 +7,10 @@ use Illuminate\Http\Request;
 
 class ManualController extends Controller
 {
-    public function downloadGuestPDF()
+    public function downloadPDF()
     {
-        $pdf = PDF::loadView('pdf.guestPDF');
-        return $pdf->download('guest.pdf');
-    }
-
-    public function downloadUserPDF()
-    {
-        $pdf = PDF::loadView('pdf.userPDF');
-        return $pdf->download('user.pdf');
-    }
-
-    public function downloadAdminPDF()
-    {
-        $pdf = PDF::loadView('pdf.adminPDF');
-        return $pdf->download('admin.pdf');
+        $view = view('pdf.guestPDF')->render() . view('pdf.userPDF')->render() . view('pdf.adminPDF')->render();
+        $pdf = PDF::loadHTML($view);
+        return $pdf->download('manual.pdf');
     }
 }
