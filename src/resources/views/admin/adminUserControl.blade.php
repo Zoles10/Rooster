@@ -1,5 +1,5 @@
 <div class="bg-gray-400 p-4 rounded-lg mt-4 mb-4 flex justify-center hidden custom:block">
-    <table class="table table-striped table-hover mt-4 mb-4 p-4 border-blue-300 rounded-lg">
+    <table class="table table-striped w-full table-hover mt-4 mb-4 p-4 border-blue-300 rounded-lg">
         <thead>
             <tr class="bg-indigo-600 text-white">
                 <th class="px-4 py-2">Name</th>
