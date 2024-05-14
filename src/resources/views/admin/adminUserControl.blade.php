@@ -1,4 +1,4 @@
-<div class="bg-gray-400 p-4 rounded-lg mt-4 mb-4 flex justify-center">
+<div class="bg-gray-400 p-4 rounded-lg mt-4 mb-4 flex justify-center hidden custom:block">
     <table class="table table-striped table-hover mt-4 mb-4 p-4 border-blue-300 rounded-lg">
         <thead>
             <tr class="bg-indigo-600 text-white">
@@ -54,6 +54,61 @@
         </tbody>
     </table>
 </div>
+
+
+<!-- Mobileview -->
+<div class="grid grid-cols-1 gap-4 px-4 py-6 sm:px-6 lg:px-8 custom:hidden">
+    @foreach ($users as $user)
+        @if (auth()->user()->id != $user->id)
+            <div class="bg-white rounded-lg shadow overflow-hidden">
+                <div class="p-4">
+                    <form method="POST" action="{{ route('user.updateName', $user) }}">
+                        @csrf
+                        <div class="mb-2">
+                            <label class="block text-sm font-medium text-gray-700">Name:</label>
+                            <div class="flex items-center space-x-2">
+                                <input type="text" name="name" class="flex-grow block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" value="{{ $user->name }}" required>
+                                <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Update</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="mb-2">
+                        <label class="block text-sm font-medium text-gray-700">Email:</label>
+                        <p>{{ $user->email }}</p>
+                    </div>
+                    <form method="POST" action="{{ route('user.update', $user) }}">
+                        @csrf
+                        <div class="mb-2">
+                            <label class="flex items-center space-x-2">
+                                <span class="text-sm font-medium text-gray-700">Is Admin:</span>
+                                <input type="checkbox" name="admin" class="form-checkbox h-5 w-5 text-indigo-600" {{ $user->admin ? 'checked' : '' }} onchange="this.form.submit()">
+                            </label>
+                        </div>
+                    </form>
+                    <form method="POST" action="{{ route('user.updatePassword', $user) }}">
+                        @csrf
+                        <div class="mb-2">
+                            <label class="block text-sm font-medium text-gray-700">Password:</label>
+                            <div class="flex items-center space-x-2">
+                                <input type="password" name="password" placeholder="New password" class="flex-grow block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" required>
+                                <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                    <form method="POST" action="{{ route('user.delete', $user) }}">
+                        @csrf
+                        @method('DELETE')
+                        <div class="flex justify-end">
+                            <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        @endif
+    @endforeach
+</div>
+
+
 
 <div class="bg-gray-400 p-4 rounded-lg mt-4 mb-4">
     <h3 class="text-xl font-bold mb-4 text-gray-100">Create New User</h3>

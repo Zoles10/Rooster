@@ -20,7 +20,7 @@ function filterTable() {
     }
 }
 </script>
-<div class="bg-gray-400 p-4 rounded-lg mt-4 mb-4">
+<div class="bg-gray-400 p-4 rounded-lg mt-4 mb-4 hidden custom:block">
     <table class="imp_admin_td table bg-white table-striped w-full table-hover mt-4 rounded">
     <thead>
         <tr class="bg-indigo-600 text-white">
@@ -58,4 +58,54 @@ function filterTable() {
     </tbody>
 </table>
 </div>
+
+<!-- Mobileview -->
+<div class="grid grid-cols-1 gap-4 px-4 py-6 sm:px-6 lg:px-8 custom:hidden">
+    @foreach($questions as $question)
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+        <div class="p-4">
+            <div class="font-semibold text-lg text-purple-800">
+                Question: {{ $question["question"] }}
+            </div>
+            <div class="text-sm text-gray-700">
+                Code: {{ $question["id"] }}
+            </div>
+            <div class="text-sm text-gray-700">
+                Subject: {{ $question["subject"]["subject"] }}
+            </div>
+            <div class="text-sm text-gray-700">
+                Owner: {{ $question["user_name"] }}
+            </div>
+            <div class="flex items-center justify-between mt-2">
+                <div>
+                    <strong>Active:</strong>
+                    <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600"
+                           {{ $question["active"] == 1 ? 'checked' : '' }}
+                           onchange="event.preventDefault(); document.getElementById('active-toggle-{{ $question['id'] }}').submit();">
+                    <form id="active-toggle-{{ $question['id'] }}" action="{{ route('question.update', $question['id']) }}" method="POST" style="display: none;">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="active" value="{{ $question["active"] == 1 ? 0 : 1 }}">
+                    </form>
+                </div>
+                <div class="flex space-x-2">
+                    <a href="{{ route('question.edit', $question["id"]) }}" class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-400">
+                        Edit
+                    </a>
+                    <form action="{{ route('question.destroy', $question['id']) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
+</div>
+
+
+
 {{ $questions->links() }}

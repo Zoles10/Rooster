@@ -40,10 +40,10 @@
         </div>
     </div>
         <div class="flex flex-c</div>ol mt-5 w-full">
-            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 w-full">
+            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 w-full hidden lg:block">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="shadow-lg overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                        <table class="w-full divide-y divide-gray-200 mb-2">
+                        <table class="min-w-full divide-y divide-gray-200 mb-2">
                             <thead class="imp_bg_white p-2">
                                 <tr>
                                     <th
@@ -147,6 +147,70 @@
         </div>
     </div>
     </div>
+
+    <!-- Mobile View -->
+    <div class="grid grid-cols-1 gap-4 px-4 py-6 sm:px-6 lg:px-8 lg:hidden">
+        @foreach ($questions as $question)
+            <div class="bg-white rounded-lg shadow overflow-hidden">
+                <div class="p-4">
+                    <div class="font-semibold text-lg text-purple-800">
+                        <a href="{{ route('question.show', $question->id) }}"
+                            class="text-purple-800 hover:text-purple-600">
+                            {{ $question->question }}
+                        </a>
+                    </div>
+                    <div class="text-sm text-gray-700 mt-2">Subject: {{ $question->subject->subject }}</div>
+                    <div class="text-sm text-gray-700">Created: {{ $question->created_at->format('d.m.Y') }}</div>
+                    <div class="mt-4">
+                        <a href="{{ route('answers.show', $question->id) }}" class="text-blue-500 hover:text-blue-700 text-sm">
+                            Go to Results
+                        </a>
+                    </div>
+                    <div class="mt-2 flex items-center justify-between">
+                        <button class="text-blue-500 hover:text-blue-700">
+                            Code: {{ $question->id }}
+                        </button>
+                        <form method="POST" action="{{ route('question.update', $question) }}">
+                            @csrf
+                            @method('PUT')
+                            <label class="flex items-center">
+                                <input type="checkbox" name="active_checkbox"
+                                    class="form-checkbox h-5 w-5 text-indigo-600 rounded"
+                                    onchange="this.form.submit()" value="{{ $question->id }}"
+                                    {{ $question->active ? 'checked' : '' }}>
+                                <span class="ml-2 text-sm text-gray-600">Active</span>
+                            </label>
+                            <input type="hidden" name="active" value="{{ $question->active ? '0' : '1' }}">
+                        </form>
+                    </div>
+                    <div class="flex justify-between items-center mt-3">
+                        <a href="{{ route('question.edit', $question->id) }}"
+                            class="text-sm bg-purple-600 text-white p-2 rounded hover:bg-purple-700">
+                            Edit
+                        </a>
+                        <form action="{{ route('question.multiply', $question) }}" method="POST" class="inline">
+                            @csrf
+                            @method('POST')
+                            <button type="submit"
+                                class="text-sm bg-blue-500 text-white p-2 rounded hover:bg-blue-700">
+                                Clone
+                            </button>
+                        </form>
+                        <form action="{{ route('question.destroy', $question->id) }}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                class="text-sm bg-red-600 text-white p-2 rounded hover:bg-red-700">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
+
     <!-- Tailwind Modal -->
     <div id="codeModal" class="hidden fixed inset-0 flex items-center justify-center z-50">
         <div class="bg-white border border-indigo-300 rounded-lg p-8 flex flex-col justify-center">
