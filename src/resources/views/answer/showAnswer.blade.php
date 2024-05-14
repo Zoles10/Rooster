@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
     @php
-        $id = request()->route('id');
+        $id = request()->route('question');
         $question = \App\Models\Question::find($id);
         $question = \App\Models\Question::with(['options.optionsHistory'])->find($id);
     @endphp
@@ -74,39 +74,26 @@
 
         anychart.onDocumentReady(function() {
             var data = [
-                {"x": "Mandarin chinese", "value": 1},
-                {"x": "English", "value": 9},
-                {"x": "Hindustani", "value": 5},
-                {"x": "Spanish", "value": 5},
-                {"x": "Arabic", "value": 4},
-                {"x": "Malay", "value": 2},
-                {"x": "Russian", "value": 2},
-                {"x": "Bengali", "value": 2},
-                {"x": "Portuguese", "value": 2},
-                {"x": "French", "value": 2},
-                {"x": "Hausa", "value": 1},
-                {"x": "Punjabi", "value": 1},
-                {"x": "Japanese", "value": 1},
-                {"x": "German", "value": 1},
-                {"x": "Persian", "value": 1}
-                ];
+                @foreach($answerCounts as $index => $count)
+                    {"x": "{{ $index }}", "value": {{ $count }}},
+                @endforeach
+            ];
 
-                // create a tag (word) cloud chart
-                var chart = anychart.tagCloud(data);
+            // create a tag (word) cloud chart
+            var chart = anychart.tagCloud(data);
 
-                // set a chart title
-                chart.title('answers: {{ $question->question }}')
-                // set an array of angles at which the words will be laid out
-                chart.angles([0])
-                // enable a color range
-                // chart.colorRange(true);
-                // set the color range length
-                // chart.colorRange().length('80%');
+            // set a chart title
+            chart.title('answers for {{ $question->question }}')
+            // set an array of angles at which the words will be laid out
+            chart.angles([0])
+            // enable a color range
+            // chart.colorRange(true);
+            // set the color range length
+            // chart.colorRange().length('80%');
 
-                // display the word cloud chart
-                chart.container("container");
-                chart.draw();
-                });
-
+            // display the word cloud chart
+            chart.container("container");
+            chart.draw();
+        });
     </script>
 </x-app-layout>

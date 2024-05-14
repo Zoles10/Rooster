@@ -48,7 +48,7 @@ class AnswerController extends Controller
                 }
             }
 
-            return view("answer.showAnswer");
+            return $this->show($question_id);
         }
 
         return to_route('welcome')->with('message', ('Question is not active'));
@@ -57,9 +57,16 @@ class AnswerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Answer $answer)
+    public function show($question_id)
     {
-        return view("answer.showAnswer");
+        $answerCounts = Answer::select('user_text', \DB::raw('count(*) as count'))
+            ->withQuestionId($question_id)
+            ->groupBy('user_text')
+            ->get()
+            ->pluck('count', 'user_text')
+            ->all();
+
+        return view("answer.showAnswer", ['answerCounts' => $answerCounts]);
     }
 
     /**

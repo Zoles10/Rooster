@@ -24,13 +24,12 @@ Route::get("/pdf/guest", [ManualController::class, 'downloadGuestPDF'])->name('d
 Route::get("/pdf/user", [ManualController::class, 'downloadUserPDF'])->middleware(['auth', 'verified'])->name('downloadUserPDF');
 Route::get("/pdf/admin", [ManualController::class, 'downloadAdminPDF'])->middleware(['auth', 'verified'])->name('downloadAdminPDF');
 
-
 Route::post('/question/{question}', [QuestionController::class, 'multiply'])->middleware(['auth', 'verified'])->name('question.multiply');
 Route::put('/question/{question}', [QuestionController::class, 'update'])->middleware(['auth', 'verified'])->name('question.update');
+Route::get('/question/{question}/answers', [AnswerController::class, 'show'])->name('answers.show');
 Route::resource('question', QuestionController::class)->except(['update', 'store']);
 
 Route::post('/answer/{id}', [AnswerController::class, 'store'])->name('answer.store');
-Route::get('/answer/{id}', [AnswerController::class, 'show'])->name('answer.show');
 
 Route::get('/user/{id}', [UserController::class, 'getById'])->middleware(['auth', 'verified'])->name('getById');
 

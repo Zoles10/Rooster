@@ -92,7 +92,7 @@
                                             {{ $question->created_at->format('d.m.Y') }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <a href="{{ route('answer.show', $question->id) }}"
+                                            <a href="{{ route('answers.show', $question->id) }}"
                                                 class="text-sm text-gray-900">
                                                 Goto Results
                                             </a>
