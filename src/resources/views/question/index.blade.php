@@ -167,8 +167,9 @@
                         </a>
                     </div>
                     <div class="mt-2 flex items-center justify-between">
-                        <button class="text-blue-500 hover:text-blue-700">
-                            Code: {{ $question->id }}
+                        <button id="{{ $question->id }}btn"
+                            class="text-blue-500 hover:text-blue-700">
+                            {{ $question->id }}
                         </button>
                         <form method="POST" action="{{ route('question.update', $question) }}">
                             @csrf
