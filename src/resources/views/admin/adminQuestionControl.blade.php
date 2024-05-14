@@ -1,25 +1,4 @@
-<input type="text" id="search" class="rounded" placeholder="Search by username" onkeyup="filterTable()">
-
-<script>
-function filterTable() {
-    var input = document.getElementById("search");
-    var filter = input.value.toUpperCase();
-    var table = document.querySelector(".table");
-    var trs = table.tBodies[0].getElementsByTagName("tr");
-
-    for (var i = 0; i < trs.length; i++) {
-        var tds = trs[i].getElementsByTagName("td");
-        if (tds.length > 0) {
-            var txtValue = tds[2].textContent || tds[2].innerText; // Get the name column
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                trs[i].style.display = "";
-            } else {
-                trs[i].style.display = "none";
-            }
-        }
-    }
-}
-</script>
+<input type="text" id="search" class="rounded" placeholder="Search by username">
 <div class="bg-gray-400 p-4 rounded-lg mt-4 mb-4 hidden custom:block">
     <table class="imp_admin_td table bg-white table-striped w-full table-hover mt-4 rounded">
     <thead>
@@ -60,9 +39,9 @@ function filterTable() {
 </div>
 
 <!-- Mobileview -->
-<div class="grid grid-cols-1 gap-4 px-4 py-6 sm:px-6 lg:px-8 custom:hidden">
+<div id="mobileTable" class="grid grid-cols-1 gap-4 px-4 py-6 sm:px-6 lg:px-8 custom:hidden">
     @foreach($questions as $question)
-    <div class="bg-white rounded-lg shadow overflow-hidden">
+    <div id="{{ $question["id"] }}-{{ $question["user_name"] }}" class="bg-white rounded-lg shadow overflow-hidden">
         <div class="p-4">
             <div class="font-semibold text-lg text-purple-800">
                 Question: {{ $question["question"] }}
@@ -80,8 +59,8 @@ function filterTable() {
                 <div>
                     <strong>Active:</strong>
                     <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600"
-                           {{ $question["active"] == 1 ? 'checked' : '' }}
-                           onchange="event.preventDefault(); document.getElementById('active-toggle-{{ $question['id'] }}').submit();">
+                            {{ $question["active"] == 1 ? 'checked' : '' }}
+                            onchange="event.preventDefault(); document.getElementById('active-toggle-{{ $question['id'] }}').submit();">
                     <form id="active-toggle-{{ $question['id'] }}" action="{{ route('question.update', $question['id']) }}" method="POST" style="display: none;">
                         @csrf
                         @method('PUT')
@@ -104,8 +83,11 @@ function filterTable() {
         </div>
     </div>
     @endforeach
-</div>
 
+</div>
+    @push('scripts')
+        @vite('resources/js/adminFilterByUsername.js')
+    @endpush
 
 
 {{ $questions->links() }}

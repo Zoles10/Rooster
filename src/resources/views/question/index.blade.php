@@ -149,9 +149,9 @@
     </div>
 
     <!-- Mobile View -->
-    <div class="grid grid-cols-1 gap-4 px-4 py-6 sm:px-6 lg:px-8 lg:hidden">
+    <div id="mobileTable" class="grid grid-cols-1 gap-4 px-4 py-6 sm:px-6 lg:px-8 lg:hidden">
         @foreach ($questions as $question)
-            <div class="bg-white rounded-lg shadow overflow-hidden">
+            <div id="{{ $question->id }}-{{ $question->created_at->format('d.m.Y') }}-{{ $question->subject->subject }}" class="bg-white rounded-lg shadow overflow-hidden">
                 <div class="p-4">
                     <div class="font-semibold text-lg text-purple-800">
                         <a href="{{ route('question.show', $question->id) }}"
