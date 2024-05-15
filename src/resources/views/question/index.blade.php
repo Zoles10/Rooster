@@ -33,7 +33,7 @@
         </div>
         <div>
             <label for="statusSelect" class="block text-sm font-medium text-gray-700">Status:</label>
-            <select id="statusSelect" name="status" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <select id="statusSelect" name="status" class="mt-1 block w-28 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 <option value="newest" selected>Newest</option>
                 <option value="oldest">Oldest</option>
             </select>

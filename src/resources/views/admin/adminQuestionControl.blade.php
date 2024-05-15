@@ -20,7 +20,16 @@
                 <td class="px-4 py-2 text-center">{{ $question["subject"]["subject"] }}</td>
                 <td class="px-4 py-2 text-center">{{ $question["user_name"] }}</td>
                 <td class="px-4 py-2 text-center">
-                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded" name="admin" {{ $question["active"] == 1 ? 'checked' : '' }} onchange="this.form.submit()">
+                    <form method="POST" action="{{ route('question.update', $question) }}">
+                        @csrf
+                        @method('PUT')
+                        <input type="hidden" name="active"
+                            value="{{ $question->active ? '0' : '1' }}">
+                        <input type="checkbox" name="active_checkbox"
+                            class="form-checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded"
+                            onchange="this.form.submit()" value="{{ $question->id }}"
+                            {{ $question->active ? 'checked' : '' }}>
+                    </form>
                 </td>
                 <td class="px-4 py-2 text-center">
                     <a href="{{ route('question.edit', $question["id"]) }}" class="px-4 py-2 text-white bg-yellow-500 rounded hover:bg-yellow-400">Edit</a>

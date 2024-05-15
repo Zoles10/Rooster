@@ -127,6 +127,11 @@ class QuestionController extends Controller
      */
     public function update(Request $request, Question $question)
     {
+        if($request->input('active') !== null) {
+            $question->active = $request->input('active');
+            return back();
+        }
+
         $validatedData = $request->validate([
             'question' => 'sometimes|string|max:1023',
             'subject' => 'sometimes',
@@ -193,7 +198,7 @@ class QuestionController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        return view('question.index', ['questions' => $questions]);
+        return view('dashboard');
     }
 
     public function multiply(Question $question)
