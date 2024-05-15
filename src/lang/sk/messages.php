@@ -9,5 +9,8 @@ return[
     "password"=> "Heslo",
     "remember"=> "Zapamätať si ma",
     "forgor"=> "Zabudli ste heslo?",
+    "name"=> "Meno",
+    "confirmPassword"=> "Potvrďte heslo",
+    "alreadyRegistered"=> "Už ste zaregistrovaný?",
 ];
 

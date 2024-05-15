@@ -9,5 +9,8 @@ return[
     "password"=> "Password",
     "remember"=> "Remember me",
     "forgor"=> "Forgot your password?",
+    "name"=> "Name",
+    "confirmPassword"=> "Confirm password",
+    "alreadyRegistered"=> "Already registered?",
 ];
 
