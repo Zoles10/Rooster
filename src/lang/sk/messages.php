@@ -40,5 +40,15 @@ return[
     "answer_questions_qr" => "Odpovedať na otázku skenovaním QR kódu otázky",
     "register_to_user" => "Registrovať sa a stať sa používateľom",
     "login_if_account" => "Ak už máte účet, môžete sa prihlásiť",
+    "question_management_title" => "Správa Otázok",
+    "user_question_management" => "Správa Otázok Používateľov",
+    'question_management' => 'Správa Otázok',
+    'question' => 'Otázka',
+    'code' => 'Kód',
+    'subject' => 'Predmet',
+    'owner' => 'Vlastník',
+    'active' => 'Aktívne',
+    'edit' => 'Upraviť',
+    'delete' => 'Zmazať',
 ];
 

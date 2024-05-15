@@ -40,5 +40,15 @@ return[
     "answer_questions_qr" => "Answer question by scanning question QR code",
     "register_to_user" => "Register to become a user",
     "login_if_account" => "If you already have an account you can log in",
+    "question_management_title" => "Question Management",
+    "user_question_management" => "User Question Management",
+    'question_management' => 'Question Management',
+    'question' => 'Question',
+    'code' => 'Code',
+    'subject' => 'Subject',
+    'owner' => 'Owner',
+    'active' => 'Active',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
 ];
 

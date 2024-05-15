@@ -3,13 +3,13 @@
     <table class="imp_admin_td table bg-white table-striped w-full table-hover mt-4 rounded">
     <thead>
         <tr class="bg-indigo-600 text-white">
-            <th class="imp_admin_td px-4 py-2 text-center">Question</th>
-            <th class="imp_admin_td px-4 py-2 text-center">Question Code</th>
-            <th class="imp_admin_td px-4 py-2 text-center">Subject</th>
-            <th class="imp_admin_td px-4 py-2 text-center">Owner</th>
-            <th class="imp_admin_td px-4 py-2 text-center">Active</th>
-            <th class="imp_admin_td px-4 py-2 text-center">Edit</th>
-            <th class="imp_admin_td px-4 py-2 text-center">Delete</th>
+            <th class="imp_admin_td px-4 py-2 text-center">{{ __('messages.question') }}</th>
+            <th class="imp_admin_td px-4 py-2 text-center">{{ __('messages.code') }}</th>
+            <th class="imp_admin_td px-4 py-2 text-center">{{ __('messages.subject') }}</th>
+            <th class="imp_admin_td px-4 py-2 text-center">{{ __('messages.owner') }}</th>
+            <th class="imp_admin_td px-4 py-2 text-center">{{ __('messages.active') }}</th>
+            <th class="imp_admin_td px-4 py-2 text-center">{{ __('messages.edit') }}</th>
+            <th class="imp_admin_td px-4 py-2 text-center">{{ __('messages.delete') }}</th>
         </tr>
     </thead>
     <tbody>
@@ -38,7 +38,7 @@
                     <form action="{{ route('question.destroyAdmin', $question['id']) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600">Delete</button>
+                        <button type="submit" class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600">{{ __('messages.delete') }}</button>
                     </form>
                 </td>
             </tr>
@@ -53,20 +53,20 @@
     <div id="{{ $question["id"] }}-{{ $question["user_name"] }}" class="bg-white rounded-lg shadow overflow-hidden">
         <div class="p-4">
             <div class="font-semibold text-lg text-purple-800">
-                Question: {{ $question["question"] }}
+                {{ __('messages.question') }}: {{ $question["question"] }}
             </div>
             <div class="text-sm text-gray-700">
-                Code: {{ $question["id"] }}
+                {{ __('messages.code') }}: {{ $question["id"] }}
             </div>
             <div class="text-sm text-gray-700">
-                Subject: {{ $question["subject"]["subject"] }}
+                {{ __('messages.subject') }}: {{ $question["subject"]["subject"] }}
             </div>
             <div class="text-sm text-gray-700">
-                Owner: {{ $question["user_name"] }}
+                {{ __('messages.owner') }}: {{ $question["user_name"] }}
             </div>
             <div class="flex items-center justify-between mt-2">
                 <div>
-                    <strong>Active:</strong>
+                    <strong>{{ __('messages.active') }}:</strong>
                     <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600"
                             {{ $question["active"] == 1 ? 'checked' : '' }}
                             onchange="event.preventDefault(); document.getElementById('active-toggle-{{ $question['id'] }}').submit();">
@@ -78,13 +78,13 @@
                 </div>
                 <div class="flex space-x-2">
                     <a href="{{ route('question.edit', $question["id"]) }}" class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-400">
-                        Edit
+                        {{ __('messages.edit') }}
                     </a>
                     <form action="{{ route('question.destroy', $question['id']) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-                            Delete
+                            {{ __('messages.delete') }}
                         </button>
                     </form>
                 </div>
