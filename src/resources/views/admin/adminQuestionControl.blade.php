@@ -1,4 +1,4 @@
-<input type="text" id="search" class="rounded" placeholder="Search by username">
+<input type="text" id="search" class="rounded" placeholder='{{ __('messages.searchUsername') }}'>
 <div class="bg-gray-400 p-4 rounded-lg mt-4 mb-4 hidden custom:block">
     <table class="imp_admin_td table bg-white table-striped w-full table-hover mt-4 rounded">
     <thead>

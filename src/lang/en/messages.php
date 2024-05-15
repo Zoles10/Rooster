@@ -50,5 +50,14 @@ return[
     'active' => 'Active',
     'edit' => 'Edit',
     'delete' => 'Delete',
+    'searchUsername' => 'Search by username',
+    'user_management' => 'User Management',
+    'email' => 'Email',
+    'is_admin' => 'Is Admin',
+    'update' => 'Update',
+    'enter_new_password' => 'Enter new password',
+    'submit' => 'Submit',
+    'createUser' => 'Create User',
+    'createNewUser'=> 'Create New User',
 ];
 
