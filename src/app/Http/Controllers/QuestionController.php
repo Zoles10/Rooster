@@ -193,7 +193,7 @@ class QuestionController extends Controller
             }
         }
 
-        return view('dashboard');
+        return to_route('dashboard')->with('message', ('Question was updated'));
     }
 
     public function multiply(Question $question)

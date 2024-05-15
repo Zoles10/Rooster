@@ -48,7 +48,7 @@ class AnswerController extends Controller
                 }
             }
 
-            return $this->show($question_id);
+            return redirect("/question/{$question_id}/answers");
         }
 
         return to_route('welcome')->with('message', ('Question is not active'));
@@ -59,14 +59,28 @@ class AnswerController extends Controller
      */
     public function show($question_id)
     {
-        $answerCounts = Answer::select('user_text', \DB::raw('count(*) as count'))
-            ->withQuestionId($question_id)
-            ->groupBy('user_text')
-            ->get()
-            ->pluck('count', 'user_text')
-            ->all();
+        return view("answer.showAnswer", ['question_id' => $question_id]);
+    }
 
-        return view("answer.showAnswer", ['answerCounts' => $answerCounts, 'question_id' => $question_id]);
+    public function updateShow($question_id) {
+        $question = Question::findOrFail($question_id);
+        if($question->question_type == 'multiple_choice') {
+            $options = $question->options()->with('optionsHistory')->get();
+            $optionCounts = [];
+            foreach ($options as $option) {
+                $optionCounts[$option->option_text] = $option->optionsHistory->times_answered;
+            }
+            return response()->json($optionCounts);
+        } else {
+            $answerCounts = Answer::select('user_text', \DB::raw('count(*) as count'))
+                ->withQuestionId($question_id)
+                ->groupBy('user_text')
+                ->get()
+                ->pluck('count', 'user_text')
+                ->all();
+
+            return response()->json($answerCounts);
+        }
     }
 
     /**

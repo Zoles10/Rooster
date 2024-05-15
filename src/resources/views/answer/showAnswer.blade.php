@@ -30,13 +30,8 @@
                                         <th>Number</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach($answerCounts as $index => $count)
-                                        <tr>
-                                            <td>{{ $index }}</td>
-                                            <td>{{ $count }}</td>
-                                        </tr>
-                                    @endforeach
+                                <tbody id="open-ended-tbody">
+
                                 </tbody>
                             </table>
                         </div>
@@ -67,13 +62,7 @@
                                     <th>Number</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                @foreach($question->options as $index => $option)
-                                    <tr>
-                                        <td>{{ $option->option_text }}</td>
-                                        <td>{{ $option->optionsHistory->times_answered }}</td>
-                                    </tr>
-                                @endforeach
+                            <tbody id="multiple-choice-tbody">
                             </tbody>
                         </table>
                     </div>
@@ -83,30 +72,104 @@
     @endif
     <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
     <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        @if($question->question_type == 'multiple_choice')
+        // call the 'show' method from the 'AnswerController' to update 'answerCounts'
+        function updateTable() {
+            $.ajax({
+                url: '/question/{{ $question_id }}/answers/update',
+                method: 'GET',
+                success: function(response) {
+                // update the 'answerCounts' variable with the updated data
+                var answerCounts = response;
+                // clear the table
+                $('#multiple-choice-tbody').empty();
+                // update the table with the updated data
+                for (var key in answerCounts) {
+                    var item = answerCounts[key];
+                    $('#multiple-choice-tbody').append('<tr><td>' + key + '</td><td>' + item + '</td></tr>');
+                }
+                },
+                error: function(error) {
+                console.log(error);
+                }
+            });
+        }
 
-        anychart.onDocumentReady(function() {
-            var data = [
-                @foreach($answerCounts as $index => $count)
-                    {"x": "{{ $index }}", "value": {{ $count }}},
-                @endforeach
-            ];
+        // update the table initially
+        updateTable();
 
-            // create a tag (word) cloud chart
-            var chart = anychart.tagCloud(data);
+        // refresh the table every 2 seconds
+        setInterval(updateTable, 2000);
+        @else
+            @if($question->word_cloud == true)
+            anychart.onDocumentReady(function() {
+                // create a tag (word) cloud chart
+                var chart = anychart.tagCloud();
 
-            // set a chart title
-            chart.title('answers for {{ $question->question }}')
-            // set an array of angles at which the words will be laid out
-            chart.angles([0])
-            // enable a color range
-            // chart.colorRange(true);
-            // set the color range length
-            // chart.colorRange().length('80%');
+                // call the 'show' method from the 'AnswerController' to update 'answerCounts'
+                function updateChart() {
+                $.ajax({
+                    url: '/question/{{ $question_id }}/answers/update',
+                    method: 'GET',
+                    success: function(response) {
+                    // update the 'answerCounts' variable with the updated data
+                    var answerCounts = response;
+                    // convert the answerCounts array to the desired pattern
+                    var formattedData = [];
+                    for (var item in answerCounts) {
+                        formattedData.push({ "x": item, "value": answerCounts[item] });
+                    }
 
-            // display the word cloud chart
-            chart.container("container");
-            chart.draw();
-        });
+                    chart.data(formattedData);
+                    // set a chart title
+                    chart.title('answers for {{ $question->question }}')
+                    // set an array of angles at which the words will be laid out
+                    chart.angles([0])
+                    chart.container("container");
+                    chart.draw();
+                    },
+                    error: function(error) {
+                    console.log(error);
+                    }
+                });
+                }
+
+                // update the chart initially
+                updateChart();
+
+                // refresh the chart every 2 seconds
+                setInterval(updateChart, 2000);
+            });
+            @else
+            // call the 'show' method from the 'AnswerController' to update 'answerCounts'
+            function updateTable() {
+                $.ajax({
+                    url: '/question/{{ $question_id }}/answers/update',
+                    method: 'GET',
+                    success: function(response) {
+                    // update the 'answerCounts' variable with the updated data
+                    var answerCounts = response;
+                    // clear the table
+                    $('#open-ended-tbody').empty();
+                    // update the table with the updated data
+                    for (var item in answerCounts) {
+                        $('#open-ended-tbody').append('<tr><td>' + item + '</td><td>' + answerCounts[item] + '</td></tr>');
+                    }
+                    },
+                    error: function(error) {
+                    console.log(error);
+                    }
+                });
+            }
+
+            // update the table initially
+            updateTable();
+
+            // refresh the table every 2 seconds
+            setInterval(updateTable, 2000);
+            @endif
+        @endif
     </script>
 </x-app-layout>
