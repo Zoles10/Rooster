@@ -7,5 +7,7 @@ return[
     "createQuestion"=> "Vytvoriť otázku",
     "manual"=> "Manuál",
     "password"=> "Heslo",
+    "remember"=> "Zapamätať si ma",
+    "forgor"=> "Zabudli ste heslo?",
 ];
 
