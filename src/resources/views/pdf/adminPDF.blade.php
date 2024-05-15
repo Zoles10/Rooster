@@ -1,22 +1,19 @@
 <div id="admin" class="p-6 text-gray-900 w-full">
     <div class="bg-red-200 rounded p-5">
-        <h1 class="font-bold text-3xl">ADMIN</h1>
+        <h1 class="font-bold text-3xl">{{ __('messages.admin_manual_title') }}</h1>
         <div class="p-3">
-            <p class="m-3">This is the admin manual for admins in our app. Here are things you
-                can do
-                as
-                admin:</p>
+            <p class="m-3">{{ __('messages.admin_manual_intro') }}</p>
             <div class="p-8 pt-3">
                 <ol class="list-decimal list-inside">
-                    <li class="mb-2">User functionality</li>
-                    <li class="mb-2">Change users name</li>
-                    <li class="mb-2">Change users passwords</li>
-                    <li class="mb-2">Create new user</li>
-                    <li class="mb-2">Delete user</li>
-                    <li class="mb-2">Create question in the name of any user</li>
-                    <li class="mb-2">Delete and edit all questions</li>
-                    <li class="mb-2">Filter user questions</li>
-                    <li class="mb-2">Promote user to admin</li>
+                    <li class="mb-2">{{ __('messages.user_functionality') }}</li>
+                    <li class="mb-2">{{ __('messages.change_users_name') }}</li>
+                    <li class="mb-2">{{ __('messages.change_users_passwords') }}</li>
+                    <li class="mb-2">{{ __('messages.create_new_user') }}</li>
+                    <li class="mb-2">{{ __('messages.delete_user') }}</li>
+                    <li class="mb-2">{{ __('messages.create_question_any_user') }}</li>
+                    <li class="mb-2">{{ __('messages.delete_edit_questions') }}</li>
+                    <li class="mb-2">{{ __('messages.filter_user_questions') }}</li>
+                    <li class="mb-2">{{ __('messages.promote_user_to_admin') }}</li>
                 </ol>
             </div>
         </div>

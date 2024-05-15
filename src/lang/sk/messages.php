@@ -23,5 +23,16 @@ return[
     "duplicate_questions" => "Duplikovať svoje otázky",
     "deactivate_questions" => "Deaktivovať svoje otázky",
     "show_question_results" => "Zobraziť výsledky otázky",
+    "admin_manual_title" => "ADMINISTRÁTOR",
+    "admin_manual_intro" => "Toto je manuál pre administrátorov v našej aplikácii. Tu sú veci, ktoré môžete robiť ako administrátor:",
+    "user_functionality" => "Funkcionalita používateľa",
+    "change_users_name" => "Zmeniť meno používateľov",
+    "change_users_passwords" => "Zmeniť heslá používateľov",
+    "create_new_user" => "Vytvoriť nového používateľa",
+    "delete_user" => "Zmazať používateľa",
+    "create_question_any_user" => "Vytvoriť otázku v mene ľubovoľného používateľa",
+    "delete_edit_questions" => "Zmazať a upraviť všetky otázky",
+    "filter_user_questions" => "Filtrovať otázky používateľov",
+    "promote_user_to_admin" => "Povýšiť používateľa na administrátora",
 ];
 

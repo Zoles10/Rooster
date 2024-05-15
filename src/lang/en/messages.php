@@ -23,5 +23,16 @@ return[
     "duplicate_questions" => "Duplicate your questions",
     "deactivate_questions" => "Deactivate your questions",
     "show_question_results" => "Show question results",
+    "admin_manual_title" => "ADMIN",
+    "admin_manual_intro" => "This is the admin manual for admins in our app. Here are things you can do as admin:",
+    "user_functionality" => "User functionality",
+    "change_users_name" => "Change users name",
+    "change_users_passwords" => "Change users passwords",
+    "create_new_user" => "Create new user",
+    "delete_user" => "Delete user",
+    "create_question_any_user" => "Create question in the name of any user",
+    "delete_edit_questions" => "Delete and edit all questions",
+    "filter_user_questions" => "Filter user questions",
+    "promote_user_to_admin" => "Promote user to admin",
 ];
 
