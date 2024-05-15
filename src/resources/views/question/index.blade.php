@@ -8,7 +8,7 @@
         <div class="flex justify-center items-center">
             <a href="{{ route('question.create') }}"
             class="imp_bg_purple inline-flex items-center px-4 py-2 hover:text-gray-300 bg-purple-800 border border-transparent rounded-md font-semibold text-m text-white uppercase tracking-widest hover:bg-purple-700 active:bg-purple-900 focus:outline-none focus:border-purple-900 focus:ring ring-purple-300 disabled:opacity-25 transition ease-in-out duration-150">
-            Create question
+            @lang('messages.createQuestion')
         </a>
     </div>
 

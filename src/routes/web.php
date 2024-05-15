@@ -6,9 +6,12 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ManualController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
+
+Route::get('locale/{lang}', [LocaleController::class, 'setLocale']);
 
 Route::get('/question/create', [QuestionController::class, 'create'])->middleware(['auth', 'verified'])->name('question.create');
 
