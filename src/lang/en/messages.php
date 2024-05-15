@@ -34,5 +34,11 @@ return[
     "delete_edit_questions" => "Delete and edit all questions",
     "filter_user_questions" => "Filter user questions",
     "promote_user_to_admin" => "Promote user to admin",
+    "guest_manual_title" => "GUEST",
+    "guest_manual_intro" => "This is the user manual for guests in our app. Here are things you can do as a guest:",
+    "answer_questions_code" => "Answer questions by providing question code",
+    "answer_questions_qr" => "Answer question by scanning question QR code",
+    "register_to_user" => "Register to become a user",
+    "login_if_account" => "If you already have an account you can log in",
 ];
 

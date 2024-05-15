@@ -34,5 +34,11 @@ return[
     "delete_edit_questions" => "Zmazať a upraviť všetky otázky",
     "filter_user_questions" => "Filtrovať otázky používateľov",
     "promote_user_to_admin" => "Povýšiť používateľa na administrátora",
+    "guest_manual_title" => "HOST",
+    "guest_manual_intro" => "Toto je manuál pre hostí v našej aplikácii. Tu sú veci, ktoré môžete robiť ako hosť:",
+    "answer_questions_code" => "Odpovedať na otázky poskytnutím kódu otázky",
+    "answer_questions_qr" => "Odpovedať na otázku skenovaním QR kódu otázky",
+    "register_to_user" => "Registrovať sa a stať sa používateľom",
+    "login_if_account" => "Ak už máte účet, môžete sa prihlásiť",
 ];
 
