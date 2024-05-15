@@ -128,7 +128,7 @@ class QuestionController extends Controller
     public function update(Request $request, Question $question)
     {
         if($request->input('active') !== null) {
-            $question->active = $request->input('active');
+            $question->update(['active' => $request->input('active')]);
             return back();
         }
 
@@ -192,11 +192,6 @@ class QuestionController extends Controller
                 }
             }
         }
-
-        $questions = Question::query()
-            ->where('owner_id', request()->user()->id)
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
 
         return view('dashboard');
     }
