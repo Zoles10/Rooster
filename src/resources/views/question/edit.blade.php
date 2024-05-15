@@ -86,13 +86,13 @@
                     <div id="options-container" class="mb-4 mt-4">
                         <label class="block text-sm font-medium text-grey">Correct:</label>
                         @foreach ($question->options as $option)
-                            <div class="flex items-center mb-3">
+                            <div id="option-wrapper-{{$i}}" class="flex items-center mb-3">
                                 <input type="checkbox" name="isCorrect{{ $i }}" class="form-checkbox imp_checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded"
                                     @if ($option->correct) checked @endif>
                                 <input type="text" name="option{{ $i }}"
                                     class="text-black form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                     value="{{ $option->option_text }}" placeholder="Option text">
-                                <button type="button" onclick="this.parentElement.remove()" class="imp_x_btn">&times;</button>
+                                <button type="button" onclick="deleteOption({{$i}})" class="imp_x_btn">&times;</button>
                             </div>
                             @php
                                 $i++;
@@ -138,6 +138,34 @@
 
     <script>
         let optionCount = {{ count($question->options) }};
+
+        // Update the option count and option ids
+        optionCount = {{ count($question->options) }};
+        for (var i = 1; i <= optionCount; i++) {
+            var currentOptionWrapper = document.getElementById('option-wrapper-' + i);
+            var currentOptionInput = currentOptionWrapper.querySelector('input[name^="option"]');
+            var currentCheckboxInput = currentOptionWrapper.querySelector('input[name^="isCorrect"]');
+            currentOptionInput.name = 'option' + i;
+            currentCheckboxInput.name = 'isCorrect' + i;
+            currentOptionWrapper.id = 'option-wrapper-' + i;
+        }
+
+        // Function to Delete an Option
+        function deleteOption(optionNumber) {
+            var optionWrapper = document.getElementById('option-wrapper-' + optionNumber);
+            optionWrapper.parentNode.removeChild(optionWrapper);
+            // Update the option count
+            optionCount--;
+            // Update the remaining option ids
+            for (var i = optionNumber + 1; i <= optionCount+1; i++) {
+                var currentOptionWrapper = document.getElementById('option-wrapper-' + i);
+                var currentOptionInput = currentOptionWrapper.querySelector('input[name^="option'+i+'"]');
+                var currentCheckboxInput = currentOptionWrapper.querySelector('input[name^="isCorrect'+i+'"]');
+                currentOptionInput.name = 'option' + (i - 1);
+                currentCheckboxInput.name = 'isCorrect' + (i - 1);
+                currentOptionWrapper.id = 'option-wrapper-' + (i - 1);
+            }
+        }
 
         // Function to Add More Options Dynamically
         function addOption(optionNumber = null) {

@@ -170,17 +170,19 @@ class QuestionController extends Controller
         $question->save();
 
         if ($question->question_type === 'multiple_choice') {
+            $question->options()->delete();
             $i = 1;
             foreach ($request->all() as $key => $value) {
                 if (str_starts_with($key, 'option')) {
                     $correct = $request->input('isCorrect' . $i);
                     $correct = isset($correct) ? true : false;
-                    $option = $question->options()->skip($i - 1)->first();
-                    if ($option) {
-                        $option->update(['option_text' => $value, 'correct' => $correct]);
-                    } else {
-                        $option = $question->options()->create(['option_text' => $value, 'correct' => $correct]);
-                    }
+                    $option = $question->options()->create(['option_text' => $value, 'correct' => $correct]);
+                    $option->optionsHistory()->create([
+                        'option_id' => $option->id,
+                        'year' => date('Y'),
+                        'times_answered' => 0
+                    ]);
+                    $option->save();
                     $i++;
                 }
             }
@@ -190,6 +192,7 @@ class QuestionController extends Controller
             ->where('owner_id', request()->user()->id)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
+
         return view('question.index', ['questions' => $questions]);
     }
 
