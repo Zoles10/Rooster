@@ -1,25 +1,25 @@
 <x-app-layout>
     <div class="bg-white min-h-screen flex flex-col items-center justify-center text-white">
         <div class="imp_margin_04 max-w-xl w-full p-6 md:p-8 bg-gray-500 rounded-lg shadow-lg shadow-gray-400">
-            <h1 class="text-2xl font-bold mb-5 text-center">Update Question</h1>
+            <h1 class="text-2xl font-bold mb-5 text-center">@lang('messages.updateQuestion')</h1>
             <form id="main-form" method="POST"  action="{{ route('question.update', $question) }}" class="bg-gray-500 p-4 rounded-lg">
                 @csrf
                 @METHOD('PUT')
                 <div class="mb-4">
-                    <label for="question" class="block text-sm font-medium text-white">Question:</label>
+                    <label for="question" class="block text-sm font-medium text-white">@lang('messages.question'):</label>
                     <span id="question-err" class="imp_invalid_input_text" style="display: none;"></span>
                     <input type="text"
                         class="text-black form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        id="question" name="question" placeholder="Enter question"
+                        id="question" name="question" placeholder="@lang('messages.enterQuestion')"
                         value="{{ $question->question }}">
                 </div>
                 @if (auth()->user()->isAdmin())
                     <div class="mb-4">
-                        <label for="ownerInput" class="block text-sm font-medium text-white">User:</label>
+                        <label for="ownerInput" class="block text-sm font-medium text-white">@lang('messages.user'):</label>
                         <select
                             class="text-black form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                             id="ownerInput" name="ownerInput">
-                            <option value="" selected disabled>Select user</option>
+                            <option value="" selected disabled>@lang('messages.selectUser')</option>
                             @foreach ($users as $user)
                                 @if ($question->owner_id == $user->id)
                                     <option value="{{ $user->name }}"
@@ -34,36 +34,35 @@
 
                 <!-- Subject Dropdown -->
                 <div class="mb-4">
-                    <label for="subject" class="block text-sm font-medium text-white">Subject:</label>
+                    <label for="subject" class="block text-sm font-medium text-white">@lang('messages.subject'):</label>
                     <span id="subject-err" class="imp_invalid_input_text" style="display: none;"></span>
                     <select id="subject" name="subject"
                         class="text-black form-control mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                         @foreach ($subjects as $subject)
                             <option value="{{ $subject->id }}" @if ($question->subject_id == $subject->id) selected @endif>{{ $subject->subject }}</option>
                         @endforeach
-                        <option value="0">Other</option>
+                        <option value="0">@lang('messages.other')</option>
                     </select>
                 </div>
 
                 <!-- Additional Input Field (Initially Hidden) -->
                 <div id="other-subject-container" class="hidden mt-4">
-                    <label for="other-subject" class="block text-sm font-medium text-white">Specify subject
-                        name:</label>
+                    <label for="other-subject" class="block text-sm font-medium text-white">@lang('messages.specifySubjectName')</label>
                     <span id="othersubject-err" class="imp_invalid_input_text" style="display: none;"></span>
-                    <input type="text" id="other-subject" name="other_subject" placeholder="Subject name"
+                    <input type="text" id="other-subject" name="other_subject" placeholder="@lang('messages.subjectName')"
                         class="text-black form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
-                    </div>
+                </div>
 
                     @if ($question->question_type === 'open_ended')
                         <div id="result-option-container" class="mb-4 mt-4">
                             <div class="mb-4">
-                            <label class="block text-sm font-medium text-white">Result Option:</label>
+                            <label class="block text-sm font-medium text-white">@lang('messages.resultOption')</label>
                             <div class="mt-3 p-2">
                                 <div class="mb-3">
                                     <label class="inline-flex items-center">
                                         <input type="radio" id="list" name="word_cloud" value="0"
                                             class="form-radio text-indigo-600" checked>
-                                        <span class="ml-2">&nbsp;&nbsp;List</span>
+                                        <span class="ml-2">&nbsp;&nbsp;@lang('messages.list')</span>
                                     </label>
                                 </div>
                                 <div class="mb-3">
@@ -84,14 +83,14 @@
                     @endphp
                     <!-- Options Container -->
                     <div id="options-container" class="mb-4 mt-4">
-                        <label class="block text-sm font-medium text-grey">Correct:</label>
+                        <label class="block text-sm font-medium text-grey">@lang('messages.correct')</label>
                         @foreach ($question->options as $option)
                             <div id="option-wrapper-{{$i}}" class="flex items-center mb-3">
                                 <input type="checkbox" name="isCorrect{{ $i }}" class="form-checkbox imp_checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded"
                                     @if ($option->correct) checked @endif>
                                 <input type="text" name="option{{ $i }}"
                                     class="text-black form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    value="{{ $option->option_text }}" placeholder="Option text">
+                                    value="{{ $option->option_text }}" placeholder="@lang('messages.optionText')">
                                 <button type="button" onclick="deleteOption({{$i}})" class="imp_x_btn">&times;</button>
                             </div>
                             @php
@@ -103,16 +102,17 @@
                         <!-- Add Option Button with Inline Styles -->
                     </div>
                     <div id="add-option-btn" class="hidden flex justify-center">
-                        <button type="button" class="imp_add_btn mt-2 p-2 bg-green-500 rounded-md text-white hover:bg-green-600" onclick="addOption()">Add
-                        Option</button>
+                        <button type="button" class="imp_add_btn mt-2 p-2 bg-green-500 rounded-md text-white hover:bg-green-600" onclick="addOption()">
+                            @lang('messages.addOption')</button>
                     </div>
                 @endif
                 <div id="buttonsContainer" class="flex justify-between mt-4">
                     <!-- Cancel Button -->
                     <button type="button" class="imp_bg_orange px-4 py-2 rounded-md text-white hover:bg-gray-600"
-                        onclick="resetForm()">Cancel</button>
+                        onclick="resetForm()">@lang('messages.cancel')</button>
                     <!-- Submit Button -->
-                    <button type="submit" class="px-4 py-2 imp_bg_purple rounded-md text-white" id="submit-btn">Submit</button>
+                    <button type="submit" class="px-4 py-2 imp_bg_purple rounded-md text-white" id="submit-btn">
+                        @lang('messages.submit')</button>
                 </div>
                 @if ($question->question_type === 'multiple_choice')
                     <script>
@@ -131,7 +131,7 @@
                 @endif
             </form>
             <div class="bg-blue-700 mt-3 px-4 py-2 rounded-md text-white hover:bg-gray-600">
-                <a href={{ route('question.index') }}>Späť na otázky</a>
+                <a href={{ route('question.index') }}>@lang('messages.backToQuestions')</a>
             </div>
         </div>
     </div>
@@ -175,7 +175,7 @@
             var input = document.createElement('input');
             input.type = 'text';
             input.name = 'option' + (optionNumber || ++optionCount);
-            input.placeholder = 'Option text';
+            input.placeholder = '@lang('messages.optionText')';
             input.className =
                 'form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm';
             input.style = 'color: black;'

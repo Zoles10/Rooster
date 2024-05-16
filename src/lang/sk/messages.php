@@ -115,5 +115,6 @@ return[
     'correct' => 'Správne',
     'optionText' => 'Text možnosti',
     'enterQue' => 'Zadajte text možností',
+    'updateQuestion' => 'Aktualizovať otázku',
 ];
 

@@ -115,5 +115,6 @@ return[
     'correct' => 'Correct',
     'optionText' => 'Option text',
     'enterQue' => 'Enter text of options',
+    'updateQuestion' => 'Update Question',
 ];
 
