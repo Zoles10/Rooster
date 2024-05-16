@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <div class="row">
         <div class="col-md-6">
             <h1>{{__('messages.actualAnswers')}}</h1>
@@ -18,16 +17,15 @@
                     @if ($question->question_type == 'multiple_choice')
                         @foreach ($question->options() as $option)
                             <tr>
-                                <td>{{ $option->text }}</td>
+                                <td>{{ $option->option_text }}</td>
                                 <td>{{ $option->optionsHistory()->times_answered }}</td>
                             </tr>
                         @endforeach
                     @else
                         @foreach ($answers->unique('user_text') as $answer)
                             @if ($answer->archived == 0)
-                                <tr>
-                                    <td>{{ $answer->text }}</td>
-                                    <td>{{ Answer::where('text', $answer->text)->where('question_id', $question->id)->where('archived', false)->count() }}</td>
+                                    <td>{{ $answer->user_text }}</td>
+                                    <td>{{ \App\Models\Answer::where('user_text', $answer->user_text)->where('question_id', $question->id)->where('archived', false)->count() }}</td>
                                 </tr>
                             @endif
                         @endforeach
@@ -52,11 +50,11 @@
                     @if ($question->question_type == 'multiple_choice')
                         @foreach ($question->options() as $option)
                             @php
-                                $optionsHistory = OptionsHistory::where('option_id', $option->id)->where('archived', true)->get();
+                                $optionsHistory = \App\Models\OptionsHistory::where('option_id', $option->id)->where('archived', true)->get();
                             @endphp
                             @foreach ($optionsHistory as $history)
                                 <tr>
-                                    <td>{{ $option->text }}</td>
+                                    <td>{{ $option->option_text }}</td>
                                     <td></td>{{ $history->times_answered }}</td>
                                 </tr>
                             @endforeach
@@ -65,8 +63,8 @@
                         @foreach ($answers->unique('user_text') as $answer)
                             @if ($answer->archived == 1)
                                 <tr>
-                                    <td>{{ $answer->text }}</td>
-                                    <td>{{ Answer::where('text', $answer->text)->where('question_id', $question->id)->where('archived', true)->count() }}</td>
+                                    <td>{{ $answer->user_text }}</td>
+                                    <td>{{ \App\Models\Answer::where('user_text', $answer->user_text)->where('question_id', $question->id)->where('archived', true)->count() }}</td>
                                 </tr>
                             @endif
                         @endforeach
