@@ -59,5 +59,9 @@ return[
     'submit' => 'Odoslať',
     'createUser' => 'Vytvoriť používateľa',
     'createNewUser'=> 'Vytvoriť nového používateľa',
+    'results' => 'Výsledky',
+    'answer_text' => 'Odpovede',
+    'number' => 'Číslo',
+    'option_text' => 'Možnosti',
 ];
 

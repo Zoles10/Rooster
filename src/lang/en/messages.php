@@ -59,5 +59,9 @@ return[
     'submit' => 'Submit',
     'createUser' => 'Create User',
     'createNewUser'=> 'Create New User',
+    'results' => 'Results',
+    'answer_text' => 'Answers',
+    'number' => 'Number',
+    'option_text' => 'Options',
 ];
 
