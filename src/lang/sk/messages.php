@@ -118,5 +118,9 @@ return[
     'updateQuestion' => 'Aktualizovať otázku',
     'lastNote' => 'Posledná poznámka',
     'lastClosed' => 'Naposledy uzavreté',
+    'timesAnswered' => 'Počet odpovedí',
+    'archivedAnswers' => 'Archivované odpovede',
+    'actualAnswers' => 'Aktuálne odpovede',
+    'archive' => 'Archív',
 ];
 

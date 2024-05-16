@@ -29,6 +29,7 @@ Route::post('/question/{question}', [QuestionController::class, 'multiply'])->mi
 Route::put('/question/{question}', [QuestionController::class, 'update'])->middleware(['auth', 'verified'])->name('question.update');
 Route::get('/question/{question}/answers', [AnswerController::class, 'show'])->name('answers.show');
 Route::get('/question/{question}/answers/update', [AnswerController::class, 'updateShow'])->name('answers.showUpdate');
+Route::get('/question/{question}/comparison', [AnswerController::class, 'comparison'])->name('answers.comparison');
 Route::resource('question', QuestionController::class)->except(['update', 'store']);
 
 Route::post('/answer/{id}', [AnswerController::class, 'store'])->name('answer.store');

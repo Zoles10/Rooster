@@ -107,4 +107,11 @@ class AnswerController extends Controller
     {
         //
     }
+
+    public function comparison(Question $question)
+    {
+        $answers = Answer::where('question_id', $question->id)->get();
+        $question->load('options');
+        return view('answer.compare', ['question' => $question, 'answers' => $answers]);
+    }
 }

@@ -118,4 +118,8 @@ return[
     'updateQuestion' => 'Update Question',
     'lastNote' => 'Last note',
     'lastClosed' => 'Last closed',
+    'timesAnswered' => 'Times answered',
+    'archivedAnswers' => 'Archived answers',
+    'actualAnswers' => 'Actual answers',
+    'archive' => 'Archive',
 ];

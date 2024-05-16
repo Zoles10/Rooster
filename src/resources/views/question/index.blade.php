@@ -153,6 +153,12 @@
                                                 <button type="submit"
                                                     class="text-white p-2 imp_del_btn hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs">@lang('messages.delete')</button>
                                             </form>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <a href="{{ route('answers.comparison', $question->id) }}"
+                                                    class="text-white p-2 imp_del_btn hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs">
+                                                    @lang('messages.archive')
+                                                </a>
+                                            </td>
                                         </td>
                                     </tr>
                                 @endforeach
