@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->integer('year');
             $table->integer('times_answered')->unsigned()->default(0);
             $table->foreignId('option_id')->constrained('options')->onDelete('cascade');
+            $table->boolean('archived')->default(false);
         });
     }
 

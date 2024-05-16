@@ -11,6 +11,8 @@ class Question extends Model
     use HasFactory;
     public $incrementing = false;
     protected $keyType = 'string';
+
+    protected $dates = ['last_closed'];
     protected static function boot()
     {
         parent::boot();
@@ -28,7 +30,10 @@ class Question extends Model
         'question_type',
         'owner_id',
         'subject_id',
-        'active'
+        'active',
+        'word_cloud',
+        'last_note',
+        'last_closed',
     ];
 
     public function answers()

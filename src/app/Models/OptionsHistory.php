@@ -11,7 +11,7 @@ class OptionsHistory extends Model
 
     protected $table = "options_history";
 
-    protected $fillable = ['year', 'times_answered', 'option_id'];
+    protected $fillable = ['year', 'times_answered', 'option_id', 'archived'];
 
     public $timestamps = false;
 

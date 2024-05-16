@@ -116,5 +116,7 @@ return[
     'optionText' => 'Text možnosti',
     'enterQue' => 'Zadajte text možností',
     'updateQuestion' => 'Aktualizovať otázku',
+    'lastNote' => 'Posledná poznámka',
+    'lastClosed' => 'Naposledy uzavreté',
 ];
 

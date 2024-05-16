@@ -20,6 +20,8 @@ return new class extends Migration {
             $table->foreignId('subject_id')->nullable()->constrained('subjects')->onDelete('cascade');
             $table->boolean('active')->default(true);
             $table->boolean('word_cloud')->default(false);
+            $table->string('last_note')->nullable();
+            $table->date('last_closed')->nullable();
             $table->timestamps();
         });
 

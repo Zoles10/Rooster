@@ -12,6 +12,7 @@ class Answer extends Model
     protected $fillable = [
         'question_id',
         'user_text',
+        'archived'
     ];
 
     public function scopeWithQuestionId($query, $questionId)

@@ -74,6 +74,7 @@ class AnswerController extends Controller
         } else {
             $answerCounts = Answer::select('user_text', \DB::raw('count(*) as count'))
                 ->withQuestionId($question_id)
+                ->where('archived', false)
                 ->groupBy('user_text')
                 ->get()
                 ->pluck('count', 'user_text')

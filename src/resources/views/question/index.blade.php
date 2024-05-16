@@ -109,13 +109,30 @@
                                                 <form method="POST" action="{{ route('question.update', $question) }}">
                                                     @csrf
                                                     @method('PUT')
-                                                    <input type="hidden" name="active"
-                                                        value="{{ $question->active ? '0' : '1' }}">
-                                                    <input type="checkbox" name="active_checkbox"
-                                                        class="form-checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded"
-                                                        onchange="this.form.submit()" value="{{ $question->id }}"
-                                                        {{ $question->active ? 'checked' : '' }}>
+                                                    <div class="flex items-center">
+                                                        <input type="hidden" name="active"
+                                                            value="{{ $question->active ? '0' : '1' }}">
+                                                        <input type="checkbox" name="active_checkbox"
+                                                            class="form-checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded"
+                                                            onchange="this.form.submit()" value="{{ $question->id }}"
+                                                            {{ $question->active ? 'checked' : '' }}>
+                                                        @if ($question->active)
+                                                            <div class="mt-2 ml-2">
+                                                                <input type="text" name="note" class="px-2 py-1 border border-gray-300 rounded-md" placeholder="Note">
+                                                            </div>
+                                                        @else
+                                                            <div class="mt-2 ml-2">
+                                                                <div>
+                                                                    {{__('messages.lastClosed')}}: {{ \Carbon\Carbon::parse($question->last_closed)->format('d.m.Y') }}
+                                                                </div>
+                                                                <div>
+                                                                    {{__('messages.lastNote')}}: {{ $question->last_note }}
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    </div>
                                                 </form>
+                                            </div>
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

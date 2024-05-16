@@ -128,7 +128,27 @@ class QuestionController extends Controller
     public function update(Request $request, Question $question)
     {
         if($request->input('active') !== null) {
-            $question->update(['active' => $request->input('active')]);
+            $question->update(['active' => $request->input('active'), 'last_closed' => date('Y-m-d'), 'last_note' => $request->input('note')]);
+
+            if($request->input('active') === '0') {
+                if($question->question_type == 'open_ended') {
+                    $answers = $question->answers()->get();
+                    foreach($answers as $answer) {
+                        $answer->update(['archived' => true]);
+                    }
+                } else {
+                    $options = $question->options()->get();
+                    foreach($options as $option) {
+                        $option->optionsHistory()->update(['archived' => true]);
+                        $option->optionsHistory()->create([
+                            'option_id' => $option->id,
+                            'year' => date('Y'),
+                            'times_answered' => 0
+                        ]);
+                    }
+                }
+            }
+
             return back();
         }
 

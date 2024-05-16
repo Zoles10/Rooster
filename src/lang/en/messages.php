@@ -116,5 +116,6 @@ return[
     'optionText' => 'Option text',
     'enterQue' => 'Enter text of options',
     'updateQuestion' => 'Update Question',
+    'lastNote' => 'Last note',
+    'lastClosed' => 'Last closed',
 ];
-
