@@ -6,7 +6,7 @@
                 @csrf
                 @if ($question->question_type == 'open_ended')
                     <div>
-                        <label for="user_text" class="block text-sm font-medium text-gray-700">Your Answer:</label>
+                        <label for="user_text" class="block text-sm font-medium text-gray-700">@lang('messages.yourAnswer'):</label>
                         <span id="answer-err" class="imp_answer_err"></span>
                         <input type="text" id="user_text" name="user_text"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -28,9 +28,9 @@
                     @endforeach
                 @endif
                 @method("POST")
-                <button type="submit" id="submit-btn" class="mt-2 mr-2 px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600">Send</button>
-                <button type="reset" class="mt-2 mr-2 px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600">Clear</button>
-                <a href="/" class="inline-block px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600">Back</a>
+                <button type="submit" id="submit-btn" class="mt-2 mr-2 px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600">@lang('messages.send')</button>
+                <button type="reset" class="mt-2 mr-2 px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600">@lang('messages.clear')</button>
+                <a href="/" class="inline-block px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600">@lang('messages.back')</a>
             </form>
             @if (Auth::id() == $question->owner_id)
                 @include("question.ownerShow")
@@ -63,7 +63,7 @@
             if (answerInput) {
                 if (answerInput.value.trim() === '') {
                     let answerErr = document.getElementById('answer-err')
-                    answerErr.innerHTML = 'Enter answer text'
+                    answerErr.innerHTML = '{Enter answer text}'
                     answerErr.style.display = 'block'
                     return;
                 } else {

@@ -90,5 +90,14 @@ return[
     'qrCodeResult' => 'QR Code result: ',
     'submitCode' => 'Submit Code',
     'accessCode' => 'Access Code',
+    'yourAnswer' => 'Your Answer',
+    'enterAnswer' => 'Enter Answer',
+    'send' => 'Send',
+    'clear' => 'Clear',
+    'back' => 'Back',
+    'enterAnswerText' => 'Please enter answer text.',
+    'ownerVisible' => 'This is visible only to the owner',
+    'activate' => 'Activate',
+    'deactivate' => 'Deactivate',
 ];
 

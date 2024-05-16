@@ -90,5 +90,14 @@ return[
     'qrCodeResult' => 'Výsledok QR kódu: ',
     'submitCode' => 'Odoslať kód',
     'accessCode' => 'Prístupový kód',
+    'yourAnswer' => 'Vaša odpoveď',
+    'enterAnswer' => 'Zadajte odpoveď',
+    'send' => 'Odoslať',
+    'clear' => 'Vymazať',
+    'back' => 'Späť',
+    'enterAnswerText' => 'Prosím, zadajte text odpovede.',
+    'ownerVisible' => 'Toto vidí len majiteľ',
+    'activate' => 'Aktivovať',
+    'deactivate' => 'Deaktivovať',
 ];
 
