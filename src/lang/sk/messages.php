@@ -79,5 +79,16 @@ return[
     'userQuestions' => 'Otázky používateľa',
     'users' => 'Používatelia',
     'downloadPDF' => 'Stiahnuť PDF',
+    'language' => 'Jazyk',
+    'english' => 'Anglicky',
+    'slovak' => 'Slovensky',
+    'enterAccessCode' => 'Zadajte prístupový kód',
+    'scanQrCode' => 'Skenovať QR kód',
+    'loginForMoreOptions' => 'Prihlásiť sa pre viac možností',
+    'myProfile' => 'Môj Profil',
+    'dashboard' => 'Panel',
+    'qrCodeResult' => 'Výsledok QR kódu: ',
+    'submitCode' => 'Odoslať kód',
+    'accessCode' => 'Prístupový kód',
 ];
 

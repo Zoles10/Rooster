@@ -79,5 +79,16 @@ return[
     'userQuestions' => 'User Questions',
     'users' => 'Users',
     'downloadPDF' => 'Download PDF',
+    'language' => 'Language',
+    'english' => 'English',
+    'slovak' => 'Slovak',
+    'enterAccessCode' => 'Enter Access Code',
+    'scanQrCode' => 'Scan QR Code',
+    'loginForMoreOptions' => 'Login for More Options',
+    'myProfile' => 'My Profile',
+    'dashboard' => 'Dashboard',
+    'qrCodeResult' => 'QR Code result: ',
+    'submitCode' => 'Submit Code',
+    'accessCode' => 'Access Code',
 ];
 
