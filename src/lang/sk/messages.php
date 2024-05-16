@@ -63,5 +63,18 @@ return[
     'answer_text' => 'Odpovede',
     'number' => 'Číslo',
     'option_text' => 'Možnosti',
+    'myQuestions' => 'Moje Otázky',
+    'all' => 'Všetko',
+    'status' => 'Stav',
+    'newest' => 'Najnovšie',
+    'oldest' => 'Najstaršie',
+    'clone' => 'Klonovať',
+    'gotoResults' => 'Prejsť na Výsledky',
+    'actions' => 'Akcie',
+    'createdAt' => 'Vytvorené dňa',
+    'goToResults' => 'Prejsť na Výsledky',
+    'cancel' => 'Zrušiť',
+    'scanMe' => 'Naskenujte ma',
+    'copyLink' => 'Alebo skopírujte tento kód',
 ];
 

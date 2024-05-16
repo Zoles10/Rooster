@@ -124,7 +124,7 @@
 
                     chart.data(formattedData);
                     // set a chart title
-                    chart.title('answers for {{ $question->question }}')
+                    chart.title('{{ __('messages.answer_text') }} {{ $question->question }}')
                     // set an array of angles at which the words will be laid out
                     chart.angles([0])
                     chart.container("container");

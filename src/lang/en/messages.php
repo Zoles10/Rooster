@@ -63,5 +63,18 @@ return[
     'answer_text' => 'Answers',
     'number' => 'Number',
     'option_text' => 'Options',
+    'myQuestions' => 'My Questions',
+    'all' => 'All',
+    'status' => 'Status',
+    'newest' => 'Newest',
+    'oldest' => 'Oldest',
+    'clone' => 'Clone',
+    'gotoResults' => 'Go to Results',
+    'actions' => 'Actions',
+    'createdAt' => 'Created at',
+    'goToResults' => 'Go to Results',
+    'cancel' => 'Cancel',
+    'scanMe' => 'Scan me',
+    'copyLink' => 'Or copy this code',
 ];
 

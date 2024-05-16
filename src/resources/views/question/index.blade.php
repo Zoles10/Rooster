@@ -1,4 +1,4 @@
-@section('title', 'My Questions')
+@section('title', __('messages.myQuestions'))
 <x-app-layout>
     @push('scripts')
         @vite('resources/js/dashboard.js')
@@ -14,9 +14,9 @@
 
     <div class="flex flex-c</div>ol mt-5 w-full">
         <div>
-            <label for="subjectSelect" class="block text-sm font-medium text-gray-700">Subject:</label>
+            <label for="subjectSelect" class="block text-sm font-medium text-gray-700">@lang('messages.subject'):</label>
             <select id="subjectSelect" name="category" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                <option value="all">All</option>
+                <option value="all"> @lang('messages.all')</option>
                 @php
                     $subjects = [];
                 @endphp
@@ -32,10 +32,10 @@
             </select>
         </div>
         <div>
-            <label for="statusSelect" class="block text-sm font-medium text-gray-700">Status:</label>
+            <label for="statusSelect" class="block text-sm font-medium text-gray-700">@lang('messages.status'):</label>
             <select id="statusSelect" name="status" class="mt-1 block w-28 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                <option value="newest" selected>Newest</option>
-                <option value="oldest">Oldest</option>
+                <option value="newest" selected>@lang('messages.newest')</option>
+                <option value="oldest">@lang('messages.oldest')</option>
             </select>
         </div>
     </div>
@@ -48,31 +48,31 @@
                                 <tr>
                                     <th
                                         class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
-                                        Question
+                                        @lang('messages.question')
                                     </th>
                                     <th
                                         class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
-                                        Subject
+                                        @lang('messages.subject')
                                     </th>
                                     <th
                                         class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
-                                        Created At
+                                        @lang('messages.createdAt')
                                     </th>
                                     <th
                                         class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
-                                        Results
+                                        @lang('messages.results')
                                     </th>
                                     <th
                                         class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
-                                        Question Code
+                                        @lang('messages.code')
                                     </th>
                                     <th
                                         class="px-6 py-4 text-m font-medium text-gray-800 uppercase tracking-wider text-center ">
-                                        Active
+                                        @lang('messages.active')
                                     </th>
                                     <th
                                         class="px-6 py-4 text-m font-medium text-gray-800 uppercase tracking-wider text-center">
-                                        Actions
+                                        @lang('messages.actions')
                                     </th>
                                 </tr>
                             </thead>
@@ -94,7 +94,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <a href="{{ route('answers.show', $question->id) }}"
                                                 class="text-sm text-gray-900">
-                                                Goto Results
+                                                @lang('messages.goToResults')
                                             </a>
                                         </td>
                                         <td class="px-4 py-2">
@@ -121,20 +121,20 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             <div class="flex flex-col space-y-2 justify-center items-center">
                                                 <a href="{{ route('question.edit', $question->id) }}"
-                                                    class="imp_bg_purple imp_50_center text-white p-2 hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs text-center">Edit</a>
+                                                    class="imp_bg_purple imp_50_center text-white p-2 hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs text-center">@lang('messages.edit')</a>
                                             </div>
                                             <form action="{{ route('question.multiply', $question) }}" method="POST" class="mt-1 flex justify-center items-center">
                                                 @csrf
                                                 @method('POST')
 
-                                                    <button type="submit" class="text-white p-2 imp_multi_btn hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs">Clone</button>
+                                                    <button type="submit" class="text-white p-2 imp_multi_btn hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs">@lang('messages.clone')</button>
                                             </form>
                                             <form action="{{ route('question.destroy', $question->id) }}" method="POST"
                                                 class="mt-1 flex justify-center items-center">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
-                                                    class="text-white p-2 imp_del_btn hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs">Delete</button>
+                                                    class="text-white p-2 imp_del_btn hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs">@lang('messages.delete')</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -159,11 +159,11 @@
                             {{ $question->question }}
                         </a>
                     </div>
-                    <div class="text-sm text-gray-700 mt-2">Subject: {{ $question->subject->subject }}</div>
-                    <div class="text-sm text-gray-700">Created: {{ $question->created_at->format('d.m.Y') }}</div>
+                    <div class="text-sm text-gray-700 mt-2">@lang('messages.subject'): {{ $question->subject->subject }}</div>
+                    <div class="text-sm text-gray-700">@lang('messages.createdAt'): {{ $question->created_at->format('d.m.Y') }}</div>
                     <div class="mt-4">
                         <a href="{{ route('answers.show', $question->id) }}" class="text-blue-500 hover:text-blue-700 text-sm">
-                            Go to Results
+                            @lang('messages.goToResults')
                         </a>
                     </div>
                     <div class="mt-2 flex items-center justify-between">
@@ -179,7 +179,7 @@
                                     class="form-checkbox h-5 w-5 text-indigo-600 rounded"
                                     onchange="this.form.submit()" value="{{ $question->id }}"
                                     {{ $question->active ? 'checked' : '' }}>
-                                <span class="ml-2 text-sm text-gray-600">Active</span>
+                                <span class="ml-2 text-sm text-gray-600">@lang('messages.active')</span>
                             </label>
                             <input type="hidden" name="active" value="{{ $question->active ? '0' : '1' }}">
                         </form>
@@ -187,14 +187,14 @@
                     <div class="flex justify-between items-center mt-3">
                         <a href="{{ route('question.edit', $question->id) }}"
                             class="text-sm bg-purple-600 text-white p-2 rounded hover:bg-purple-700">
-                            Edit
+                            @lang('messages.edit')
                         </a>
                         <form action="{{ route('question.multiply', $question) }}" method="POST" class="inline">
                             @csrf
                             @method('POST')
                             <button type="submit"
                                 class="text-sm bg-blue-500 text-white p-2 rounded hover:bg-blue-700">
-                                Clone
+                                @lang('messages.clone')
                             </button>
                         </form>
                         <form action="{{ route('question.destroy', $question->id) }}" method="POST" class="inline">
@@ -202,7 +202,7 @@
                             @method('DELETE')
                             <button type="submit"
                                 class="text-sm bg-red-600 text-white p-2 rounded hover:bg-red-700">
-                                Delete
+                                @lang('messages.delete')
                             </button>
                         </form>
                     </div>
@@ -217,14 +217,14 @@
         <div class="bg-white border border-indigo-300 rounded-lg p-8 flex flex-col justify-center">
             <div class="flex flex-col justify-center items-center">
 
-                <h2 class="text-2xl font-bold mb-4">Scan Me</h2>
+                <h2 class="text-2xl font-bold mb-4">@lang('messages.scanMe')</h2>
                 <div id="qr-code">
 
                 </div>
                 <hr class="mx-3 my-auto">
-                <p class="mb-1 mt-3">Or copy this code: <span id="code"></span></p>
+                <p class="mb-1 mt-3">@lang('messages.copyLink'): <span id="code"></span></p>
                 <div class="mt-6 flex justify-center">
-                    <button id="hideModalButton" class="px-4 py-2 bg-red-600 text-white rounded-md mr-2">Cancel</button>
+                    <button id="hideModalButton" class="px-4 py-2 bg-red-600 text-white rounded-md mr-2">@lang('messages.cancel')</button>
                 </div>
             </div>
         </div>
