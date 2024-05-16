@@ -63,7 +63,7 @@
             if (answerInput) {
                 if (answerInput.value.trim() === '') {
                     let answerErr = document.getElementById('answer-err')
-                    answerErr.innerHTML = '{Enter answer text}'
+                    answerErr.innerHTML = 'Enter answer text'
                     answerErr.style.display = 'block'
                     return;
                 } else {
