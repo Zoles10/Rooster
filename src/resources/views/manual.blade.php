@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Manual') }}
+            {{ __('messages.manual') }}
         </h2>
     </x-slot>
     <div class="py-12">
@@ -10,7 +10,7 @@
                 @include("pdf.guestPDF")
                 @include("pdf.userPDF")
                 @include("pdf.adminPDF")
-                <a href="{{ url('/pdf/manual') }}" class="px-4 py-2 w-fit bg-blue-500 rounded-md text-white hover:bg-blue-600">Download PDF</a>
+                <a href="{{ url('/pdf/manual') }}" class="px-4 py-2 w-fit bg-blue-500 rounded-md text-white hover:bg-blue-600">{{ __('messages.downloadPDF') }}</a>
             </div>
         </div>
     </div>

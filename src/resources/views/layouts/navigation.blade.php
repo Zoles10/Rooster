@@ -13,25 +13,25 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex ">
                     <x-nav-link :href="route('manual')" class="text-black" :active="request()->routeIs('manual')">
-                        {{ __('Manual') }}
+                        {{ __('messages.manual') }}
                     </x-nav-link>
                 </div>
             @if (auth()->user())
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex ">
                     <x-nav-link :href="route('dashboard')" class="text-black" :active="request()->routeIs('dashboard')">
-                        {{ __('My Questions') }}
+                        {{ __('messages.myQuestions') }}
                     </x-nav-link>
                 </div>
 
                     @if (auth()->user()->isAdmin())
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex ">
                         <x-nav-link :href="route('adminUserControl')" class="text-black" :active="request()->routeIs('adminUserControl')">
-                            {{ __('Users') }}
+                            {{ __('messages.users') }}
                         </x-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex ">
                         <x-nav-link :href="route('adminQuestionControl')" class="text-black" :active="request()->routeIs('adminQuestionControl')">
-                            {{ __('User Questions') }}
+                            {{ __('messages.userQuestions') }}
                         </x-nav-link>
                     </div>
                     @endif
@@ -103,24 +103,24 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('manual')" :active="request()->routeIs('manual')">
-                {{ __('Manual') }}
+                {{ __('messages.manual') }}
             </x-responsive-nav-link>
         </div>
         @if (auth()->user())
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('My Questions') }}
+                {{ __('messages.myQuestions') }}
             </x-responsive-nav-link>
         </div>
             @if (auth()->user()->isAdmin())
                 <div class="pt-2 pb-3 space-y-1">
                     <x-responsive-nav-link :href="route('adminUserControl')" :active="request()->routeIs('adminUserControl')">
-                        {{ __('Users') }}
+                        {{ __('messages.users') }}
                     </x-responsive-nav-link>
                 </div>
                 <div class="pt-2 pb-3 space-y-1">
                     <x-responsive-nav-link :href="route('adminQuestionControl')" :active="request()->routeIs('adminQuestionControl')">
-                        {{ __('User Questions') }}
+                        {{ __('messages.userQuestions') }}
                     </x-responsive-nav-link>
                 </div>
             @endif

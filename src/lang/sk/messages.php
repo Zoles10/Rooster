@@ -76,5 +76,8 @@ return[
     'cancel' => 'Zrušiť',
     'scanMe' => 'Naskenujte ma',
     'copyLink' => 'Alebo skopírujte tento kód',
+    'userQuestions' => 'Otázky používateľa',
+    'users' => 'Používatelia',
+    'downloadPDF' => 'Stiahnuť PDF',
 ];
 

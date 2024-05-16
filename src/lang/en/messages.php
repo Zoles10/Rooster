@@ -76,5 +76,8 @@ return[
     'cancel' => 'Cancel',
     'scanMe' => 'Scan me',
     'copyLink' => 'Or copy this code',
+    'userQuestions' => 'User Questions',
+    'users' => 'Users',
+    'downloadPDF' => 'Download PDF',
 ];
 
