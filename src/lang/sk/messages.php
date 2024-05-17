@@ -140,6 +140,9 @@ return [
     'confirmDeleteAccount' => 'Ste si istý, že chcete vymazať svoj účet?',
     'confirmDeleteAccountInfo' => 'Po vymazaní vášho účtu budú všetky jeho zdroje a dáta trvale vymazané. Prosím, zadajte svoje heslo na potvrdenie, že chcete trvale vymazať svoj účet.',
     'note' => 'Poznámka',
+    'forgotPassword' => 'Zabudnuté heslo',
+    'forgotPasswordInstructions' => 'Zabudli ste heslo? Žiadny problém. Stačí nám povedať vašu e-mailovú adresu a my vám pošleme odkaz na obnovenie hesla, ktorý vám umožní vybrať si nové.',
+    'emailPasswordResetLink' => 'Poslať odkaz na obnovenie hesla',
 
 ];
 

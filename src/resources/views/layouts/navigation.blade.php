@@ -69,8 +69,8 @@
                         </svg>
                     </button>
                     <div x-show="langOpen" @click.away="langOpen = false" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95">
-                        <a href="locale/en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">@lang('messages.english')</a>
-                        <a href="locale/sk" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">@lang('messages.slovak')</a>
+                        <a :href="`/locale/en?redirect=${window.location.pathname}`" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">@lang('messages.english')</a>
+                        <a :href="`/locale/sk?redirect=${window.location.pathname}`" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">@lang('messages.slovak')</a>
                     </div>
                 </div>
             </div>
@@ -140,8 +140,8 @@
                         </svg>
                     </button>
                     <div x-show="langOpen" @click.away="langOpen = false" class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95">
-                        <a href="locale/en" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">@lang('messages.english')</a>
-                        <a href="locale/sk" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">@lang('messages.slovak')</a>
+                        <a :href="`/locale/en?redirect=${window.location.pathname}`" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">@lang('messages.english')</a>
+                        <a :href="`/locale/sk?redirect=${window.location.pathname}`" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">@lang('messages.slovak')</a>
                     </div>
                 </div>
             </div>
