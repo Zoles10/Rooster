@@ -224,7 +224,11 @@
                             @method('DELETE')
                             <button type="submit" class="text-sm bg-red-600 text-white p-2 rounded hover:bg-red-700 text-center w-full">@lang('messages.delete')</button>
                         </form>
+                        @if ($question->options()->whereHas('optionsHistory', function ($query) {
+                            $query->where('archived', 1);
+                        })->count() > 0 || $question->answers()->where('archived', 1)->count() > 0)
                         <a href="{{ route('answers.comparison', $question->id) }}" class="text-sm bg-gray-600 text-white p-2 rounded hover:bg-gray-700 text-center w-full">@lang('messages.archive')</a>
+                        @endif
                     </div>
                 </div>
             </div>
