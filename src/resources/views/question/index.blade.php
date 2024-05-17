@@ -180,67 +180,52 @@
             <div id="{{ $question->id }}-{{ $question->created_at->format('d.m.Y') }}-{{ $question->subject->subject }}" class="bg-white rounded-lg shadow overflow-hidden">
                 <div class="p-4">
                     <div class="font-semibold text-lg text-purple-800">
-                        <a href="{{ route('question.show', $question->id) }}"
-                            class="text-purple-800 hover:text-purple-600">
-                            {{ $question->question }}
-                        </a>
+                        <a href="{{ route('question.show', $question->id) }}" class="text-purple-800 hover:text-purple-600">{{ $question->question }}</a>
                     </div>
                     <div class="text-sm text-gray-700 mt-2">@lang('messages.subject'): {{ $question->subject->subject }}</div>
                     <div class="text-sm text-gray-700">@lang('messages.createdAt'): {{ $question->created_at->format('d.m.Y') }}</div>
                     <div class="mt-4">
-                        <a href="{{ route('answers.show', $question->id) }}" class="text-blue-500 hover:text-blue-700 text-sm">
-                            @lang('messages.goToResults')
-                        </a>
+                        <a href="{{ route('answers.show', $question->id) }}" class="text-blue-500 hover:text-blue-700 text-sm">@lang('messages.goToResults')</a>
                     </div>
-                    <div class="mt-2 flex items-center justify-between">
-                        <button id="{{ $question->id }}btn"
-                            class="text-blue-500 hover:text-blue-700">
-                            {{ $question->id }}
-                        </button>
+                    <div class="mt-2">
                         <form method="POST" action="{{ route('question.update', $question) }}">
                             @csrf
                             @method('PUT')
                             <label class="flex items-center">
-                                <input type="checkbox" name="active_checkbox"
-                                    class="form-checkbox h-5 w-5 text-indigo-600 rounded"
-                                    onchange="this.form.submit()" value="{{ $question->id }}"
-                                    {{ $question->active ? 'checked' : '' }}>
+                                <input type="checkbox" name="active_checkbox" class="form-checkbox h-5 w-5 text-indigo-600 rounded" onchange="this.form.submit()" value="{{ $question->id }}" {{ $question->active ? 'checked' : '' }}>
                                 <span class="ml-2 text-sm text-gray-600">@lang('messages.active')</span>
                             </label>
                             <input type="hidden" name="active" value="{{ $question->active ? '0' : '1' }}">
+                            @if ($question->active)
+                                <div class="mt-2">
+                                    <input type="text" name="note" class="px-2 py-1 border border-gray-300 rounded-md" placeholder="@lang('messages.note')">
+                                </div>
+                            @else
+                                <div class="mt-2">
+                                    <div>{{ __('messages.lastClosed') }}: {{ \Carbon\Carbon::parse($question->last_closed)->format('d.m.Y') }}</div>
+                                    <div>{{ __('messages.lastNote') }}: {{ $question->last_note }}</div>
+                                </div>
+                            @endif
                         </form>
                     </div>
                     <div class="grid grid-cols-2 gap-2 mt-3">
-                        <a href="{{ route('question.edit', $question->id) }}"
-                            class="text-sm bg-purple-600 text-white p-2 rounded hover:bg-purple-700 text-center w-full">
-                            @lang('messages.edit')
-                        </a>
+                        <a href="{{ route('question.edit', $question->id) }}" class="text-sm bg-purple-600 text-white p-2 rounded hover:bg-purple-700 text-center w-full">@lang('messages.edit')</a>
                         <form action="{{ route('question.multiply', $question) }}" method="POST" class="w-full">
                             @csrf
                             @method('POST')
-                            <button type="submit"
-                                class="text-sm bg-blue-500 text-white p-2 rounded hover:bg-blue-700 text-center w-full">
-                                @lang('messages.clone')
-                            </button>
+                            <button type="submit" class="text-sm bg-blue-500 text-white p-2 rounded hover:bg-blue-700 text-center w-full">@lang('messages.clone')</button>
                         </form>
                         <form action="{{ route('question.destroy', $question->id) }}" method="POST" class="w-full">
                             @csrf
                             @method('DELETE')
-                            <button type="submit"
-                                class="text-sm bg-red-600 text-white p-2 rounded hover:bg-red-700 text-center w-full">
-                                @lang('messages.delete')
-                            </button>
+                            <button type="submit" class="text-sm bg-red-600 text-white p-2 rounded hover:bg-red-700 text-center w-full">@lang('messages.delete')</button>
                         </form>
-                        <a href="{{ route('answers.comparison', $question->id) }}"
-                            class="text-sm bg-gray-600 text-white p-2 rounded hover:bg-gray-700 text-center w-full">
-                            @lang('messages.archive')
-                        </a>
+                        <a href="{{ route('answers.comparison', $question->id) }}" class="text-sm bg-gray-600 text-white p-2 rounded hover:bg-gray-700 text-center w-full">@lang('messages.archive')</a>
                     </div>
                 </div>
             </div>
         @endforeach
     </div>
-
 
 
     <!-- Tailwind Modal -->
