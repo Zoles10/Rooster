@@ -91,7 +91,7 @@
     -   [x] k uzavretiu umožniť vytvoriť poznámku
 -   [x] zobrazenie výsledkov aktuálnych a archivovaných hlasovaní
 -   [x] pri otázkach s možnosťami zobraziť porovnanie s historickými hlasovaniami (tabuľka)
--   [ ] exportovanie otázok a odpovedí do csv, json alebo xml (**dal by som csv**)
+-   [x] exportovanie otázok a odpovedí do csv, json alebo xml (**dal by som csv**)
 
 ---
 
