@@ -143,7 +143,7 @@ class QuestionController extends Controller
                 } else {
                     $options = $question->options()->get();
                     foreach($options as $option) {
-                        $option->optionsHistory()->update(['archived' => true]);
+                        $option->optionsHistory()->update(['archived' => true, 'archived_at' => date('Y-m-d')]);
                         $option->optionsHistory()->create([
                             'option_id' => $option->id,
                             'year' => date('Y'),

@@ -23,11 +23,10 @@
                         @endforeach
                     @else
                         @foreach ($answers->unique('user_text') as $answer)
-                            @if ($answer->archived == 0)
-                                    <td>{{ $answer->user_text }}</td>
-                                    <td>{{ \App\Models\Answer::where('user_text', $answer->user_text)->where('question_id', $question->id)->where('archived', false)->count() }}</td>
-                                </tr>
-                            @endif
+                            <tr>
+                                <td>{{ $answer->user_text }}</td>
+                                <td>{{ \App\Models\Answer::where('user_text', $answer->user_text)->where('question_id', $question->id)->where('archived', false)->count() }}</td>
+                            </tr>
                         @endforeach
                     @endif
                 </tbody>
@@ -48,25 +47,21 @@
                 </thead>
                 <tbody>
                     @if ($question->question_type == 'multiple_choice')
-                        @foreach ($question->options() as $option)
+                        @foreach ($archivedAnswers as $history)
                             @php
-                                $optionsHistory = \App\Models\OptionsHistory::where('option_id', $option->id)->where('archived', true)->get();
+                            $option = \App\Models\Option::find($history->option_id);
                             @endphp
-                            @foreach ($optionsHistory as $history)
-                                <tr>
-                                    <td>{{ $option->option_text }}</td>
-                                    <td></td>{{ $history->times_answered }}</td>
-                                </tr>
-                            @endforeach
+                            <tr>
+                                <td>{{ $option->option_text }}</td>
+                                <td>{{ $history->times_answered }}</td>
+                            </tr>
                         @endforeach
                     @else
-                        @foreach ($answers->unique('user_text') as $answer)
-                            @if ($answer->archived == 1)
-                                <tr>
-                                    <td>{{ $answer->user_text }}</td>
-                                    <td>{{ \App\Models\Answer::where('user_text', $answer->user_text)->where('question_id', $question->id)->where('archived', true)->count() }}</td>
-                                </tr>
-                            @endif
+                        @foreach ($archivedAnswers->unique('user_text') as $answer)
+                            <tr>
+                                <td>{{ $answer->user_text }}</td>
+                                <td>{{ \App\Models\Answer::where('user_text', $answer->user_text)->where('question_id', $question->id)->count() }}</td>
+                            </tr>
                         @endforeach
                     @endif
                 </tbody>

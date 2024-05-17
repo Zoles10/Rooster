@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Answer;
 use App\Models\Question;
+use App\Models\OptionsHistory;
 use Illuminate\Http\Request;
 
 class AnswerController extends Controller
@@ -110,8 +111,15 @@ class AnswerController extends Controller
 
     public function comparison(Question $question)
     {
-        $answers = Answer::where('question_id', $question->id)->get();
+        $answers = Answer::where('question_id', $question->id)->where('archived', false)->get();
+        if($question->question_type == 'open_ended') {
+            $archivedAnswers = Answer::where('question_id', $question->id)->where('archived', true)->get();
+        } else {
+            $archivedAnswers = OptionsHistory::whereHas('option', function($query) use ($question) {
+                $query->where('question_id', $question->id);
+            })->where('archived', true)->get();
+        }
         $question->load('options');
-        return view('answer.compare', ['question' => $question, 'answers' => $answers]);
+        return view('answer.compare', ['question' => $question, 'answers' => $answers, 'archivedAnswers' => $archivedAnswers]);
     }
 }
