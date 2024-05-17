@@ -139,6 +139,7 @@ return [
     'deleteAccountInfo' => 'Po vymazaní vášho účtu budú všetky jeho zdroje a dáta trvale vymazané. Pred vymazaním vášho účtu si prosím stiahnite všetky dáta alebo informácie, ktoré chcete zachovať.',
     'confirmDeleteAccount' => 'Ste si istý, že chcete vymazať svoj účet?',
     'confirmDeleteAccountInfo' => 'Po vymazaní vášho účtu budú všetky jeho zdroje a dáta trvale vymazané. Prosím, zadajte svoje heslo na potvrdenie, že chcete trvale vymazať svoj účet.',
-    
+    'note' => 'Poznámka',
+
 ];
 

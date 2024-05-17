@@ -118,7 +118,7 @@
                                                             {{ $question->active ? 'checked' : '' }}>
                                                         @if ($question->active)
                                                             <div class="mt-2 ml-2">
-                                                                <input type="text" name="note" class="px-2 py-1 border border-gray-300 rounded-md" placeholder="Note">
+                                                                <input type="text" name="note" class="px-2 py-1 border border-gray-300 rounded-md" placeholder="@lang('messages.note')">
                                                             </div>
                                                         @else
                                                             <div class="mt-2 ml-2">
@@ -136,29 +136,32 @@
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <div class="flex flex-col space-y-2 justify-center items-center">
+                                            <div class="grid grid-cols-2 gap-2">
                                                 <a href="{{ route('question.edit', $question->id) }}"
-                                                    class="imp_bg_purple imp_50_center text-white p-2 hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs text-center">@lang('messages.edit')</a>
-                                            </div>
-                                            <form action="{{ route('question.multiply', $question) }}" method="POST" class="mt-1 flex justify-center items-center">
-                                                @csrf
-                                                @method('POST')
-
-                                                    <button type="submit" class="text-white p-2 imp_multi_btn hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs">@lang('messages.clone')</button>
-                                            </form>
-                                            <form action="{{ route('question.destroy', $question->id) }}" method="POST"
-                                                class="mt-1 flex justify-center items-center">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="text-white p-2 imp_del_btn hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs">@lang('messages.delete')</button>
-                                            </form>
-                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                    class="text-white bg-purple-600 py-2 px-4 hover:bg-purple-700 border border-transparent rounded-md font-semibold text-xs text-center min-w-[75px]">
+                                                    @lang('messages.edit')
+                                                </a>
+                                                <form action="{{ route('question.multiply', $question) }}" method="POST">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <button type="submit"
+                                                        class="text-white bg-blue-500 py-2 px-4 hover:bg-blue-700 border border-transparent rounded-md font-semibold text-xs text-center min-w-[75px]">
+                                                        @lang('messages.clone')
+                                                    </button>
+                                                </form>
+                                                <form action="{{ route('question.destroy', $question->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="text-white bg-red-600 py-2 px-4 hover:bg-red-700 border border-transparent rounded-md font-semibold text-xs text-center min-w-[75px]">
+                                                        @lang('messages.delete')
+                                                    </button>
+                                                </form>
                                                 <a href="{{ route('answers.comparison', $question->id) }}"
-                                                    class="text-white p-2 imp_del_btn hover:text-gray-300 m-1 border border-transparent rounded-md font-semibold text-xs">
+                                                    class="text-white bg-gray-600 py-2 px-4 hover:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-center min-w-[75px]">
                                                     @lang('messages.archive')
                                                 </a>
-                                            </td>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -207,32 +210,37 @@
                             <input type="hidden" name="active" value="{{ $question->active ? '0' : '1' }}">
                         </form>
                     </div>
-                    <div class="flex justify-between items-center mt-3">
+                    <div class="grid grid-cols-2 gap-2 mt-3">
                         <a href="{{ route('question.edit', $question->id) }}"
-                            class="text-sm bg-purple-600 text-white p-2 rounded hover:bg-purple-700">
+                            class="text-sm bg-purple-600 text-white p-2 rounded hover:bg-purple-700 text-center w-full">
                             @lang('messages.edit')
                         </a>
-                        <form action="{{ route('question.multiply', $question) }}" method="POST" class="inline">
+                        <form action="{{ route('question.multiply', $question) }}" method="POST" class="w-full">
                             @csrf
                             @method('POST')
                             <button type="submit"
-                                class="text-sm bg-blue-500 text-white p-2 rounded hover:bg-blue-700">
+                                class="text-sm bg-blue-500 text-white p-2 rounded hover:bg-blue-700 text-center w-full">
                                 @lang('messages.clone')
                             </button>
                         </form>
-                        <form action="{{ route('question.destroy', $question->id) }}" method="POST" class="inline">
+                        <form action="{{ route('question.destroy', $question->id) }}" method="POST" class="w-full">
                             @csrf
                             @method('DELETE')
                             <button type="submit"
-                                class="text-sm bg-red-600 text-white p-2 rounded hover:bg-red-700">
+                                class="text-sm bg-red-600 text-white p-2 rounded hover:bg-red-700 text-center w-full">
                                 @lang('messages.delete')
                             </button>
                         </form>
+                        <a href="{{ route('answers.comparison', $question->id) }}"
+                            class="text-sm bg-gray-600 text-white p-2 rounded hover:bg-gray-700 text-center w-full">
+                            @lang('messages.archive')
+                        </a>
                     </div>
                 </div>
             </div>
         @endforeach
     </div>
+
 
 
     <!-- Tailwind Modal -->
