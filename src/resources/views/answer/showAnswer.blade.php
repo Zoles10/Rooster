@@ -16,60 +16,70 @@
             padding: 0;
         }
     </style>
-    @if($question->question_type == 'open_ended')
-        @if($question->word_cloud == 0)
-            <!-- Display table with answers -->
-            <div class="py-12">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            @if($question->question_type == 'open_ended')
+                @if($question->word_cloud == 0)
+                    <!-- Display table with answers -->
                     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 text-gray-900">
-                            <table>
-                                <thead>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                {{ __('messages.answer_text') }}
+                                            </th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                {{ __('messages.number') }}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="open-ended-tbody" class="bg-white divide-y divide-gray-200">
+                                        <!-- Data will be appended here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                @elseif($question->word_cloud == 1)
+                    <!-- Display wordcloud -->
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6 text-gray-900" id='container'></div>
+                    </div>
+                @endif
+            @elseif($question->question_type == 'multiple_choice')
+                <!-- Display table with options history -->
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
                                     <tr>
-                                        <th>{{ __('messages.answer_text') }}</th>
-                                        <th>{{ __('messages.number') }}</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            {{ __('messages.option_text') }}
+                                        </th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            {{ __('messages.number') }}
+                                        </th>
                                     </tr>
                                 </thead>
-                                <tbody id="open-ended-tbody">
-
+                                <tbody id="multiple-choice-tbody" class="bg-white divide-y divide-gray-200">
+                                    <!-- Data will be appended here -->
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-            </div>
-        @elseif($question->word_cloud == 1)
-            <!-- Display wordcloud -->
-            <div class="py-12">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 text-gray-900" id='container'>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
-    @elseif($question->question_type == 'multiple_choice')
-        <!-- Display table with options history -->
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>{{ __('messages.option_text') }}</th>
-                                    <th>{{ __('messages.number') }}</th>
-                                </tr>
-                            </thead>
-                            <tbody id="multiple-choice-tbody">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            @endif
+            <!-- Back Button -->
+            <div class="flex justify-center mt-4">
+                <a href="{{ route('dashboard') }}" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                    @lang('messages.back')
+                </a>
             </div>
         </div>
-    @endif
+    </div>
     <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
     <script src="https://cdn.anychart.com/releases/v8/js/anychart-tag-cloud.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -88,7 +98,7 @@
                 // update the table with the updated data
                 for (var key in answerCounts) {
                     var item = answerCounts[key];
-                    $('#multiple-choice-tbody').append('<tr><td>' + key + '</td><td>' + item + '</td></tr>');
+                    $('#multiple-choice-tbody').append('<tr><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">' + key + '</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">' + item + '</td></tr>');
                 }
                 },
                 error: function(error) {
@@ -155,7 +165,7 @@
                     $('#open-ended-tbody').empty();
                     // update the table with the updated data
                     for (var item in answerCounts) {
-                        $('#open-ended-tbody').append('<tr><td>' + item + '</td><td>' + answerCounts[item] + '</td></tr>');
+                        $('#open-ended-tbody').append('<tr><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">' + item + '</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">' + answerCounts[item] + '</td></tr>');
                     }
                     },
                     error: function(error) {
