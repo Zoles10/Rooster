@@ -19,7 +19,7 @@
                             @foreach ($question->options as $option)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $option->option_text }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $option->optionsHistory()->times_answered }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $option->optionsHistory()->latest()->first()->times_answered }}</td>
                                 </tr>
                             @endforeach
                         @else
@@ -50,13 +50,10 @@
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         @if ($question->question_type == 'multiple_choice')
-                            @foreach ($archivedAnswers as $history)
-                                @php
-                                $option = \App\Models\Option::find($history->option_id);
-                                @endphp
+                            @foreach ($archivedAnswers as $option_text => $count)
                                 <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $option->option_text }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $history->times_answered }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $option_text }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $count }}</td>
                                 </tr>
                             @endforeach
                         @else

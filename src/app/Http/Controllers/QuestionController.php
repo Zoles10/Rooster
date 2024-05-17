@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use App\Models\Subject;
 use App\Models\User;
-use App\Models\OptionsHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -143,7 +142,7 @@ class QuestionController extends Controller
                 } else {
                     $options = $question->options()->get();
                     foreach($options as $option) {
-                        $option->optionsHistory()->update(['archived' => true, 'archived_at' => date('Y-m-d')]);
+                        $option->optionsHistory()->update(['archived' => true]);
                         $option->optionsHistory()->create([
                             'option_id' => $option->id,
                             'year' => date('Y'),

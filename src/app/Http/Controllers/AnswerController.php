@@ -66,10 +66,10 @@ class AnswerController extends Controller
     public function updateShow($question_id) {
         $question = Question::findOrFail($question_id);
         if($question->question_type == 'multiple_choice') {
-            $options = $question->options()->with('optionsHistory')->get();
+            $options = $question->options()->get();
             $optionCounts = [];
             foreach ($options as $option) {
-                $optionCounts[$option->option_text] = $option->optionsHistory->times_answered;
+                $optionCounts[$option->option_text] = $option->optionsHistory()->latest()->first()->times_answered;
             }
             return response()->json($optionCounts);
         } else {
@@ -115,9 +115,14 @@ class AnswerController extends Controller
         if($question->question_type == 'open_ended') {
             $archivedAnswers = Answer::where('question_id', $question->id)->where('archived', true)->get();
         } else {
-            $archivedAnswers = OptionsHistory::whereHas('option', function($query) use ($question) {
-                $query->where('question_id', $question->id);
-            })->where('archived', true)->get();
+            $archivedAnswers = OptionsHistory::join('options', 'options_history.option_id', '=', 'options.id')
+                ->select('options.option_text', \DB::raw('SUM(options_history.times_answered) as count'))
+                ->where('options.question_id', $question->id)
+                ->where('options_history.archived', true)
+                ->groupBy('options.option_text')
+                ->get()
+                ->pluck('count', 'option_text')
+                ->all();
         }
         $question->load('options');
         return view('answer.compare', ['question' => $question, 'answers' => $answers, 'archivedAnswers' => $archivedAnswers]);

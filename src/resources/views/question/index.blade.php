@@ -157,10 +157,14 @@
                                                         @lang('messages.delete')
                                                     </button>
                                                 </form>
-                                                <a href="{{ route('answers.comparison', $question->id) }}"
-                                                    class="text-white bg-gray-600 py-2 px-4 hover:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-center min-w-[75px]">
-                                                    @lang('messages.archive')
-                                                </a>
+                                                @if ($question->options()->whereHas('optionsHistory', function ($query) {
+                                                    $query->where('archived', 1);
+                                                })->count() > 0 || $question->answers()->where('archived', 1)->count() > 0)
+                                                    <a href="{{ route('answers.comparison', $question->id) }}"
+                                                        class="text-white bg-gray-600 py-2 px-4 hover:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-center min-w-[75px]">
+                                                        @lang('messages.archive')
+                                                    </a>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>
