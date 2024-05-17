@@ -247,4 +247,36 @@ class QuestionController extends Controller
         $question->delete();
         return back();
     }
+
+    public function export(Question $question)
+    {
+        if ($question->question_type === 'open_ended') {
+            $answers = $question->answers()->where('archived', false)->get();
+            $csvData = [['Answer ID', 'Answer text', 'Created at']];
+            foreach ($answers as $answer) {
+                $csvData[] = [$answer->id, $answer->user_text, $answer->created_at];
+            }
+            $csvFileName = $question->id . '-export.csv';
+            $csvFile = fopen($csvFileName, 'w');
+            foreach ($csvData as $row) {
+                fputcsv($csvFile, $row);
+            }
+            fclose($csvFile);
+            return response()->download($csvFileName)->deleteFileAfterSend(true);
+        } else {
+            $options = $question->options()->get();
+            $csvData = [];
+            $csvData = [['Option ID', 'Option Text', 'Correct', 'Times answered']];
+            foreach ($options as $option) {
+                $csvData[] = [$option->id, $option->option_text, $option->correct, $option->optionsHistory()->first()->times_answered];
+            }
+            $csvFileName = $question->id . '-export.csv';
+            $csvFile = fopen($csvFileName, 'w');
+            foreach ($csvData as $row) {
+                fputcsv($csvFile, $row);
+            }
+            fclose($csvFile);
+            return response()->download($csvFileName)->deleteFileAfterSend(true);
+        }
+    }
 }

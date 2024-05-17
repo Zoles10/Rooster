@@ -30,6 +30,7 @@ Route::put('/question/{question}', [QuestionController::class, 'update'])->middl
 Route::get('/question/{question}/answers', [AnswerController::class, 'show'])->name('answers.show');
 Route::get('/question/{question}/answers/update', [AnswerController::class, 'updateShow'])->name('answers.showUpdate');
 Route::get('/question/{question}/comparison', [AnswerController::class, 'comparison'])->name('answers.comparison');
+Route::get('/question/{question}/export', [QuestionController::class, 'export'])->name('question.export');
 Route::resource('question', QuestionController::class)->except(['update', 'store']);
 
 Route::post('/answer/{id}', [AnswerController::class, 'store'])->name('answer.store');
