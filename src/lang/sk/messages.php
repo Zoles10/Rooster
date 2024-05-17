@@ -131,5 +131,9 @@ return [
     'newVerificationLinkSent' => 'Na vašu e-mailovú adresu bol odoslaný nový overovací odkaz.',
     'save' => 'Uložiť',
     'saved' => 'Uložené.',
+    'updatePassword' => 'Aktualizovať heslo',
+    'ensureAccountSecurity' => 'Uistite sa, že váš účet používa dlhé, náhodné heslo pre zabezpečenie.',
+    'currentPassword' => 'Aktuálne heslo',
+    'newPassword' => 'Nové heslo',
 ];
 

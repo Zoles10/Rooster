@@ -131,4 +131,8 @@ return[
     'newVerificationLinkSent' => 'A new verification link has been sent to your email address.',
     'save' => 'Save',
     'saved' => 'Saved.',
+    'updatePassword' => 'Update Password',
+    'ensureAccountSecurity' => 'Ensure your account is using a long, random password to stay secure.',
+    'currentPassword' => 'Current Password',
+    'newPassword' => 'New Password',
 ];
