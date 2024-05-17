@@ -38,7 +38,7 @@ Robené počas akademického roku 2023/24 letný semester
 
 ### Všeobecné:
 
--   [ ] dvojjazyčnosť
+-   [x] dvojjazyčnosť
 -   [x] responzivita
 -   [x] 3 role: neprihlásený, prihlásený a admin
 -   [x] príručka exportovateľnná do pdf, čo robí ktorá rola
@@ -84,12 +84,12 @@ Robené počas akademického roku 2023/24 letný semester
 -   [x] ku každej otázke definovať k akému predmetu patrí
 -   [x] filtrácia otázok na základe predmetu
 -   [x] filtrácia otázok na základe dátumu vytvorenia
--   [ ] uzatvorenie hlasovania pre danú otázku
--   [ ] pri uzavretí otázky:
-    -   [ ] uložiť odpovede s dátumom uzavretia
-    -   [ ] k uzavretiu umožniť vytvoriť poznámku
--   [ ] zobrazenie výsledkov aktuálnych a archivovaných hlasovaní
--   [ ] pri otázkach s možnosťami zobraziť porovnanie s historickými hlasovaniami (tabuľka)
+-   [x] uzatvorenie hlasovania pre danú otázku
+-   [x] pri uzavretí otázky:
+    -   [x] uložiť odpovede s dátumom uzavretia
+    -   [x] k uzavretiu umožniť vytvoriť poznámku
+-   [x] zobrazenie výsledkov aktuálnych a archivovaných hlasovaní
+-   [x] pri otázkach s možnosťami zobraziť porovnanie s historickými hlasovaniami (tabuľka)
 -   [ ] exportovanie otázok a odpovedí do csv, json alebo xml (**dal by som csv**)
 
 ---
