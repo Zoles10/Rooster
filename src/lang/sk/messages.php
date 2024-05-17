@@ -122,5 +122,14 @@ return [
     'archivedAnswers' => 'Archivované odpovede',
     'actualAnswers' => 'Aktuálne odpovede',
     'archive' => 'Archív',
+    'logout'=> 'Odhlásiť sa',
+    'profile' => 'Profil',
+    'profileInformation' => 'Informácie o profile',
+    'updateProfileInfo' => "Aktualizujte informácie a e-mailovú adresu svojho účtu.",
+    'emailUnverified' => 'Vaša e-mailová adresa nie je overená.',
+    'clickResendVerification' => 'Kliknite sem pre opätovné odoslanie overovacieho e-mailu.',
+    'newVerificationLinkSent' => 'Na vašu e-mailovú adresu bol odoslaný nový overovací odkaz.',
+    'save' => 'Uložiť',
+    'saved' => 'Uložené.',
 ];
 

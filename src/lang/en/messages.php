@@ -122,4 +122,13 @@ return[
     'archivedAnswers' => 'Archived answers',
     'actualAnswers' => 'Actual answers',
     'archive' => 'Archive',
+    'logout'=> 'Log out',
+    'profile' => 'Profile',
+    'profileInformation' => 'Profile Information',
+    'updateProfileInfo' => "Update your account's profile information and email address.",
+    'emailUnverified' => 'Your email address is unverified.',
+    'clickResendVerification' => 'Click here to re-send the verification email.',
+    'newVerificationLinkSent' => 'A new verification link has been sent to your email address.',
+    'save' => 'Save',
+    'saved' => 'Saved.',
 ];
