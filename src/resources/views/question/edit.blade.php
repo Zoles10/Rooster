@@ -53,31 +53,28 @@
                         class="text-black form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                 </div>
 
-                    @if ($question->question_type === 'open_ended')
-                        <div id="result-option-container" class="mb-4 mt-4">
-                            <div class="mb-4">
-                            <label class="block text-sm font-medium text-white">@lang('messages.resultOption')</label>
-                            <div class="mt-3 p-2">
-                                <div class="mb-3">
-                                    <label class="inline-flex items-center">
-                                        <input type="radio" id="list" name="word_cloud" value="0"
-                                            class="form-radio text-indigo-600" checked>
-                                        <span class="ml-2">&nbsp;&nbsp;@lang('messages.list')</span>
-                                    </label>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="inline-flex items-center">
-                                        <input type="radio" id="word-cloud" name="word_cloud" value="1"
-                                        class="form-radio text-indigo-600">
-                                        <span class="ml-2">&nbsp;&nbsp;WordCloud</span>
-                                    </label>
-                                </div>
+                @if ($question->question_type === 'open_ended')
+                    <div id="result-option-container" class="mb-4 mt-4">
+                        <div class="mb-4">
+                        <label class="block text-sm font-medium text-white">@lang('messages.resultOption')</label>
+                        <div class="mt-3 p-2">
+                            <div class="mb-3">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" id="list" name="word_cloud" value="0"
+                                        class="form-radio text-indigo-600" checked>
+                                    <span class="ml-2">&nbsp;&nbsp;@lang('messages.list')</span>
+                                </label>
+                            </div>
+                            <div class="mb-3">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" id="word-cloud" name="word_cloud" value="1"
+                                    class="form-radio text-indigo-600">
+                                    <span class="ml-2">&nbsp;&nbsp;WordCloud</span>
+                                </label>
                             </div>
                         </div>
-                    @endif
-                </div>
-
-                @if ($question->question_type === 'multiple_choice')
+                    </div>
+                @else
                     @php
                         $i = 1;
                     @endphp
@@ -130,10 +127,17 @@
                     </script>
                 @endif
             </form>
-            <div class="bg-blue-700 mt-3 px-4 py-2 rounded-md text-white hover:bg-gray-600">
-                <a href={{ route('question.index') }}>@lang('messages.backToQuestions')</a>
-            </div>
         </div>
+        <div id="back-btn" class="bg-blue-700 mt-3 px-4 py-2 rounded-md text-white hover:bg-gray-600">
+            <a href={{ route('question.index') }}>@lang('messages.backToQuestions')</a>
+        </div>
+        @if ($question->question_type === 'open_ended')
+            <script>
+                const backBtn = document.getElementById('back-btn');
+                backBtn.parentNode.removeChild(backBtn);
+                document.getElementById('main-form').parentNode.parentNode.appendChild(backBtn);
+            </script>
+        @endif
     </div>
 
     <script>
@@ -219,15 +223,7 @@
         });
 
         function resetForm() {
-            const form = document.getElementById('main-form'); // Adjust the selector to target the specific form
-            var container = document.getElementById('options-container');
-            container.innerHTML = ''; // Clear existing inputs
-            const otherSubjectContainer = document.getElementById('other-subject-container');
-            otherSubjectContainer.classList.add('hidden');
-            var addOptionBtn = document.getElementById('add-option-btn');
-            addOptionBtn.classList.add('hidden'); // Hide "Add Option" button
-            form.reset(); // Clear out all form fields
-            window.location.href = "{{ route('question.create') }}";
+            window.location.reload(); // Refresh the window
         }
 
         function handleSubmit(event) {

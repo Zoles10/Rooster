@@ -118,7 +118,11 @@ class QuestionController extends Controller
     public function edit(Question $question)
     {
         $subjects = Subject::all();
-        $users = User::all();
+        if(Auth::user()->isAdmin()) {
+            $users = User::all();
+        } else {
+            $users = null;
+        }
         return view('question.edit', ['question' => $question, "users" => $users, 'subjects' => $subjects]);
     }
 
