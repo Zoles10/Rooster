@@ -81,11 +81,11 @@
                                     <tr class="border">
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <a href="{{ route('question.show', $question->id) }}"
-                                                class="text-sm text-gray-900">
-                                                {{ $question->question }}
+                                                class="text-sm text-gray-900 ">
+                                                {{ \Illuminate\Support\Str::limit($question->question, 10) }}
                                             </a>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 py-4 text-center whitespace-nowrap">
                                             {{ $question->subject->subject }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
@@ -135,7 +135,7 @@
                                             </div>
                                             </div>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <td class="pl-1 pr-3 py-4 whitespace-nowrap text-sm text-gray-500">
                                             <div class="grid grid-cols-2 gap-2">
                                                 <a href="{{ route('question.edit', $question->id) }}" class="text-white bg-purple-600 py-2 px-4 hover:bg-purple-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.edit')</a>
                                                 <form action="{{ route('question.multiply', $question) }}" method="POST" class="w-full h-full flex items-center justify-center">
