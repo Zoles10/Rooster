@@ -75,7 +75,7 @@
             <!-- Back Button -->
             <div class="flex justify-center mt-4">
                 <a href="{{ route('dashboard') }}" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                    @lang('messages.back')
+                    @lang('messages.backToQuestions')
                 </a>
             </div>
         </div>

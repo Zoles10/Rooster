@@ -14,7 +14,7 @@
     <!-- Laravel default style (Adjust or extend as needed) -->
     <style>
         /* COLOR PALLETTE */
-        /* https: //coolors.co/31334d-93acb5-96c5f7-a9d3ff-f2f4ff */
+        /* https://coolors.co/31334d-93acb5-96c5f7-a9d3ff-f2f4ff */
         body {
             background-color: #f3f4f6;
             color: #31334d;
@@ -113,33 +113,62 @@
         }
 
         #qr-reader img {
-
             display: none;
+        }
+
+        /* Custom styles for language dropdown */
+        .dropdown-toggle {
+            background-color: rgb(79, 70, 229);
+            color: #F2F4FF;
+            border: none;
+            font-weight: bold;
+            letter-spacing: .1rem;
+        }
+
+        .dropdown-toggle:hover {
+            background-color: #F2F4FF;
+            color: rgb(79, 70, 229);
+        }
+
+        .dropdown-menu {
+            background-color: rgb(79, 70, 229);
+            color: #F2F4FF;
+            border: none;
+        }
+
+        .dropdown-item {
+            color: #F2F4FF;
+            padding: 10px 20px;
+        }
+
+        .dropdown-item:hover {
+            background-color: #F2F4FF;
+            color: rgb(79, 70, 229);
         }
     </style>
 </head>
 
 <body>
-    <!-- @Jakub
-    fix boostrap+tailwind errors vymaztentotextpredat@include('layouts.navigation')
-        --->
-        <header class="site-header d-flex justify-content-between align-items-center">
-            <div class="d-flex justify-content-center flex-grow-1">
-                <a href="{{ url('/') }}">
-                    <x-application-logo class="block h-full w-auto fill-current text-gray-800" style="width: 15vh!important; height: auto;" />
-                </a>
+    <!-- @Jakub fix boostrap+tailwind errors vymaztentotextpredat@include('layouts.navigation') --->
+    <header class="site-header d-flex justify-content-center align-items-center py-3">
+        <div class="d-flex justify-content-center flex-grow-1">
+            <a href="{{ url('/') }}">
+                <x-application-logo class="block h-full w-auto fill-current text-gray-800"
+                    style="width: 15vh!important; height: auto;" />
+            </a>
+        </div>
+        <!-- Language Dropdown -->
+        <div class="dropdown ms-auto me-3">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                @lang('messages.language')
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="locale/en">@lang('messages.english')</a>
+                <a class="dropdown-item" href="locale/sk">@lang('messages.slovak')</a>
             </div>
-            <!-- Language Dropdown -->
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    @lang('messages.language')
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="locale/en">@lang('messages.english')</a>
-                    <a class="dropdown-item" href="locale/sk">@lang('messages.slovak')</a>
-                </div>
-            </div>
-        </header>
+        </div>
+    </header>
 
     <div class="container mt-5">
         <div class="accordion" id="accordionExample">
@@ -156,8 +185,10 @@
                         <div class="main-content p-4 shadow">
                             <h2 class="mb-3 fs-3 fw-bold">@lang('messages.enterAccessCode')</h2>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="@lang('messages.enterAccessCode')" id="access-code">
-                                <button class="btn btn-primary" type="button" id="submit-code">@lang('messages.submit')</button>
+                                <input type="text" class="form-control" placeholder="@lang('messages.enterAccessCode')"
+                                    id="access-code">
+                                <button class="btn btn-primary" type="button"
+                                    id="submit-code">@lang('messages.submit')</button>
                             </div>
                         </div>
                     </div>
@@ -184,57 +215,56 @@
             </div>
         </div>
         @if (Auth::guest())
-            <div class="accordion" id="accordionExample2">
-                <div class="accordion-item m-4">
-                    <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                            @lang('messages.loginForMoreOptions')
-                        </button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse show">
-                        <div class="accordion-body">
-                            <div class="login-form mt-4 p-4 shadow-sm">
-                                <div class="d-flex justify-content-center align-items-center login-container mt-4">
-                                    <div class="w-50 d-flex flex-column align-items-center">
-                                        <a href="{{ route('login') }}" class="btn btn-primary w-100 mb-3">@lang('messages.login')</a>
-                                        <hr class="m-1" style="background-color: #000; width: 75%;">
-                                        <a href="{{ route('register') }}"
-                                            class="btn btn-primary w-100 mt-3 mb-3">@lang('messages.register')</a>
-                                        <hr class="m-1" style="background-color: #000; width: 75%;">
-                                        <a href="{{ route('manual') }}"
-                                            class="btn btn-primary w-100 mt-3 mb-3">@lang('messages.manual')</a>
-                                    </div>
+        <div class="accordion" id="accordionExample2">
+            <div class="accordion-item m-4">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                        @lang('messages.loginForMoreOptions')
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        <div class="login-form mt-4 p-4 shadow-sm">
+                            <div class="d-flex justify-content-center align-items-center login-container mt-4">
+                                <div class="w-50 d-flex flex-column align-items-center">
+                                    <a href="{{ route('login') }}" class="btn btn-primary w-100 mb-3">@lang('messages.login')</a>
+                                    <hr class="m-1" style="background-color: #000; width: 75%;">
+                                    <a href="{{ route('register') }}"
+                                        class="btn btn-primary w-100 mt-3 mb-3">@lang('messages.register')</a>
+                                    <hr class="m-1" style="background-color: #000; width: 75%;">
+                                    <a href="{{ route('manual') }}"
+                                        class="btn btn-primary w-100 mt-3 mb-3">@lang('messages.manual')</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         @else
-            <div class="accordion" id="accordionExample2">
-                <div class="accordion-item m-4">
-                    <h2 class="accordion-header" id="headingFour">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseThree">
-                            @lang('messages.myProfile')
-                        </button>
-                    </h2>
-                    <div id="collapseFour" class="accordion-collapse collapse show">
-                        <div class="accordion-body">
-                            <div class="login-form mt-4 p-4 shadow-sm">
-                                <div class="d-flex justify-content-center align-items-center login-container mt-4">
-                                    <div class="w-50 d-flex flex-column align-items-center">
-                                        <a href="{{ route('dashboard') }}"
-                                            class="btn btn-primary w-100 mb-3">@lang('messages.dashboard')</a>
-                                        <hr class="m-1" style="background-color: #000; width: 75%;">
-                                    </div>
+        <div class="accordion" id="accordionExample2">
+            <div class="accordion-item m-4">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseThree">
+                        @lang('messages.myProfile')
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        <div class="login-form mt-4 p-4 shadow-sm">
+                            <div class="d-flex justify-content-center align-items-center login-container mt-4">
+                                <div class="w-50 d-flex flex-column align-items-center">
+                                    <a href="{{ route('dashboard') }}" class="btn btn-primary w-100 mb-3">@lang('messages.dashboard')</a>
+                                    <hr class="m-1" style="background-color: #000; width: 75%;">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         @endif
     </div>
 
@@ -250,7 +280,8 @@
             var code = document.getElementById('access-code').value;
             window.location.href = '/' + code;
         });
-            // QR code and other functionality scripts here
+
+        // QR code and other functionality scripts here
         function onScanSuccess(decodedText, decodedResult) {
             // handle success
             document.getElementById('qr-result').textContent = qrCodeResultMessage + decodedText;

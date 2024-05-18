@@ -137,33 +137,21 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             <div class="grid grid-cols-2 gap-2">
-                                                <a href="{{ route('question.edit', $question->id) }}"
-                                                    class="text-white bg-purple-600 py-2 px-4 hover:bg-purple-700 border border-transparent rounded-md font-semibold text-xs text-center min-w-[75px]">
-                                                    @lang('messages.edit')
-                                                </a>
-                                                <form action="{{ route('question.multiply', $question) }}" method="POST">
+                                                <a href="{{ route('question.edit', $question->id) }}" class="text-white bg-purple-600 py-2 px-4 hover:bg-purple-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.edit')</a>
+                                                <form action="{{ route('question.multiply', $question) }}" method="POST" class="w-full h-full flex items-center justify-center">
                                                     @csrf
                                                     @method('POST')
-                                                    <button type="submit"
-                                                        class="text-white bg-blue-500 py-2 px-4 hover:bg-blue-700 border border-transparent rounded-md font-semibold text-xs text-center min-w-[75px]">
-                                                        @lang('messages.clone')
-                                                    </button>
+                                                    <button type="submit" class="text-white bg-blue-500 py-2 px-4 hover:bg-blue-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.clone')</button>
                                                 </form>
-                                                <form action="{{ route('question.destroy', $question->id) }}" method="POST">
+                                                <form action="{{ route('question.destroy', $question->id) }}" method="POST" class="w-full h-full flex items-center justify-center">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit"
-                                                        class="text-white bg-red-600 py-2 px-4 hover:bg-red-700 border border-transparent rounded-md font-semibold text-xs text-center min-w-[75px]">
-                                                        @lang('messages.delete')
-                                                    </button>
+                                                    <button type="submit" class="text-white bg-red-600 py-2 px-4 hover:bg-red-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.delete')</button>
                                                 </form>
                                                 @if ($question->options()->whereHas('optionsHistory', function ($query) {
                                                     $query->where('archived', 1);
                                                 })->count() > 0 || $question->answers()->where('archived', 1)->count() > 0)
-                                                    <a href="{{ route('answers.comparison', $question->id) }}"
-                                                        class="text-white bg-gray-600 py-2 px-4 hover:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-center min-w-[75px]">
-                                                        @lang('messages.archive')
-                                                    </a>
+                                                    <a href="{{ route('answers.comparison', $question->id) }}" class="text-white bg-gray-600 py-2 px-4 hover:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.archive')</a>
                                                 @endif
                                             </div>
                                         </td>
