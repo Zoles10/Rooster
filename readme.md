@@ -1,5 +1,5 @@
-<h1  align="center"> Skúškové zadanie - B-WEBTE2 3.roč 6.sem</h1>
-<p align="center">Robené počas akademického roku 2023/24 letný semester.</p> 
+<h1  align="center"> Semestrálne zadanie - I-ASOS 2.roč 3.sem</h1>
+<p align="center">Spravené počas akademického roku 2025/26 zimný semester.</p> 
 <h3 align="center">Spravené pomocou</h3>
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
@@ -27,15 +27,13 @@
 
 ## Autori
 
--   Matej Ištok (frontend)
--   Jakub Hubáček (frontend)
--   Daniel Janík (fullstack)
--   Michal Gregorovič (backend)
+-   Martin Vidlička
+-   Viktor Malý
+-   Matúš Petrovaj
+-   Daniel Janík
+-   Zoltán Raffay
 
-
-## Téma
-
-## TODO:
+## Obsah aplikácie:
 
 ### Všeobecné:
 
@@ -43,7 +41,6 @@
 -   [x] responzivita
 -   [x] 3 role: neprihlásený, prihlásený a admin
 -   [x] príručka exportovateľnná do pdf, čo robí ktorá rola
--   [ ] videoprezentácia
 -   [x] Titulná stránka s prihlásením a zadaním kódu pre anketu/kvíz/otázku
 
 ---
