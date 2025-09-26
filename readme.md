@@ -17,13 +17,14 @@
 1. Git clone na WSL2
 2. Otvoriť VSCode na WSL a otvoriť projekt (daj ho do /home/user)
 3. Otvoriť terminal a vnoriť sa do cd src/
-4. Napíš `composer install`
+4. Napíš `composer install` prípadne predtým `composer update`
 5. Choď späť pomocou cd ..
 6. `docker-compose build` následne `docker-compose up -d` na zastavenie `docker-compose down`
 7. <b>VEĽMI PODSTATNÉ (TAKMER SOM TO STRATIL)</b> ideš `docker exec -it php /bin/sh` a napíšeš `chmod -R 777 storage` a vystúpiš z php containeru pomocou `exit`
 8. Pre aktualizovanie laravelu cez artisan použi `docker exec -it php /bin/sh` (napojenie sa do terminalu containeru PHP)
 9. `php artisan {PRIKAZ}` v PHP containeri keď niečo chceš robiť s laravelom
-10. `exit` na opustenie PHP container terminalu
+10. `npm run dev` alebo `npm run build` v PHP containeri aby si natiahol CSS
+11. `exit` na opustenie PHP container terminalu
 
 ## Autori
 

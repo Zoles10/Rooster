@@ -116,7 +116,6 @@
             display: none;
         }
 
-        /* Custom styles for language dropdown */
         .dropdown-toggle {
             background-color: rgb(79, 70, 229);
             color: #F2F4FF;
@@ -128,6 +127,23 @@
         .dropdown-toggle:hover {
             background-color: #F2F4FF;
             color: rgb(79, 70, 229);
+        }
+
+        /* Add these new rules to fix the invisible button issue */
+        .dropdown-toggle:focus,
+        .dropdown-toggle:active,
+        .dropdown-toggle.show {
+            background-color: rgb(79, 70, 229) !important;
+            color: #F2F4FF !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        .dropdown-toggle:focus:hover,
+        .dropdown-toggle:active:hover,
+        .dropdown-toggle.show:hover {
+            background-color: #F2F4FF !important;
+            color: rgb(79, 70, 229) !important;
         }
 
         .dropdown-menu {
