@@ -44,8 +44,8 @@
             </a>
         </div>
     </div>
-            <div class="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 w-full hidden lg:block">
-                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+            <div class="my-2 overflow-x-auto w-full hidden lg:block">
+                <div class="py-2 align-middle inline-block min-w-full">
                     <div class="shadow-lg overflow-hidden border-b border-gray-200 sm:rounded-lg">
                         <table class="min-w-full divide-y divide-gray-200 mb-2">
                             <thead class="imp_bg_white p-2">

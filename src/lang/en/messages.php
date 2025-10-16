@@ -54,7 +54,7 @@ return [
     'user_management' => 'User Management',
     'manual' => 'Manual',
     'email' => 'Email',
-    'is_admin' => 'Is Admin',
+    'is_admin' => 'Admin',
     'update' => 'Update',
     'enter_new_password' => 'Enter new password',
     'submit' => 'Submit',

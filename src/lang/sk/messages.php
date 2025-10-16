@@ -53,7 +53,7 @@ return [
     'searchUsername' => 'Hľadať podľa používateľského mena',
     'user_management' => 'Správa používateľov',
     'email' => 'Email',
-    'is_admin' => 'Je administrátor',
+    'is_admin' => 'Administrátor',
     'update' => 'Aktualizovať',
     'enter_new_password' => 'Zadajte nové heslo',
     'submit' => 'Odoslať',

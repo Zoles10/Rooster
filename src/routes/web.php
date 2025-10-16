@@ -9,22 +9,23 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
 
+// home
+Route::get('/', [WelcomeController::class, 'welcome'])->name('welcome');
 Route::get('locale/{lang}', [LocaleController::class, 'setLocale']);
 
-Route::get('/question/create', [QuestionController::class, 'create'])->middleware(['auth', 'verified'])->name('question.create');
-
-Route::post('/question', [QuestionController::class, 'store'])->middleware(['auth', 'verified'])->name('question.store');
-
-Route::get('/dashboard', [QuestionController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-
+// manual page
 Route::get('/manual', function () {
     return view("manual");
 })->name('manual');
-
 Route::get("/pdf/manual", [ManualController::class, 'downloadPDF'])->name('downloadPDF');
 
+// my questions
+Route::get('/dashboard', [QuestionController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+// questions
+Route::post('/question', [QuestionController::class, 'store'])->middleware(['auth', 'verified'])->name('question.store');
+Route::get('/question/create', [QuestionController::class, 'create'])->middleware(['auth', 'verified'])->name('question.create');
 Route::post('/question/{question}', [QuestionController::class, 'multiply'])->middleware(['auth', 'verified'])->name('question.multiply');
 Route::put('/question/{question}', [QuestionController::class, 'update'])->middleware(['auth', 'verified'])->name('question.update');
 Route::get('/question/{question}/answers', [AnswerController::class, 'show'])->name('answers.show');
@@ -35,18 +36,20 @@ Route::resource('question', QuestionController::class)->except(['update', 'store
 
 Route::post('/answer/{id}', [AnswerController::class, 'store'])->name('answer.store');
 
-Route::get('/user/{id}', [UserController::class, 'getById'])->middleware(['auth', 'verified'])->name('getById');
-
+// admin
 Route::get('/admin/Users', [UserController::class, 'index'])->middleware(['auth', 'verified'])->name('adminUserControl');
 Route::get('/admin/AllQuestions', [UserController::class, 'indexQuestions'])->middleware(['auth', 'verified'])->name('adminQuestionControl');
+Route::post('/admin/create', [UserController::class, 'create'])->middleware(['auth', 'verified'])->name('admin.create');
 Route::delete('/question/{id}/admin', [QuestionController::class, 'destroyAdmin'])->middleware(['auth', 'verified'])->name('question.destroyAdmin');
 
+// user
+Route::get('/user/{id}', [UserController::class, 'getById'])->middleware(['auth', 'verified'])->name('getById');
 Route::post('/user/{user}/admin', [UserController::class, 'update'])->middleware(['auth', 'verified'])->name('user.update');
 Route::post('/user/{user}/password', [UserController::class, 'edit'])->middleware(['auth', 'verified'])->name('user.updatePassword');
 Route::post('/user/{user}/name', [UserController::class, 'editName'])->middleware(['auth', 'verified'])->name('user.updateName');
 Route::delete('/user/{user}/delete', [UserController::class, 'destroy'])->middleware(['auth', 'verified'])->name('user.delete');
-Route::post('/admin/create', [UserController::class, 'create'])->middleware(['auth', 'verified'])->name('admin.create');
 
+// auth
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
