@@ -96,17 +96,17 @@
                 method: 'GET',
                 success: function(response) {
                 // update the 'answerCounts' variable with the updated data
-                var answerCounts = response;
-                // clear the table
-                $('#multiple-choice-tbody').empty();
-                // update the table with the updated data
-                for (var key in answerCounts) {
-                    var item = answerCounts[key];
-                    $('#multiple-choice-tbody').append('<tr><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">' + key + '</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">' + item + '</td></tr>');
-                }
+                    var answerCounts = response;
+                    // clear the table
+                    $('#multiple-choice-tbody').empty();
+                    // update the table with the updated data
+                    for (var key in answerCounts) {
+                        var item = answerCounts[key];
+                        $('#multiple-choice-tbody').append('<tr><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">' + key + '</td><td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">' + item + '</td></tr>');
+                    }
                 },
-                error: function(error) {
-                console.log(error);
+                    error: function(error) {
+                    console.log(error);
                 }
             });
         }

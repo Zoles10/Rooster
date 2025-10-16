@@ -89,7 +89,7 @@ function sortTable(n, order = 'asc') {
     let table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.querySelector('table');
     switching = true;
-    dir = order === 'asc' ? 'asc' : 'desc';
+    dir = order === 'asc' ? 'desc' : 'asc';
     while (switching) {
         switching = false;
         rows = table.rows;

@@ -105,15 +105,13 @@
 
                 <div class="flex justify-between mt-4">
                    <!-- Cancel Button -->
-                        <button type="button" class="imp_bg_orange px-4 py-2 rounded-md text-white hover:bg-gray-600"
-                        onclick="resetForm()">@lang('messages.reset')</button>
+                        <div class="bg-blue-700 px-4 py-2 rounded-md text-white hover:bg-gray-600">
+                            <a href={{ route('question.index') }}>@lang('messages.backToQuestions')</a>
+                        </div>
                     <!-- Submit Button -->
                         <button type="submit" class="px-4 py-2 imp_bg_purple rounded-md text-white" id="submit-btn">@lang('messages.submit')</button>
                 </div>
             </form>
-        </div>
-        <div class="bg-blue-700 mt-3 px-4 py-2 rounded-md text-white hover:bg-gray-600">
-            <a href={{ route('question.index') }}>@lang('messages.backToQuestions')</a>
         </div>
     </div>
 
