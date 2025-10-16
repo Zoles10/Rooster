@@ -74,7 +74,11 @@
             @endif
             <!-- Back Button -->
             <div class="flex justify-center mt-4">
-                <a href="{{ route('welcome') }}" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                @php
+                    $question = \App\Models\Question::find($question_id);
+                @endphp
+                <a href="{{ Auth::check() && Auth::id() === $question->owner_id ? route('dashboard') : route('welcome') }}"
+                class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
                     @lang('messages.back')
                 </a>
             </div>
@@ -111,7 +115,7 @@
         updateTable();
 
         // refresh the table every 2 seconds
-        setInterval(updateTable, 2000);
+        setInterval(updateTable, 5000);
         @else
             @if($question->word_cloud == true)
             anychart.onDocumentReady(function() {
@@ -150,7 +154,7 @@
                 updateChart();
 
                 // refresh the chart every 2 seconds
-                setInterval(updateChart, 2000);
+                setInterval(updateChart, 5000);
             });
             @else
             // call the 'show' method from the 'AnswerController' to update 'answerCounts'
@@ -178,7 +182,7 @@
             updateTable();
 
             // refresh the table every 2 seconds
-            setInterval(updateTable, 2000);
+            setInterval(updateTable, 5000);
             @endif
         @endif
     </script>
