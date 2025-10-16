@@ -4,6 +4,11 @@
         @vite('resources/js/dashboard.js')
         @vite('resources/js/sortQuestions.js')
     @endpush
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('messages.myQuestions') }}
+        </h2>
+    </x-slot>
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
 
     <div class="flex flex-c</div>ol mt-5 w-full">
@@ -39,8 +44,7 @@
             </a>
         </div>
     </div>
-        <div class="flex flex-c</div>ol mt-5 w-full">
-            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 w-full hidden lg:block">
+            <div class="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8 w-full hidden lg:block">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="shadow-lg overflow-hidden border-b border-gray-200 sm:rounded-lg">
                         <table class="min-w-full divide-y divide-gray-200 mb-2">
@@ -162,7 +166,6 @@
                     {{ $questions->links() }}
                 </div>
             </div>
-        </div>
     </div>
     </div>
 
