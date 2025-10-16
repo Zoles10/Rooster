@@ -106,7 +106,7 @@
                 <div id="buttonsContainer" class="flex justify-between mt-4">
                     <!-- Cancel Button -->
                     <button type="button" class="imp_bg_orange px-4 py-2 rounded-md text-white hover:bg-gray-600"
-                        onclick="resetForm()">@lang('messages.cancel')</button>
+                        onclick="resetForm()">@lang('messages.reset')</button>
                     <!-- Submit Button -->
                     <button type="submit" class="px-4 py-2 imp_bg_purple rounded-md text-white" id="submit-btn">
                         @lang('messages.submit')</button>

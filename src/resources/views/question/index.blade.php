@@ -5,12 +5,6 @@
         @vite('resources/js/sortQuestions.js')
     @endpush
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-center items-center">
-            <a href="{{ route('question.create') }}"
-            class="imp_bg_purple inline-flex items-center px-4 py-2 hover:text-gray-300 bg-purple-800 border border-transparent rounded-md font-semibold text-m text-white uppercase tracking-widest hover:bg-purple-700 active:bg-purple-900 focus:outline-none focus:border-purple-900 focus:ring ring-purple-300 disabled:opacity-25 transition ease-in-out duration-150">
-            @lang('messages.createQuestion')
-        </a>
-    </div>
 
     <div class="flex flex-c</div>ol mt-5 w-full">
         <div>
@@ -29,14 +23,20 @@
                     @endif
                 @endforeach
             </select>
-            </select>
         </div>
-        <div>
+        <div class="ml-1">
             <label for="statusSelect" class="block text-sm font-medium text-gray-700">@lang('messages.status'):</label>
             <select id="statusSelect" name="status" class="mt-1 block w-28 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 <option value="newest" selected>@lang('messages.newest')</option>
                 <option value="oldest">@lang('messages.oldest')</option>
             </select>
+        </div>
+        <div class="ml-1">
+            <label for="createQuestion" class="block text-sm font-medium text-gray-700 opacity-0">a</label>
+            <a id="createQuestion" href="{{ route('question.create') }}"
+                class="mt-1 block imp_bg_purple w-full py-2 px-3 border border-gray-30 text-m text-white uppercase hover:text-gray-300 hover:bg-purple-700 active:bg-purple-900 focus:border-purple-900 focus:ring ring-purple-300 disabled:opacity-25 transition ease-in-out duration-150 bg-purple-800 font-semibold rounded-md shadow-sm focus:outline-none sm:text-sm">
+                @lang('messages.createQuestion')
+            </a>
         </div>
     </div>
         <div class="flex flex-c</div>ol mt-5 w-full">

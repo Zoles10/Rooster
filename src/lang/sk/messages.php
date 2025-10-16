@@ -144,6 +144,7 @@ return [
     'forgotPasswordInstructions' => 'Zabudli ste heslo? Žiadny problém. Stačí nám povedať vašu e-mailovú adresu a my vám pošleme odkaz na obnovenie hesla, ktorý vám umožní vybrať si nové.',
     'emailPasswordResetLink' => 'Poslať odkaz na obnovenie hesla',
     'export' => 'Exportovať',
-    'manual' => 'Manuál'
+    'manual' => 'Manuál',
+    'reset' => 'Zresetovať',
 ];
 
