@@ -1,0 +1,145 @@
+body {
+    background-color: #f3f4f6;
+    color: #31334d;
+    font-family: 'Figtree', sans-serif;
+}
+
+.site-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #F2F4FF;
+}
+
+.site-header {
+    background-color: #ffffff;
+    color: white;
+    padding: 0;
+}
+
+.main-content {
+    background-color: #cfe2ff;
+    border-radius: .4rem;
+    border: .2rem solid #31334D;
+}
+
+.login-form {
+    background-color: #cfe2ff;
+    border-radius: .4rem;
+    font-size: 0.9rem;
+    border: .2rem solid #31334D;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.qr-code-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+.btn-submit {
+    background-color: rgb(79, 70, 229);
+    color: #F2F4FF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: .4rem;
+    cursor: pointer;
+}
+
+.btn-link {
+    color: rgb(79, 70, 229);
+    border: dashed .15rem rgb(79, 70, 229);
+    font-weight: bolder;
+    letter-spacing: .2rem;
+    text-decoration: none;
+    border-radius: .3rem;
+}
+
+.btn-link:hover {
+    color: #F2F4FF;
+    border: dashed .15rem #F2F4FF;
+}
+
+.btn-primary {
+    background-color: rgb(79, 70, 229);
+    font-weight: bold;
+    letter-spacing: .2rem;
+    color: #F2F4FF;
+    border: rgb(79, 70, 229);
+}
+
+.btn-primary:hover {
+    background-color: #F2F4FF;
+    color: rgb(79, 70, 229);
+    border: rgb(79, 70, 229);
+}
+
+#qr-reader a {
+    color: rgb(79, 70, 229);
+    font-size: 1.2rem;
+    margin: .3rem !important;
+}
+
+#qr-reader a:hover {
+    color: #F2F4FF;
+}
+
+#qr-reader button,
+input {
+    background-color: rgb(79, 70, 229);
+    color: #F2F4FF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: .4rem;
+    cursor: pointer;
+}
+
+#qr-reader img {
+    display: none;
+}
+
+.dropdown-toggle {
+    background-color: rgb(79, 70, 229);
+    color: #F2F4FF;
+    border: none;
+    font-weight: bold;
+    letter-spacing: .1rem;
+}
+
+.dropdown-toggle:hover {
+    background-color: #F2F4FF;
+    color: rgb(79, 70, 229);
+}
+
+.dropdown-toggle:focus,
+.dropdown-toggle:active,
+.dropdown-toggle.show {
+    background-color: rgb(79, 70, 229) !important;
+    color: #F2F4FF !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.dropdown-toggle:focus:hover,
+.dropdown-toggle:active:hover,
+.dropdown-toggle.show:hover {
+    background-color: #F2F4FF !important;
+    color: rgb(79, 70, 229) !important;
+}
+
+.dropdown-menu {
+    background-color: rgb(79, 70, 229);
+    color: #F2F4FF;
+    border: none;
+}
+
+.dropdown-item {
+    color: #F2F4FF;
+    padding: 10px 20px;
+}
+
+.dropdown-item:hover {
+    background-color: #F2F4FF;
+    color: rgb(79, 70, 229);
+}

@@ -58,6 +58,10 @@
                             </form>
                         </x-slot>
                     </x-dropdown>
+                @else
+                    <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                        {{ __('messages.login') }}
+                    </x-responsive-nav-link>
                 @endif
 
                 <!-- Language Dropdown -->

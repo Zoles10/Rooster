@@ -52,6 +52,7 @@ return [
     'delete' => 'Delete',
     'searchUsername' => 'Search by username',
     'user_management' => 'User Management',
+    'manual' => 'Manual',
     'email' => 'Email',
     'is_admin' => 'Is Admin',
     'update' => 'Update',

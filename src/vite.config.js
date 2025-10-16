@@ -10,6 +10,7 @@ export default defineConfig({
                 'resources/js/dashboard.js',
                 'resources/js/sortQuestions.js',
                 'resources/js/adminFilterByUsername.js',
+                'resources/js/welcome.js',
             ],
             refresh: true,
         }),
