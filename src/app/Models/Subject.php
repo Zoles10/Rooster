@@ -10,4 +10,9 @@ class Subject extends Model
     use HasFactory;
     protected $fillable = ['subject'];
     public $timestamps = false;
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class, 'subject_id');
+    }
 }

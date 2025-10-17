@@ -10,13 +10,18 @@ class Answer extends Model
     use HasFactory;
 
     protected $fillable = [
-        'question_id',
-        'user_text',
-        'archived'
+        'option_id',
+        'user_id',
+        'correct',
     ];
 
-    public function scopeWithQuestionId($query, $questionId)
+    public function option()
     {
-        return $query->where('question_id', $questionId);
+        return $this->belongsTo(Option::class, 'option_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

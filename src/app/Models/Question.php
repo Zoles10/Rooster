@@ -13,42 +13,29 @@ class Question extends Model
     protected $keyType = 'string';
 
     protected $dates = ['last_closed'];
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            do {
-                $random = Str::random(5);
-            } while (self::where($model->getKeyName(), $random)->exists());
-
-            $model->{$model->getKeyName()} = $random;
-        });
-    }
     protected $fillable = [
         'question',
-        'question_type',
         'owner_id',
+        'quiz_id',
         'subject_id',
         'active',
-        'word_cloud',
         'last_note',
         'last_closed',
     ];
 
-    public function answers()
-    {
-        return $this->hasMany(Answer::class);
-    }
-
     public function options()
     {
-        return $this->hasMany(Option::class);
+        return $this->hasMany(Option::class, 'question_id');
     }
 
     public function subject()
     {
-        return $this->belongsTo(Subject::class);
+        return $this->belongsTo(Subject::class, 'subject_id');
+    }
+
+    public function quiz()
+    {
+        return $this->belongsTo(Quiz::class, 'quiz_id');
     }
 
     public function user()

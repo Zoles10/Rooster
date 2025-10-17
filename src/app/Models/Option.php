@@ -13,8 +13,13 @@ class Option extends Model
 
     public $timestamps = false;
 
-    public function optionsHistory()
+    public function answers()
     {
-        return $this->hasOne(OptionsHistory::class);
+        return $this->hasMany(Answer::class, 'option_id');
+    }
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class, 'question_id');
     }
 }
