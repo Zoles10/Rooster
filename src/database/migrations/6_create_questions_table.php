@@ -12,15 +12,13 @@ return new class extends Migration {
     {
         // Now create the questions table with foreign keyss
         Schema::create('questions', function (Blueprint $table) {
-            $table->string('id', 5);
-            $table->primary('id');
+            $table->id();
             $table->string('question', 1023);
-            $table->enum('question_type', ['multiple_choice', 'open_ended']);
             $table->foreignId('owner_id')->constrained('users')->onDelete('cascade');
+            $table->string('quiz_id', 5);
+            $table->foreign('quiz_id')->references('id')->on('quizes')->onDelete('cascade');
             $table->foreignId('subject_id')->nullable()->constrained('subjects')->onDelete('cascade');
             $table->boolean('active')->default(true);
-            $table->boolean('word_cloud')->default(false);
-            $table->string('last_note')->nullable();
             $table->date('last_closed')->nullable();
             $table->timestamps();
         });
