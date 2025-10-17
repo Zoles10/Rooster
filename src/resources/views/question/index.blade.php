@@ -152,11 +152,6 @@
                                                     @method('DELETE')
                                                     <button type="submit" class="text-white bg-red-600 py-2 px-4 hover:bg-red-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.delete')</button>
                                                 </form>
-                                                @if ($question->options()->whereHas('optionsHistory', function ($query) {
-                                                    $query->where('archived', 1);
-                                                })->count() > 0 || $question->answers()->where('archived', 1)->count() > 0)
-                                                    <a href="{{ route('answers.comparison', $question->id) }}" class="text-white bg-gray-600 py-2 px-4 hover:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.archive')</a>
-                                                @endif
                                             </div>
                                         </td>
                                     </tr>
@@ -215,11 +210,6 @@
                             @method('DELETE')
                             <button type="submit" class="text-sm bg-red-600 text-white p-2 rounded hover:bg-red-700 text-center w-full">@lang('messages.delete')</button>
                         </form>
-                        @if ($question->options()->whereHas('optionsHistory', function ($query) {
-                            $query->where('archived', 1);
-                        })->count() > 0 || $question->answers()->where('archived', 1)->count() > 0)
-                        <a href="{{ route('answers.comparison', $question->id) }}" class="text-sm bg-gray-600 text-white p-2 rounded hover:bg-gray-700 text-center w-full">@lang('messages.archive')</a>
-                        @endif
                     </div>
                 </div>
             </div>

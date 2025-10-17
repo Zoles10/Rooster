@@ -29,27 +29,6 @@
                         </select>
                     </div>
                 @endif
-                <!-- Type of Question -->
-                <div>
-                    <label class="block text-sm font-medium text-white">@lang('messages.typeOfQuestion')</label>
-                    <div class="mt-3 p-2">
-                        <div class="mb-3">
-                            <label class="inline-flex items-center">
-                                <input type="radio" id="open_ended" name="question_type" value="open_ended"
-                                    class="form-radio text-indigo-600" required checked>
-                                <span class="ml-2">&nbsp;&nbsp;@lang('messages.openEnded')</span>
-                            </label>
-                        </div>
-                        <div class="mb-3">
-                            <label class="inline-flex items-center">
-                                <input type="radio" id="multiple_choice" name="question_type" value="multiple_choice"
-                                    class="form-radio text-indigo-600" required>
-                                <span class="ml-2">&nbsp;&nbsp;@lang('messages.multipleChoice')</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Subject Dropdown -->
                 <div class="mb-4">
                     <label for="subject" class="block text-sm font-medium text-white">@lang('messages.subject')</label>
@@ -71,28 +50,6 @@
                         class="form-control text-black mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                 </div>
 
-                <div id="result-option-container" class="mb-4 mt-4">
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-white">@lang('messages.resultOption')</label>
-                        <div class="mt-3 p-2">
-                            <div class="mb-3">
-                                <label class="inline-flex items-center">
-                                    <input type="radio" id="list" name="word_cloud" value="0"
-                                        class="form-radio text-indigo-600" checked>
-                                    <span class="ml-2">&nbsp;&nbsp;@lang('messages.list')</span>
-                                </label>
-                            </div>
-                            <div class="mb-3">
-                                <label class="inline-flex items-center">
-                                    <input type="radio" id="word-cloud" name="word_cloud" value="1"
-                                        class="form-radio text-indigo-600">
-                                    <span class="ml-2">&nbsp;&nbsp;WordCloud</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Options Container -->
                 <div id="options-container" class="mb-4 mt-4">
 
                 </div>
@@ -117,12 +74,8 @@
 
     <script>
         // Event Listeners for Question Type Selection
-        document.getElementById('open_ended').addEventListener('change', handleQuestionTypeChange);
-        document.getElementById('multiple_choice').addEventListener('change', handleQuestionTypeChange);
-
         // Initial Option Counter
         let optionCount = 4;
-
         // Handles the Change Between Open Ended and Multiple Choice
         function handleQuestionTypeChange() {
             var container = document.getElementById('options-container');
@@ -130,20 +83,12 @@
             var addOptionBtn = document.getElementById('add-option-btn');
             optionCount = 4; // Reset to the default number of options
 
-            if (this.value === 'multiple_choice') {
-                document.getElementById('result-option-container').classList.add('hidden');
-                addOptionBtn.classList.remove('hidden'); // Show "Add Option" button
-                container.innerHTML =
-                    '<label class="block text-sm font-medium text-grey">@lang('messages.correct'):</label>'; // Clear existing inputs
-                // Add default 4 options
-                for (var i = 0; i < optionCount; i++) {
-                    addOption(i + 1);
-                }
-            } else {
-                container.innerHTML = ''; // Clear existing inputs
-                addOptionBtn.classList.add('hidden'); // Hide "Add Option" button
-                var resultoptioncontainer = document.getElementById('result-option-container');
-                resultoptioncontainer.classList.remove('hidden');
+            addOptionBtn.classList.remove('hidden'); // Show "Add Option" button
+            container.innerHTML =
+                '<label class="block text-sm font-medium text-grey">@lang('messages.correct'):</label>'; // Clear existing inputs
+            // Add default 4 options
+            for (var i = 0; i < optionCount; i++) {
+                addOption(i + 1);
             }
         }
 
@@ -270,5 +215,6 @@
 
         // Attach the `handleSubmit` function to the submit button
         document.getElementById('submit-btn').addEventListener('click', handleSubmit);
+        handleQuestionTypeChange()
     </script>
 </x-app-layout>

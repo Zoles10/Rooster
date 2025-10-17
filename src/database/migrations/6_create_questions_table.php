@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->id();
             $table->string('question', 1023);
             $table->foreignId('owner_id')->constrained('users')->onDelete('cascade');
-            $table->string('quiz_id', 5);
+            $table->string('quiz_id', 5)->nullable();
             $table->foreign('quiz_id')->references('id')->on('quizes')->onDelete('cascade');
             $table->foreignId('subject_id')->nullable()->constrained('subjects')->onDelete('cascade');
             $table->boolean('active')->default(true);

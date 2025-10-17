@@ -49,12 +49,8 @@ class QuestionController extends Controller
         $question = new Question;
         $validatedData = $request->validate([
             'question' => 'required|string|max:1023',
-            'question_type' => 'required|string|in:multiple_choice,open_ended',
-            'word_cloud' => 'required|boolean|in:0,1',
         ]);
         $question->question = $validatedData['question'];
-        $question->question_type = $validatedData['question_type'];
-        $question->word_cloud = $validatedData['word_cloud'];
 
         $dropdownValue = $request->input('ownerInput');
         if (! empty($dropdownValue) && $dropdownValue != '0') {
@@ -77,22 +73,14 @@ class QuestionController extends Controller
 
         $question->save();
 
-        if ($validatedData['question_type'] === 'multiple_choice') {
-            $i = 1;
-            foreach ($request->all() as $key => $value) {
-                if (str_starts_with($key, 'option')) {
-                    $correct = $request->input('isCorrect' . $i);
-                    $correct = isset($correct) ? true : false;
-                    $option = $question->options()->create(['option_text' => $value, 'correct' => $correct]);
-                    $optionHistory = $option->optionsHistory()->create([
-                        'option_id' => $option->id,
-                        'year' => date('Y'),
-                        'times_answered' => 0
-                    ]);
-                    $optionHistory->save();
-                    $option->save();
-                    $i++;
-                }
+        $i = 1;
+        foreach ($request->all() as $key => $value) {
+            if (str_starts_with($key, 'option')) {
+                $correct = $request->input('isCorrect' . $i);
+                $correct = isset($correct) ? true : false;
+                $option = $question->options()->create(['option_text' => $value, 'correct' => $correct]);
+                $option->save();
+                $i++;
             }
         }
         return redirect()->route('question.index', $question);
@@ -205,11 +193,6 @@ class QuestionController extends Controller
                     $correct = $request->input('isCorrect' . $i);
                     $correct = isset($correct) ? true : false;
                     $option = $question->options()->create(['option_text' => $value, 'correct' => $correct]);
-                    $option->optionsHistory()->create([
-                        'option_id' => $option->id,
-                        'year' => date('Y'),
-                        'times_answered' => 0
-                    ]);
                     $option->save();
                     $i++;
                 }

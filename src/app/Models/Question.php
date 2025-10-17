@@ -9,8 +9,6 @@ use Illuminate\Support\Str;
 class Question extends Model
 {
     use HasFactory;
-    public $incrementing = false;
-    protected $keyType = 'string';
 
     protected $dates = ['last_closed'];
     protected $fillable = [
