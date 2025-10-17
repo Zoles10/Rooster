@@ -11,6 +11,7 @@ export default defineConfig({
                 'resources/js/sortQuestions.js',
                 'resources/js/adminFilterByUsername.js',
                 'resources/js/welcome.js',
+                'resources/js/showQuestion.js',
             ],
             refresh: true,
         }),

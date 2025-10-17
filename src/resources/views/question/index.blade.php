@@ -67,10 +67,6 @@
                                         @lang('messages.results')
                                     </th>
                                     <th
-                                        class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
-                                        @lang('messages.code')
-                                    </th>
-                                    <th
                                         class="px-6 py-4 text-m font-medium text-gray-800 uppercase tracking-wider text-center ">
                                         @lang('messages.active')
                                     </th>
@@ -89,7 +85,7 @@
                                                 {{ \Illuminate\Support\Str::limit($question->question, 10) }}
                                             </a>
                                         </td>
-                                        <td class="px-6 py-4 text-center whitespace-nowrap">
+                                        <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $question->subject->subject }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
@@ -100,12 +96,6 @@
                                                 class="text-sm text-gray-900">
                                                 @lang('messages.goToResults')
                                             </a>
-                                        </td>
-                                        <td class="px-4 py-2">
-                                            <button id="{{ $question->id }}btn"
-                                                class="text-blue-500 hover:text-blue-700">
-                                                {{ $question->id }}
-                                            </button>
                                         </td>
                                         <td
                                             class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 justify-center items-center">
@@ -120,17 +110,10 @@
                                                             class="form-checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded"
                                                             onchange="this.form.submit()" value="{{ $question->id }}"
                                                             {{ $question->active ? 'checked' : '' }}>
-                                                        @if ($question->active)
-                                                            <div class="mt-2 ml-2">
-                                                                <input type="text" name="note" class="px-2 py-1 border border-gray-300 rounded-md" placeholder="@lang('messages.note')">
-                                                            </div>
-                                                        @else
+                                                        @if (! $question->active)
                                                             <div class="mt-2 ml-2">
                                                                 <div>
                                                                     {{__('messages.lastClosed')}}: {{ \Carbon\Carbon::parse($question->last_closed)->format('d.m.Y') }}
-                                                                </div>
-                                                                <div>
-                                                                    {{__('messages.lastNote')}}: {{ $question->last_note }}
                                                                 </div>
                                                             </div>
                                                         @endif
@@ -215,24 +198,4 @@
             </div>
         @endforeach
     </div>
-
-
-    <!-- Tailwind Modal -->
-    <div id="codeModal" class="hidden fixed inset-0 flex items-center justify-center z-50">
-        <div class="bg-white border border-indigo-300 rounded-lg p-8 flex flex-col justify-center">
-            <div class="flex flex-col justify-center items-center">
-
-                <h2 class="text-2xl font-bold mb-4">@lang('messages.scanMe')</h2>
-                <div id="qr-code">
-
-                </div>
-                <hr class="mx-3 my-auto">
-                <p class="mb-1 mt-3">@lang('messages.copyLink'): <span id="code"></span></p>
-                <div class="mt-6 flex justify-center">
-                    <button id="hideModalButton" class="px-4 py-2 bg-red-600 text-white rounded-md mr-2">@lang('messages.cancel')</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 </x-app-layout>

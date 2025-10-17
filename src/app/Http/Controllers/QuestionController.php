@@ -10,10 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-
     public function getAllByUserId(string $id)
     {
         $questions = Question::query()
@@ -31,9 +27,6 @@ class QuestionController extends Controller
         return view('question.index', ['questions' => $questions]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $subjects = Subject::all();
@@ -41,15 +34,10 @@ class QuestionController extends Controller
         return view('question.create', ["users" => $users, 'subjects' => $subjects]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $question = new Question;
-        $validatedData = $request->validate([
-            'question' => 'required|string|max:1023',
-        ]);
+        $validatedData = $request->validate(['question' => 'required|string|max:1023']);
         $question->question = $validatedData['question'];
 
         $dropdownValue = $request->input('ownerInput');
@@ -76,7 +64,7 @@ class QuestionController extends Controller
         $i = 1;
         foreach ($request->all() as $key => $value) {
             if (str_starts_with($key, 'option')) {
-                $correct = $request->input('isCorrect' . $i);
+                $correct = $request->input('isCorrect'.$i);
                 $correct = isset($correct) ? true : false;
                 $option = $question->options()->create(['option_text' => $value, 'correct' => $correct]);
                 $option->save();
@@ -86,26 +74,19 @@ class QuestionController extends Controller
         return redirect()->route('question.index', $question);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Question $question)
     {
         if (! $question->active && $question->owner_id !== Auth::id()) {
             return redirect()->back();
         }
-        //options budu v $question->options
         $question->load('options');
         return view('question.show', ['question' => $question]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Question $question)
     {
         $subjects = Subject::all();
-        if(Auth::user()->isAdmin()) {
+        if (Auth::user()->isAdmin()) {
             $users = User::all();
         } else {
             $users = null;
@@ -113,33 +94,10 @@ class QuestionController extends Controller
         return view('question.edit', ['question' => $question, "users" => $users, 'subjects' => $subjects]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Question $question)
     {
-        if($request->input('active') !== null) {
-            $question->update(['active' => $request->input('active'), 'last_closed' => date('Y-m-d'), 'last_note' => $request->input('note')]);
-
-            if($request->input('active') === '0') {
-                if($question->question_type == 'open_ended') {
-                    $answers = $question->answers()->get();
-                    foreach($answers as $answer) {
-                        $answer->update(['archived' => true]);
-                    }
-                } else {
-                    $options = $question->options()->get();
-                    foreach($options as $option) {
-                        $option->optionsHistory()->update(['archived' => true]);
-                        $option->optionsHistory()->create([
-                            'option_id' => $option->id,
-                            'year' => date('Y'),
-                            'times_answered' => 0
-                        ]);
-                    }
-                }
-            }
-
+        if ($request->input('active') !== null) {
+            $question->update(['active' => $request->input('active'), 'last_closed' => date('Y-m-d')]);
             return back();
         }
 
@@ -179,27 +137,21 @@ class QuestionController extends Controller
             $question->active = $validatedData['active'];
         }
 
-        if (isset($validatedData['word_cloud'])) {
-            $question->word_cloud = $validatedData['word_cloud'] === '1' ? true : false;
-        }
-
         $question->save();
 
-        if ($question->question_type === 'multiple_choice') {
-            $question->options()->delete();
-            $i = 1;
-            foreach ($request->all() as $key => $value) {
-                if (str_starts_with($key, 'option')) {
-                    $correct = $request->input('isCorrect' . $i);
-                    $correct = isset($correct) ? true : false;
-                    $option = $question->options()->create(['option_text' => $value, 'correct' => $correct]);
-                    $option->save();
-                    $i++;
-                }
+        $question->options()->delete();
+        $i = 1;
+        foreach ($request->all() as $key => $value) {
+            if (str_starts_with($key, 'option')) {
+                $correct = $request->input('isCorrect'.$i);
+                $correct = isset($correct) ? true : false;
+                $option = $question->options()->create(['option_text' => $value, 'correct' => $correct]);
+                $option->save();
+                $i++;
             }
         }
 
-        return to_route('dashboard')->with('message', ('Question was updated'));
+        return to_route('dashboard')->with('message', 'Question was updated');
     }
 
     public function multiply(Question $question)
@@ -207,7 +159,6 @@ class QuestionController extends Controller
         $newQuestion = $question->replicate();
         $newQuestion->save();
 
-        // Copy related models
         $options = $question->options()->get();
         foreach ($options as $option) {
             $newOption = $option->replicate();
@@ -217,14 +168,11 @@ class QuestionController extends Controller
 
         return redirect()->route('question.index', $newQuestion);
     }
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Question $question)
     {
         $question->delete();
-
-        return to_route('question.index')->with('message', ('Question was destroyed'));
+        return to_route('question.index')->with('message', 'Question was destroyed');
     }
 
     public function destroyAdmin(string $question_id)
@@ -232,37 +180,5 @@ class QuestionController extends Controller
         $question = Question::find($question_id);
         $question->delete();
         return back();
-    }
-
-    public function export(Question $question)
-    {
-        if ($question->question_type === 'open_ended') {
-            $answers = $question->answers()->where('archived', false)->get();
-            $csvData = [['Answer ID', 'Answer text', 'Created at']];
-            foreach ($answers as $answer) {
-                $csvData[] = [$answer->id, $answer->user_text, $answer->created_at];
-            }
-            $csvFileName = $question->id . '-export.csv';
-            $csvFile = fopen($csvFileName, 'w');
-            foreach ($csvData as $row) {
-                fputcsv($csvFile, $row);
-            }
-            fclose($csvFile);
-            return response()->download($csvFileName)->deleteFileAfterSend(true);
-        } else {
-            $options = $question->options()->get();
-            $csvData = [];
-            $csvData = [['Option ID', 'Option Text', 'Correct', 'Times answered']];
-            foreach ($options as $option) {
-                $csvData[] = [$option->id, $option->option_text, $option->correct, $option->optionsHistory()->first()->times_answered];
-            }
-            $csvFileName = $question->id . '-export.csv';
-            $csvFile = fopen($csvFileName, 'w');
-            foreach ($csvData as $row) {
-                fputcsv($csvFile, $row);
-            }
-            fclose($csvFile);
-            return response()->download($csvFileName)->deleteFileAfterSend(true);
-        }
     }
 }

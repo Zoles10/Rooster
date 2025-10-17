@@ -10,7 +10,6 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    // Used to get Users and Their Questions
     public function getAll()
     {
         return User::all();
@@ -33,8 +32,6 @@ class UserController extends Controller
         return null;
     }
 
-    // used for displaying all user questions
-
     public function indexQuestions()
     {
         $questions = Question::with('user')->paginate(10);
@@ -47,7 +44,6 @@ class UserController extends Controller
         return view('admin.adminQuestionBoard', ["questions" => $questions]);
     }
 
-    // used for displaying all users in User Management view
     public function index()
     {
         $users = User::all();

@@ -3,128 +3,127 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
+use App\Models\Option;
 use App\Models\Question;
 use App\Models\OptionsHistory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AnswerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, $question_id)
     {
         $question = Question::findOrFail($question_id);
+        $options = $question->options()->get();
+        $selectedOption = null;
 
-        if ($question['active'] == true) {
-            if ($question['question_type'] == 'open_ended') {
-                $request->validate([
-                    'user_text' => 'required|string|max:1023'
-                ]);
-                $question->answers()->create($request->all());
-            } else {
-                $options = $question->options()->get();
-                $i = 1;
-                foreach ($options as $option) {
-                    if (isset($request['selected' . $i])) {
-                        $option->optionsHistory()->increment('times_answered');
-                    }
-                    $i++;
-                }
+        $i = 1;
+        foreach ($options as $option) {
+            if (isset($request['selected'.$i])) {
+                $selectedOption = $option;
             }
-
-            return redirect("/question/{$question_id}/answers");
+            $i++;
         }
 
-        return to_route('welcome')->with('message', ('Question is not active'));
+        $answer = $selectedOption->answers()->create([
+            'user_id' => Auth::id(),
+            'correct' => $selectedOption->correct,
+        ]);
+
+        return to_route('welcome')->with('message', 'Answer submitted');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($question_id)
+    public function show($option_id)
     {
-        return view("answer.showAnswer", ['question_id' => $question_id]);
+        return view("answer.showAnswer", ['question_id' => $option_id]);
     }
 
-    public function updateShow($question_id) {
+    public function updateShow($question_id)
+    {
         $question = Question::findOrFail($question_id);
-        if($question->question_type == 'multiple_choice') {
-            $options = $question->options()->get();
-            $optionCounts = [];
-            foreach ($options as $option) {
-                $optionCounts[$option->option_text] = $option->optionsHistory()->latest()->first()->times_answered;
-            }
-            return response()->json($optionCounts);
-        } else {
-            $answerCounts = Answer::select('user_text', \DB::raw('count(*) as count'))
-                ->withQuestionId($question_id)
-                ->where('archived', false)
-                ->groupBy('user_text')
-                ->get()
-                ->pluck('count', 'user_text')
-                ->all();
 
-            return response()->json($answerCounts);
-        }
+        $answers = Answer::whereHas('option', function ($query) use ($question_id) {
+            $query->where('question_id', $question_id);
+        })
+            ->with(['user:id,name', 'option:id,option_text,correct'])
+            ->get()
+            ->map(function ($answer) {
+                return [
+                    'user_name' => $answer->user->name,
+                    'selected_option' => $answer->option->option_text,
+                    'correct' => $answer->correct,
+                ];
+            });
+
+        return response()->json($answers);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Answer $answer)
     {
-        //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Answer $answer)
     {
-        //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Answer $answer)
     {
-        //
     }
 
     public function comparison(Question $question)
     {
-        $answers = Answer::where('question_id', $question->id)->where('archived', false)->get();
-        if($question->question_type == 'open_ended') {
-            $archivedAnswers = Answer::where('question_id', $question->id)->where('archived', true)->get();
-        } else {
-            $archivedAnswers = OptionsHistory::join('options', 'options_history.option_id', '=', 'options.id')
-                ->select('options.option_text', \DB::raw('SUM(options_history.times_answered) as count'))
-                ->where('options.question_id', $question->id)
-                ->where('options_history.archived', true)
-                ->groupBy('options.option_text')
-                ->get()
-                ->pluck('count', 'option_text')
-                ->all();
+    }
+
+    public function export(Question $question)
+    {
+        // Get the same data as updateShow
+        $answers = Answer::whereHas('option', function ($query) use ($question) {
+            $query->where('question_id', $question->id);
+        })
+            ->with(['user:id,name', 'option:id,option_text,correct'])
+            ->get()
+            ->map(function ($answer) {
+                return [
+                    'user_name' => $answer->user->name,
+                    'selected_option' => $answer->option->option_text,
+                    'correct' => $answer->correct ? 'Yes' : 'No',
+                ];
+            });
+
+        // Create temporary file
+        $tempFile = tempnam(sys_get_temp_dir(), 'question_export_');
+        $csvFile = fopen($tempFile, 'w');
+
+        // Add question as first row
+        fputcsv($csvFile, ['Question:', $question->question]);
+
+        // Add empty row for spacing (optional)
+        fputcsv($csvFile, []);
+
+        // Add header row (matching the JSON keys)
+        fputcsv($csvFile, ['User Name', 'Selected Option', 'Correct']);
+
+        // Add data rows
+        foreach ($answers as $answer) {
+            fputcsv($csvFile, [
+                $answer['user_name'],
+                $answer['selected_option'],
+                $answer['correct'],
+            ]);
         }
-        $question->load('options');
-        return view('answer.compare', ['question' => $question, 'answers' => $answers, 'archivedAnswers' => $archivedAnswers]);
+
+        fclose($csvFile);
+
+        $fileName = 'question-'.$question->id.'-answers-export.csv';
+
+        return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
     }
 }

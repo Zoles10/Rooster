@@ -5,17 +5,14 @@
             @csrf
             @method('PUT')
             <input type="hidden" name="active" value="{{ $question->active ? '0' : '1' }}">
-            <input type="checkbox" name="active_checkbox"
+            <input type="checkbox" name="active_checkbox" id='toggleQuestion'
                 class="form-checkbox h-5 w-5 text-indigo-600 rounded"
                 onchange="this.form.submit()" value="{{ $question->id }}"
                 {{ $question->active ? 'checked' : '' }}>
             <label class="text-sm text-gray-700 ml-2">{{ $question->active ? __('messages.deactivate') : __('messages.activate') }}</label>
-            @if ($question->active)
-                <input type="text" name="note" class="ml-2 px-2 py-1 border border-gray-300 rounded-md mt-2 md:mt-0" placeholder="@lang('messages.note')">
-            @else
+            @if (! $question->active)
                 <div class="ml-2 text-sm text-gray-700 mt-2 md:mt-0">
                     <div>{{ __('messages.lastClosed') }}: {{ \Carbon\Carbon::parse($question->last_closed)->format('d.m.Y') }}</div>
-                    <div>{{ __('messages.lastNote') }}: {{ $question->last_note }}</div>
                 </div>
             @endif
         </form>
@@ -29,9 +26,6 @@
             @csrf
             @method('POST')
             <button type="submit" class="px-4 py-2 bg-purple-500 rounded-md text-white hover:bg-purple-600">@lang('messages.clone')</button>
-        </form>
-        <form action="{{ route('question.export', $question->id) }}" method="GET" class="mb-2 md:mb-0 md:ml-2">
-            <button type="submit" class="px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600">@lang('messages.export')</button>
         </form>
     </div>
 </div>
