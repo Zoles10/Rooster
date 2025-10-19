@@ -1,7 +1,7 @@
 @section('title', __('messages.myQuestions'))
 <x-app-layout>
     @push('scripts')
-        @vite('resources/js/dashboard.js')
+        @vite('resources/js/questions.js')
         @vite('resources/js/sortQuestions.js')
     @endpush
     <x-slot name="header">

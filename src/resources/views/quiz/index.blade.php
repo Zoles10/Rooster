@@ -1,5 +1,6 @@
 @section('title', __('messages.myQuizzes'))
 <x-app-layout>
+    @vite('resources/js/quiz.js')
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('messages.myQuizzes') }}
@@ -67,7 +68,9 @@
                                         {{ \Illuminate\Support\Str::limit($quiz->description, 10) }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        {{ \Illuminate\Support\Str::limit($quiz->id, 10) }}
+                                        <button id="{{ $quiz->id }}btn" class="text-blue-500 hover:text-blue-700">
+                                            {{ $quiz->id }}
+                                        </button>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         {{ $quiz->created_at->format('d.m.Y') }}
@@ -75,7 +78,7 @@
                                     <td
                                         class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 justify-center items-center">
                                         <div class="flex justify-center items-center">
-                                            <form method="POST" action="{{ route('question.update', $quiz) }}">
+                                            <form method="POST" action="{{ route('quiz.update', $quiz) }}">
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="flex items-center">
@@ -100,16 +103,16 @@
                 </td>
                 <td class="pl-1 pr-3 py-4 whitespace-nowrap text-sm text-gray-500">
                     <div class="grid grid-cols-2 gap-2">
-                        <a href="{{ route('question.edit', $quiz->id) }}"
+                        <a href="{{ route('quiz.edit', $quiz->id) }}"
                             class="text-white bg-purple-600 py-2 px-4 hover:bg-purple-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.edit')</a>
-                        <form action="{{ route('question.multiply', $quiz) }}" method="POST"
+                        <form action="{{ route('quiz.multiply', $quiz) }}" method="POST"
                             class="w-full h-full flex items-center justify-center">
                             @csrf
                             @method('POST')
                             <button type="submit"
                                 class="text-white bg-blue-500 py-2 px-4 hover:bg-blue-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.clone')</button>
                         </form>
-                        <form action="{{ route('question.destroy', $quiz->id) }}" method="POST"
+                        <form action="{{ route('quiz.destroy', $quiz->id) }}" method="POST"
                             class="w-full h-full flex items-center justify-center">
                             @csrf
                             @method('DELETE')
@@ -126,4 +129,23 @@
             </div>
         </div>
     </div>
+    <!-- Tailwind Modal -->
+    <div id="codeModal" class="hidden fixed inset-0 flex items-center justify-center z-50">
+        <div class="bg-white border border-indigo-300 rounded-lg p-8 flex flex-col justify-center">
+            <div class="flex flex-col justify-center items-center">
+
+                <h2 class="text-2xl font-bold mb-4">@lang('messages.scanMe')</h2>
+                <div id="qr-code">
+
+                </div>
+                <hr class="mx-3 my-auto">
+                <p class="mb-1 mt-3">@lang('messages.copyLink'): <span id="code"></span></p>
+                <div class="mt-6 flex justify-center">
+                    <button id="hideModalButton"
+                        class="px-4 py-2 bg-red-600 text-white rounded-md mr-2">@lang('messages.cancel')</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 </x-app-layout>

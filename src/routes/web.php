@@ -26,13 +26,14 @@ Route::get('/quizzes', [QuizController::class, 'index'])->middleware(['auth', 'v
 
 // quizzes
 Route::post('/quiz', [QuizController::class, 'store'])->middleware(['auth', 'verified'])->name('quiz.store');
-Route::post('/quiz/{quiz_id}', [QuizController::class, 'show'])->middleware(['auth', 'verified'])->name('quiz.show');
+Route::post('/quiz/{quiz}', [QuizController::class, 'show'])->middleware(['auth', 'verified'])->name('quiz.show');
 Route::get('/quiz/create', [QuizController::class, 'create'])->middleware(['auth', 'verified'])->name('quiz.create');
-Route::put('/quiz/{quiz_id}', [QuizController::class, 'update'])->middleware(['auth', 'verified'])->name('quiz.update');
-Route::put('/quiz/{quiz_id}/delete', [QuizController::class, 'destroy'])->middleware(['auth', 'verified'])->name('quiz.delete');
+Route::put('/quiz/{quiz}', [QuizController::class, 'update'])->middleware(['auth', 'verified'])->name('quiz.update');
+Route::post('/quiz/{quiz}', [QuizController::class, 'multiply'])->middleware(['auth', 'verified'])->name('quiz.multiply');
+Route::resource('quiz', QuizController::class)->except(['update', 'store']);
 
 // my questions
-Route::get('/dashboard', [QuestionController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/questions', [QuestionController::class, 'index'])->middleware(['auth', 'verified'])->name('questions');
 
 // questions
 Route::post('/question', [QuestionController::class, 'store'])->middleware(['auth', 'verified'])->name('question.store');
@@ -68,8 +69,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/{any}', function ($any) {
-    if (App\Models\Question::where('id', $any)->exists()) {
-        return redirect("/question/$any");
+    if (App\Models\Quiz::where('id', $any)->exists()) {
+        return redirect("/quiz/$any");
     }
     abort(404);
 })->where('any', '^(?!login$|register$|forgot-password$)[a-zA-Z0-9]{5}$');

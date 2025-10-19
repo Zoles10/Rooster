@@ -106,7 +106,6 @@ class QuestionController extends Controller
             'subject' => 'sometimes',
             'other_subject' => 'sometimes|max:255',
             'active' => 'sometimes|boolean',
-            'word_cloud' => 'sometimes|boolean'
         ]);
 
         $dropdownValue = $request->input('ownerInput');
@@ -151,7 +150,7 @@ class QuestionController extends Controller
             }
         }
 
-        return to_route('dashboard')->with('message', 'Question was updated');
+        return to_route('questions')->with('message', 'Question was updated');
     }
 
     public function multiply(Question $question)

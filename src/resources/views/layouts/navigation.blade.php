@@ -16,7 +16,7 @@
                         {{ __('messages.manual') }}
                     </x-nav-link>
                     @if (auth()->user())
-                        <x-nav-link :href="route('dashboard')" class="text-black" :active="request()->routeIs('dashboard')">
+                        <x-nav-link :href="route('questions')" class="text-black" :active="request()->routeIs('questions')">
                             {{ __('messages.myQuestions') }}
                         </x-nav-link>
                         <x-nav-link :href="route('quizzes')" class="text-black" :active="request()->routeIs('quizzes')">
@@ -122,7 +122,7 @@
                 {{ __('messages.manual') }}
             </x-responsive-nav-link>
             @if (auth()->user())
-                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                <x-responsive-nav-link :href="route('questions')" :active="request()->routeIs('questions')">
                     {{ __('messages.myQuestions') }}
                 </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('quizzes')" class="text-black" :active="request()->routeIs('quizzes')">

@@ -31,6 +31,7 @@ class Quiz extends Model
         'description',
         'owner_id',
         'active',
+        'last_closed',
     ];
 
     public function questions()

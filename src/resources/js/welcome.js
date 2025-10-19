@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         submitButton.addEventListener('click', function() {
             var code = accessCodeInput.value;
             if (code) {
-                window.location.href = '/question/' + code;
+                window.location.href = '/' + code;
             }
         });
 

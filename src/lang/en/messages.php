@@ -149,4 +149,10 @@ return [
     'quizTitle' => 'Title',
     'quizDescription' => 'Description',
     'quizCode' => 'Code',
+    'createQuiz' => 'Create quiz',
+    'quiz' => 'Quiz title',
+    'editQuiz' => 'Edit quiz',
+    'backToQuizzes' => 'Back to quizzes',
+    'enterQuiz' => 'Enter quiz title',
+    'enterQuizDescription' => 'Enter quiz description',
 ];
