@@ -62,6 +62,10 @@
                                 </th>
                                 <th
                                     class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
+                                    @lang('messages.quizCode')
+                                </th>
+                                <th
+                                    class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
                                     @lang('messages.createdAt')
                                 </th>
                                 <th
@@ -89,6 +93,9 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         {{ $question->subject->subject }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap center">
+                                        {{ $question->quiz_id }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         {{ $question->created_at->format('d.m.Y') }}

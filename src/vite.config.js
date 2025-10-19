@@ -13,6 +13,7 @@ export default defineConfig({
                 'resources/js/welcome.js',
                 'resources/js/quiz.js',
                 'resources/js/showQuestion.js',
+                'resources/js/createQuestion.js',
             ],
             refresh: true,
         }),

@@ -97,7 +97,13 @@ class QuestionController extends Controller
     public function update(Request $request, Question $question)
     {
         if ($request->input('active') !== null) {
-            $question->update(['active' => $request->input('active'), 'last_closed' => date('Y-m-d')]);
+            $isActive = $request->input('active');
+            $question->update(['active' => $isActive, 'last_closed' => date('Y-m-d')]);
+
+            if (! $isActive && $question->quiz_id !== null) {
+                $question->update(['quiz_id' => null]);
+            }
+
             return back();
         }
 
@@ -133,7 +139,12 @@ class QuestionController extends Controller
         }
 
         if (isset($validatedData['active'])) {
-            $question->active = $validatedData['active'];
+            $isActive = $validatedData['active'];
+            $question->active = $isActive;
+
+            if (! $isActive && $question->quiz_id !== null) {
+                $question->quiz_id = null;
+            }
         }
 
         $question->save();

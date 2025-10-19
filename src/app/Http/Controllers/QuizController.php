@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Quiz;
 use App\Models\User;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,14 +29,38 @@ class QuizController extends Controller
 
     public function create()
     {
-        $users = User::all();
-        return view('quiz.create', ["users" => $users]);
+        if (Auth::user()->isAdmin())
+            $users = User::all();
+
+        $questions = Question::where('owner_id', request()->user()->id)
+            ->where('active', true)
+            ->get();
+        return view('quiz.create', ["users" => $users, "questions" => $questions]);
     }
 
     public function store(Request $request)
     {
         $quiz = new Quiz;
-        $validatedData = $request->validate(['quiz' => 'required|string|max:255', 'quizDescription' => 'required|string|max:1023']);
+        $validatedData = $request->validate([
+            'quiz' => 'required|string|max:255',
+            'quizDescription' => 'required|string|max:1023',
+            'selected_questions' => 'required|array|min:1',
+            'selected_questions.*' => 'integer|exists:questions,id'
+        ]);
+
+        $selectedIds = $validatedData['selected_questions'];
+
+        $alreadyAssigned = Question::whereIn('id', $selectedIds)
+            ->whereNotNull('quiz_id')
+            ->pluck('id')
+            ->toArray();
+
+        if (! empty($alreadyAssigned)) {
+            return back()
+                ->withInput()
+                ->withErrors(['selected_questions' => 'The following question IDs are already assigned to a quiz: '.implode(', ', $alreadyAssigned)]);
+        }
+
         $quiz->title = $validatedData['quiz'];
         $quiz->description = $validatedData['quizDescription'];
 
@@ -50,6 +75,8 @@ class QuizController extends Controller
             $quiz->owner_id = Auth::id();
 
         $quiz->save();
+        $ids = $validatedData['selected_questions'];
+        Question::whereIn('id', $ids)->update(['quiz_id' => $quiz->id]);
         return redirect()->route('quizzes', $quiz);
     }
 
@@ -59,7 +86,12 @@ class QuizController extends Controller
             $users = User::all();
         else
             $users = null;
-        return view('quiz.edit', ['quiz' => $quiz, "users" => $users]);
+
+        $questions = Question::where('owner_id', request()->user()->id)
+            ->where('active', true)
+            ->get();
+
+        return view('quiz.edit', ['quiz' => $quiz, "users" => $users, 'questions' => $questions]);
     }
 
     public function update(Request $request, Quiz $quiz)
@@ -73,7 +105,37 @@ class QuizController extends Controller
             'quiz' => 'sometimes|string|max:255',
             'quizDescription' => 'sometimes|string|max:1023',
             'active' => 'sometimes|boolean',
+            'selected_questions' => 'sometimes|array',
+            'selected_questions.*' => 'integer|exists:questions,id'
         ]);
+
+        $selectedIds = $validatedData['selected_questions'] ?? [];
+
+        // Deep copy questions that belong to other quizzes
+        $finalIds = [];
+        if (! empty($selectedIds)) {
+            foreach ($selectedIds as $questionId) {
+                $question = Question::find($questionId);
+
+                // If question belongs to another quiz, duplicate it
+                if ($question->quiz_id !== null && $question->quiz_id !== $quiz->id) {
+                    $newQuestion = $question->replicate();
+                    $newQuestion->quiz_id = null; // will be set below
+                    $newQuestion->save();
+
+                    // Duplicate all options
+                    foreach ($question->options as $option) {
+                        $newOption = $option->replicate();
+                        $newOption->question_id = $newQuestion->id;
+                        $newOption->save();
+                    }
+
+                    $finalIds[] = $newQuestion->id;
+                } else {
+                    $finalIds[] = $questionId;
+                }
+            }
+        }
 
         $dropdownValue = $request->input('ownerInput');
         if (! empty($dropdownValue) && $dropdownValue != '0') {
@@ -98,6 +160,13 @@ class QuizController extends Controller
             $quiz->description = $validatedData['quizDescription'];
         }
 
+        Question::where('quiz_id', $quiz->id)
+            ->whereNotIn('id', $finalIds)
+            ->update(['quiz_id' => null]);
+
+        if (! empty($finalIds)) {
+            Question::whereIn('id', $finalIds)->update(['quiz_id' => $quiz->id]);
+        }
         $quiz->save();
 
         return to_route('quizzes')->with('message', 'Quiz was updated');
@@ -112,14 +181,16 @@ class QuizController extends Controller
 
     public function destroy(Quiz $quiz)
     {
+        Question::where('quiz_id', $quiz->id)->update(['quiz_id' => null]);
         $quiz->delete();
         return to_route('quiz.index')->with('message', 'Quiz was destroyed');
     }
 
-    public function destroyAdmin(string $question_id)
+    public function destroyAdmin(string $quiz_id)
     {
-        $question = Quiz::find($question_id);
-        $question->delete();
+        Question::where('quiz_id', $quiz_id)->update(['quiz_id' => null]);
+        $quiz = Quiz::find($quiz_id);
+        $quiz->delete();
         return back();
     }
 }

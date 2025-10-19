@@ -155,4 +155,9 @@ return [
     'backToQuizzes' => 'Back to quizzes',
     'enterQuiz' => 'Enter quiz title',
     'enterQuizDescription' => 'Enter quiz description',
+    "availableQuestions" => "Available Questions",
+    "add" => "Add",
+    "remove" => "Remove",
+    "addAll" => "Add all",
+    "noQuestionsAvailable" => "No questions available",
 ];
