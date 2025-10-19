@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
-use App\Models\Option;
 use App\Models\Question;
-use App\Models\OptionsHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -80,11 +78,11 @@ class AnswerController extends Controller
 
     public function comparison(Question $question)
     {
+        return view("answer.compare");
     }
 
     public function export(Question $question)
     {
-        // Get the same data as updateShow
         $answers = Answer::whereHas('option', function ($query) use ($question) {
             $query->where('question_id', $question->id);
         })
@@ -98,20 +96,13 @@ class AnswerController extends Controller
                 ];
             });
 
-        // Create temporary file
         $tempFile = tempnam(sys_get_temp_dir(), 'question_export_');
         $csvFile = fopen($tempFile, 'w');
 
-        // Add question as first row
         fputcsv($csvFile, ['Question:', $question->question]);
-
-        // Add empty row for spacing (optional)
         fputcsv($csvFile, []);
-
-        // Add header row (matching the JSON keys)
         fputcsv($csvFile, ['User Name', 'Selected Option', 'Correct']);
 
-        // Add data rows
         foreach ($answers as $answer) {
             fputcsv($csvFile, [
                 $answer['user_name'],
@@ -121,9 +112,7 @@ class AnswerController extends Controller
         }
 
         fclose($csvFile);
-
         $fileName = 'question-'.$question->id.'-answers-export.csv';
-
         return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
     }
 }

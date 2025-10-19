@@ -4,6 +4,7 @@ use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ManualController;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocaleController;
@@ -19,6 +20,16 @@ Route::get('/manual', function () {
     return view("manual");
 })->name('manual');
 Route::get("/pdf/manual", [ManualController::class, 'downloadPDF'])->name('downloadPDF');
+
+// my quizzes
+Route::get('/quizzes', [QuizController::class, 'index'])->middleware(['auth', 'verified'])->name('quizzes');
+
+// quizzes
+Route::post('/quiz', [QuizController::class, 'store'])->middleware(['auth', 'verified'])->name('quiz.store');
+Route::post('/quiz/{quiz_id}', [QuizController::class, 'show'])->middleware(['auth', 'verified'])->name('quiz.show');
+Route::get('/quiz/create', [QuizController::class, 'create'])->middleware(['auth', 'verified'])->name('quiz.create');
+Route::put('/quiz/{quiz_id}', [QuizController::class, 'update'])->middleware(['auth', 'verified'])->name('quiz.update');
+Route::put('/quiz/{quiz_id}/delete', [QuizController::class, 'destroy'])->middleware(['auth', 'verified'])->name('quiz.delete');
 
 // my questions
 Route::get('/dashboard', [QuestionController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');

@@ -145,4 +145,8 @@ return [
     'emailPasswordResetLink' => 'Email Password Reset Link',
     'export' => 'Export',
     'reset' => 'Reset',
+    'myQuizzes' => 'My Quizzes',
+    'quizTitle' => 'Title',
+    'quizDescription' => 'Description',
+    'quizCode' => 'Code',
 ];

@@ -56,17 +56,20 @@
                 <span id="option-err" class="imp_invalid_input_text" style="display: none;"></span>
                 <!-- Add Option Button with Inline Styles -->
                 <div id="add-option-btn" class="hidden flex justify-center">
-                    <button type="button" class="imp_add_btn mt-2 p-2 bg-green-500 rounded-md text-white hover:bg-green-600" onclick="addOption()">
+                    <button type="button"
+                        class="imp_add_btn mt-2 p-2 bg-green-500 rounded-md text-white hover:bg-green-600"
+                        onclick="addOption()">
                         @lang('messages.addOption')</button>
                 </div>
 
                 <div class="flex justify-between mt-4">
-                   <!-- Cancel Button -->
-                        <div class="bg-blue-700 px-4 py-2 rounded-md text-white hover:bg-gray-600">
-                            <a href={{ route('question.index') }}>@lang('messages.backToQuestions')</a>
-                        </div>
+                    <!-- Cancel Button -->
+                    <div class="bg-blue-700 px-4 py-2 rounded-md text-white hover:bg-gray-600">
+                        <a href={{ route('question.index') }}>@lang('messages.backToQuestions')</a>
+                    </div>
                     <!-- Submit Button -->
-                        <button type="submit" class="px-4 py-2 imp_bg_purple rounded-md text-white" id="submit-btn">@lang('messages.submit')</button>
+                    <button type="submit" class="px-4 py-2 imp_bg_purple rounded-md text-white"
+                        id="submit-btn">@lang('messages.submit')</button>
                 </div>
             </form>
         </div>

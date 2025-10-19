@@ -15,7 +15,7 @@ class User extends Authenticatable
 
     protected $hidden = ["password", "remember_token"];
 
-    protected function casts() : array
+    protected function casts(): array
     {
         return [
             "email_verified_at" => "datetime",
@@ -32,7 +32,7 @@ class User extends Authenticatable
         return $this->hasMany(Question::class, 'owner_id');
     }
 
-    public function quizes()
+    public function quizzes()
     {
         return $this->hasMany(Quiz::class, 'owner_id');
     }
