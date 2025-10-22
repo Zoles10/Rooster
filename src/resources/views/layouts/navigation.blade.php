@@ -29,6 +29,9 @@
                             <x-nav-link :href="route('adminQuestionControl')" class="text-black" :active="request()->routeIs('adminQuestionControl')">
                                 {{ __('messages.userQuestions') }}
                             </x-nav-link>
+                            <x-nav-link :href="route('adminQuizControl')" class="text-black" :active="request()->routeIs('adminQuizControl')">
+                                {{ __('messages.userQuizzes') }}
+                            </x-nav-link>
                         @endif
                     @endif
                 </div>
@@ -134,6 +137,9 @@
                     </x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('adminQuestionControl')" :active="request()->routeIs('adminQuestionControl')">
                         {{ __('messages.userQuestions') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('adminQuizControl')" :active="request()->routeIs('adminQuizControl')">
+                        {{ __('messages.userQuizzes') }}
                     </x-responsive-nav-link>
                 @endif
             @endif

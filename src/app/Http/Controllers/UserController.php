@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\Quiz;
 use Carbon\Traits\ToStringFormat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -42,6 +43,16 @@ class UserController extends Controller
         }
 
         return view('admin.adminQuestionBoard', ["questions" => $questions]);
+    }
+
+    public function indexQuizzes()
+    {
+        $quizes = Quiz::with('user')->paginate(10);
+
+        foreach ($quizes as $quiz) {
+            $quiz->owner_name = $quiz->user->name;
+        }
+        return view('admin.adminQuizBoard', ["quizzes" => $quizes]);
     }
 
     public function index()

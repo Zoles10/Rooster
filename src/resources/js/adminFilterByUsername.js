@@ -29,7 +29,7 @@ function filterTable() {
         for (let i = 0; i < trs.length; i++) {
             let tds = trs[i].getElementsByTagName("td");
             if (tds.length > 0) {
-                let txtValue = tds[3].textContent || tds[3].innerText; // Get the name column
+                let txtValue = tds[2].textContent || tds[2].innerText; // Get the name column
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
                     trs[i].style.display = "";
                 } else {

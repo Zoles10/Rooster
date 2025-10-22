@@ -50,8 +50,10 @@ Route::post('/answer/{id}', [AnswerController::class, 'store'])->name('answer.st
 
 // admin
 Route::get('/admin/Users', [UserController::class, 'index'])->middleware(['auth', 'verified'])->name('adminUserControl');
+Route::get('/admin/AllQuizzes', [UserController::class, 'indexQuizzes'])->middleware(['auth', 'verified'])->name('adminQuizControl');
 Route::get('/admin/AllQuestions', [UserController::class, 'indexQuestions'])->middleware(['auth', 'verified'])->name('adminQuestionControl');
 Route::post('/admin/create', [UserController::class, 'create'])->middleware(['auth', 'verified'])->name('admin.create');
+Route::delete('/quiz/{id}/admin', [QuizController::class, 'destroyAdmin'])->middleware(['auth', 'verified'])->name('quiz.destroyAdmin');
 Route::delete('/question/{id}/admin', [QuestionController::class, 'destroyAdmin'])->middleware(['auth', 'verified'])->name('question.destroyAdmin');
 
 // user

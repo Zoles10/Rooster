@@ -160,4 +160,5 @@ return [
     "remove" => "Remove",
     "addAll" => "Add all",
     "noQuestionsAvailable" => "No questions available",
+    "userQuizzes" => "User quizzes",
 ];
