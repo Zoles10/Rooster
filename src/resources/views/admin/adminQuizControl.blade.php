@@ -96,4 +96,4 @@
 @endpush
 
 
-{{ $quizzes->links() }}
+{{-- {{ $quizzes->links() }} --}}

@@ -161,4 +161,6 @@ return [
     "addAll" => "Add all",
     "noQuestionsAvailable" => "No questions available",
     "userQuizzes" => "User quizzes",
+    "admin_dashboard" => "Admin dashboard",
+    "quiz_management" => "Quiz Management",
 ];

@@ -23,14 +23,11 @@
                             {{ __('messages.myQuizzes') }}
                         </x-nav-link>
                         @if (auth()->user()->isAdmin())
-                            <x-nav-link :href="route('adminUserControl')" class="text-black" :active="request()->routeIs('adminUserControl')">
-                                {{ __('messages.users') }}
-                            </x-nav-link>
-                            <x-nav-link :href="route('adminQuestionControl')" class="text-black" :active="request()->routeIs('adminQuestionControl')">
-                                {{ __('messages.userQuestions') }}
-                            </x-nav-link>
-                            <x-nav-link :href="route('adminQuizControl')" class="text-black" :active="request()->routeIs('adminQuizControl')">
-                                {{ __('messages.userQuizzes') }}
+                            <x-nav-link :href="route('adminDashboard')" class="text-black" :active="request()->routeIs('adminDashboard') ||
+                                request()->routeIs('adminUserControl') ||
+                                request()->routeIs('adminQuestionControl') ||
+                                request()->routeIs('adminQuizControl')">
+                                {{ __('messages.admin_dashboard') }}
                             </x-nav-link>
                         @endif
                     @endif
@@ -132,14 +129,11 @@
                     {{ __('messages.myQuizzes') }}
                 </x-responsive-nav-link>
                 @if (auth()->user()->isAdmin())
-                    <x-responsive-nav-link :href="route('adminUserControl')" :active="request()->routeIs('adminUserControl')">
-                        {{ __('messages.users') }}
-                    </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('adminQuestionControl')" :active="request()->routeIs('adminQuestionControl')">
-                        {{ __('messages.userQuestions') }}
-                    </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('adminQuizControl')" :active="request()->routeIs('adminQuizControl')">
-                        {{ __('messages.userQuizzes') }}
+                    <x-responsive-nav-link :href="route('adminDashboard')" class="text-black" :active="request()->routeIs('adminDashboard') ||
+                        request()->routeIs('adminUserControl') ||
+                        request()->routeIs('adminQuestionControl') ||
+                        request()->routeIs('adminQuizControl')">
+                        {{ __('messages.admin_dashboard') }}
                     </x-responsive-nav-link>
                 @endif
             @endif

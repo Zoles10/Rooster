@@ -102,4 +102,4 @@
 @endpush
 
 
-{{ $questions->links() }}
+{{-- {{ $questions->links() }} --}}

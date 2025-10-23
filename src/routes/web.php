@@ -49,6 +49,9 @@ Route::resource('question', QuestionController::class)->except(['update', 'store
 Route::post('/answer/{id}', [AnswerController::class, 'store'])->name('answer.store');
 
 // admin
+Route::get('/admin', function () {
+    return redirect()->route('adminUserControl');
+})->middleware(['auth', 'verified'])->name('adminDashboard');
 Route::get('/admin/Users', [UserController::class, 'index'])->middleware(['auth', 'verified'])->name('adminUserControl');
 Route::get('/admin/AllQuizzes', [UserController::class, 'indexQuizzes'])->middleware(['auth', 'verified'])->name('adminQuizControl');
 Route::get('/admin/AllQuestions', [UserController::class, 'indexQuestions'])->middleware(['auth', 'verified'])->name('adminQuestionControl');

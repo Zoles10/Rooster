@@ -33,6 +33,14 @@ class UserController extends Controller
         return null;
     }
 
+    public function show()
+    {
+        $users = User::all();
+        $questions = Question::all();
+        $quizzes = Quiz::all();
+        return view('admin.adminDashboard', ['users' => $users, 'questions' => $questions, 'quizzes' => $quizzes]);
+    }
+
     public function indexQuestions()
     {
         $questions = Question::with('user')->paginate(10);
