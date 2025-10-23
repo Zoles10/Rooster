@@ -62,7 +62,7 @@
                                 </th>
                                 <th
                                     class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
-                                    @lang('messages.quizCode')
+                                    @lang('messages.quiz')
                                 </th>
                                 <th
                                     class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">

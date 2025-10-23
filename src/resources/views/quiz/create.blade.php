@@ -10,7 +10,7 @@
                     <div>
                         <div class="mb-4">
                             <label for="quiz"
-                                class="block text-sm font-medium text-gray-700">@lang('messages.quiz'):</label>
+                                class="block text-sm font-medium text-gray-700">@lang('messages.quiz_title'):</label>
                             <span id="quiz-err" class="imp_invalid_input_text text-sm text-red-600"
                                 style="display: none;"></span>
                             <input type="text"

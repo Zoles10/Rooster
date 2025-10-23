@@ -3,7 +3,7 @@
     <table class="imp_admin_td table bg-white table-striped w-full table-hover mt-4 rounded">
         <thead>
             <tr class="bg-indigo-600 text-white">
-                <th class="imp_admin_td px-4 py-2 text-center">{{ __('messages.quiz') }}</th>
+                <th class="imp_admin_td px-4 py-2 text-center">{{ __('messages.quiz_title') }}</th>
                 <th class="imp_admin_td px-4 py-2 text-center">{{ __('messages.quizCode') }}</th>
                 <th class="imp_admin_td px-4 py-2 text-center">{{ __('messages.owner') }}</th>
                 <th class="imp_admin_td px-4 py-2 text-center">{{ __('messages.active') }}</th>

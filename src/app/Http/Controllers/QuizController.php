@@ -24,7 +24,30 @@ class QuizController extends Controller
         if (! $quiz->active && $quiz->owner_id !== Auth::id()) {
             return redirect()->back();
         }
+        $quiz->load(['questions.options']);
         return view('quiz.show', ['quiz' => $quiz]);
+    }
+
+    public function submitAnswers(Request $request, Quiz $quiz)
+    {
+        $answers = $request->input('answers', []);
+
+        foreach ($answers as $questionId => $selectedOptions) {
+            $question = Question::find($questionId);
+            if (! $question)
+                continue;
+
+            foreach ($selectedOptions as $optionId) {
+                $option = $question->options()->find($optionId);
+                if ($option) {
+                    $option->answers()->create([
+                        'user_id' => Auth::id(),
+                        'correct' => $option->correct,
+                    ]);
+                }
+            }
+        }
+        return redirect()->route('welcome')->with('message', 'Quiz answers submitted successfully');
     }
 
     public function create()
@@ -50,17 +73,6 @@ class QuizController extends Controller
 
         $selectedIds = $validatedData['selected_questions'];
 
-        $alreadyAssigned = Question::whereIn('id', $selectedIds)
-            ->whereNotNull('quiz_id')
-            ->pluck('id')
-            ->toArray();
-
-        if (! empty($alreadyAssigned)) {
-            return back()
-                ->withInput()
-                ->withErrors(['selected_questions' => 'The following question IDs are already assigned to a quiz: '.implode(', ', $alreadyAssigned)]);
-        }
-
         $quiz->title = $validatedData['quiz'];
         $quiz->description = $validatedData['quizDescription'];
 
@@ -75,8 +87,35 @@ class QuizController extends Controller
             $quiz->owner_id = Auth::id();
 
         $quiz->save();
-        $ids = $validatedData['selected_questions'];
-        Question::whereIn('id', $ids)->update(['quiz_id' => $quiz->id]);
+
+        // Deep copy questions that are already assigned to other quizzes
+        $finalIds = [];
+        foreach ($selectedIds as $questionId) {
+            $question = Question::find($questionId);
+
+            // If question is already assigned to another quiz, duplicate it
+            if ($question->quiz_id !== null) {
+                $newQuestion = $question->replicate();
+                $newQuestion->quiz_id = $quiz->id;
+                $newQuestion->save();
+
+                // Duplicate all options
+                foreach ($question->options as $option) {
+                    $newOption = $option->replicate();
+                    $newOption->question_id = $newQuestion->id;
+                    $newOption->save();
+                }
+
+                $finalIds[] = $newQuestion->id;
+            } else {
+                // Question is not assigned, assign it directly
+                $finalIds[] = $questionId;
+            }
+        }
+
+        // Assign the final IDs to the quiz
+        Question::whereIn('id', $finalIds)->update(['quiz_id' => $quiz->id]);
+
         return redirect()->route('quizzes', $quiz);
     }
 

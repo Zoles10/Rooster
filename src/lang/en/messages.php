@@ -150,7 +150,7 @@ return [
     'quizDescription' => 'Description',
     'quizCode' => 'Code',
     'createQuiz' => 'Create quiz',
-    'quiz' => 'Quiz title',
+    'quiz_title' => 'Quiz title',
     'editQuiz' => 'Edit quiz',
     'backToQuizzes' => 'Back to quizzes',
     'enterQuiz' => 'Enter quiz title',
@@ -163,4 +163,5 @@ return [
     "userQuizzes" => "User quizzes",
     "admin_dashboard" => "Admin dashboard",
     "quiz_management" => "Quiz Management",
+    "quiz" => "Quiz"
 ];
