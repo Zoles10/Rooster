@@ -76,8 +76,8 @@ class QuestionController extends Controller
 
     public function show(Question $question)
     {
-        if (! $question->active && $question->owner_id !== Auth::id()) {
-            return redirect()->back();
+        if (Auth::id() !== $question->owner_id) {
+            abort(403, 'Unauthorized');
         }
         $question->load('options');
         return view('question.show', ['question' => $question]);

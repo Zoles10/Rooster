@@ -96,7 +96,7 @@ return [
     'clear' => 'Clear',
     'back' => 'Back',
     'enterAnswerText' => 'Please enter answer text.',
-    'ownerVisible' => 'This is visible only to the owner',
+    'ownerVisible' => 'Question actions',
     'activate' => 'Activate',
     'deactivate' => 'Deactivate',
     'enterQuestion' => 'Enter question',

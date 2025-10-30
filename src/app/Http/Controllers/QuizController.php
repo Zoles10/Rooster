@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Quiz;
 use App\Models\User;
 use App\Models\Question;
+use App\Models\QuizAttempt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,9 +22,14 @@ class QuizController extends Controller
 
     public function show(Quiz $quiz)
     {
-        if (! $quiz->active && $quiz->owner_id !== Auth::id()) {
-            return redirect()->back();
+        $userId = Auth::id();
+
+        if ($quiz->owner_id !== $userId) {
+            if (! $quiz->active || QuizAttempt::where('quiz_id', $quiz->id)->where('user_id', $userId)->exists()) {
+                return redirect()->route('welcome')->with('error', 'You cannot view this quiz.');
+            }
         }
+
         $quiz->load(['questions.options']);
         return view('quiz.show', ['quiz' => $quiz]);
     }
@@ -47,6 +53,10 @@ class QuizController extends Controller
                 }
             }
         }
+        QuizAttempt::create([
+            'quiz_id' => $quiz->id,
+            'user_id' => Auth::id(),
+        ]);
         return redirect()->route('welcome')->with('message', 'Quiz answers submitted successfully');
     }
 

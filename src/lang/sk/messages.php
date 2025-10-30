@@ -96,7 +96,7 @@ return [
     'clear' => 'Vymazať',
     'back' => 'Späť',
     'enterAnswerText' => 'Prosím, zadajte text odpovede.',
-    'ownerVisible' => 'Toto vidí len majiteľ',
+    'ownerVisible' => 'Akcie pre otázku',
     'activate' => 'Aktivovať',
     'deactivate' => 'Deaktivovať',
     'enterQuestion' => 'Zadajte otázku',
