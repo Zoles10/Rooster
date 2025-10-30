@@ -1,4 +1,4 @@
-<nav x-data="{ open: false, langOpen: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false, langOpen: false }" class="bg-white border-b border-gray-100 sticky top-0 z-50">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -12,15 +12,12 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('manual')" class="text-black" :active="request()->routeIs('manual')">
-                        {{ __('messages.manual') }}
-                    </x-nav-link>
                     @if (auth()->user())
-                        <x-nav-link :href="route('questions')" class="text-black" :active="request()->routeIs('questions')">
-                            {{ __('messages.myQuestions') }}
-                        </x-nav-link>
                         <x-nav-link :href="route('quizzes')" class="text-black" :active="request()->routeIs('quizzes')">
                             {{ __('messages.myQuizzes') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('questions')" class="text-black" :active="request()->routeIs('questions')">
+                            {{ __('messages.myQuestions') }}
                         </x-nav-link>
                         @if (auth()->user()->isAdmin())
                             <x-nav-link :href="route('adminDashboard')" class="text-black" :active="request()->routeIs('adminDashboard') ||
@@ -31,6 +28,9 @@
                             </x-nav-link>
                         @endif
                     @endif
+                    <x-nav-link :href="route('manual')" class="text-black" :active="request()->routeIs('manual')">
+                        {{ __('messages.manual') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -118,15 +118,12 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('manual')" :active="request()->routeIs('manual')">
-                {{ __('messages.manual') }}
-            </x-responsive-nav-link>
             @if (auth()->user())
-                <x-responsive-nav-link :href="route('questions')" :active="request()->routeIs('questions')">
-                    {{ __('messages.myQuestions') }}
-                </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('quizzes')" class="text-black" :active="request()->routeIs('quizzes')">
                     {{ __('messages.myQuizzes') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('questions')" :active="request()->routeIs('questions')">
+                    {{ __('messages.myQuestions') }}
                 </x-responsive-nav-link>
                 @if (auth()->user()->isAdmin())
                     <x-responsive-nav-link :href="route('adminDashboard')" class="text-black" :active="request()->routeIs('adminDashboard') ||
@@ -137,6 +134,9 @@
                     </x-responsive-nav-link>
                 @endif
             @endif
+            <x-responsive-nav-link :href="route('manual')" :active="request()->routeIs('manual')">
+                {{ __('messages.manual') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

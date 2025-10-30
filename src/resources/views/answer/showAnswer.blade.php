@@ -45,7 +45,7 @@
                     class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
                     @lang('messages.back')
                 </a>
-                @if (Auth::check() && Auth::id() === $question->owner_id)
+                @if (Auth::check() && Auth::id() === $question->owner_id && $question->options()->whereHas('answers')->exists())
                     <form action="{{ route('answers.export', $question->id) }}" method="GET"
                         class="mb-2 md:mb-0 md:ml-2">
                         <button type="submit"

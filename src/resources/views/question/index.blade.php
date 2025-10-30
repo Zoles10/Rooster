@@ -150,12 +150,12 @@
                             <button type="submit"
                                 class="text-white bg-red-600 py-2 px-4 hover:bg-red-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.delete')</button>
                         </form>
-                        @if ($question->options()->whereHas('answers')->exists() && !$question->active)
-                            <a href="{{ route('answers.comparison', $question->id) }}"
-                                class="text-white bg-gray-600 py-2 px-4 hover:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.archive')</a>
+                        @if ($question->options()->whereHas('answers')->exists())
+                            <a href="{{ route('answers.export', $question->id) }}"
+                                class="text-white bg-gray-600 py-2 px-4 hover:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.export')</a>
                         @else
                             <button disabled
-                                class="text-gray-300 bg-gray-600 py-2 px-4 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.archive')</button>
+                                class="text-gray-300 bg-gray-600 py-2 px-4 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.export')</button>
                         @endif
                     </div>
                 </td>
