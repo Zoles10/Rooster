@@ -4,12 +4,14 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class SubjectFactory extends Factory
+class OptionFactory extends Factory
 {
     public function definition(): array
     {
         return [
-            "subject" => fake()->name(),
+            'question_id' => 1,
+            'option_text' => fake()->word(),
+            'correct' => true
         ];
     }
 }

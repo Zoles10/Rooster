@@ -15,56 +15,56 @@ class QuestionSeeder extends Seeder
         $subject1 = Subject::where('subject', 'WEBTE2')->first();
         $subject2 = Subject::where('subject', 'VSA')->first();
 
-        Question::create([
+        Question::factory()->create([
             'question' => 'What is Laravel?',
             'owner_id' => $admin->id,
             'subject_id' => $subject1->id,
             'active' => true,
         ]);
 
-        Question::create([
+        Question::factory()->create([
             'question' => 'Which database does Laravel support?',
             'owner_id' => $admin->id,
             'subject_id' => $subject1->id,
             'active' => true,
         ]);
 
-        Question::create([
+        Question::factory()->create([
             'question' => 'What is MVC?',
             'owner_id' => $admin->id,
             'subject_id' => $subject1->id,
             'active' => true,
         ]);
 
-        Question::create([
+        Question::factory()->create([
             'question' => 'What is Blade in Laravel?',
             'owner_id' => $admin->id,
             'subject_id' => $subject1->id,
             'active' => true,
         ]);
 
-        Question::create([
+        Question::factory()->create([
             'question' => 'What is Eloquent ORM?',
             'owner_id' => $admin->id,
             'subject_id' => $subject1->id,
             'active' => true,
         ]);
 
-        Question::create([
+        Question::factory()->create([
             'question' => 'What is middleware in Laravel?',
             'owner_id' => $admin->id,
             'subject_id' => $subject2->id,
             'active' => true,
         ]);
 
-        Question::create([
+        Question::factory()->create([
             'question' => 'What is Artisan?',
             'owner_id' => $admin->id,
             'subject_id' => $subject2->id,
             'active' => true,
         ]);
 
-        Question::create([
+        Question::factory()->create([
             'question' => 'What is migration in Laravel?',
             'owner_id' => $admin->id,
             'subject_id' => $subject2->id,

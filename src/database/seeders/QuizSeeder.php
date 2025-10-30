@@ -14,7 +14,7 @@ class QuizSeeder extends Seeder
         $admin = User::where('email', 'admin@admin.sk')->first();
         $questions = Question::all();
 
-        $quiz = Quiz::create([
+        $quiz = Quiz::factory()->create([
             'title' => 'Laravel Basics Quiz',
             'description' => 'Test your knowledge of Laravel fundamentals and core concepts',
             'owner_id' => $admin->id,
