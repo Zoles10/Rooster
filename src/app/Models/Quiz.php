@@ -32,6 +32,7 @@ class Quiz extends Model
         'owner_id',
         'active',
         'last_closed',
+        'previous_closed',
     ];
 
     public function questions()

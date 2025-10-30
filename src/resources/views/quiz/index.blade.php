@@ -119,6 +119,13 @@
                             <button type="submit"
                                 class="text-white bg-red-600 py-2 px-4 hover:bg-red-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.delete')</button>
                         </form>
+                        @if (!$quiz->active)
+                            <a href="{{ route('quiz.comparison', $quiz) }}"
+                                class="text-white bg-gray-600 py-2 px-4 hover:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.export')</a>
+                        @else
+                            <button disabled
+                                class="text-gray-300 bg-gray-600 py-2 px-4 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.export')</button>
+                        @endif
                     </div>
                 </td>
                 </tr>

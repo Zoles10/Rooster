@@ -146,7 +146,10 @@ class QuizController extends Controller
     public function update(Request $request, Quiz $quiz)
     {
         if ($request->input('active') !== null) {
-            $quiz->update(['active' => $request->input('active'), 'last_closed' => date('Y-m-d')]);
+            $quiz->previous_closed = $quiz->last_closed;
+            $quiz->last_closed = now();
+            $quiz->active = $request->input('active');
+            $quiz->save();
             return back();
         }
 
@@ -241,5 +244,18 @@ class QuizController extends Controller
         $quiz = Quiz::find($quiz_id);
         $quiz->delete();
         return back();
+    }
+
+    public function comparison(Quiz $quiz)
+    {
+        if ($quiz->active) {
+            return abort(403, 'Forbidden');
+        }
+        return view("quiz.ownerShow", ['quiz' => $quiz]);
+    }
+
+    public function export(Quiz $quiz)
+    {
+        dd("endpoint working");
     }
 }

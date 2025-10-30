@@ -19,6 +19,7 @@ return new class extends Migration
             $table->boolean('active')->default(true);
             $table->foreignId('owner_id')->constrained('users')->onDelete('cascade');
             $table->date('last_closed')->nullable();
+            $table->date('previous_closed')->nullable();
             $table->timestamps();
         });
 
