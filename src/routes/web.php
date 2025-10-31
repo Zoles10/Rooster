@@ -32,7 +32,9 @@ Route::get('/quiz/create', [QuizController::class, 'create'])->middleware(['auth
 Route::put('/quiz/{quiz}', [QuizController::class, 'update'])->middleware(['auth', 'verified'])->name('quiz.update');
 Route::post('/quiz/{quiz}', [QuizController::class, 'multiply'])->middleware(['auth', 'verified'])->name('quiz.multiply');
 Route::get('/quiz/{quiz}/comparison', [QuizController::class, 'comparison'])->middleware(['auth', 'verified'])->name('quiz.comparison');
-Route::get('/quiz/{quiz}/export', [QuizController::class, 'export'])->middleware(['auth', 'verified'])->name('quiz.export');
+Route::get('/quiz/{quiz}/{user}/export', [QuizController::class, 'export'])->middleware(['auth', 'verified'])->name('quiz.export');
+Route::get('/quiz/{quiz}/export/all', [QuizController::class, 'export_all'])->middleware(['auth', 'verified'])->name('quiz.export_all');
+Route::delete('/quiz/{quiz}/entry', [QuizController::class, 'delete_entry'])->middleware(['auth', 'verified'])->name('quiz.entry');
 Route::resource('quiz', QuizController::class)->middleware(['auth', 'verified'])->except(['update', 'store']);
 
 // my questions

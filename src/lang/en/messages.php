@@ -163,5 +163,9 @@ return [
     "userQuizzes" => "User quizzes",
     "admin_dashboard" => "Admin dashboard",
     "quiz_management" => "Quiz Management",
-    "quiz" => "Quiz"
+    "quiz" => "Quiz",
+    "userName" => "User Name",
+    "userPoints" => "Points",
+    "submittedAt" => "Submitted At",
+    "export_all" => "Export All"
 ];

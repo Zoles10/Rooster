@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Quiz;
 use App\Models\User;
 use App\Models\Question;
+use \App\Models\Answer;
 use App\Models\QuizAttempt;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -245,17 +247,148 @@ class QuizController extends Controller
         $quiz->delete();
         return back();
     }
+    private function getUserStats(Quiz $quiz)
+    {
+        // Get all attempts for this quiz
+        $attempts = QuizAttempt::where('quiz_id', $quiz->id)->with('user')->get();
 
+        // Get all questions for this quiz
+        $questions = $quiz->questions()->with('options')->get();
+        $questionIds = $questions->pluck('id')->toArray();
+
+        // For each user, calculate stats
+        $userStats = [];
+        foreach ($attempts as $attempt) {
+            $user = $attempt->user;
+            // Get all answers for this user for this quiz's questions
+            $answers = Answer::where('user_id', $user->id)
+                ->whereHas('option', function ($q) use ($questionIds) {
+                    $q->whereIn('question_id', $questionIds);
+                })->get();
+
+            $correctCount = $answers->where('correct', true)->count();
+            $maxCount = $questions->reduce(function ($sum, $question) {
+                return $sum + $question->options->where('correct', true)->count();
+            }, 0);
+
+            $userStats[] = [
+                'user' => $user,
+                'user_name' => $user->name,
+                'quiz_id' => $quiz->id,
+                'correct' => $correctCount,
+                'max' => $maxCount,
+                'answers' => $answers,
+                'submitted_at' => $attempt->created_at,
+            ];
+        }
+        return $userStats;
+    }
     public function comparison(Quiz $quiz)
     {
         if ($quiz->active) {
             return abort(403, 'Forbidden');
         }
-        return view("quiz.ownerShow", ['quiz' => $quiz]);
+
+
+        return view("quiz.ownerShow", [
+            'quiz' => $quiz,
+            'userStats' => $this->getUserStats($quiz),
+        ]);
     }
 
-    public function export(Quiz $quiz)
+    public function export(Quiz $quiz, User $user)
     {
-        dd("endpoint working");
+        // Get all questions for this quiz
+        $questions = $quiz->questions()->with('options')->get();
+        $questionIds = $questions->pluck('id')->toArray();
+
+        // Get user's answers for this quiz
+        $answers = Answer::where('user_id', $user->id)
+            ->whereHas('option', function ($q) use ($questionIds) {
+                $q->whereIn('question_id', $questionIds);
+            })
+            ->with('option')
+            ->get()
+            ->groupBy(function ($answer) {
+                return $answer->option->question_id;
+            });
+
+        // Pass data to the PDF view
+        $pdf = Pdf::loadView('quiz.exportPDF', [
+            'quiz' => $quiz,
+            'user' => $user,
+            'questions' => $questions,
+            'answers' => $answers,
+        ]);
+
+        return $pdf->download('quiz-'.$quiz->id.'-user-'.$user->id.'.pdf');
+    }
+
+    public function export_all(Quiz $quiz)
+    {
+        $userStats = $this->getUserStats($quiz);
+
+        // Prepare CSV headers
+        $csvHeader = ['user', 'quiz_id', 'points', 'question', 'chosen_option', 'correct'];
+        $rows = [];
+
+        foreach ($userStats as $userStat) {
+            $user = $userStat['user_name'];
+            $quizId = $userStat['quiz_id'];
+            $points = $userStat['correct'];
+            foreach ($userStat['answers'] as $answer) {
+                $questionText = $answer->option->question->question ?? '';
+                $chosenOption = $answer->option->option_text ?? '';
+                $correct = $answer->correct ? '1' : '0';
+                $rows[] = [
+                    $user,
+                    $quizId,
+                    $points,
+                    $questionText,
+                    $chosenOption,
+                    $correct
+                ];
+            }
+        }
+
+        // Create CSV string
+        $output = fopen('php://temp', 'r+');
+        fputcsv($output, $csvHeader);
+        foreach ($rows as $row) {
+            fputcsv($output, $row);
+        }
+        rewind($output);
+        $csv = stream_get_contents($output);
+        fclose($output);
+
+        // Return as download response
+        return response($csv)
+            ->header('Content-Type', 'text/csv')
+            ->header('Content-Disposition', 'attachment; filename="quiz_export.csv"');
+    }
+
+    public function delete_entry(Quiz $quiz, Request $request)
+    {
+        $userName = $request->input('user_name');
+        $user = User::where('name', $userName)->first();
+        if (! $user) {
+            return back()->with('error', 'User not found');
+        }
+
+        // Get all question IDs for this quiz
+        $questionIds = $quiz->questions()->pluck('id')->toArray();
+
+        // Delete all answers for this user for these questions
+        Answer::where('user_id', $user->id)
+            ->whereHas('option', function ($q) use ($questionIds) {
+                $q->whereIn('question_id', $questionIds);
+            })->delete();
+
+        // Delete the quiz attempt
+        QuizAttempt::where('quiz_id', $quiz->id)
+            ->where('user_id', $user->id)
+            ->delete();
+
+        return back()->with('message', 'User entry deleted for this quiz');
     }
 }
