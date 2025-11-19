@@ -167,10 +167,9 @@
             </div>
         </div>
     </div>
-    </div>
 
     <!-- Mobile View -->
-    <div id="mobileTable" class="grid grid-cols-1 gap-4 px-4 py-6 sm:px-6 lg:px-8 lg:hidden">
+    <div id="mobileTable" class="grid grid-cols-1 gap-4 py-6 lg:px-8 lg:hidden">
         @foreach ($questions as $question)
             <div id="{{ $question->id }}-{{ $question->created_at->format('d.m.Y') }}-{{ $question->subject->subject }}"
                 class="bg-white rounded-lg shadow overflow-hidden">
