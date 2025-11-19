@@ -123,6 +123,7 @@ return [
     'actualAnswers' => 'Actual answers',
     'archive' => 'Archive',
     'logout' => 'Log out',
+    'noResults' => 'No answers yet',
     'profile' => 'Profile',
     'profileInformation' => 'Profile Information',
     'updateProfileInfo' => "Update your account's profile information and email address.",

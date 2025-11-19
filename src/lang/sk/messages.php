@@ -123,6 +123,7 @@ return [
     'actualAnswers' => 'Aktuálne odpovede',
     'archive' => 'Archív',
     'logout' => 'Odhlásiť sa',
+    'noResults' => 'Zatiaľ žiadne odpovede',
     'profile' => 'Profil',
     'profileInformation' => 'Informácie o profile',
     'updateProfileInfo' => "Aktualizujte informácie a e-mailovú adresu svojho účtu.",

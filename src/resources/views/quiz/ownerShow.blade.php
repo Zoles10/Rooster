@@ -1,8 +1,8 @@
-@section('title', __('messages.quizOwnerShow'))
+@section("title", __("messages.quizOwnerShow"))
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ $quiz->title . ' | ' . $quiz->id }}
+            {{ $quiz->title . " | " . $quiz->id }}
         </h2>
     </x-slot>
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -15,19 +15,19 @@
                                 <tr>
                                     <th
                                         class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
-                                        @lang('messages.userName')
+                                        @lang("messages.userName")
                                     </th>
                                     <th
                                         class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
-                                        @lang('messages.userPoints')
+                                        @lang("messages.userPoints")
                                     </th>
                                     <th
                                         class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
-                                        @lang('messages.submittedAt')
+                                        @lang("messages.submittedAt")
                                     </th>
                                     <th
                                         class="px-6 py-4 text-m font-medium text-gray-800 uppercase tracking-wider text-center">
-                                        @lang('messages.actions')
+                                        @lang("messages.actions")
                                     </th>
                                 </tr>
                             </thead>
@@ -35,31 +35,30 @@
                                 @foreach ($userStats as $userStat)
                                     <tr class="border">
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $userStat['user_name'] }}
-                                            </a>
+                                            {{ $userStat["user_name"] }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $userStat['correct'] . '/' . $userStat['max'] }}
+                                            {{ $userStat["correct"] . "/" . $userStat["max"] }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $userStat['submitted_at']->format('d.m.Y') }}
+                                            {{ $userStat["submitted_at"]->format("d.m.Y") }}
                                         </td>
                                         <td class="pl-1 pr-3 py-4 whitespace-nowrap text-sm text-gray-500">
                                             <div class="grid grid-cols-2 gap-2">
                                                 <form
-                                                    action="{{ route('quiz.entry', ['quiz' => $quiz, 'user_name' => $userStat['user_name']]) }}"
+                                                    action="{{ route("quiz.entry", ["quiz" => $quiz, "user_name" => $userStat["user_name"]]) }}"
                                                     method="GET"
                                                     class="w-full h-full flex items-center justify-center">
                                                     @csrf
-                                                    @method('DELETE')
+                                                    @method("DELETE")
                                                     <button type="submit"
-                                                        class="text-white bg-red-600 py-2 px-4 hover:bg-red-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.delete')</button>
+                                                        class="text-white bg-red-600 py-2 px-4 hover:bg-red-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang("messages.delete")</button>
                                                 </form>
-                                                <form action="{{ route('quiz.export', [$quiz, $userStat['user']]) }}"
+                                                <form action="{{ route("quiz.export", [$quiz, $userStat["user"]]) }}"
                                                     method="GET"
                                                     class="w-full h-full flex items-center justify-center">
                                                     <button type="submit"
-                                                        class="text-white bg-blue-500 py-2 px-4 hover:bg-blue-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.export')</button>
+                                                        class="text-white bg-blue-500 py-2 px-4 hover:bg-blue-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang("messages.export")</button>
                                                 </form>
                                             </div>
                                         </td>
@@ -67,14 +66,59 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <form action="{{ route('quiz.export_all', $quiz) }}" method="GET"
+                        <form action="{{ route("quiz.export_all", $quiz) }}" method="GET"
                             class="w-full h-full flex items-center justify-center">
                             <button type="submit"
-                                class="text-white bg-gray-500 py-2 px-4 hover:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.export_all')</button>
+                                class="text-white bg-gray-500 py-2 px-4 hover:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang("messages.export_all")</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <!-- Mobile view -->
+    <div id="mobileTable" class="grid grid-cols-1 gap-4 py-6 px-4 sm:px-6 lg:px-8 lg:hidden">
+        @foreach ($userStats as $userStat)
+            <div id="{{ $quiz->id }}-{{ $userStat["user_name"] }}"
+                class="bg-white rounded-lg shadow overflow-hidden">
+                <div class="p-4">
+                    <div class="font-semibold text-lg text-purple-800">
+                        {{ $userStat["user_name"] }}
+                    </div>
+                    <div class="text-sm text-gray-700 mt-2">
+                        @lang("messages.userPoints"): {{ $userStat["correct"] . "/" . $userStat["max"] }}
+                    </div>
+                    <div class="text-sm text-gray-700 mt-1">
+                        @lang("messages.submittedAt"): {{ $userStat["submitted_at"]->format("d.m.Y") }}
+                    </div>
 
+                    <div class="mt-4 grid grid-cols-2 gap-2">
+                        <form
+                            action="{{ route("quiz.entry", ["quiz" => $quiz, "user_name" => $userStat["user_name"]]) }}"
+                            method="GET" class="w-full h-full">
+                            @csrf
+                            @method("DELETE")
+                            <button type="submit"
+                                class="text-white bg-red-600 py-2 px-4 hover:bg-red-700 border border-transparent rounded-md font-semibold text-xs w-full h-full">@lang("messages.delete")</button>
+                        </form>
+
+                        <form action="{{ route("quiz.export", [$quiz, $userStat["user"]]) }}" method="GET"
+                            class="w-full h-full">
+                            <button type="submit"
+                                class="text-white bg-blue-500 py-2 px-4 hover:bg-blue-700 border border-transparent rounded-md font-semibold text-xs w-full h-full">@lang("messages.export")</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+        <!-- export all button for mobile -->
+        <div class="px-2 mt-2">
+            <form action="{{ route("quiz.export_all", $quiz) }}" method="GET">
+                <button type="submit"
+                    class="w-full text-white bg-gray-500 py-2 px-4 hover:bg-gray-700 border border-transparent rounded-md font-semibold text-xs">
+                    @lang("messages.export_all")
+                </button>
+            </form>
+        </div>
+    </div>
 </x-app-layout>

@@ -25,6 +25,7 @@ export default defineConfig({
                 'resources/js/quiz.js',
                 'resources/js/showQuestion.js',
                 'resources/js/createQuestion.js',
+                'resources/js/answersShow.js',
             ],
             refresh: true,
         }),
