@@ -5,10 +5,10 @@
 
 ## Návod na prácu
 
-### Návod na prácu s dockerom a laravel projektom
+### Windows
 
 1. Git clone na WSL2 (linux distro)
-2. Otvoriť VSCode/PHPStorm/Vim na WSL a otvoriť projekt (daj ho do /home/user)
+2. Otvoriť projekt vo VSCode/PHPStorm/Vim (aby ste mali terminál rovno v working directory)
 3.  `docker-compose build` následne `docker-compose up -d` na zastavenie `docker-compose down`
 4. Do terminálu v priečinku projektu napíš `docker exec -it php /bin/sh` pre vstup do php kontajneru
 5. Napíš `composer install` prípadne predtým `composer update`
@@ -17,6 +17,12 @@
 8. Napíš `npm run build` v aby si natiahol CSS a JS, prípadne `npm run dev` ak chceš ďalej programovať
 9. Vystúp z php kontajneru pomocou `exit`
 10. Mal by si mať funkčnú web aplikáciu s dátami
+
+### Mac
+1. Stačí dať clone do Vami zvoleného adresára a pokračovať s krokom 2.
+
+### Linux
+1. Stačí dať clone do Vami zvoleného adresára a pokračovať s krokom 2.
 
 ## Autori
 
