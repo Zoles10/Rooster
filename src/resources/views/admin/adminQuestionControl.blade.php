@@ -30,14 +30,20 @@
                     </td>
                     <td class="px-4 py-2 text-center">
                         <a href="{{ route('question.edit', $question['id']) }}"
-                            class="px-4 py-2 text-white bg-yellow-500 rounded hover:bg-yellow-400">Edit</a>
+                            class="inline-flex items-center justify-center h-9 w-9 bg-emerald-500 rounded hover:bg-emerald-600"
+                            title="Edit">
+                            @svg('mdi-pencil', 'w-5 h-5 text-white')
+                        </a>
                     </td>
                     <td class="px-4 py-2 text-center">
                         <form action="{{ route('question.destroyAdmin', $question['id']) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit"
-                                class="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600">{{ __('messages.delete') }}</button>
+                                class="inline-flex items-center justify-center h-9 w-9 bg-red-500 rounded hover:bg-red-600"
+                                title="Delete">
+                                @svg('mdi-delete', 'w-5 h-5 text-white')
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -80,14 +86,17 @@
                     </div>
                     <div class="flex space-x-2">
                         <a href="{{ route('question.edit', $question['id']) }}"
-                            class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-400">
-                            {{ __('messages.edit') }}
+                            class="inline-flex items-center justify-center h-9 w-9 bg-emerald-500 rounded hover:bg-emerald-600"
+                            title="Edit">
+                            @svg('mdi-pencil', 'w-5 h-5 text-white')
                         </a>
                         <form action="{{ route('question.destroyAdmin', $question['id']) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-                                {{ __('messages.delete') }}
+                            <button type="submit"
+                                class="inline-flex items-center justify-center h-9 w-9 bg-red-500 text-white rounded hover:bg-red-600"
+                                title="Delete">
+                                @svg('mdi-delete', 'w-5 h-5 text-white')
                             </button>
                         </form>
                     </div>
@@ -100,6 +109,5 @@
 @push('scripts')
     @vite('resources/js/adminFilterByUsername.js')
 @endpush
-
 
 {{-- {{ $questions->links() }} --}}

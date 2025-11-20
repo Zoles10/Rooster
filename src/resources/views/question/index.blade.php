@@ -136,8 +136,8 @@
                 <td class="pl-1 pr-3 py-4 whitespace-nowrap text-sm text-gray-500">
                     <div class="flex flex-row gap-1 items-center justify-center">
                         <a href="{{ route('question.edit', $question->id) }}" title="{{ __('messages.edit') }}"
-                            class="inline-flex items-center justify-center p-2 h-9 w-9 text-white bg-purple-600 hover:bg-purple-700 rounded-md border border-transparent focus:outline-none">
-                            @svg('mdi-circle-edit-outline', 'w-5 h-5')
+                            class="inline-flex items-center justify-center p-2 h-9 w-9 text-white bg-emerald-500 hover:bg-emerald-600 rounded-md border border-transparent focus:outline-none">
+                            @svg('mdi-pencil', 'w-5 h-5')
                             <span class="sr-only">@lang('messages.edit')</span>
                         </a>
 
@@ -202,48 +202,67 @@
                         <a href="{{ route('answers.show', $question->id) }}"
                             class="text-blue-500 hover:text-blue-700 text-sm">@lang('messages.goToResults')</a>
                     </div>
-                    <div class="mt-2">
-                        <form method="POST" action="{{ route('question.update', $question) }}">
+                    <div class="flex flex-row gap-2 mt-3 items-center">
+                        <form method="POST" action="{{ route('question.update', $question) }}"
+                            class="flex items-center">
                             @csrf
                             @method('PUT')
-                            <label class="flex items-center">
-                                <input type="checkbox" name="active_checkbox"
-                                    class="form-checkbox h-5 w-5 text-indigo-600 rounded"
-                                    onchange="this.form.submit()" value="{{ $question->id }}"
-                                    {{ $question->active ? 'checked' : '' }}>
-                                <span class="ml-2 text-sm text-gray-600">@lang('messages.active')</span>
-                            </label>
+                            <input type="checkbox" name="active_checkbox"
+                                class="form-checkbox h-5 w-5 text-indigo-600 rounded" onchange="this.form.submit()"
+                                value="{{ $question->id }}" {{ $question->active ? 'checked' : '' }}>
                             <input type="hidden" name="active" value="{{ $question->active ? '0' : '1' }}">
-                            @if (!$question->active)
-                                <div class="mt-2">
-                                    <div>{{ __('messages.lastClosed') }}:
-                                        {{ \Carbon\Carbon::parse($question->last_closed)->format('d.m.Y') }}</div>
-                                </div>
+                            @if ($question->active)
+                                <span class="ml-2 text-sm text-gray-600">@lang('messages.active')</span>
                             @endif
                         </form>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 mt-3">
-                        <a href="{{ route('question.edit', $question->id) }}"
-                            class="text-sm bg-purple-600 text-white p-2 rounded hover:bg-purple-700 text-center w-full">@lang('messages.edit')</a>
-                        <form action="{{ route('question.multiply', $question) }}" method="POST" class="w-full">
-                            @csrf
-                            @method('POST')
-                            <button type="submit"
-                                class="text-sm bg-blue-500 text-white p-2 rounded hover:bg-blue-700 text-center w-full">@lang('messages.clone')</button>
-                        </form>
-                        <form action="{{ route('question.destroy', $question->id) }}" method="POST" class="w-full">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                class="text-sm bg-red-600 text-white p-2 rounded hover:bg-red-700 text-center w-full">@lang('messages.delete')</button>
-                        </form>
-                        @if ($question->options()->whereHas('answers')->exists() && !$question->active)
-                            <a href="{{ route('answers.comparison', $question->id) }}"
-                                class="text-white bg-gray-600 py-2 px-4 hover:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.archive')</a>
-                        @else
-                            <button disabled
-                                class="text-gray-300 bg-gray-600 py-2 px-4 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.archive')</button>
+                        @if (!$question->active)
+                            <div class="text-xs text-gray-500 ml-1">
+                                {{ __('messages.lastClosed') }}:
+                                {{ \Carbon\Carbon::parse($question->last_closed)->format('d.m.Y') }}
+                            </div>
                         @endif
+                        <div class="flex flex-row gap-2 ml-auto items-center">
+                            <a href="{{ route('question.edit', $question->id) }}"
+                                class="inline-flex items-center justify-center h-9 w-9 text-white bg-emerald-500 hover:bg-emerald-600 rounded-md border border-transparent focus:outline-none"
+                                title="{{ __('messages.edit') }}">
+                                @svg('mdi-pencil', 'w-5 h-5')
+                                <span class="sr-only">@lang('messages.edit')</span>
+                            </a>
+                            <form action="{{ route('question.multiply', $question) }}" method="POST">
+                                @csrf
+                                @method('POST')
+                                <button type="submit"
+                                    class="inline-flex items-center justify-center h-9 w-9 text-white bg-blue-500 hover:bg-blue-700 rounded-md border border-transparent focus:outline-none"
+                                    title="{{ __('messages.clone') }}">
+                                    @svg('mdi-content-copy', 'w-5 h-5')
+                                    <span class="sr-only">@lang('messages.clone')</span>
+                                </button>
+                            </form>
+                            <form action="{{ route('question.destroy', $question->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="inline-flex items-center justify-center h-9 w-9 text-white bg-red-600 hover:bg-red-700 rounded-md border border-transparent focus:outline-none"
+                                    title="{{ __('messages.delete') }}">
+                                    @svg('mdi-delete-forever-outline', 'w-5 h-5')
+                                    <span class="sr-only">@lang('messages.delete')</span>
+                                </button>
+                            </form>
+                            @if ($question->options()->whereHas('answers')->exists())
+                                <a href="{{ route('answers.export', $question->id) }}"
+                                    title="{{ __('messages.export') }}"
+                                    class="inline-flex items-center justify-center h-9 w-9 text-white bg-gray-600 hover:bg-gray-700 rounded-md border border-transparent focus:outline-none">
+                                    @svg('mdi-export-variant', 'w-5 h-5')
+                                    <span class="sr-only">@lang('messages.export')</span>
+                                </a>
+                            @else
+                                <button disabled
+                                    class="inline-flex items-center justify-center h-9 w-9 opacity-40 bg-gray-600 rounded-md border border-transparent">
+                                    @svg('mdi-export-variant', 'w-5 h-5')
+                                    <span class="sr-only">@lang('messages.export')</span>
+                                </button>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>

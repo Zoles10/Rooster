@@ -105,8 +105,8 @@
                 <td class="pl-1 pr-3 py-4 whitespace-nowrap text-sm text-gray-500">
                     <div class="flex flex-row gap-1 items-center justify-center">
                         <a href="{{ route('quiz.edit', $quiz->id) }}" title="{{ __('messages.edit') }}"
-                            class="inline-flex items-center justify-center p-2 h-9 w-9 bg-purple-600 hover:bg-purple-700 text-white rounded-md border border-transparent focus:outline-none">
-                            @svg('mdi-circle-edit-outline', 'w-5 h-5')
+                            class="inline-flex items-center justify-center p-2 h-9 w-9 bg-emerald-500 hover:bg-emerald-600 text-white rounded-md border border-transparent focus:outline-none">
+                            @svg('mdi-pencil', 'w-5 h-5')
                             <span class="sr-only">@lang('messages.edit')</span>
                         </a>
                         <form action="{{ route('quiz.multiply', $quiz) }}" method="POST" class="inline-block">
@@ -177,49 +177,62 @@
                     <div class="text-sm text-gray-700 mt-2">@lang('messages.quizDescription'): {{ $quiz->description }}</div>
                     <div class="text-sm text-gray-700">@lang('messages.createdAt'): {{ $quiz->created_at->format('d.m.Y') }}
                     </div>
-                    <div class="mt-2">
-                        <form method="POST" action="{{ route('quiz.update', $quiz) }}">
+                    <div class="flex flex-row gap-2 mt-3 items-center">
+                        <form method="POST" action="{{ route('quiz.update', $quiz) }}" class="flex items-center">
                             @csrf
                             @method('PUT')
-                            <label class="flex items-center">
-                                <input type="checkbox" name="active_checkbox"
-                                    class="form-checkbox h-5 w-5 text-indigo-600 rounded"
-                                    onchange="this.form.submit()" value="{{ $quiz->id }}"
-                                    {{ $quiz->active ? 'checked' : '' }}>
-                                <span class="ml-2 text-sm text-gray-600">@lang('messages.active')</span>
-                            </label>
+                            <input type="checkbox" name="active_checkbox"
+                                class="form-checkbox h-5 w-5 text-indigo-600 rounded" onchange="this.form.submit()"
+                                value="{{ $quiz->id }}" {{ $quiz->active ? 'checked' : '' }}>
                             <input type="hidden" name="active" value="{{ $quiz->active ? '0' : '1' }}">
-                            @if (!$quiz->active)
-                                <div class="mt-2">
-                                    <div>{{ __('messages.lastClosed') }}:
-                                        {{ \Carbon\Carbon::parse($quiz->last_closed)->format('d.m.Y') }}</div>
-                                </div>
-                            @endif
-                        </form>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 mt-3">
-                        <a href="{{ route('quiz.edit', $quiz->id) }}"
-                            class="text-sm bg-purple-600 text-white p-2 rounded hover:bg-purple-700 text-center w-full">@lang('messages.edit')</a>
-                        <form action="{{ route('quiz.multiply', $quiz) }}" method="POST" class="w-full">
-                            @csrf
-                            @method('POST')
-                            <button type="submit"
-                                class="text-sm bg-blue-500 text-white p-2 rounded hover:bg-blue-700 text-center w-full">@lang('messages.clone')</button>
-                        </form>
-                        <form action="{{ route('quiz.destroy', $quiz->id) }}" method="POST" class="w-full">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                class="text-sm bg-red-600 text-white p-2 rounded hover:bg-red-700 text-center w-full">@lang('messages.delete')
-                            </button>
                         </form>
                         @if (!$quiz->active)
-                            <a href="{{ route('quiz.comparison', $quiz) }}"
-                                class="text-white bg-gray-600 py-2 px-4 hover:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.export')</a>
-                        @else
-                            <button disabled
-                                class="text-gray-300 bg-gray-600 py-2 px-4 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.export')</button>
+                            <div class="text-xs text-gray-500 ml-1">
+                                {{ __('messages.lastClosed') }}:
+                                {{ \Carbon\Carbon::parse($quiz->last_closed)->format('d.m.Y') }}
+                            </div>
                         @endif
+                        <div class="flex flex-row gap-2 ml-auto items-center">
+                            <a href="{{ route('quiz.edit', $quiz->id) }}"
+                                class="inline-flex items-center justify-center h-9 w-9 bg-emerald-500 hover:bg-emerald-600 text-white rounded-md border border-transparent focus:outline-none"
+                                title="{{ __('messages.edit') }}">
+                                @svg('mdi-pencil', 'w-5 h-5')
+                                <span class="sr-only">@lang('messages.edit')</span>
+                            </a>
+                            <form action="{{ route('quiz.multiply', $quiz) }}" method="POST">
+                                @csrf
+                                @method('POST')
+                                <button type="submit"
+                                    class="inline-flex items-center justify-center h-9 w-9 bg-blue-500 hover:bg-blue-700 text-white rounded-md border border-transparent focus:outline-none"
+                                    title="{{ __('messages.clone') }}">
+                                    @svg('mdi-content-copy', 'w-5 h-5')
+                                    <span class="sr-only">@lang('messages.clone')</span>
+                                </button>
+                            </form>
+                            <form action="{{ route('quiz.destroy', $quiz->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="inline-flex items-center justify-center h-9 w-9 bg-red-600 hover:bg-red-700 text-white rounded-md border border-transparent focus:outline-none"
+                                    title="{{ __('messages.delete') }}">
+                                    @svg('mdi-delete-forever-outline', 'w-5 h-5')
+                                    <span class="sr-only">@lang('messages.delete')</span>
+                                </button>
+                            </form>
+                            @if (!$quiz->active)
+                                <a href="{{ route('quiz.comparison', $quiz) }}" title="{{ __('messages.export') }}"
+                                    class="inline-flex items-center justify-center h-9 w-9 bg-gray-600 hover:bg-gray-700 text-white rounded-md border border-transparent focus:outline-none">
+                                    @svg('mdi-export-variant', 'w-5 h-5')
+                                    <span class="sr-only">@lang('messages.export')</span>
+                                </a>
+                            @else
+                                <button disabled
+                                    class="inline-flex items-center justify-center h-9 w-9 opacity-40 bg-gray-600 rounded-md border border-transparent">
+                                    @svg('mdi-export-variant', 'w-5 h-5')
+                                    <span class="sr-only">@lang('messages.export')</span>
+                                </button>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
