@@ -19,7 +19,8 @@
             <div class="ml-1">
                 <label for="createQuiz" class="block text-sm font-medium text-gray-700 opacity-0">a</label>
                 <a id="createQuiz" href="{{ route('quiz.create') }}"
-                    class="mt-1 block imp_bg_purple w-full py-2 px-3 border border-gray-30 text-m text-white uppercase hover:text-gray-300 hover:bg-purple-700 active:bg-purple-900 focus:border-purple-900 focus:ring ring-purple-300 disabled:opacity-25 transition ease-in-out duration-150 bg-purple-800 font-semibold rounded-md shadow-sm focus:outline-none sm:text-sm">
+                    class="mt-1 imp_bg_purple w-full py-2 px-3 border border-gray-30 text-m text-white uppercase hover:text-gray-300 hover:bg-purple-700 active:bg-purple-900 focus:border-purple-900 focus:ring ring-purple-300 disabled:opacity-25 transition ease-in-out duration-150 bg-purple-800 font-semibold rounded-md shadow-sm focus:outline-none sm:text-sm flex items-center justify-center">
+                    @svg('mdi-plus', 'w-5 h-5 mr-0.5 text-gray-100')
                     @lang('messages.createQuiz')
                 </a>
             </div>
@@ -102,29 +103,38 @@
                 </div>
                 </td>
                 <td class="pl-1 pr-3 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <div class="grid grid-cols-2 gap-2">
-                        <a href="{{ route('quiz.edit', $quiz->id) }}"
-                            class="text-white bg-purple-600 py-2 px-4 hover:bg-purple-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.edit')</a>
-                        <form action="{{ route('quiz.multiply', $quiz) }}" method="POST"
-                            class="w-full h-full flex items-center justify-center">
+                    <div class="flex flex-row gap-1 items-center justify-center">
+                        <a href="{{ route('quiz.edit', $quiz->id) }}" title="{{ __('messages.edit') }}"
+                            class="inline-flex items-center justify-center p-2 h-9 w-9 bg-purple-600 hover:bg-purple-700 text-white rounded-md border border-transparent focus:outline-none">
+                            @svg('mdi-circle-edit-outline', 'w-5 h-5')
+                            <span class="sr-only">@lang('messages.edit')</span>
+                        </a>
+                        <form action="{{ route('quiz.multiply', $quiz) }}" method="POST" class="inline-block">
                             @csrf
                             @method('POST')
-                            <button type="submit"
-                                class="text-white bg-blue-500 py-2 px-4 hover:bg-blue-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.clone')</button>
+                            <button type="submit" title="{{ __('messages.clone') }}"
+                                class="inline-flex items-center justify-center p-2 h-9 w-9 bg-blue-500 hover:bg-blue-700 text-white rounded-md border border-transparent focus:outline-none">@svg('mdi-content-copy', 'w-5 h-5')
+                                <span class="sr-only">@lang('messages.clone')</span>
+                            </button>
                         </form>
-                        <form action="{{ route('quiz.destroy', $quiz->id) }}" method="POST"
-                            class="w-full h-full flex items-center justify-center">
+                        <form action="{{ route('quiz.destroy', $quiz->id) }}" method="POST" class="inline-block">
                             @csrf
                             @method('DELETE')
-                            <button type="submit"
-                                class="text-white bg-red-600 py-2 px-4 hover:bg-red-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.delete')</button>
+                            <button type="submit" title="{{ __('messages.delete') }}"
+                                class="inline-flex items-center justify-center p-2 h-9 w-9 bg-red-600 hover:bg-red-700 text-white rounded-md border border-transparent focus:outline-none">
+                                @svg('mdi-delete-forever-outline', 'w-5 h-5')
+                                <span class="sr-only">@lang('messages.delete')</span>
+                            </button>
                         </form>
                         @if (!$quiz->active)
-                            <a href="{{ route('quiz.comparison', $quiz) }}"
-                                class="text-white bg-gray-600 py-2 px-4 hover:bg-gray-700 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.export')</a>
+                            <a href="{{ route('quiz.comparison', $quiz) }}" title="{{ __('messages.export') }}"
+                                class="inline-flex items-center justify-center p-2 h-9 w-9 bg-gray-600 hover:bg-gray-700 text-white rounded-md border border-transparent focus:outline-none">@svg('mdi-export-variant', 'w-5 h-5')
+                                <span class="sr-only">@lang('messages.export')</span>
+                            </a>
                         @else
-                            <button disabled
-                                class="text-gray-300 bg-gray-600 py-2 px-4 border border-transparent rounded-md font-semibold text-xs text-center w-full h-full flex items-center justify-center">@lang('messages.export')</button>
+                            <button disabled title="{{ __('messages.export') }}"
+                                class="text-gray-300 bg-gray-600 p-2 h-9 w-9 rounded-md border border-transparent inline-flex items-center justify-center">@svg('mdi-export-variant', 'w-5 h-5')<span
+                                    class="sr-only">@lang('messages.export')</span></button>
                         @endif
                     </div>
                 </td>
@@ -173,8 +183,9 @@
                             @method('PUT')
                             <label class="flex items-center">
                                 <input type="checkbox" name="active_checkbox"
-                                    class="form-checkbox h-5 w-5 text-indigo-600 rounded" onchange="this.form.submit()"
-                                    value="{{ $quiz->id }}" {{ $quiz->active ? 'checked' : '' }}>
+                                    class="form-checkbox h-5 w-5 text-indigo-600 rounded"
+                                    onchange="this.form.submit()" value="{{ $quiz->id }}"
+                                    {{ $quiz->active ? 'checked' : '' }}>
                                 <span class="ml-2 text-sm text-gray-600">@lang('messages.active')</span>
                             </label>
                             <input type="hidden" name="active" value="{{ $quiz->active ? '0' : '1' }}">
@@ -199,7 +210,8 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit"
-                                class="text-sm bg-red-600 text-white p-2 rounded hover:bg-red-700 text-center w-full">@lang('messages.delete')</button>
+                                class="text-sm bg-red-600 text-white p-2 rounded hover:bg-red-700 text-center w-full">@lang('messages.delete')
+                            </button>
                         </form>
                         @if (!$quiz->active)
                             <a href="{{ route('quiz.comparison', $quiz) }}"
