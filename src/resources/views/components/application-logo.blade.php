@@ -5,5 +5,6 @@
         $logoPath = Vite::asset('resources/images/rooster.png');
         $alt = config('app.name', 'Rooster');
     @endphp
-    <img src="{{ $logoPath }}" alt="{{ $alt }}" {{ $attributes->merge(['class' => 'h-12 w-auto']) }} />
+    <img src="{{ $logoPath }}" alt="{{ $alt }}"
+        {{ $attributes->merge(['class' => 'h-6 w-auto max-h-12 max-w-[168px]']) }} />
 </g>
