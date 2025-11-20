@@ -64,12 +64,18 @@
     <div class="px-4 sm:px-6 lg:hidden mt-4">
         <div class="flex justify-center gap-2">
             <a href="{{ Auth::check() && Auth::id() === $question->owner_id ? route('questions') : route('welcome') }}"
-                class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">@lang('messages.back')</a>
+                class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 flex items-center">
+                @svg('mdi-arrow-left', 'w-5 h-5 mr-1')
+                @lang('messages.back')
+            </a>
 
             @if (Auth::check() && Auth::id() === $question->owner_id && $question->options()->whereHas('answers')->exists())
                 <form action="{{ route('answers.export', $question->id) }}" method="GET">
                     <button type="submit"
-                        class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">@lang('messages.export')</button>
+                        class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 flex items-center">
+                        @svg('mdi-file-export', 'w-5 h-5 mr-1')
+                        @lang('messages.export')
+                    </button>
                 </form>
             @endif
         </div>
