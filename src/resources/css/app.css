@@ -10,7 +10,6 @@
 
 .dark .page-link {
     background-color: white !important;
-    color: black !important;
 }
 
 .imp_bg_purple {
@@ -74,4 +73,21 @@
 .imp_invalid_input_text {
     font-size: .7rem;
     color:red;
+}
+
+.page-link {
+    background-color: white !important;
+    color: #007bff !important;
+    border-color: #dee2e6 !important;
+}
+
+.page-link:hover {
+    background-color: #e9ecef !important;
+    color: #0056b3 !important;
+}
+
+.page-item.active .page-link {
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+    color: white !important;
 }

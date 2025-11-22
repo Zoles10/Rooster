@@ -61,7 +61,8 @@
                             @foreach ($quizzes as $quiz)
                                 <tr class="border">
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <a href="{{ route('quiz.show', $quiz->id) }}" class="text-sm text-gray-900 ">
+                                        <a href="{{ route('quiz.show', $quiz->id) }}"
+                                            class="text-sm font-bold text-black hover:text-gray-500 ">
                                             {{ \Illuminate\Support\Str::limit($quiz->title, 10) }}
                                         </a>
                                     </td>
@@ -128,12 +129,12 @@
                         </form>
                         @if (!$quiz->active)
                             <a href="{{ route('quiz.comparison', $quiz) }}" title="{{ __('messages.export') }}"
-                                class="inline-flex items-center justify-center p-2 h-9 w-9 bg-teal-400 hover:bg-teal-600 text-white rounded-md border border-transparent focus:outline-none">@svg('mdi-export-variant', 'w-5 h-5')
+                                class="inline-flex items-center justify-center p-2 h-9 w-9 bg-teal-400 hover:bg-teal-600 text-white rounded-md border border-transparent focus:outline-none">@svg('mdi-file-export', 'w-5 h-5')
                                 <span class="sr-only">@lang('messages.export')</span>
                             </a>
                         @else
                             <button disabled title="{{ __('messages.export') }}"
-                                class="text-gray-300 opacity-40 bg-teal-800 p-2 h-9 w-9 rounded-md border border-transparent inline-flex items-center justify-center">@svg('mdi-export-variant', 'w-5 h-5')<span
+                                class="text-gray-300 opacity-40 bg-teal-800 p-2 h-9 w-9 rounded-md border border-transparent inline-flex items-center justify-center">@svg('mdi-file-export', 'w-5 h-5')<span
                                     class="sr-only">@lang('messages.export')</span></button>
                         @endif
                     </div>
@@ -159,7 +160,10 @@
                 <p class="mb-1 mt-3">@lang('messages.copyLink'): <span id="code"></span></p>
                 <div class="mt-6 flex justify-center">
                     <button id="hideModalButton"
-                        class="px-4 py-2 bg-red-600 text-white rounded-md mr-2">@lang('messages.cancel')</button>
+                        class="inline-flex items-center justify-center px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
+                        @svg('mdi-close', 'w-5 h-5 mr-2')
+                        @lang('messages.cancel')
+                    </button>
                 </div>
             </div>
         </div>
@@ -223,13 +227,13 @@
                             @if (!$quiz->active)
                                 <a href="{{ route('quiz.comparison', $quiz) }}" title="{{ __('messages.export') }}"
                                     class="inline-flex items-center justify-center h-9 w-9 bg-teal-400 hover:bg-teal-600 text-white rounded-md border border-transparent focus:outline-none">
-                                    @svg('mdi-export-variant', 'w-5 h-5')
+                                    @svg('mdi-file-export', 'w-5 h-5')
                                     <span class="sr-only">@lang('messages.export')</span>
                                 </a>
                             @else
                                 <button disabled
                                     class="inline-flex items-center justify-center h-9 w-9 opacity-40 bg-teal-800 rounded-md border border-transparent">
-                                    @svg('mdi-export-variant', 'w-5 h-5')
+                                    @svg('mdi-file-export', 'w-5 h-5')
                                     <span class="sr-only">@lang('messages.export')</span>
                                 </button>
                             @endif

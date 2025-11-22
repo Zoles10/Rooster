@@ -1,11 +1,8 @@
 import $ from "jquery";
 
-// Initialize question editing functionality
 $(function() {
-    // Get initial option count from data attribute
     let optionCount = parseInt($('#options-container').data('initial-count')) || 0;
 
-    // Update the option count and option ids
     for (var i = 1; i <= optionCount; i++) {
         var currentOptionWrapper = $('#option-wrapper-' + i);
         if (currentOptionWrapper.length) {
@@ -17,14 +14,11 @@ $(function() {
         }
     }
 
-    // Function to Delete an Option
     window.deleteOption = function(optionNumber) {
         var optionWrapper = $('#option-wrapper-' + optionNumber);
         if (optionWrapper.length) {
             optionWrapper.remove();
-            // Update the option count
             optionCount--;
-            // Update the remaining option ids
             for (var i = optionNumber + 1; i <= optionCount + 1; i++) {
                 var currentOptionWrapper = $('#option-wrapper-' + i);
                 if (currentOptionWrapper.length) {
@@ -38,21 +32,18 @@ $(function() {
         }
     };
 
-    // Function to Add More Options Dynamically
     window.addOption = function(optionNumber = null) {
         var container = $('#options-container');
         if (!container.length) return;
 
-        // Create a new input field for the option
         var input = $('<input>', {
             type: 'text',
             name: 'option' + (optionNumber || ++optionCount),
-            placeholder: 'Option Text', // Will be localized in Blade template
+            placeholder: 'Option Text',
             class: 'form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm',
             css: { color: 'black' }
         });
 
-        // Create a new checkbox for correct option
         var checkbox = $('<input>', {
             type: 'checkbox',
             name: 'isCorrect' + (optionNumber || optionCount),
@@ -60,7 +51,6 @@ $(function() {
             css: { margin: '.25rem 2.7rem 0 .8rem', 'border-radius': '4px' }
         });
 
-        // Add a rose "Remove" button
         var removeButton = $('<button>', {
             type: 'button',
             html: '&times;',
@@ -70,7 +60,6 @@ $(function() {
             }
         });
 
-        // Wrap the inputs together
         var optionWrapper = $('<div>', {
             class: 'flex items-center mb-3'
         }).append(checkbox, input, removeButton);
@@ -78,7 +67,6 @@ $(function() {
         container.append(optionWrapper);
     };
 
-    // Toggle visibility of the "Other" input field based on subject dropdown
     $('#subject').on('change', function() {
         if (this.value === '0') {
             $('#other-subject-container').removeClass('hidden');
@@ -87,11 +75,9 @@ $(function() {
         }
     });
 
-    // Form validation and submission
     function handleSubmit(event) {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault();
 
-        // Form validation
         const questionInput = $('#question');
         const subjectDropdown = $('#subject');
 
@@ -112,30 +98,29 @@ $(function() {
             }
         }
 
-        // Additional validation for multiple choice questions
         const options = $('input[name^="option"]');
-        let allValid = true;
+        const correctCheckboxes = $('input[name^="isCorrect"]');
+        let hasOption = options.length > 0;
+        let hasCorrect = correctCheckboxes.toArray().some(cb => $(cb).is(':checked'));
+        let allOptionsFilled = options.toArray().every(opt => $(opt).val().trim() !== '');
 
-        options.each(function() {
-            if ($(this).val().trim() === '') {
-                allValid = false;
-            }
-        });
-
-        if (!allValid) {
+        if (!hasOption) {
+            $('#option-err').html('At least one option is required').show();
+            return;
+        } else if (!allOptionsFilled) {
             $('#option-err').html('Option text is empty').show();
+            return;
+        } else if (!hasCorrect) {
+            $('#option-err').html('At least one option must be marked as correct').show();
             return;
         } else {
             $('#option-err').hide();
         }
 
-        // Submit the form after validation
-        $('#main-form').trigger( "submit" )
+        $('#main-form').trigger('submit');
     }
 
-    // Attach the handleSubmit function to the submit button
     $('#submit-btn').on('click', handleSubmit);
 
-    // Show the "Add Option" button when the page loads
     $('#add-option-btn').removeClass('hidden').addClass('flex justify-center');
 });

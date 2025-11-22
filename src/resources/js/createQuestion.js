@@ -32,12 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.dataset.selected = selected ? '1' : '0';
         if (selected) {
             btn.textContent = removeLabel;
-            btn.classList.remove('bg-indigo-600', 'add-state');
+            btn.classList.remove('bg-indigo-500', 'add-state');
             btn.classList.add('bg-red-600', 'remove-state');
         } else {
             btn.textContent = addLabel;
             btn.classList.remove('bg-red-600', 'remove-state');
-            btn.classList.add('bg-indigo-600', 'add-state');
+            btn.classList.add('bg-indigo-500', 'add-state');
         }
     }
 

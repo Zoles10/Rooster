@@ -7,7 +7,14 @@
     const NO_RESULTS = cfg.noResults || 'No results';
     const UPDATE_INTERVAL = cfg.updateInterval || 5000;
 
-    if (!UPDATE_URL) return;
+    const icons = {
+        check: '<svg class="w-5 h-5 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.76L18.88,4.88L21.71,7.71L9,20.42Z"/></svg>',
+        close: '<svg class="w-5 h-5 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"/></svg>'
+    };
+
+    function getIcon(isCorrect) {
+        return isCorrect ? icons.check : icons.close;
+    }
 
     async function updateTable() {
         try {
@@ -33,7 +40,7 @@
             }
 
             for (const item of answerCounts) {
-                const correctIcon = item.correct ? '✓' : '✗';
+                const correctIcon = getIcon(item.correct);
                 const correctClass = item.correct ? 'text-green-600' : 'text-red-600';
 
                 // Desktop row

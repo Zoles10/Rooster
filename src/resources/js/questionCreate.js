@@ -27,7 +27,7 @@ export function addOption(optionNumber = null) {
     const checkbox = $('<input>', {
         type: 'checkbox',
         name: 'isCorrect' + (optionNumber || optionCount),
-        class: 'form-checkbox imp_checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded'
+        class: 'form-checkbox imp_checkbox h-5 w-5 text-indigo-500 mt-3 ml-1 p-2 rounded cursor-pointer hover:text-indigo-600'
     });
 
     // Create X button with consistent styling from questionEdit

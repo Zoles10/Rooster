@@ -1,10 +1,11 @@
 <x-app-layout>
     <div class="bg-white min-h-screen flex flex-col items-center justify-center text-white">
-        <div
-            class="imp_margin_04 max-w-xl w-full p-6 md:p-8 bg-gray-100 rounded-lg shadow-lg shadow-gray-400 text-black">
-            <h1 class="text-2xl font-bold mb-5 text-center">@lang('messages.updateQuestion')</h1>
+        <div class="imp_margin_04 max-w-xl w-full bg-gray-100 rounded-lg shadow-lg shadow-gray-400 text-black">
+            <div class="imp_bg_white w-full px-6 md:px-8 py-4 rounded-t-lg">
+                <h1 class="text-2xl font-bold text-center">@lang('messages.updateQuestion')</h1>
+            </div>
             <form id="main-form" method="POST" action="{{ route('question.update', $question) }}"
-                class="bg-gray-100 p-4 rounded-lg text-black">
+                class="p-6 md:p-8 text-black">
                 @csrf
                 @METHOD('PUT')
                 <div class="mb-4">
@@ -65,7 +66,7 @@
                     @foreach ($question->options as $option)
                         <div id="option-wrapper-{{ $i }}" class="flex items-center mb-3">
                             <input type="checkbox" name="isCorrect{{ $i }}"
-                                class="form-checkbox imp_checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded hover:text-indigo-700 cursor-pointer"
+                                class="form-checkbox imp_checkbox h-5 w-5 text-indigo-500 mt-3 ml-1 p-2 rounded cursor-pointer hover:text-indigo-600"
                                 @if ($option->correct) checked @endif>
                             <input type="text" name="option{{ $i }}"
                                 class="text-black form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"

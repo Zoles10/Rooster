@@ -88,7 +88,7 @@
                                 <tr class="border">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <a href="{{ route('question.show', $question->id) }}"
-                                            class="text-sm text-gray-900 ">
+                                            class="text-sm font-bold text-black hover:text-gray-500">
                                             {{ \Illuminate\Support\Str::limit($question->question, 10) }}
                                         </a>
                                     </td>
@@ -103,7 +103,7 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <a href="{{ route('answers.show', $question->id) }}"
-                                            class="text-sm text-gray-900">
+                                            class="text-sm font-bold text-indigo-700 hover:text-indigo-900">
                                             @lang('messages.goToResults')
                                         </a>
                                     </td>
@@ -117,7 +117,7 @@
                                                     <input type="hidden" name="active"
                                                         value="{{ $question->active ? '0' : '1' }}">
                                                     <input type="checkbox" name="active_checkbox"
-                                                        class="form-checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded cursor-pointer hover:bg-indigo-100"
+                                                        class="form-checkbox h-5 w-5 text-indigo-500 mt-3 ml-1 p-2 rounded cursor-pointer hover:text-indigo-600"
                                                         onchange="this.form.submit()" value="{{ $question->id }}"
                                                         {{ $question->active ? 'checked' : '' }}>
                                                     @if (!$question->active)
@@ -165,13 +165,13 @@
                         @if ($question->options()->whereHas('answers')->exists())
                             <a href="{{ route('answers.export', $question->id) }}" title="{{ __('messages.export') }}"
                                 class="inline-flex items-center justify-center p-2 h-9 w-9 text-white bg-teal-400 hover:bg-teal-600 rounded-md border border-transparent focus:outline-none">
-                                @svg('mdi-export-variant', 'w-5 h-5')
+                                @svg('mdi-file-export', 'w-5 h-5')
                                 <span class="sr-only">@lang('messages.export')</span>
                             </a>
                         @else
                             <button disabled title="{{ __('messages.export') }}"
                                 class="inline-flex items-center justify-center p-2 h-9 w-9 opacity-40 bg-teal-800 rounded-md border border-transparent">
-                                @svg('mdi-export-variant', 'w-5 h-5')<span class="sr-only">@lang('messages.export')</span>
+                                @svg('mdi-file-export', 'w-5 h-5')<span class="sr-only">@lang('messages.export')</span>
                             </button>
                         @endif
                     </div>
@@ -208,7 +208,7 @@
                             @csrf
                             @method('PUT')
                             <input type="checkbox" name="active_checkbox"
-                                class="form-checkbox h-5 w-5 text-indigo-600 rounded cursor-pointer hover:bg-indigo-100"
+                                class="form-checkbox h-5 w-5 text-indigo-500 rounded cursor-pointer hover:text-indigo-600"
                                 onchange="this.form.submit()" value="{{ $question->id }}"
                                 {{ $question->active ? 'checked' : '' }}>
                             <input type="hidden" name="active" value="{{ $question->active ? '0' : '1' }}">
