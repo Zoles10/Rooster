@@ -19,7 +19,7 @@
             <div class="ml-1">
                 <label for="createQuiz" class="block text-sm font-medium text-gray-700 opacity-0">a</label>
                 <a id="createQuiz" href="{{ route('quiz.create') }}"
-                    class="mt-1 imp_bg_purple w-full py-2 px-3 border border-gray-30 text-m text-white uppercase hover:text-gray-300 hover:bg-purple-700 active:bg-purple-900 focus:border-purple-900 focus:ring ring-purple-300 disabled:opacity-25 transition ease-in-out duration-150 bg-purple-800 font-semibold rounded-md shadow-sm focus:outline-none sm:text-sm flex items-center justify-center">
+                    class="mt-1 bg-indigo-500 w-full py-2 px-3 border border-gray-30 text-m text-white uppercase hover:text-gray-300 hover:bg-indigo-600  disabled:opacity-25 transition ease-in-out duration-150 font-semibold rounded-md shadow-sm focus:outline-none sm:text-sm flex items-center justify-center">
                     @svg('mdi-plus', 'w-5 h-5 mr-0.5 text-gray-100')
                     @lang('messages.createQuiz')
                 </a>
@@ -86,7 +86,7 @@
                                                     <input type="hidden" name="active"
                                                         value="{{ $quiz->active ? '0' : '1' }}">
                                                     <input type="checkbox" name="active_checkbox"
-                                                        class="form-checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded"
+                                                        class="form-checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded cursor-pointer hover:bg-indigo-100"
                                                         onchange="this.form.submit()" value="{{ $quiz->id }}"
                                                         {{ $quiz->active ? 'checked' : '' }}>
                                                     @if (!$quiz->active)
@@ -113,7 +113,7 @@
                             @csrf
                             @method('POST')
                             <button type="submit" title="{{ __('messages.clone') }}"
-                                class="inline-flex items-center justify-center p-2 h-9 w-9 bg-blue-500 hover:bg-blue-700 text-white rounded-md border border-transparent focus:outline-none">@svg('mdi-content-copy', 'w-5 h-5')
+                                class="inline-flex items-center justify-center p-2 h-9 w-9 bg-sky-400 hover:bg-sky-600 text-white rounded-md border border-transparent focus:outline-none">@svg('mdi-content-copy', 'w-5 h-5')
                                 <span class="sr-only">@lang('messages.clone')</span>
                             </button>
                         </form>
@@ -121,19 +121,19 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" title="{{ __('messages.delete') }}"
-                                class="inline-flex items-center justify-center p-2 h-9 w-9 bg-red-600 hover:bg-red-700 text-white rounded-md border border-transparent focus:outline-none">
+                                class="inline-flex items-center justify-center p-2 h-9 w-9 bg-rose-500 hover:bg-rose-600 text-white rounded-md border border-transparent focus:outline-none">
                                 @svg('mdi-delete-forever-outline', 'w-5 h-5')
                                 <span class="sr-only">@lang('messages.delete')</span>
                             </button>
                         </form>
                         @if (!$quiz->active)
                             <a href="{{ route('quiz.comparison', $quiz) }}" title="{{ __('messages.export') }}"
-                                class="inline-flex items-center justify-center p-2 h-9 w-9 bg-gray-600 hover:bg-gray-700 text-white rounded-md border border-transparent focus:outline-none">@svg('mdi-export-variant', 'w-5 h-5')
+                                class="inline-flex items-center justify-center p-2 h-9 w-9 bg-teal-400 hover:bg-teal-600 text-white rounded-md border border-transparent focus:outline-none">@svg('mdi-export-variant', 'w-5 h-5')
                                 <span class="sr-only">@lang('messages.export')</span>
                             </a>
                         @else
                             <button disabled title="{{ __('messages.export') }}"
-                                class="text-gray-300 bg-gray-600 p-2 h-9 w-9 rounded-md border border-transparent inline-flex items-center justify-center">@svg('mdi-export-variant', 'w-5 h-5')<span
+                                class="text-gray-300 opacity-40 bg-teal-800 p-2 h-9 w-9 rounded-md border border-transparent inline-flex items-center justify-center">@svg('mdi-export-variant', 'w-5 h-5')<span
                                     class="sr-only">@lang('messages.export')</span></button>
                         @endif
                     </div>
@@ -182,8 +182,9 @@
                             @csrf
                             @method('PUT')
                             <input type="checkbox" name="active_checkbox"
-                                class="form-checkbox h-5 w-5 text-indigo-600 rounded" onchange="this.form.submit()"
-                                value="{{ $quiz->id }}" {{ $quiz->active ? 'checked' : '' }}>
+                                class="form-checkbox h-5 w-5 text-indigo-600 rounded cursor-pointer hover:bg-indigo-100"
+                                onchange="this.form.submit()" value="{{ $quiz->id }}"
+                                {{ $quiz->active ? 'checked' : '' }}>
                             <input type="hidden" name="active" value="{{ $quiz->active ? '0' : '1' }}">
                         </form>
                         @if (!$quiz->active)
@@ -203,7 +204,7 @@
                                 @csrf
                                 @method('POST')
                                 <button type="submit"
-                                    class="inline-flex items-center justify-center h-9 w-9 bg-blue-500 hover:bg-blue-700 text-white rounded-md border border-transparent focus:outline-none"
+                                    class="inline-flex items-center justify-center h-9 w-9 bg-sky-400 hover:bg-sky-600 text-white rounded-md border border-transparent focus:outline-none"
                                     title="{{ __('messages.clone') }}">
                                     @svg('mdi-content-copy', 'w-5 h-5')
                                     <span class="sr-only">@lang('messages.clone')</span>
@@ -213,7 +214,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                    class="inline-flex items-center justify-center h-9 w-9 bg-red-600 hover:bg-red-700 text-white rounded-md border border-transparent focus:outline-none"
+                                    class="inline-flex items-center justify-center h-9 w-9 bg-rose-500 hover:bg-rose-600 text-white rounded-md border border-transparent focus:outline-none"
                                     title="{{ __('messages.delete') }}">
                                     @svg('mdi-delete-forever-outline', 'w-5 h-5')
                                     <span class="sr-only">@lang('messages.delete')</span>
@@ -221,13 +222,13 @@
                             </form>
                             @if (!$quiz->active)
                                 <a href="{{ route('quiz.comparison', $quiz) }}" title="{{ __('messages.export') }}"
-                                    class="inline-flex items-center justify-center h-9 w-9 bg-gray-600 hover:bg-gray-700 text-white rounded-md border border-transparent focus:outline-none">
+                                    class="inline-flex items-center justify-center h-9 w-9 bg-teal-400 hover:bg-teal-600 text-white rounded-md border border-transparent focus:outline-none">
                                     @svg('mdi-export-variant', 'w-5 h-5')
                                     <span class="sr-only">@lang('messages.export')</span>
                                 </a>
                             @else
                                 <button disabled
-                                    class="inline-flex items-center justify-center h-9 w-9 opacity-40 bg-gray-600 rounded-md border border-transparent">
+                                    class="inline-flex items-center justify-center h-9 w-9 opacity-40 bg-teal-800 rounded-md border border-transparent">
                                     @svg('mdi-export-variant', 'w-5 h-5')
                                     <span class="sr-only">@lang('messages.export')</span>
                                 </button>

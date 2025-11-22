@@ -2,7 +2,8 @@
     <div class="bg-white min-h-screen flex flex-col items-center justify-center text-white">
         <div class="imp_margin_04 max-w-xl w-full p-6 md:p-8 bg-gray-500 rounded-lg shadow-lg shadow-gray-400">
             <h1 class="text-2xl font-bold mb-5 text-center">@lang('messages.updateQuestion')</h1>
-            <form id="main-form" method="POST"  action="{{ route('question.update', $question) }}" class="bg-gray-500 p-4 rounded-lg">
+            <form id="main-form" method="POST" action="{{ route('question.update', $question) }}"
+                class="bg-gray-500 p-4 rounded-lg">
                 @csrf
                 @METHOD('PUT')
                 <div class="mb-4">
@@ -39,7 +40,8 @@
                     <select id="subject" name="subject"
                         class="text-black form-control mt-1 block w-full px-3 py-2 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                         @foreach ($subjects as $subject)
-                            <option value="{{ $subject->id }}" @if ($question->subject_id == $subject->id) selected @endif>{{ $subject->subject }}</option>
+                            <option value="{{ $subject->id }}" @if ($question->subject_id == $subject->id) selected @endif>
+                                {{ $subject->subject }}</option>
                         @endforeach
                         <option value="0">@lang('messages.other')</option>
                     </select>
@@ -56,52 +58,56 @@
                 @if ($question->question_type === 'open_ended')
                     <div id="result-option-container" class="mb-4 mt-4">
                         <div class="mb-4">
-                        <label class="block text-sm font-medium text-white">@lang('messages.resultOption')</label>
-                        <div class="mt-3 p-2">
-                            <div class="mb-3">
-                                <label class="inline-flex items-center">
-                                    <input type="radio" id="list" name="word_cloud" value="0"
-                                        class="form-radio text-indigo-600" checked>
-                                    <span class="ml-2">&nbsp;&nbsp;@lang('messages.list')</span>
-                                </label>
-                            </div>
-                            <div class="mb-3">
-                                <label class="inline-flex items-center">
-                                    <input type="radio" id="word-cloud" name="word_cloud" value="1"
-                                    class="form-radio text-indigo-600">
-                                    <span class="ml-2">&nbsp;&nbsp;WordCloud</span>
-                                </label>
+                            <label class="block text-sm font-medium text-white">@lang('messages.resultOption')</label>
+                            <div class="mt-3 p-2">
+                                <div class="mb-3">
+                                    <label class="inline-flex items-center">
+                                        <input type="radio" id="list" name="word_cloud" value="0"
+                                            class="form-radio text-indigo-600" checked>
+                                        <span class="ml-2">&nbsp;&nbsp;@lang('messages.list')</span>
+                                    </label>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="inline-flex items-center">
+                                        <input type="radio" id="word-cloud" name="word_cloud" value="1"
+                                            class="form-radio text-indigo-600">
+                                        <span class="ml-2">&nbsp;&nbsp;WordCloud</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @else
-                    @php
-                        $i = 1;
-                    @endphp
-                    <!-- Options Container -->
-                    <div id="options-container" class="mb-4 mt-4">
-                        <label class="block text-sm font-medium text-grey">@lang('messages.correct')</label>
-                        @foreach ($question->options as $option)
-                            <div id="option-wrapper-{{$i}}" class="flex items-center mb-3">
-                                <input type="checkbox" name="isCorrect{{ $i }}" class="form-checkbox imp_checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded"
-                                    @if ($option->correct) checked @endif>
-                                <input type="text" name="option{{ $i }}"
-                                    class="text-black form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    value="{{ $option->option_text }}" placeholder="@lang('messages.optionText')">
-                                <button type="button" onclick="deleteOption({{$i}})" class="imp_x_btn">&times;</button>
-                            </div>
-                            @php
-                                $i++;
-                            @endphp
-                        @endforeach
+                    @else
+                        @php
+                            $i = 1;
+                        @endphp
+                        <!-- Options Container -->
+                        <div id="options-container" class="mb-4 mt-4">
+                            <label class="block text-sm font-medium text-grey">@lang('messages.correct')</label>
+                            @foreach ($question->options as $option)
+                                <div id="option-wrapper-{{ $i }}" class="flex items-center mb-3">
+                                    <input type="checkbox" name="isCorrect{{ $i }}"
+                                        class="form-checkbox imp_checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded"
+                                        @if ($option->correct) checked @endif>
+                                    <input type="text" name="option{{ $i }}"
+                                        class="text-black form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                        value="{{ $option->option_text }}" placeholder="@lang('messages.optionText')">
+                                    <button type="button" onclick="deleteOption({{ $i }})"
+                                        class="imp_x_btn">&times;</button>
+                                </div>
+                                @php
+                                    $i++;
+                                @endphp
+                            @endforeach
 
-                        <span id="option-err" class="imp_invalid_input_text" style="display: none;"></span>
-                        <!-- Add Option Button with Inline Styles -->
-                    </div>
-                    <div id="add-option-btn" class="hidden flex justify-center">
-                        <button type="button" class="imp_add_btn mt-2 p-2 bg-green-500 rounded-md text-white hover:bg-green-600" onclick="addOption()">
-                            @lang('messages.addOption')</button>
-                    </div>
+                            <span id="option-err" class="imp_invalid_input_text" style="display: none;"></span>
+                            <!-- Add Option Button with Inline Styles -->
+                        </div>
+                        <div id="add-option-btn" class="hidden flex justify-center">
+                            <button type="button"
+                                class="imp_add_btn mt-2 p-2 bg-green-500 rounded-md text-white hover:bg-green-600"
+                                onclick="addOption()">
+                                @lang('messages.addOption')</button>
+                        </div>
                 @endif
                 <div id="buttonsContainer" class="flex justify-between mt-4">
                     <!-- Cancel Button -->
@@ -109,7 +115,8 @@
                         <a href={{ route('question.index') }}>@lang('messages.backToQuestions')</a>
                     </div>
                     <!-- Submit Button -->
-                    <button type="submit" class="px-4 py-2 imp_bg_purple rounded-md text-white" id="submit-btn">
+                    <button type="submit" class="px-4 py-2 bg-indigo-500 rounded-md text-white hover:bg-indigo-600"
+                        id="submit-btn">
                         @lang('messages.submit')</button>
                 </div>
                 @if ($question->question_type === 'multiple_choice')
@@ -152,10 +159,10 @@
             // Update the option count
             optionCount--;
             // Update the remaining option ids
-            for (var i = optionNumber + 1; i <= optionCount+1; i++) {
+            for (var i = optionNumber + 1; i <= optionCount + 1; i++) {
                 var currentOptionWrapper = document.getElementById('option-wrapper-' + i);
-                var currentOptionInput = currentOptionWrapper.querySelector('input[name^="option'+i+'"]');
-                var currentCheckboxInput = currentOptionWrapper.querySelector('input[name^="isCorrect'+i+'"]');
+                var currentOptionInput = currentOptionWrapper.querySelector('input[name^="option' + i + '"]');
+                var currentCheckboxInput = currentOptionWrapper.querySelector('input[name^="isCorrect' + i + '"]');
                 currentOptionInput.name = 'option' + (i - 1);
                 currentCheckboxInput.name = 'isCorrect' + (i - 1);
                 currentOptionWrapper.id = 'option-wrapper-' + (i - 1);

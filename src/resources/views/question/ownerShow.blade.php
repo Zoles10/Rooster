@@ -26,13 +26,13 @@
             @csrf
             @method('DELETE')
             <button type="submit"
-                class="px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600">@lang('messages.delete')</button>
+                class="px-4 py-2 bg-rose-500 rounded-md text-white hover:bg-rose-600">@lang('messages.delete')</button>
         </form>
         <form action="{{ route('question.multiply', $question) }}" method="POST" class="mb-2 md:mb-0 md:ml-2">
             @csrf
             @method('POST')
             <button type="submit"
-                class="px-4 py-2 bg-purple-500 rounded-md text-white hover:bg-purple-600">@lang('messages.clone')</button>
+                class="px-4 py-2 bg-sky-400 rounded-md text-white hover:bg-sky-600">@lang('messages.clone')</button>
         </form>
     </div>
 </div>

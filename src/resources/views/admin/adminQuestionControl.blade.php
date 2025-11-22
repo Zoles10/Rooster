@@ -1,62 +1,84 @@
-<input type="text" id="search" class="rounded" placeholder='{{ __('messages.searchUsername') }}'>
-<div class="bg-gray-400 p-4 rounded-lg mt-4 mb-4 hidden custom:block">
-    <table class="imp_admin_td table bg-white table-striped w-full table-hover mt-4 rounded">
-        <thead>
-            <tr class="bg-indigo-600 text-white">
-                <th class="imp_admin_td px-4 py-2 text-center">{{ __('messages.question') }}</th>
-                <th class="imp_admin_td px-4 py-2 text-center">{{ __('messages.subject') }}</th>
-                <th class="imp_admin_td px-4 py-2 text-center">{{ __('messages.owner') }}</th>
-                <th class="imp_admin_td px-4 py-2 text-center">{{ __('messages.active') }}</th>
-                <th class="imp_admin_td px-4 py-2 text-center">{{ __('messages.edit') }}</th>
-                <th class="imp_admin_td px-4 py-2 text-center">{{ __('messages.delete') }}</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($questions as $question)
-                <tr class="imp_admin_td">
-                    <td class="px-4 py-2 text-center">{{ $question['question'] }}</td>
-                    <td class="px-4 py-2 text-center">{{ $question['subject']['subject'] }}</td>
-                    <td class="px-4 py-2 text-center">{{ $question['user_name'] }}</td>
-                    <td class="px-4 py-2 text-center">
-                        <form method="POST" action="{{ route('question.update', $question) }}">
-                            @csrf
-                            @method('PUT')
-                            <input type="hidden" name="active" value="{{ $question->active ? '0' : '1' }}">
-                            <input type="checkbox" name="active_checkbox"
-                                class="form-checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded"
-                                onchange="this.form.submit()" value="{{ $question->id }}"
-                                {{ $question->active ? 'checked' : '' }}>
-                        </form>
-                    </td>
-                    <td class="px-4 py-2 text-center">
-                        <a href="{{ route('question.edit', $question['id']) }}"
-                            class="inline-flex items-center justify-center h-9 w-9 bg-emerald-500 rounded hover:bg-emerald-600"
-                            title="Edit">
-                            @svg('mdi-pencil', 'w-5 h-5 text-white')
-                        </a>
-                    </td>
-                    <td class="px-4 py-2 text-center">
-                        <form action="{{ route('question.destroyAdmin', $question['id']) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                class="inline-flex items-center justify-center h-9 w-9 bg-red-500 rounded hover:bg-red-600"
-                                title="Delete">
-                                @svg('mdi-delete', 'w-5 h-5 text-white')
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+<div class="my-2 overflow-x-auto w-full hidden custom:block">
+    <input type="text" id="search" class="rounded" placeholder='{{ __('messages.searchUsername') }}'>
+    <div class="py-2 align-middle inline-block min-w-full">
+        <div class="shadow-lg overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <table class="table min-w-full divide-y divide-gray-200 mb-2">
+                <thead class="imp_bg_white p-2">
+                    <tr>
+                        <th class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
+                            {{ __('messages.question') }}
+                        </th>
+                        <th class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
+                            {{ __('messages.subject') }}
+                        </th>
+                        <th class="px-6 py-4 text-left text-m font-medium text-gray-800 uppercase tracking-wider">
+                            {{ __('messages.owner') }}
+                        </th>
+                        <th class="px-6 py-4 text-m font-medium text-gray-800 uppercase tracking-wider text-center">
+                            {{ __('messages.active') }}
+                        </th>
+                        <th class="px-6 py-4 text-m font-medium text-gray-800 uppercase tracking-wider text-center">
+                            {{ __('messages.actions') }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    @foreach ($questions as $question)
+                        <tr class="border">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                {{ $question['question'] }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                {{ $question['subject']['subject'] }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                {{ $question['user_name'] }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-center">
+                                <form method="POST" action="{{ route('question.update', $question) }}">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="active" value="{{ $question->active ? '0' : '1' }}">
+                                    <input type="checkbox" name="active_checkbox"
+                                        class="form-checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded cursor-pointer hover:bg-indigo-100"
+                                        onchange="this.form.submit()" value="{{ $question->id }}"
+                                        {{ $question->active ? 'checked' : '' }}>
+                                </form>
+                            </td>
+                            <td class="pl-1 pr-3 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <div class="flex flex-row gap-1 items-center justify-center">
+                                    <a href="{{ route('question.edit', $question['id']) }}"
+                                        class="inline-flex items-center justify-center p-2 h-9 w-9 bg-emerald-500 hover:bg-emerald-600 text-white rounded-md border border-transparent focus:outline-none"
+                                        title="Edit">
+                                        @svg('mdi-pencil', 'w-5 h-5')
+                                        <span class="sr-only">@lang('messages.edit')</span>
+                                    </a>
+                                    <form action="{{ route('question.destroyAdmin', $question['id']) }}" method="POST"
+                                        class="inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="inline-flex items-center justify-center p-2 h-9 w-9 bg-rose-500 hover:bg-rose-600 text-white rounded-md border border-transparent focus:outline-none"
+                                            title="Delete">
+                                            @svg('mdi-delete-forever-outline', 'w-5 h-5')
+                                            <span class="sr-only">@lang('messages.delete')</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <!-- Mobileview -->
 <div id="mobileTable" class="grid grid-cols-1 gap-4 px-4 py-6 sm:px-6 lg:px-8 custom:hidden">
     @foreach ($questions as $question)
         <div id="{{ $question['id'] }}-{{ $question['user_name'] }}"
-            class="bg-white rounded-lg shadow overflow-hidden">
+            class="bg-zinc-100 rounded-lg shadow overflow-hidden">
             <div class="p-4">
                 <div class="font-semibold text-lg text-purple-800">
                     {{ __('messages.question') }}: {{ $question['question'] }}
@@ -73,7 +95,8 @@
                 <div class="flex items-center justify-between mt-2">
                     <div>
                         <strong>{{ __('messages.active') }}:</strong>
-                        <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600"
+                        <input type="checkbox"
+                            class="form-checkbox h-5 w-5 text-indigo-600 cursor-pointer hover:bg-indigo-100"
                             {{ $question['active'] == 1 ? 'checked' : '' }}
                             onchange="event.preventDefault(); document.getElementById('active-toggle-{{ $question['id'] }}').submit();">
                         <form id="active-toggle-{{ $question['id'] }}"
@@ -94,7 +117,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit"
-                                class="inline-flex items-center justify-center h-9 w-9 bg-red-500 text-white rounded hover:bg-red-600"
+                                class="inline-flex items-center justify-center h-9 w-9 bg-rose-500 text-white rounded-md hover:bg-rose-600"
                                 title="Delete">
                                 @svg('mdi-delete', 'w-5 h-5 text-white')
                             </button>

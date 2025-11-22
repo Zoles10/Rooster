@@ -28,7 +28,7 @@ export function addOption(optionNumber = null) {
     // Create X button with Tailwind classes only, always 1:1
     const removeButton = document.createElement('button');
     removeButton.type = 'button';
-    removeButton.className = 'inline-flex items-center justify-center bg-red-500 hover:bg-red-700 text-white rounded-md w-9 h-9 text-xl font-bold transition-colors duration-150';
+    removeButton.className = 'inline-flex items-center justify-center bg-rose-500 hover:bg-rose-600 text-white rounded-md w-9 h-9 text-xl font-bold transition-colors duration-150';
     removeButton.innerHTML = '&times;';
     removeButton.addEventListener('click', function() {
         if (optionWrapper.parentNode === container) {

@@ -115,7 +115,7 @@
                             <a href="{{ route('quizzes') }}"
                                 class="inline-block px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400">@lang('messages.backToQuizzes')</a>
                             <button type="submit" id="submit-btn"
-                                class="px-4 py-2 imp_bg_purple text-white rounded-md">@lang('messages.submit')</button>
+                                class="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600">@lang('messages.submit')</button>
                         </div>
                     </div>
                 </div>
