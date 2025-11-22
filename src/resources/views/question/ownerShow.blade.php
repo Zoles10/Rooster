@@ -18,8 +18,9 @@
                 </div>
             @endif
         </form>
-        <a href="/questions"
-            class="inline-block px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600">@lang('messages.back')</a>
+        <a href="/questions" class="px-4 py-2 bg-slate-500 rounded-md text-white hover:bg-slate-700 flex items-center">
+            @svg('mdi-arrow-left', 'w-5 h-5 mr-1')
+            @lang('messages.back')</a>
         <a href="{{ route('question.edit', $question->id) }}"
             class="px-4 py-2 bg-green-500 rounded-md text-white hover:bg-green-600 mb-2 md:mb-0 md:ml-2">@lang('messages.edit')</a>
         <form action="{{ route('question.destroy', $question->id) }}" method="POST" class="mb-2 md:mb-0 md:ml-2">

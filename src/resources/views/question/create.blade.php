@@ -69,14 +69,14 @@
                 <div class="flex justify-end gap-2 mt-4">
                     <!-- Back Button -->
                     <a href="{{ route('question.index') }}"
-                        class="bg-slate-500 px-4 py-2 rounded-md text-white hover:bg-slate-700 flex items-center transition-colors duration-150">
+                        class="bg-slate-500 px-4 py-2 rounded-md text-white h-9 hover:bg-slate-700 flex items-center transition-colors duration-150">
                         @svg('mdi-arrow-left', 'w-5 h-5 mr-1')
                         @lang('messages.back')
                     </a>
                     <!-- Submit Button -->
                     <button type="submit"
-                        class="px-4 py-2 bg-indigo-500 rounded-md text-white flex items-center justify-center hover:bg-indigo-700 transition-colors duration-150"
-                        id="submit-btn">
+                        class="inline-flex items-center justify-center h-9 w-9 text-white bg-indigo-500 hover:bg-indigo-700 rounded-md border border-transparent focus:outline-none transition-colors duration-150"
+                        id="submit-btn" title="@lang('messages.createQuestion')">
                         @svg('mdi-check', 'w-5 h-5')
                     </button>
                 </div>

@@ -46,7 +46,8 @@
                     $question = \App\Models\Question::find($question_id);
                 @endphp
                 <a href="{{ Auth::check() && Auth::id() === $question->owner_id ? route('questions') : route('welcome') }}"
-                    class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                    class="px-4 py-2 bg-slate-500 text-white rounded-md hover:bg-slate-700 flex items-center">
+                    @svg('mdi-arrow-left', 'w-5 h-5 mr-1')
                     @lang('messages.back')
                 </a>
                 @if (Auth::check() && Auth::id() === $question->owner_id && $question->options()->whereHas('answers')->exists())
@@ -64,7 +65,7 @@
     <div class="px-4 sm:px-6 lg:hidden mt-4">
         <div class="flex justify-center gap-2">
             <a href="{{ Auth::check() && Auth::id() === $question->owner_id ? route('questions') : route('welcome') }}"
-                class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 flex items-center">
+                class="px-4 py-2 bg-slate-500 text-white rounded-md hover:bg-slate-700 flex items-center">
                 @svg('mdi-arrow-left', 'w-5 h-5 mr-1')
                 @lang('messages.back')
             </a>
