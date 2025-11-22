@@ -168,5 +168,6 @@ return [
     "userName" => "User Name",
     "userPoints" => "Points",
     "submittedAt" => "Submitted At",
-    "export_all" => "Export All"
+    "export_all" => "Export All",
+    "enter" => "Enter"
 ];

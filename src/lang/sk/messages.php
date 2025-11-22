@@ -146,5 +146,6 @@ return [
     'emailPasswordResetLink' => 'Poslať odkaz na obnovenie hesla',
     'export' => 'Exportovať',
     'reset' => 'Zresetovať',
+    "enter" => "Vstúpiť"
 ];
 
