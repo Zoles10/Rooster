@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div class="bg-white min-h-screen flex flex-col items-center justify-center text-white">
-        <div class="imp_margin_04 max-w-xl w-full bg-gray-100 rounded-lg shadow-lg shadow-gray-400 text-black">
+    <div class="bg-white min-h-screen flex flex-col items-center pt-5 text-white">
+        <div class="imp_margin_04 max-w-xl w-full bg-gray-100 rounded-md shadow-lg shadow-gray-400 text-black">
             <div class="imp_bg_white w-full px-6 md:px-8 py-4 rounded-t-lg">
                 <h1 class="text-2xl font-bold text-center text-black">@lang('messages.createQuestion')</h1>
             </div>
@@ -69,15 +69,15 @@
                 <div class="flex justify-end gap-2 mt-4">
                     <!-- Back Button -->
                     <a href="{{ route('question.index') }}"
-                        class="bg-slate-500 px-4 py-2 rounded-md text-white h-9 hover:bg-slate-700 flex items-center transition-colors duration-150">
+                        class="bg-slate-500 px-4 py-2 rounded-md text-white hover:bg-slate-700 flex items-center transition-colors duration-150">
                         @svg('mdi-arrow-left', 'w-5 h-5 mr-1')
                         @lang('messages.back')
                     </a>
                     <!-- Submit Button -->
                     <button type="submit"
-                        class="inline-flex items-center justify-center h-9 w-9 text-white bg-indigo-500 hover:bg-indigo-700 rounded-md border border-transparent focus:outline-none transition-colors duration-150"
-                        id="submit-btn" title="@lang('messages.createQuestion')">
-                        @svg('mdi-check', 'w-5 h-5')
+                        class="inline-flex items-center justify-center px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
+                        @svg('mdi-content-save', 'w-5 h-5 mr-2')
+                        @lang('messages.submit')
                     </button>
                 </div>
             </form>

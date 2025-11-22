@@ -27,17 +27,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function setBtnSelectedState(btn, selected) {
-        const addLabel = btn.dataset.addLabel || 'Add';
-        const removeLabel = btn.dataset.removeLabel || 'Remove';
         btn.dataset.selected = selected ? '1' : '0';
         if (selected) {
-            btn.textContent = removeLabel;
-            btn.classList.remove('bg-indigo-500', 'add-state');
-            btn.classList.add('bg-red-600', 'remove-state');
+            btn.classList.remove('bg-indigo-400', 'hover:bg-indigo-600');
+            btn.classList.add('bg-rose-500', 'hover:bg-rose-600');
+            btn.innerHTML = '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19,13H5V11H19V13Z"/></svg>';
         } else {
-            btn.textContent = addLabel;
-            btn.classList.remove('bg-red-600', 'remove-state');
-            btn.classList.add('bg-indigo-500', 'add-state');
+            btn.classList.remove('bg-rose-500', 'hover:bg-rose-600');
+            btn.classList.add('bg-indigo-400', 'hover:bg-indigo-600');
+            btn.innerHTML = '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"/></svg>';
         }
     }
 

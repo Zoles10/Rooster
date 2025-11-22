@@ -1,9 +1,19 @@
+@section('title', __('messages.createQuiz'))
 <x-app-layout>
-    <div class="min-h-screen w-full bg-gray-100 py-6">
-        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-2xl font-bold mb-6 text-center text-gray-900">@lang('messages.createQuiz')</h1>
+    @vite('resources/js/createQuiz.js')
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('messages.createQuiz') }}
+        </h2>
+    </x-slot>
 
-            <form id="main-form" method="POST" action="{{ route('quiz.store') }}" class="">
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="imp_bg_white p-6">
+                <h1 class="text-2xl font-bold text-gray-900">{{ __('messages.createQuiz') }}</h1>
+            </div>
+
+            <form id="main-form" method="POST" action="{{ route('quiz.store') }}" class="p-6">
                 @csrf
                 <div class="bg-white p-6 rounded-lg shadow center">
                     <!-- QUIZ FORMULAR -->
@@ -82,17 +92,17 @@
                                             </div>
 
                                             <button type="button"
-                                                class="toggle-btn text-xs px-2 py-1 rounded
-                                                @if ($isSelected) bg-red-600 text-white remove-state
-                                                @else bg-indigo-600 text-white add-state @endif"
+                                                class="toggle-btn inline-flex items-center justify-center w-7 h-7 rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150
+                                                @if ($isSelected) bg-rose-500 hover:bg-rose-600 text-white
+                                                @else bg-indigo-500 hover:bg-indigo-600 text-white @endif"
                                                 data-id="{{ $question->id }}"
                                                 data-selected="{{ $isSelected ? '1' : '0' }}"
                                                 data-add-label="@lang('messages.add')"
                                                 data-remove-label="@lang('messages.remove')">
                                                 @if ($isSelected)
-                                                    @lang('messages.remove')
+                                                    @svg('mdi-minus', 'w-4 h-4')
                                                 @else
-                                                    @lang('messages.add')
+                                                    @svg('mdi-plus', 'w-4 h-4')
                                                 @endif
                                             </button>
                                         </li>
@@ -104,23 +114,37 @@
                         </div>
                     </div>
                     <!-- BUTTONS FOR FORMULAR -->
-                    <div>
-                        <button id="add-all-questions" type="button"
-                            class="px-4 py-2 bg-gray-500 text-white rounded-md">@lang('messages.addAll')</button>
+                    <div
+                        class="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center pt-6 border-t border-gray-200">
+                        <div class="flex flex-wrap gap-2">
+                            <button id="add-all-questions" type="button"
+                                class="inline-flex items-center justify-center px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
+                                @svg('mdi-plus-box-multiple', 'w-5 h-5 mr-2')
+                                @lang('messages.addAll')
+                            </button>
 
-                        <button id="clear-selection" type="button"
-                            class="px-4 py-2 bg-gray-500 text-white rounded-md">@lang('messages.clear')</button>
+                            <button id="clear-selection" type="button"
+                                class="inline-flex items-center justify-center px-4 py-2 bg-rose-500 hover:bg-rose-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
+                                @svg('mdi-refresh', 'w-5 h-5 mr-2')
+                                @lang('messages.clear')
+                            </button>
+                        </div>
 
-                        <div class="flex justify-between items-center mt-6">
+                        <div class="flex gap-2">
                             <a href="{{ route('quizzes') }}"
-                                class="inline-block px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400">@lang('messages.backToQuizzes')</a>
+                                class="inline-flex items-center justify-center px-4 py-2 bg-gray-500 hover:bg-gray-700 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
+                                @svg('mdi-arrow-left', 'w-5 h-5 mr-2')
+                                @lang('messages.backToQuizzes')
+                            </a>
                             <button type="submit" id="submit-btn"
-                                class="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600">@lang('messages.submit')</button>
+                                class="inline-flex items-center justify-center px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
+                                @svg('mdi-content-save', 'w-5 h-5 mr-2')
+                                @lang('messages.submit')
+                            </button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    @vite('resources/js/createQuestion.js')
 </x-app-layout>

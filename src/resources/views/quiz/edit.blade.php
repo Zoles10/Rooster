@@ -1,12 +1,22 @@
 @section('title', __('messages.quizEdit'))
 <x-app-layout>
-    <div class="min-h-screen w-full bg-gray-100 py-6">
-        <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-            <h1 class="mb-6 text-center text-2xl font-bold text-gray-900">@lang('messages.editQuiz')</h1>
+    @vite('resources/js/createQuiz.js')
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('messages.editQuiz') }}
+        </h2>
+    </x-slot>
+
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="imp_bg_white p-6">
+                <h1 class="text-2xl font-bold text-gray-900">{{ __('messages.editQuiz') }}</h1>
+            </div>
+
             <form id="main-form" method="POST" action="{{ route('quiz.update', $quiz) }}">
                 @csrf
-                @METHOD('PUT')
-                <div class="center rounded-lg bg-white p-6 shadow">
+                @method('PUT')
+                <div class="bg-white p-6 rounded-lg shadow center">
                     <!-- QUIZ FORMULAR -->
                     <div>
                         <div class="mb-4">
@@ -15,7 +25,7 @@
                             <span id="quiz-err" class="imp_invalid_input_text text-sm text-red-600"
                                 style="display: none;"></span>
                             <input type="text"
-                                class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-black shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                class="mt-1 block w-full px-3 py-2 text-black bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 id="quiz" name="quiz" placeholder="@lang('messages.enterQuiz')"
                                 value="{{ $quiz->title }}">
                         </div>
@@ -26,7 +36,7 @@
                             <span id="quizDescription-err" class="imp_invalid_input_text text-sm text-red-600"
                                 style="display: none;"></span>
                             <input type="text"
-                                class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-black shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                class="mt-1 block w-full px-3 py-2 text-black bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 id="quizDescription" name="quizDescription" placeholder="@lang('messages.enterQuizDescription')"
                                 value="{{ $quiz->description }}">
                         </div>
@@ -36,11 +46,11 @@
                                 <label for="ownerInput"
                                     class="block text-sm font-medium text-gray-700">@lang('messages.user'):</label>
                                 <select id="ownerInput" name="ownerInput"
-                                    class="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-black shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                    class="mt-1 block w-full px-3 py-2 bg-white text-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                     <option value="" selected disabled>@lang('messages.selectUser')</option>
                                     @foreach ($users as $user)
                                         <option value="{{ $user->name }}"
-                                            @if (old('ownerInput', auth()->user()->name) == $user->name) selected @endif>{{ $user->name }}
+                                            @if (old('ownerInput', $quiz->owner->name ?? auth()->user()->name) == $user->name) selected @endif>{{ $user->name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -49,7 +59,7 @@
                     </div>
                     <!-- AVAILABLE QUESTIONS FORMULAR -->
                     <div>
-                        <div class="mb-4 flex items-center justify-between">
+                        <div class="flex items-center justify-between mb-4">
                             <h2 class="text-lg font-semibold text-gray-800">@lang('messages.availableQuestions')</h2>
                         </div>
                         <div id="selected-questions-inputs">
@@ -64,7 +74,7 @@
                             @endforeach
                         </div>
 
-                        <div class="flex-1 overflow-auto rounded border p-2">
+                        <div class="flex-1 overflow-auto border rounded p-2">
                             @php
                                 $selected = (array) old('selected_questions', $quiz->questions->pluck('id')->toArray());
                             @endphp
@@ -73,7 +83,7 @@
                                 <ul id="available-list" class="space-y-2">
                                     @foreach ($questions as $question)
                                         @php $isSelected = in_array($question->id, $selected); @endphp
-                                        <li class="available-item flex items-start justify-between rounded bg-gray-50 p-2"
+                                        <li class="flex items-start justify-between bg-gray-50 p-2 rounded available-item"
                                             data-id="{{ $question->id }}"
                                             data-question="{{ e(\Illuminate\Support\Str::limit($question->question)) }}">
                                             <div class="flex items-start">
@@ -83,16 +93,17 @@
                                             </div>
 
                                             <button type="button"
-                                                class="toggle-btn @if ($isSelected) bg-red-600 text-white remove-state
-                                                @else bg-indigo-600 text-white add-state @endif rounded px-2 py-1 text-xs"
+                                                class="toggle-btn inline-flex items-center justify-center w-7 h-7 rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150
+                                                @if ($isSelected) bg-rose-500 hover:bg-rose-600 text-white
+                                                @else bg-indigo-500 hover:bg-indigo-600 text-white @endif"
                                                 data-id="{{ $question->id }}"
                                                 data-selected="{{ $isSelected ? '1' : '0' }}"
                                                 data-add-label="@lang('messages.add')"
                                                 data-remove-label="@lang('messages.remove')">
                                                 @if ($isSelected)
-                                                    @lang('messages.remove')
+                                                    @svg('mdi-minus', 'w-4 h-4')
                                                 @else
-                                                    @lang('messages.add')
+                                                    @svg('mdi-plus', 'w-4 h-4')
                                                 @endif
                                             </button>
                                         </li>
@@ -104,23 +115,37 @@
                         </div>
                     </div>
                     <!-- BUTTONS FOR FORMULAR -->
-                    <div>
-                        <button id="add-all-questions" type="button"
-                            class="rounded-md bg-gray-500 px-4 py-2 text-white">@lang('messages.addAll')</button>
+                    <div
+                        class="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center pt-6 border-t border-gray-200">
+                        <div class="flex flex-wrap gap-2">
+                            <button id="add-all-questions" type="button"
+                                class="inline-flex items-center justify-center px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
+                                @svg('mdi-plus-box-multiple', 'w-5 h-5 mr-2')
+                                @lang('messages.addAll')
+                            </button>
 
-                        <button id="clear-selection" type="button"
-                            class="rounded-md bg-gray-500 px-4 py-2 text-white">@lang('messages.clear')</button>
+                            <button id="clear-selection" type="button"
+                                class="inline-flex items-center justify-center px-4 py-2 bg-rose-500 hover:bg-rose-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
+                                @svg('mdi-refresh', 'w-5 h-5 mr-2')
+                                @lang('messages.clear')
+                            </button>
+                        </div>
 
-                        <div class="mt-6 flex items-center justify-between">
+                        <div class="flex gap-2">
                             <a href="{{ route('quizzes') }}"
-                                class="inline-block rounded-md bg-gray-300 px-4 py-2 text-gray-800 hover:bg-gray-400">@lang('messages.backToQuizzes')</a>
+                                class="inline-flex items-center justify-center px-4 py-2 bg-gray-500 hover:bg-gray-700 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
+                                @svg('mdi-arrow-left', 'w-5 h-5 mr-2')
+                                @lang('messages.backToQuizzes')
+                            </a>
                             <button type="submit" id="submit-btn"
-                                class="bg-indigo-500 rounded-md px-4 py-2 text-white hover:bg-indigo-600">@lang('messages.submit')</button>
+                                class="inline-flex items-center justify-center px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
+                                @svg('mdi-content-save', 'w-5 h-5 mr-2')
+                                @lang('messages.submit')
+                            </button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    @vite('resources/js/createQuestion.js')
 </x-app-layout>
