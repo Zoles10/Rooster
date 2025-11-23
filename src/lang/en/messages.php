@@ -178,4 +178,8 @@ return [
     "view_quiz_results" => "View quiz results from other users",
     "create_quiz_any_user" => "Create quiz in the name of any user",
     "delete_edit_quizzes" => "Delete and edit all quizzes",
+    "guestWelcomeTitle" => "Welcome to Rooster",
+    "guestRegisterToParticipate" => "Register to participate in quizzes",
+    "guestCreateOwnQuizzes" => "Create your own quizzes and questions to engage others",
+    "guestAddQuestions" => "Build custom question sets and share them with anyone",
 ];

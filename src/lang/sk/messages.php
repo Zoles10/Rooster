@@ -178,5 +178,9 @@ return [
     "view_quiz_results" => "Prezerať výsledky kvízov od iných používateľov",
     "create_quiz_any_user" => "Vytvoriť kvíz v mene ľubovoľného používateľa",
     "delete_edit_quizzes" => "Mazať a upravovať všetky kvízy",
+    "guestWelcomeTitle" => "Vitajte v Rooster",
+    "guestRegisterToParticipate" => "Zaregistrujte sa a zúčastnite sa kvízov",
+    "guestCreateOwnQuizzes" => "Vytvorte si vlastné kvízy a otázky na zapojenie ostatných",
+    "guestAddQuestions" => "Zostavte vlastné súbory otázok a zdieľajte ich s kýmkoľvek",
 ];
 
