@@ -170,5 +170,12 @@ return [
     "submittedAt" => "Submitted At",
     "export_all" => "Export All",
     "enter" => "Enter",
-    "registerNow" => "Register Now"
+    "registerNow" => "Register Now",
+    "crud_questions" => "Create, edit, delete, view questions",
+    "crud_questions2" => "Export and view question answers",
+    "crud_quizzes" => "Create, edit, delete, view quizzes",
+    "participate_quiz" => "Participate in quizzes",
+    "view_quiz_results" => "View quiz results from other users",
+    "create_quiz_any_user" => "Create quiz in the name of any user",
+    "delete_edit_quizzes" => "Delete and edit all quizzes",
 ];

@@ -1,5 +1,5 @@
 <div id="admin" class="p-6 text-gray-900 w-full">
-    <div class="bg-red-200 rounded p-5">
+    <div class="bg-orange-300 rounded p-5">
         <h1 class="font-bold text-3xl">{{ __('messages.admin_manual_title') }}</h1>
         <div class="p-3">
             <p class="m-3">{{ __('messages.admin_manual_intro') }}</p>
@@ -12,7 +12,8 @@
                     <li class="mb-2">{{ __('messages.delete_user') }}</li>
                     <li class="mb-2">{{ __('messages.create_question_any_user') }}</li>
                     <li class="mb-2">{{ __('messages.delete_edit_questions') }}</li>
-                    <li class="mb-2">{{ __('messages.filter_user_questions') }}</li>
+                    <li class="mb-2">{{ __('messages.create_quiz_any_user') }}</li>
+                    <li class="mb-2">{{ __('messages.delete_edit_quizzes') }}</li>
                     <li class="mb-2">{{ __('messages.promote_user_to_admin') }}</li>
                 </ol>
             </div>

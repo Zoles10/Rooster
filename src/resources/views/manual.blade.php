@@ -12,7 +12,10 @@
                 @include('pdf.userPDF')
                 @include('pdf.adminPDF')
                 <a href="{{ url('/pdf/manual') }}"
-                    class="px-4 py-2 w-fit bg-blue-500 rounded-md text-white hover:bg-blue-600">{{ __('messages.downloadPDF') }}</a>
+                    class="flex items-center gap-2 px-4 py-2 w-fit bg-teal-400 rounded-md text-white hover:bg-teal-600">
+                    @svg('mdi-download', 'w-4 h-4')
+                    {{ __('messages.downloadPDF') }}
+                </a>
             </div>
         </div>
     </div>
