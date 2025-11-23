@@ -8,21 +8,20 @@
     </x-slot>
 
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-md">
             <div class="imp_bg_white p-6">
-                <h1 class="text-2xl font-bold text-gray-900">{{ __('messages.createQuiz') }}</h1>
+                <h1 class="text-2xl font-bold text-gray-900">{{ __('messages.quiz') }}</h1>
             </div>
 
             <form id="main-form" method="POST" action="{{ route('quiz.store') }}" class="p-6">
                 @csrf
-                <div class="bg-white p-6 rounded-lg shadow center">
+                <div class="bg-white p-6 rounded-md shadow center">
                     <!-- QUIZ FORMULAR -->
                     <div>
                         <div class="mb-4">
                             <label for="quiz"
                                 class="block text-sm font-medium text-gray-700">@lang('messages.quiz_title'):</label>
-                            <span id="quiz-err" class="imp_invalid_input_text text-sm text-red-600"
-                                style="display: none;"></span>
+                            <span id="quiz-err" class="imp_invalid_input_text text-sm text-red-600 hidden"></span>
                             <input type="text"
                                 class="mt-1 block w-full px-3 py-2 text-black bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 id="quiz" name="quiz" placeholder="@lang('messages.enterQuiz')"
@@ -32,8 +31,8 @@
                         <div class="mb-4">
                             <label for="quizDescription"
                                 class="block text-sm font-medium text-gray-700">@lang('messages.quizDescription'):</label>
-                            <span id="quizDescription-err" class="imp_invalid_input_text text-sm text-red-600"
-                                style="display: none;"></span>
+                            <span id="quizDescription-err"
+                                class="imp_invalid_input_text text-sm text-red-600 hidden"></span>
                             <input type="text"
                                 class="mt-1 block w-full px-3 py-2 text-black bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 id="quizDescription" name="quizDescription" placeholder="@lang('messages.enterQuizDescription')"
@@ -112,10 +111,10 @@
                                 <div class="text-sm text-gray-600">@lang('messages.noQuestionsAvailable')</div>
                             @endif
                         </div>
+                        <span id="question-selection-err" class="text-sm text-red-600 border-none hidden"></span>
                     </div>
                     <!-- BUTTONS FOR FORMULAR -->
-                    <div
-                        class="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center pt-6 border-t border-gray-200">
+                    <div class="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center pt-6">
                         <div class="flex flex-wrap gap-2">
                             <button id="add-all-questions" type="button"
                                 class="inline-flex items-center justify-center px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">

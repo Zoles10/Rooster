@@ -169,5 +169,6 @@ return [
     "userPoints" => "Points",
     "submittedAt" => "Submitted At",
     "export_all" => "Export All",
-    "enter" => "Enter"
+    "enter" => "Enter",
+    "registerNow" => "Register Now"
 ];

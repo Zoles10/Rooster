@@ -78,10 +78,9 @@
                             $i++;
                         @endphp
                     @endforeach
-
-                    <span id="option-err" class="imp_invalid_input_text" style="display: none;"></span>
-                    <!-- Add Option Button with Inline Styles -->
                 </div>
+
+                <span id="option-err" class="imp_invalid_input_text" style="display: none;"></span>
                 <div id="add-option-btn" class="hidden">
                     <button type="button"
                         class="mt-2 p-2 bg-emerald-500 rounded-md text-white hover:bg-emerald-600 flex items-center justify-center"

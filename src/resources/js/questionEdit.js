@@ -47,14 +47,14 @@ $(function() {
         var checkbox = $('<input>', {
             type: 'checkbox',
             name: 'isCorrect' + (optionNumber || optionCount),
-            class: 'form-checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded',
+            class: 'form-checkbox h-5 w-5 text-indigo-500 mt-3 ml-1 p-2 rounded cursor-pointer hover:text-indigo-600',
             css: { margin: '.25rem 2.7rem 0 .8rem', 'border-radius': '4px' }
         });
 
         var removeButton = $('<button>', {
             type: 'button',
             html: '&times;',
-            class: 'bg-rose-400 hover:bg-rose-500 text-white rounded px-2 py-1 ml-2 mt-1',
+            class: 'imp_x_btn bg-rose-500 hover:bg-rose-600',
             click: function() {
                 optionWrapper.remove();
             }
@@ -76,14 +76,14 @@ $(function() {
     });
 
     function handleSubmit(event) {
-        event.preventDefault();
-
         const questionInput = $('#question');
         const subjectDropdown = $('#subject');
 
+        let valid = true;
+
         if (questionInput.val().trim() === '') {
             $('#question-err').html('Enter question text').show();
-            return;
+            valid = false;
         } else {
             $('#question-err').hide();
         }
@@ -92,7 +92,7 @@ $(function() {
             const otherSubjectInput = $('#other-subject');
             if (otherSubjectInput.val().trim() === '') {
                 $('#othersubject-err').html('Enter subject name').show();
-                return;
+                valid = false;
             } else {
                 $('#othersubject-err').hide();
             }
@@ -106,21 +106,24 @@ $(function() {
 
         if (!hasOption) {
             $('#option-err').html('At least one option is required').show();
-            return;
+            valid = false;
         } else if (!allOptionsFilled) {
             $('#option-err').html('Option text is empty').show();
-            return;
+            valid = false;
         } else if (!hasCorrect) {
             $('#option-err').html('At least one option must be marked as correct').show();
-            return;
+            valid = false;
         } else {
             $('#option-err').hide();
         }
 
-        $('#main-form').trigger('submit');
+        if (!valid) {
+            event.preventDefault();
+        }
+        // If valid, allow form to submit normally
     }
 
-    $('#submit-btn').on('click', handleSubmit);
+    $('#main-form').on('submit', handleSubmit);
 
     $('#add-option-btn').removeClass('hidden').addClass('flex justify-center');
 });

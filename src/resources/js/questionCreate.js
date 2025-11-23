@@ -49,7 +49,7 @@ export function addOption(optionNumber = null) {
 
 // Initialize when document is ready
 $(function() {
-    $('#submit-btn').on('click', validateForm);
+    $('#main-form').on('submit', validateForm);
     handleQuestionTypeChange();
     $('#add-option-btn button').on('click', () => addOption());
 
@@ -64,7 +64,6 @@ $(function() {
 });
 
 export function validateForm(event) {
-    event.preventDefault();
     const questionInput = $('#question');
     const subjectDropdown = $('#subject');
     const optionErr = $('#option-err');
@@ -108,7 +107,8 @@ export function validateForm(event) {
         optionErr.hide();
     }
 
-    if (valid) {
-        $('#main-form').submit();
+    if (!valid) {
+        event.preventDefault();
     }
+    // If valid, allow the form to submit normally
 }

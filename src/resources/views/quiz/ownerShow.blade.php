@@ -1,4 +1,4 @@
-@section('title', __('messages.quizOwnerShow'))
+@section('title', $quiz->id . ' - ' . __('messages.answer_text'))
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">

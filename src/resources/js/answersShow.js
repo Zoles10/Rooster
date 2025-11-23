@@ -55,7 +55,7 @@
 
                 // Mobile card
                 const card = document.createElement('div');
-                card.className = 'bg-white rounded-lg shadow overflow-hidden';
+                card.className = 'bg-white rounded-md shadow overflow-hidden';
                 card.innerHTML = `
                     <div class="p-4">
                         <div class="font-semibold text-lg text-purple-800">${item.user_name}</div>

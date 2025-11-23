@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-md">
             <div class="imp_bg_white p-6">
                 <h1 class="text-2xl font-bold text-gray-900">{{ __('messages.welcome') }}</h1>
             </div>
@@ -9,7 +9,7 @@
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <!-- Enter Access Code Section -->
                     @if (!Auth::id())
-                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
+                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-md mb-6">
                             <div class="p-6 text-gray-900">
                                 <h2 class="text-2xl font-semibold mb-4">@lang('messages.guestWelcomeTitle', [], 'en')</h2>
                                 <ul class="list-disc pl-5 space-y-2">
@@ -27,7 +27,7 @@
                             </div>
                         </div>
                     @else
-                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
+                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-md mb-6">
                             <div class="p-6 text-gray-900">
                                 <h2 class="text-2xl font-semibold mb-4">@lang('messages.enterAccessCode')</h2>
                                 <div class="flex gap-2">
@@ -44,7 +44,7 @@
                         </div>
 
                         <!-- Scan QR Code Section -->
-                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-md">
                             <div class="p-6 text-gray-900">
                                 <h2 class="text-2xl font-semibold mb-4">@lang('messages.scanQrCode')</h2>
                                 <div id="qr-reader" class="w-full"></div>
