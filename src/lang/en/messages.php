@@ -182,4 +182,12 @@ return [
     "guestRegisterToParticipate" => "Register to participate in quizzes",
     "guestCreateOwnQuizzes" => "Create your own quizzes and questions to engage others",
     "guestAddQuestions" => "Build custom question sets and share them with anyone",
+    "quizTitleRequired" => "Quiz title is required",
+    "quizDescriptionRequired" => "Quiz description is required",
+    "atLeastOneQuestionRequired" => "At least one question must be selected",
+    "questionTextRequired" => "Enter question text",
+    "enterSubjectName" => "Enter subject name",
+    "atLeastOneOption" => "At least one option is required",
+    "optionTextEmpty" => "Option text is empty",
+    "atLeastOneCorrect" => "At least one option must be marked as correct",
 ];

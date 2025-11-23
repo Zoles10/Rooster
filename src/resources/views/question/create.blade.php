@@ -88,11 +88,11 @@
         window.LangMessages = {
             correct: "@lang('messages.correct')",
             optionText: "@lang('messages.optionText')",
-            enterQue: "@lang('messages.enterQue')",
+            enterQue: "@lang('messages.questionTextRequired')",
             enterSubjectName: "@lang('messages.enterSubjectName')",
-            atLeastOneOption: "At least one option is required.",
-            optionTextEmpty: "Option text is empty.",
-            atLeastOneCorrect: "At least one option must be marked as correct."
+            atLeastOneOption: "@lang('messages.atLeastOneOption')",
+            optionTextEmpty: "@lang('messages.optionTextEmpty')",
+            atLeastOneCorrect: "@lang('messages.atLeastOneCorrect')"
         };
     </script>
     @vite('resources/js/questionCreate.js')

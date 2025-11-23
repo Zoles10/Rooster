@@ -4,8 +4,57 @@ document.addEventListener('DOMContentLoaded', function() {
     const addAllBtn = document.getElementById('add-all-questions');
     const clearBtn = document.getElementById('clear-selection');
     const mainForm = document.getElementById('main-form');
+    const prevPageBtn = document.getElementById('prev-page');
+    const nextPageBtn = document.getElementById('next-page');
+    const pageInfo = document.getElementById('page-info');
 
     if (!list) return;
+
+    // Pagination settings
+    const itemsPerPage = 10;
+    let currentPage = 1;
+    let allItems = [];
+
+    // Initialize pagination
+    function initPagination() {
+        allItems = Array.from(list.querySelectorAll('.question-item'));
+        if (allItems.length <= itemsPerPage) {
+            // Hide pagination if not needed
+            if (document.getElementById('pagination-controls')) {
+                document.getElementById('pagination-controls').style.display = 'none';
+            }
+        } else {
+            showPage(currentPage);
+        }
+    }
+
+    function showPage(page) {
+        const totalPages = Math.ceil(allItems.length / itemsPerPage);
+        currentPage = Math.max(1, Math.min(page, totalPages));
+
+        const startIdx = (currentPage - 1) * itemsPerPage;
+        const endIdx = startIdx + itemsPerPage;
+
+        // Hide all items
+        allItems.forEach(item => item.style.display = 'none');
+
+        // Show items for current page
+        allItems.slice(startIdx, endIdx).forEach(item => item.style.display = 'flex');
+
+        // Update pagination controls
+        if (prevPageBtn) prevPageBtn.disabled = currentPage === 1;
+        if (nextPageBtn) nextPageBtn.disabled = currentPage === totalPages;
+        if (pageInfo) pageInfo.textContent = `${currentPage} of ${totalPages}`;
+    }
+
+    // Pagination button handlers
+    if (prevPageBtn) {
+        prevPageBtn.addEventListener('click', () => showPage(currentPage - 1));
+    }
+
+    if (nextPageBtn) {
+        nextPageBtn.addEventListener('click', () => showPage(currentPage + 1));
+    }
 
     function hasHiddenFor(id) {
         return !!inputsContainer.querySelector('input[data-selected-input="' + id + '"]');
@@ -27,6 +76,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (input) input.remove();
     }
 
+    // Initialize pagination
+    initPagination();
+
     function setBtnSelectedState(btn, selected) {
         btn.dataset.selected = selected ? '1' : '0';
         if (selected) {
@@ -45,9 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const id = btn.dataset.id;
         const selected = hasHiddenFor(id);
         setBtnSelectedState(btn, selected);
-    });
-
-    // click handler for toggle buttons
+    });    // click handler for toggle buttons
     list.addEventListener('click', function(e) {
         const btn = e.target.closest('.toggle-btn');
         if (!btn) return;
@@ -66,65 +116,74 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // addAll: add hidden inputs for every item and update buttons
+    // addAll: add all questions across all pages
     addAllBtn && addAllBtn.addEventListener('click', function() {
-        const buttons = list.querySelectorAll('.toggle-btn');
-        buttons.forEach(btn => {
-            const id = btn.dataset.id;
-            if (!hasHiddenFor(id)) {
-                createHiddenFor(id);
+        allItems.forEach(item => {
+            const btn = item.querySelector('.toggle-btn');
+            if (btn) {
+                const id = btn.dataset.id;
+                if (!hasHiddenFor(id)) {
+                    createHiddenFor(id);
+                }
+                setBtnSelectedState(btn, true);
             }
-            setBtnSelectedState(btn, true);
         });
     });
 
-    // clear: remove all hidden inputs and reset buttons
+    // clear: remove all hidden inputs and reset all buttons
     clearBtn && clearBtn.addEventListener('click', function() {
         // remove all hidden inputs
         const hiddenInputs = inputsContainer.querySelectorAll('input[data-selected-input]');
         hiddenInputs.forEach(i => i.remove());
 
-        // reset all toggle buttons
-        const buttons = list.querySelectorAll('.toggle-btn');
-        buttons.forEach(btn => setBtnSelectedState(btn, false));
-    });
-
-    // Form validation
+        // reset all toggle buttons across all pages
+        allItems.forEach(item => {
+            const btn = item.querySelector('.toggle-btn');
+            if (btn) setBtnSelectedState(btn, false);
+        });
+    });    // Form validation
     mainForm && mainForm.addEventListener('submit', function(event) {
         const quizInput = document.getElementById('quiz');
         const quizDescriptionInput = document.getElementById('quizDescription');
         const selectedQuestions = inputsContainer.querySelectorAll('input[data-selected-input]');
 
+        // Get translations from window object
+        const messages = window.quizValidationMessages || {
+            quizTitleRequired: 'Quiz title is required',
+            quizDescriptionRequired: 'Quiz description is required',
+            atLeastOneQuestionRequired: 'At least one question must be selected'
+        };
+
         let valid = true;
 
         // Validate quiz title
         if (quizInput && quizInput.value.trim() === '') {
-            document.getElementById('quiz-err').textContent = 'Quiz title is required';
-            document.getElementById('quiz-err').style.display = 'block';
+            document.getElementById('quiz-err').textContent = messages.quizTitleRequired;
+            document.getElementById('quiz-err').classList.remove('hidden');
             valid = false;
         } else {
-            document.getElementById('quiz-err').style.display = 'none';
+            document.getElementById('quiz-err').classList.add('hidden');
         }
 
         // Validate quiz description
         if (quizDescriptionInput && quizDescriptionInput.value.trim() === '') {
-            document.getElementById('quizDescription-err').textContent = 'Quiz description is required';
-            document.getElementById('quizDescription-err').style.display = 'block';
+            document.getElementById('quizDescription-err').textContent = messages.quizDescriptionRequired;
+            document.getElementById('quizDescription-err').classList.remove('hidden');
             valid = false;
         } else {
-            document.getElementById('quizDescription-err').style.display = 'none';
+            document.getElementById('quizDescription-err').classList.add('hidden');
         }
 
         // Validate at least one question is selected
         if (selectedQuestions.length === 0) {
             const questionErr = document.getElementById('question-selection-err');
-            questionErr.textContent = 'At least one question must be selected';
-            questionErr.style.display = 'block';
+            questionErr.textContent = messages.atLeastOneQuestionRequired;
+            questionErr.classList.remove('hidden');
             valid = false;
         } else {
             const questionErr = document.getElementById('question-selection-err');
             if (questionErr) {
-                questionErr.style.display = 'none';
+                questionErr.classList.add('hidden');
             }
         }
 

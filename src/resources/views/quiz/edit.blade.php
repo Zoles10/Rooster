@@ -1,6 +1,13 @@
 @section('title', __('messages.editQuiz'))
 <x-app-layout>
     @vite('resources/js/createQuiz.js')
+    <script>
+        window.quizValidationMessages = {
+            quizTitleRequired: "{{ __('messages.quizTitleRequired') }}",
+            quizDescriptionRequired: "{{ __('messages.quizDescriptionRequired') }}",
+            atLeastOneQuestionRequired: "{{ __('messages.atLeastOneQuestionRequired') }}"
+        };
+    </script>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('messages.editQuiz') }}
@@ -73,7 +80,7 @@
                             @endforeach
                         </div>
 
-                        <div class="flex-1 overflow-auto border rounded p-2">
+                        <div class="flex-1 border rounded p-2">
                             @php
                                 $selected = (array) old('selected_questions', $quiz->questions->pluck('id')->toArray());
                             @endphp
@@ -82,7 +89,7 @@
                                 <ul id="available-list" class="space-y-2">
                                     @foreach ($questions as $question)
                                         @php $isSelected = in_array($question->id, $selected); @endphp
-                                        <li class="flex items-start justify-between bg-gray-50 p-2 rounded available-item"
+                                        <li class="flex items-start justify-between bg-gray-50 p-2 rounded available-item question-item"
                                             data-id="{{ $question->id }}"
                                             data-question="{{ e(\Illuminate\Support\Str::limit($question->question)) }}">
                                             <div class="flex items-start">
@@ -108,6 +115,29 @@
                                         </li>
                                     @endforeach
                                 </ul>
+
+                                <div id="pagination-controls" class="mt-4 flex justify-end">
+                                    <span class="relative z-0 inline-flex rtl:flex-row-reverse shadow-sm rounded-md">
+                                        <button type="button" id="prev-page"
+                                            class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md leading-5 hover:text-gray-400 focus:z-10 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150 disabled:opacity-50 disabled:cursor-default disabled:hover:text-gray-500">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                        <span id="page-info"
+                                            class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5"></span>
+                                        <button type="button" id="next-page"
+                                            class="relative inline-flex items-center px-2 py-2 -ml-px text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md leading-5 hover:text-gray-400 focus:z-10 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150 disabled:opacity-50 disabled:cursor-default disabled:hover:text-gray-500">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                    </span>
+                                </div>
                             @else
                                 <div class="text-sm text-gray-600">@lang('messages.noQuestionsAvailable')</div>
                             @endif

@@ -79,10 +79,19 @@ $(function() {
         const questionInput = $('#question');
         const subjectDropdown = $('#subject');
 
+        // Get translations from window object
+        const messages = window.questionValidationMessages || {
+            questionTextRequired: 'Enter question text',
+            enterSubjectName: 'Enter subject name',
+            atLeastOneOption: 'At least one option is required',
+            optionTextEmpty: 'Option text is empty',
+            atLeastOneCorrect: 'At least one option must be marked as correct'
+        };
+
         let valid = true;
 
         if (questionInput.val().trim() === '') {
-            $('#question-err').html('Enter question text').show();
+            $('#question-err').html(messages.questionTextRequired).show();
             valid = false;
         } else {
             $('#question-err').hide();
@@ -91,7 +100,7 @@ $(function() {
         if (subjectDropdown.val() === '0') {
             const otherSubjectInput = $('#other-subject');
             if (otherSubjectInput.val().trim() === '') {
-                $('#othersubject-err').html('Enter subject name').show();
+                $('#othersubject-err').html(messages.enterSubjectName).show();
                 valid = false;
             } else {
                 $('#othersubject-err').hide();
@@ -105,13 +114,13 @@ $(function() {
         let allOptionsFilled = options.toArray().every(opt => $(opt).val().trim() !== '');
 
         if (!hasOption) {
-            $('#option-err').html('At least one option is required').show();
+            $('#option-err').html(messages.atLeastOneOption).show();
             valid = false;
         } else if (!allOptionsFilled) {
-            $('#option-err').html('Option text is empty').show();
+            $('#option-err').html(messages.optionTextEmpty).show();
             valid = false;
         } else if (!hasCorrect) {
-            $('#option-err').html('At least one option must be marked as correct').show();
+            $('#option-err').html(messages.atLeastOneCorrect).show();
             valid = false;
         } else {
             $('#option-err').hide();

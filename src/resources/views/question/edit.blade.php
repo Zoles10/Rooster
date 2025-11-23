@@ -105,5 +105,14 @@
             </form>
         </div>
     </div>
+    <script>
+        window.questionValidationMessages = {
+            questionTextRequired: "@lang('messages.questionTextRequired')",
+            enterSubjectName: "@lang('messages.enterSubjectName')",
+            atLeastOneOption: "@lang('messages.atLeastOneOption')",
+            optionTextEmpty: "@lang('messages.optionTextEmpty')",
+            atLeastOneCorrect: "@lang('messages.atLeastOneCorrect')"
+        };
+    </script>
     @vite('resources/js/questionEdit.js')
 </x-app-layout>

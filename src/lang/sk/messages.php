@@ -182,5 +182,13 @@ return [
     "guestRegisterToParticipate" => "Zaregistrujte sa a zúčastnite sa kvízov",
     "guestCreateOwnQuizzes" => "Vytvorte si vlastné kvízy a otázky na zapojenie ostatných",
     "guestAddQuestions" => "Zostavte vlastné súbory otázok a zdieľajte ich s kýmkoľvek",
+    "quizTitleRequired" => "Názov kvízu je povinný",
+    "quizDescriptionRequired" => "Popis kvízu je povinný",
+    "atLeastOneQuestionRequired" => "Musí byť vybraná aspoň jedna otázka",
+    "questionTextRequired" => "Zadajte text otázky",
+    "enterSubjectName" => "Zadajte názov predmetu",
+    "atLeastOneOption" => "Požadovaná je aspoň jedna možnosť",
+    "optionTextEmpty" => "Text možnosti je prázdny",
+    "atLeastOneCorrect" => "Aspoň jedna možnosť musí byť označená ako správna",
 ];
 
