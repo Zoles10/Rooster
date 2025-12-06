@@ -5,9 +5,13 @@ export default defineConfig({
     server: {
         host: '0.0.0.0',
         port: 5175,
+        strictPort: true,
+        cors: true,
         hmr: {
             host: 'localhost',
+            protocol: 'ws',
             port: 5175,
+            cors: true
         },
         watch: {
             usePolling: true,
