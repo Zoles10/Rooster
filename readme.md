@@ -6,6 +6,7 @@
 ## Návod na prácu
 
 ### Windows
+Silno odporúčame spúšťať cez WSL2. Dá sa spustiť aj čisto na Windowse, ale aplikácia môže byť citeľne pomalšia.
 
 1. Git clone na WSL2 (linux distro)
 2. Otvoriť projekt vo VSCode/PHPStorm/Vim (aby ste mali terminál rovno v working directory)
@@ -14,9 +15,10 @@
 5. Napíš `composer install` prípadne predtým `composer update`
 6. Napíš `chmod -R 777 storage` pre udelenie práv php kontajneru
 7. Napíš `php artisan migrate:fresh --seed` na naplnenie databázy sample údajmi
-8. Napíš `npm run build` v aby si natiahol CSS a JS, prípadne `npm run dev` ak chceš ďalej programovať
-9. Vystúp z php kontajneru pomocou `exit`
-10. Mal by si mať funkčnú web aplikáciu s dátami
+8. Napíš `npm install` 
+9. Napíš `npm run build` v aby si natiahol CSS a JS, prípadne `npm run dev` ak chceš ďalej programovať
+10. Vystúp z php kontajneru pomocou `exit`
+11. Mal by si mať funkčnú web aplikáciu s dátami na `localhost:8082`
 
 ### Mac
 1. Stačí dať clone do Vami zvoleného adresára a pokračovať s krokom 2.
