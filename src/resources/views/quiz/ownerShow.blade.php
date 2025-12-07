@@ -1,4 +1,4 @@
-@section('title', __('messages.quizOwnerShow'))
+@section('title', $quiz->id . ' - ' . __('messages.answer_text'))
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -44,24 +44,24 @@
                                             {{ $userStat['submitted_at']->format('d.m.Y') }}
                                         </td>
                                         <td class="pl-1 pr-3 py-4 whitespace-nowrap text-sm text-gray-500">
-                                            <div class="grid grid-cols-2 gap-2">
+                                            <div class="flex gap-1 items-center justify-center">
                                                 <form
                                                     action="{{ route('quiz.entry', ['quiz' => $quiz, 'user_name' => $userStat['user_name']]) }}"
-                                                    method="GET"
-                                                    class="w-full h-full flex items-center justify-center">
+                                                    method="GET" class="inline-block">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit"
-                                                        class="bg-red-600 hover:bg-red-700 border border-transparent rounded-md flex items-center justify-center w-9 h-9 text-white transition-colors duration-150">
-                                                        @svg('mdi-delete', 'w-5 h-5')
+                                                    <button type="submit" title="{{ __('messages.delete') }}"
+                                                        class="inline-flex items-center justify-center p-2 h-9 w-9 bg-rose-500 hover:bg-rose-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
+                                                        @svg('mdi-delete-forever-outline', 'w-5 h-5')
+                                                        <span class="sr-only">@lang('messages.delete')</span>
                                                     </button>
                                                 </form>
                                                 <form action="{{ route('quiz.export', [$quiz, $userStat['user']]) }}"
-                                                    method="GET"
-                                                    class="w-full h-full flex items-center justify-center">
-                                                    <button type="submit"
-                                                        class="bg-blue-500 hover:bg-blue-700 border border-transparent rounded-md flex items-center justify-center w-9 h-9 text-white transition-colors duration-150">
+                                                    method="GET" class="inline-block">
+                                                    <button type="submit" title="{{ __('messages.export') }}"
+                                                        class="inline-flex items-center justify-center p-2 h-9 w-9 bg-teal-400 hover:bg-teal-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
                                                         @svg('mdi-file-export', 'w-5 h-5')
+                                                        <span class="sr-only">@lang('messages.export')</span>
                                                     </button>
                                                 </form>
                                             </div>
@@ -70,20 +70,23 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <form action="{{ route('quiz.export_all', $quiz) }}" method="GET"
-                            class="w-full h-full flex items-center justify-center">
-                            <button type="submit"
-                                class="bg-gray-500 hover:bg-gray-700 border border-transparent rounded-md flex items-center justify-center w-9 h-9 text-white transition-colors duration-150">
-                                @svg('mdi-file-export-outline', 'w-5 h-5')
-                            </button>
-                        </form>
+                        <!-- Export All Button -->
+                        <div class="flex justify-center mt-4 pb-4">
+                            <form action="{{ route('quiz.export_all', $quiz) }}" method="GET" class="inline-block">
+                                <button type="submit" title="{{ __('messages.export_all') }}"
+                                    class="inline-flex items-center justify-center px-4 py-2 bg-teal-400 hover:bg-teal-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
+                                    @svg('mdi-file-export-outline', 'w-5 h-5 mr-2')
+                                    @lang('messages.export_all')
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Mobile view -->
-    <div id="mobileTable" class="grid grid-cols-1 gap-4 py-6 px-4 sm:px-6 lg:px-8 lg:hidden">
+    <!-- Mobile View -->
+    <div id="mobileTable" class="grid grid-cols-1 gap-4 lg:hidden">
         @foreach ($userStats as $userStat)
             <div id="{{ $quiz->id }}-{{ $userStat['user_name'] }}"
                 class="bg-white rounded-lg shadow overflow-hidden">
@@ -98,23 +101,25 @@
                         @lang('messages.submittedAt'): {{ $userStat['submitted_at']->format('d.m.Y') }}
                     </div>
 
-                    <div class="mt-4 grid grid-cols-2 gap-2">
+                    <div class="mt-4 flex gap-1 items-center ">
                         <form
                             action="{{ route('quiz.entry', ['quiz' => $quiz, 'user_name' => $userStat['user_name']]) }}"
-                            method="GET" class="w-full h-full flex items-center justify-center">
+                            method="GET" class="inline-block">
                             @csrf
                             @method('DELETE')
-                            <button type="submit"
-                                class="bg-red-600 hover:bg-red-700 border border-transparent rounded-md flex items-center justify-center w-9 h-9 text-white transition-colors duration-150">
-                                @svg('mdi-delete', 'w-5 h-5')
+                            <button type="submit" title="{{ __('messages.delete') }}"
+                                class="inline-flex items-center justify-center p-2 h-9 w-9 bg-rose-500 hover:bg-rose-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
+                                @svg('mdi-delete-forever-outline', 'w-5 h-5')
+                                <span class="sr-only">@lang('messages.delete')</span>
                             </button>
                         </form>
 
                         <form action="{{ route('quiz.export', [$quiz, $userStat['user']]) }}" method="GET"
-                            class="w-full h-full flex items-center justify-center">
-                            <button type="submit"
-                                class="bg-blue-500 hover:bg-blue-700 border border-transparent rounded-md flex items-center justify-center w-9 h-9 text-white transition-colors duration-150">
+                            class="inline-block">
+                            <button type="submit" title="{{ __('messages.export') }}"
+                                class="inline-flex items-center justify-center p-2 h-9 w-9 bg-teal-400 hover:bg-teal-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
                                 @svg('mdi-file-export', 'w-5 h-5')
+                                <span class="sr-only">@lang('messages.export')</span>
                             </button>
                         </form>
                     </div>
@@ -122,12 +127,13 @@
             </div>
         @endforeach
         <!-- export all button for mobile -->
-        <div class="px-2 mt-2">
-            <form action="{{ route('quiz.export_all', $quiz) }}" method="GET">
-                <button type="submit"
-                    class="w-full bg-gray-500 hover:bg-gray-700 border border-transparent rounded-md flex items-center justify-center w-9 h-9 text-white transition-colors duration-150">
-                    @svg('mdi-file-export-outline', 'w-5 h-5')
+        <div class="flex justify-center mt-4">
+            <form action="{{ route('quiz.export_all', parameters: $quiz) }}" method="GET" class="inline-block">
+                <button type="submit" title="{{ __('messages.export_all') }}"
+                    class="inline-flex items-center justify-center px-4 py-2 bg-teal-400 hover:bg-teal-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
+                    @svg('mdi-file-export-outline', 'w-5 h-5 mr-2')
+                    @lang('messages.export_all')
                 </button>
             </form>
-        </div </div>
+        </div>
 </x-app-layout>

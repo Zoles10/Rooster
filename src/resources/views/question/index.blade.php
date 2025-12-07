@@ -41,7 +41,7 @@
             <div class="ml-1">
                 <label for="createQuestion" class="block text-sm font-medium text-gray-700 opacity-0">a</label>
                 <a id="createQuestion" href="{{ route('question.create') }}"
-                    class="mt-1 imp_bg_purple w-full py-2 px-3 border border-gray-30 text-m text-white uppercase hover:text-gray-300 hover:bg-purple-700 active:bg-purple-900 focus:border-purple-900 focus:ring ring-purple-300 disabled:opacity-25 transition ease-in-out duration-150 bg-purple-800 font-semibold rounded-md shadow-sm focus:outline-none sm:text-sm flex items-center justify-center">
+                    class="mt-1 w-full py-2 px-3 border border-gray-30 text-m text-white uppercase hover:text-gray-300 hover:bg-indigo-600 disabled:opacity-25 transition ease-in-out duration-150 bg-indigo-500 font-semibold rounded-md shadow-sm focus:outline-none sm:text-sm flex items-center justify-center">
                     @svg('mdi-plus', 'w-5 h-5 text-gray-100 mr-0.5')
                     @lang('messages.createQuestion')
                 </a>
@@ -88,7 +88,7 @@
                                 <tr class="border">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <a href="{{ route('question.show', $question->id) }}"
-                                            class="text-sm text-gray-900 ">
+                                            class="text-sm font-bold text-black hover:text-gray-500">
                                             {{ \Illuminate\Support\Str::limit($question->question, 10) }}
                                         </a>
                                     </td>
@@ -103,7 +103,7 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <a href="{{ route('answers.show', $question->id) }}"
-                                            class="text-sm text-gray-900">
+                                            class="text-sm font-bold text-indigo-700 hover:text-indigo-900">
                                             @lang('messages.goToResults')
                                         </a>
                                     </td>
@@ -117,7 +117,7 @@
                                                     <input type="hidden" name="active"
                                                         value="{{ $question->active ? '0' : '1' }}">
                                                     <input type="checkbox" name="active_checkbox"
-                                                        class="form-checkbox h-5 w-5 text-indigo-600 mt-3 ml-1 p-2 rounded"
+                                                        class="form-checkbox h-5 w-5 text-indigo-500 mt-3 ml-1 p-2 rounded cursor-pointer hover:text-indigo-600"
                                                         onchange="this.form.submit()" value="{{ $question->id }}"
                                                         {{ $question->active ? 'checked' : '' }}>
                                                     @if (!$question->active)
@@ -145,7 +145,7 @@
                             @csrf
                             @method('POST')
                             <button type="submit" title="{{ __('messages.clone') }}"
-                                class="inline-flex items-center justify-center p-2 h-9 w-9 text-white bg-blue-500 hover:bg-blue-700 rounded-md border border-transparent focus:outline-none">
+                                class="inline-flex items-center justify-center p-2 h-9 w-9 text-white bg-sky-400 hover:bg-sky-600 rounded-md border border-transparent focus:outline-none">
                                 @svg('mdi-content-copy', 'w-5 h-5')
                                 <span class="sr-only">@lang('messages.clone')</span>
                             </button>
@@ -156,7 +156,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit" title="{{ __('messages.delete') }}"
-                                class="inline-flex items-center justify-center p-2 h-9 w-9 text-white bg-red-600 hover:bg-red-700 rounded-md border border-transparent focus:outline-none">
+                                class="inline-flex items-center justify-center p-2 h-9 w-9 text-white bg-rose-500 hover:bg-rose-600 rounded-md border border-transparent focus:outline-none">
                                 @svg('mdi-delete-forever-outline', 'w-5 h-5')
                                 <span class="sr-only">@lang('messages.delete')</span>
                             </button>
@@ -164,14 +164,14 @@
 
                         @if ($question->options()->whereHas('answers')->exists())
                             <a href="{{ route('answers.export', $question->id) }}" title="{{ __('messages.export') }}"
-                                class="inline-flex items-center justify-center p-2 h-9 w-9 text-white bg-gray-600 hover:bg-gray-700 rounded-md border border-transparent focus:outline-none">
-                                @svg('mdi-export-variant', 'w-5 h-5')
+                                class="inline-flex items-center justify-center p-2 h-9 w-9 text-white bg-teal-400 hover:bg-teal-600 rounded-md border border-transparent focus:outline-none">
+                                @svg('mdi-file-export', 'w-5 h-5')
                                 <span class="sr-only">@lang('messages.export')</span>
                             </a>
                         @else
                             <button disabled title="{{ __('messages.export') }}"
-                                class="inline-flex items-center justify-center p-2 h-9 w-9 opacity-40 bg-gray-600 rounded-md border border-transparent">
-                                @svg('mdi-export-variant', 'w-5 h-5')<span class="sr-only">@lang('messages.export')</span>
+                                class="inline-flex items-center justify-center p-2 h-9 w-9 opacity-40 bg-teal-800 rounded-md border border-transparent">
+                                @svg('mdi-file-export', 'w-5 h-5')<span class="sr-only">@lang('messages.export')</span>
                             </button>
                         @endif
                     </div>
@@ -208,8 +208,9 @@
                             @csrf
                             @method('PUT')
                             <input type="checkbox" name="active_checkbox"
-                                class="form-checkbox h-5 w-5 text-indigo-600 rounded" onchange="this.form.submit()"
-                                value="{{ $question->id }}" {{ $question->active ? 'checked' : '' }}>
+                                class="form-checkbox h-5 w-5 text-indigo-500 rounded cursor-pointer hover:text-indigo-600"
+                                onchange="this.form.submit()" value="{{ $question->id }}"
+                                {{ $question->active ? 'checked' : '' }}>
                             <input type="hidden" name="active" value="{{ $question->active ? '0' : '1' }}">
                             @if ($question->active)
                                 <span class="ml-2 text-sm text-gray-600">@lang('messages.active')</span>
@@ -232,7 +233,7 @@
                                 @csrf
                                 @method('POST')
                                 <button type="submit"
-                                    class="inline-flex items-center justify-center h-9 w-9 text-white bg-blue-500 hover:bg-blue-700 rounded-md border border-transparent focus:outline-none"
+                                    class="inline-flex items-center justify-center h-9 w-9 text-white bg-sky-400 hover:bg-sky-600 rounded-md border border-transparent focus:outline-none"
                                     title="{{ __('messages.clone') }}">
                                     @svg('mdi-content-copy', 'w-5 h-5')
                                     <span class="sr-only">@lang('messages.clone')</span>
@@ -242,7 +243,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                    class="inline-flex items-center justify-center h-9 w-9 text-white bg-red-600 hover:bg-red-700 rounded-md border border-transparent focus:outline-none"
+                                    class="inline-flex items-center justify-center h-9 w-9 text-white bg-rose-500 hover:bg-rose-600 rounded-md border border-transparent focus:outline-none"
                                     title="{{ __('messages.delete') }}">
                                     @svg('mdi-delete-forever-outline', 'w-5 h-5')
                                     <span class="sr-only">@lang('messages.delete')</span>
@@ -251,13 +252,13 @@
                             @if ($question->options()->whereHas('answers')->exists())
                                 <a href="{{ route('answers.export', $question->id) }}"
                                     title="{{ __('messages.export') }}"
-                                    class="inline-flex items-center justify-center h-9 w-9 text-white bg-gray-600 hover:bg-gray-700 rounded-md border border-transparent focus:outline-none">
+                                    class="inline-flex items-center justify-center h-9 w-9 text-white bg-teal-400 hover:bg-teal-600 rounded-md border border-transparent focus:outline-none">
                                     @svg('mdi-export-variant', 'w-5 h-5')
                                     <span class="sr-only">@lang('messages.export')</span>
                                 </a>
                             @else
                                 <button disabled
-                                    class="inline-flex items-center justify-center h-9 w-9 opacity-40 bg-gray-600 rounded-md border border-transparent">
+                                    class="inline-flex items-center justify-center h-9 w-9 opacity-40 bg-teal-800 rounded-md border border-transparent">
                                     @svg('mdi-export-variant', 'w-5 h-5')
                                     <span class="sr-only">@lang('messages.export')</span>
                                 </button>

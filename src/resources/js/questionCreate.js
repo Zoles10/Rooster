@@ -1,124 +1,114 @@
+import $ from "jquery";
+
 let optionCount = 4;
 
 export function handleQuestionTypeChange() {
-    const container = document.getElementById('options-container');
-    container.innerHTML = '';
-    const addOptionBtn = document.getElementById('add-option-btn');
+    const container = $('#options-container');
+    container.empty();
+    const addOptionBtn = $('#add-option-btn');
     optionCount = 4;
-    addOptionBtn.classList.remove('hidden');
-    container.innerHTML = '<label class="block text-sm font-medium text-grey">' + window.LangMessages.correct + ':</label>';
+    addOptionBtn.removeClass('hidden');
+    container.html('<label class="block text-sm font-medium text-black">' + window.LangMessages.correct + '</label>');
     for (let i = 0; i < optionCount; i++) {
         addOption(i + 1);
     }
 }
 
 export function addOption(optionNumber = null) {
-    const container = document.getElementById('options-container');
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.name = 'option' + (optionNumber || ++optionCount);
-    input.placeholder = window.LangMessages.optionText;
-    input.className = 'form-control flex-1 h-9 px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black';
+    const container = $('#options-container');
 
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.name = 'isCorrect' + (optionNumber || optionCount);
-    checkbox.className = 'form-checkbox h-5 w-5 text-indigo-600 mr-2 rounded';
+    const input = $('<input>', {
+        type: 'text',
+        name: 'option' + (optionNumber || ++optionCount),
+        placeholder: window.LangMessages.optionText,
+        class: 'text-black form-control mt-1 block w-full px-3 py-2 bg-white border border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm'
+    });
 
-    // Create X button with Tailwind classes only, always 1:1
-    const removeButton = document.createElement('button');
-    removeButton.type = 'button';
-    removeButton.className = 'inline-flex items-center justify-center bg-red-500 hover:bg-red-700 text-white rounded-md w-9 h-9 text-xl font-bold transition-colors duration-150';
-    removeButton.innerHTML = '&times;';
-    removeButton.addEventListener('click', function() {
-        if (optionWrapper.parentNode === container) {
-            container.removeChild(optionWrapper);
+    const checkbox = $('<input>', {
+        type: 'checkbox',
+        name: 'isCorrect' + (optionNumber || optionCount),
+        class: 'form-checkbox imp_checkbox h-5 w-5 text-indigo-500 mt-3 ml-1 p-2 rounded cursor-pointer hover:text-indigo-600'
+    });
+
+    // Create X button with consistent styling from questionEdit
+    const removeButton = $('<button>', {
+        type: 'button',
+        html: '&times;',
+        class: 'bg-rose-500 hover:bg-rose-600 text-white rounded px-2 py-1 ml-2 mt-1 imp_x_btn',
+        click: function() {
+            optionWrapper.remove();
         }
     });
 
-    const optionWrapper = document.createElement('div');
-    optionWrapper.className = 'flex items-center gap-2 mb-3'; // flex + items-center + gap for spacing
-    optionWrapper.appendChild(checkbox);
-    optionWrapper.appendChild(input);
-    optionWrapper.appendChild(removeButton);
-    container.appendChild(optionWrapper);
+    const optionWrapper = $('<div>', {
+        class: 'flex items-center mb-3'
+    }).append(checkbox, input, removeButton);
+
+    container.append(optionWrapper);
 }
 
-// Show/hide "Other Subject" input
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('submit-btn').addEventListener('click', validateForm);
+// Initialize when document is ready
+$(function() {
+    $('#main-form').on('submit', validateForm);
     handleQuestionTypeChange();
-    const addOptionBtn = document.querySelector('#add-option-btn button');
-    if (addOptionBtn) {
-        addOptionBtn.addEventListener('click', () => addOption());
-    }
+    $('#add-option-btn button').on('click', () => addOption());
+
     // Subject dropdown logic
-    const subjectDropdown = document.getElementById('subject');
-    const otherSubjectContainer = document.getElementById('other-subject-container');
-    if (subjectDropdown && otherSubjectContainer) {
-        subjectDropdown.addEventListener('change', function() {
-            if (this.value === '0') {
-                otherSubjectContainer.classList.remove('hidden');
-            } else {
-                otherSubjectContainer.classList.add('hidden');
-            }
-        });
-    }
+    $('#subject').on('change', function() {
+        if (this.value === '0') {
+            $('#other-subject-container').removeClass('hidden');
+        } else {
+            $('#other-subject-container').addClass('hidden');
+        }
+    });
 });
 
 export function validateForm(event) {
-    event.preventDefault();
-    const questionInput = document.getElementById('question');
-    const subjectDropdown = document.getElementById('subject');
-    const optionErr = document.getElementById('option-err');
-    const questionErr = document.getElementById('question-err');
+    const questionInput = $('#question');
+    const subjectDropdown = $('#subject');
+    const optionErr = $('#option-err');
+    const questionErr = $('#question-err');
     let valid = true;
 
-    if (questionInput.value.trim() === '') {
-        questionErr.innerHTML = window.LangMessages.enterQue;
-        questionErr.style.display = 'block';
+    if (questionInput.val().trim() === '') {
+        questionErr.html(window.LangMessages.enterQue).show();
         valid = false;
     } else {
-        questionErr.style.display = 'none';
+        questionErr.hide();
     }
 
-    if (subjectDropdown.value === '0') {
-        const otherSubjectInput = document.getElementById('other-subject');
-        if (otherSubjectInput.value.trim() === '') {
-            let othersubjectErr = document.getElementById('othersubject-err');
-            othersubjectErr.innerHTML = window.LangMessages.enterSubjectName;
-            othersubjectErr.style.display = 'block';
+    if (subjectDropdown.val() === '0') {
+        const otherSubjectInput = $('#other-subject');
+        if (otherSubjectInput.val().trim() === '') {
+            $('#othersubject-err').html(window.LangMessages.enterSubjectName).show();
             valid = false;
         } else {
-            let othersubjectErr = document.getElementById('othersubject-err');
-            othersubjectErr.style.display = 'none';
+            $('#othersubject-err').hide();
         }
     }
 
     // Option validation
-    const options = document.querySelectorAll('#options-container input[type="text"]');
-    const correctCheckboxes = document.querySelectorAll('#options-container input[type="checkbox"]');
+    const options = $('#options-container input[type="text"]');
+    const correctCheckboxes = $('#options-container input[type="checkbox"]');
     let hasOption = options.length > 0;
-    let hasCorrect = Array.from(correctCheckboxes).some(cb => cb.checked);
-    let allOptionsFilled = Array.from(options).every(opt => opt.value.trim() !== '');
+    let hasCorrect = correctCheckboxes.toArray().some(cb => $(cb).is(':checked'));
+    let allOptionsFilled = options.toArray().every(opt => $(opt).val().trim() !== '');
 
     if (!hasOption) {
-        optionErr.innerHTML = window.LangMessages.atLeastOneOption;
-        optionErr.style.display = 'block';
+        optionErr.html(window.LangMessages.atLeastOneOption).show();
         valid = false;
     } else if (!allOptionsFilled) {
-        optionErr.innerHTML = window.LangMessages.optionTextEmpty;
-        optionErr.style.display = 'block';
+        optionErr.html(window.LangMessages.optionTextEmpty).show();
         valid = false;
     } else if (!hasCorrect) {
-        optionErr.innerHTML = window.LangMessages.atLeastOneCorrect;
-        optionErr.style.display = 'block';
+        optionErr.html(window.LangMessages.atLeastOneCorrect).show();
         valid = false;
     } else {
-        optionErr.style.display = 'none';
+        optionErr.hide();
     }
 
-    if (valid) {
-        document.getElementById('main-form').submit();
+    if (!valid) {
+        event.preventDefault();
     }
+    // If valid, allow the form to submit normally
 }

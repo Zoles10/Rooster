@@ -1,22 +1,19 @@
-@section('title', __('messages.quizShow'))
+@section('title', __('messages.quiz') . ' - ' . $quiz->id)
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ $quiz->title }}
-        </h2>
-    </x-slot>
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 m-4">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900">
-                <h3 class="text-lg font-semibold mb-2">{{ $quiz->description }}</h3>
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-md">
+            <div class="imp_bg_white p-6">
+                <h1 class="text-2xl font-bold text-gray-900">{{ $quiz->title }}</h1>
+                <p class="text-gray-600 mt-2">{{ $quiz->description }}</p>
             </div>
 
             <form id="quiz-answer-form" action="{{ route('quiz.submitAnswers', $quiz->id) }}" method="POST" class="p-6">
                 @csrf
 
                 @foreach ($quiz->questions as $index => $question)
-                    <div class="mb-8 p-6 bg-gray-50 rounded-lg border border-gray-200">
-                        <h4 class="text-xl mb-4 font-semibold">{{ $index + 1 }}. {{ $question->question }}</h4>
+                    <div class="mb-8 p-6 bg-gray-50 rounded-md border border-gray-200">
+                        <h4 class="text-xl mb-4 font-semibold text-gray-800">{{ $index + 1 }}.
+                            {{ $question->question }}</h4>
 
                         @php
                             $correctOptionsCount = $question->options->where('correct', 1)->count();
@@ -25,13 +22,15 @@
                             value="{{ $correctOptionsCount }}">
 
                         @foreach ($question->options as $optIndex => $option)
-                            <div class="border p-3 m-2 rounded bg-white border-gray-300">
-                                <input class="form-check-input form-checkbox h-5 w-5 text-indigo-600 ml-1 p-2 rounded"
+                            <div
+                                class="border p-4 m-2 rounded bg-white border-gray-300 hover:border-indigo-300 transition ease-in-out duration-150">
+                                <input
+                                    class="form-check-input form-checkbox h-5 w-5 text-indigo-400 hover:text-indigo-600 ml-1 p-2 rounded cursor-pointer"
                                     type="checkbox" name="answers[{{ $question->id }}][{{ $optIndex }}]"
                                     id="question-{{ $question->id }}-option-{{ $optIndex }}"
                                     value="{{ $option->id }}" data-question-id="{{ $question->id }}"
                                     onclick="limitCheckboxes({{ $question->id }})">
-                                <label class="form-check-label ml-2 text-gray-700"
+                                <label class="form-check-label ml-2 text-gray-700 cursor-pointer"
                                     for="question-{{ $question->id }}-option-{{ $optIndex }}">
                                     {{ $option->option_text }}
                                 </label>
@@ -40,17 +39,22 @@
                     </div>
                 @endforeach
 
-                <div class="flex justify-between items-center mt-6 px-6">
+                <div
+                    class="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center pt-6 border-t border-gray-200">
                     <a href="{{ Auth::check() ? route('quizzes') : route('welcome') }}"
-                        class="px-4 py-2 bg-gray-500 rounded-md text-white hover:bg-gray-600">
+                        class="inline-flex items-center justify-center px-4 py-2 bg-gray-500 hover:bg-gray-700 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
+                        @svg('mdi-arrow-left', 'w-5 h-5 mr-2')
                         @lang('messages.back')
                     </a>
-                    <div class="space-x-2">
-                        <button type="reset" class="px-4 py-2 bg-red-500 rounded-md text-white hover:bg-red-600">
+                    <div class="flex gap-2">
+                        <button type="reset"
+                            class="inline-flex items-center justify-center px-4 py-2 bg-rose-500 hover:bg-rose-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
+                            @svg('mdi-refresh', 'w-5 h-5 mr-2')
                             @lang('messages.clear')
                         </button>
                         <button type="submit" id="submit-quiz-btn"
-                            class="px-4 py-2 bg-blue-500 rounded-md text-white hover:bg-blue-600">
+                            class="inline-flex items-center justify-center px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
+                            @svg('mdi-send', 'w-5 h-5 mr-2')
                             @lang('messages.send')
                         </button>
                     </div>

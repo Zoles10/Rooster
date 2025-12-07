@@ -5,9 +5,13 @@ export default defineConfig({
     server: {
         host: '0.0.0.0',
         port: 5175,
+        strictPort: true,
+        cors: true,
         hmr: {
             host: 'localhost',
+            protocol: 'ws',
             port: 5175,
+            cors: true
         },
         watch: {
             usePolling: true,
@@ -26,7 +30,8 @@ export default defineConfig({
                     'resources/js/welcome.js',
                     'resources/js/quiz.js',
                     'resources/js/showQuestion.js',
-                    'resources/js/createQuestion.js',
+                    'resources/js/createQuiz.js',
+                    'resources/js/questionEdit.js',
                     'resources/js/answersShow.js',
                 ],
             refresh: true,

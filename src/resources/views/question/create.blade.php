@@ -1,10 +1,10 @@
 <x-app-layout>
-    <div class="bg-white min-h-screen flex flex-col items-center justify-center text-white">
-        <div
-            class="imp_margin_04 max-w-xl w-full p-6 md:p-8 bg-gray-100 rounded-lg shadow-lg shadow-gray-400 text-black">
-            <h1 class="text-2xl font-bold mb-5 text-center text-black">@lang('messages.createQuestion')</h1>
-            <form id="main-form" method="POST" action="{{ route('question.store') }}"
-                class="bg-gray-100 p-4 rounded-lg text-black">
+    <div class="bg-white min-h-screen flex flex-col items-center pt-5 text-white">
+        <div class="imp_margin_04 max-w-xl w-full bg-gray-100 rounded-md shadow-lg shadow-gray-400 text-black">
+            <div class="imp_bg_white w-full px-6 md:px-8 py-4 rounded-t-lg">
+                <h1 class="text-2xl font-bold text-center text-black">@lang('messages.createQuestion')</h1>
+            </div>
+            <form id="main-form" method="POST" action="{{ route('question.store') }}" class="p-6 md:p-8 text-black">
                 @csrf
                 <div class="mb-4">
                     <label for="question" class="block text-sm font-medium text-black">@lang('messages.question'):</label>
@@ -57,7 +57,7 @@
                 </div>
                 <span id="option-err" class="imp_invalid_input_text" style="display: none;"></span>
                 <!-- Add Option Button with Inline Styles -->
-                <div id="add-option-btn" class="hidden flex justify-center">
+                <div id="add-option-btn" class="flex justify-center">
                     <button type="button"
                         class="mt-2 p-2 bg-emerald-500 rounded-md text-white hover:bg-emerald-600 flex items-center justify-center"
                         onclick="addOption()">
@@ -75,9 +75,9 @@
                     </a>
                     <!-- Submit Button -->
                     <button type="submit"
-                        class="px-4 py-2 bg-indigo-500 rounded-md text-white flex items-center justify-center hover:bg-indigo-700 transition-colors duration-150"
-                        id="submit-btn">
-                        @svg('mdi-check', 'w-5 h-5')
+                        class="inline-flex items-center justify-center px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
+                        @svg('mdi-content-save', 'w-5 h-5 mr-2')
+                        @lang('messages.submit')
                     </button>
                 </div>
             </form>
@@ -88,11 +88,11 @@
         window.LangMessages = {
             correct: "@lang('messages.correct')",
             optionText: "@lang('messages.optionText')",
-            enterQue: "@lang('messages.enterQue')",
+            enterQue: "@lang('messages.questionTextRequired')",
             enterSubjectName: "@lang('messages.enterSubjectName')",
-            atLeastOneOption: "At least one option is required.",
-            optionTextEmpty: "Option text is empty.",
-            atLeastOneCorrect: "At least one option must be marked as correct."
+            atLeastOneOption: "@lang('messages.atLeastOneOption')",
+            optionTextEmpty: "@lang('messages.optionTextEmpty')",
+            atLeastOneCorrect: "@lang('messages.atLeastOneCorrect')"
         };
     </script>
     @vite('resources/js/questionCreate.js')
