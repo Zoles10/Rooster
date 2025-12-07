@@ -1,0 +1,37 @@
+flowchart TD
+    Guest[👤 Hosť]
+    
+    subgraph System["🐓 Rooster App - Systém"]
+        %% Use cases for guests
+        UC1((Zobraziť úvodnú stránku))
+        UC2((Zmeniť jazyk))
+        UC3((Zobraziť manuál))
+        UC4((Stiahnuť manuál PDF))
+        UC5((Registrovať účet))
+        UC6((Prihlásiť sa))
+        UC7((Zabudnuté heslo))
+        UC8((Obnoviť heslo))
+        UC9((Pristúpiť k kvízu cez kód))
+        UC10((Odpovedať na otázku))
+    end
+    
+    %% Connections (Actor outside system boundary)
+    Guest --- UC1
+    Guest --- UC2
+    Guest --- UC3
+    Guest --- UC4
+    Guest --- UC5
+    Guest --- UC6
+    Guest --- UC7
+    Guest --- UC8
+    Guest --- UC9
+    Guest --- UC10
+    
+    %% Styling for use cases
+    classDef usecase fill:#E3F2FD,stroke:#1976D2,stroke-width:2px,color:#0D47A1
+    classDef actor fill:#FFF3E0,stroke:#F57C00,stroke-width:2px,color:#E65100
+    classDef system fill:#F5F5F5,stroke:#424242,stroke-width:3px,color:#212121
+    
+    class UC1,UC2,UC3,UC4,UC5,UC6,UC7,UC8,UC9,UC10 usecase
+    class Guest actor
+    class System system

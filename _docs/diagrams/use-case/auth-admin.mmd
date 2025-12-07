@@ -1,0 +1,62 @@
+flowchart TD
+    Admin[👑 Administrátor]
+    
+    subgraph System["🐓 Rooster App - Systém"]
+        %% User management
+        UC1((Zobraziť všetkých používateľov))
+        UC2((Vytvoriť používateľa))
+        UC3((Upraviť meno používateľa))
+        UC4((Zmeniť heslo používateľa))
+        UC5((Povýšiť na administrátora))
+        UC6((Zmazať používateľa))
+        UC7((Zobraziť profil používateľa))
+        
+        %% Quiz management
+        UC8((Zobraziť všetky kvízy))
+        UC9((Zmazať akýkoľvek kvíz))
+        UC10((Spravovať všetky kvízy))
+        
+        %% Question management
+        UC11((Zobraziť všetky otázky))
+        UC12((Zmazať akúkoľvek otázku))
+        UC13((Spravovať všetky otázky))
+        
+        %% Inherited user capabilities
+        UC14((Všetky funkcie používateľa))
+        
+        %% Admin dashboard
+        UC15((Administrátorský panel))
+        UC16((Systémové nastavenia))
+    end
+    
+    %% Connections (Actor outside system boundary)
+    Admin --- UC1
+    Admin --- UC2
+    Admin --- UC3
+    Admin --- UC4
+    Admin --- UC5
+    Admin --- UC6
+    Admin --- UC7
+    Admin --- UC8
+    Admin --- UC9
+    Admin --- UC10
+    Admin --- UC11
+    Admin --- UC12
+    Admin --- UC13
+    Admin --- UC14
+    Admin --- UC15
+    Admin --- UC16
+    
+    %% Styling
+    classDef adminUC fill:#FFEBEE,stroke:#D32F2F,stroke-width:2px,color:#B71C1C
+    classDef userMgmt fill:#FFF3E0,stroke:#FF9800,stroke-width:2px,color:#E65100
+    classDef contentMgmt fill:#F1F8E9,stroke:#689F38,stroke-width:2px,color:#33691E
+    classDef systemUC fill:#E8EAF6,stroke:#3F51B5,stroke-width:2px,color:#1A237E
+    classDef actor fill:#FFCDD2,stroke:#D32F2F,stroke-width:3px,color:#B71C1C
+    classDef system fill:#F5F5F5,stroke:#424242,stroke-width:3px,color:#212121
+    
+    class UC1,UC2,UC3,UC4,UC5,UC6,UC7 userMgmt
+    class UC8,UC9,UC10,UC11,UC12,UC13 contentMgmt
+    class UC14,UC15,UC16 systemUC
+    class Admin actor
+    class System system

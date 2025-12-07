@@ -1,0 +1,79 @@
+flowchart TD
+    User[👤 Používateľ]
+    
+    subgraph System["🐓 Rooster App - Systém"]
+        %% Profile management
+        UC1((Upraviť profil))
+        UC2((Zmeniť heslo))
+        UC3((Zmazať účet))
+        UC4((Odhlásiť sa))
+        UC5((Overiť email))
+        
+        %% Quiz management
+        UC6((Zobraziť moje kvízy))
+        UC7((Vytvoriť kvíz))
+        UC8((Upraviť kvíz))
+        UC9((Zmazať kvíz))
+        UC10((Klonovať kvíz))
+        UC11((Zobraziť výsledky kvízu))
+        UC12((Exportovať dáta kvízu))
+        UC13((Odoslať odpovede kvízu))
+        UC14((Porovnať výsledky))
+        
+        %% Question management
+        UC15((Zobraziť moje otázky))
+        UC16((Vytvoriť otázku))
+        UC17((Upraviť otázku))
+        UC18((Zmazať otázku))
+        UC19((Klonovať otázku))
+        UC20((Zobraziť odpovede))
+        UC21((Exportovať odpovede))
+        UC22((Porovnať odpovede))
+        
+        %% General features
+        UC23((Zobraziť manuál))
+        UC24((Stiahnuť manuál))
+        UC25((Zmeniť jazyk))
+    end
+    
+    %% Connections (Actor outside system boundary)
+    User --- UC1
+    User --- UC2
+    User --- UC3
+    User --- UC4
+    User --- UC5
+    User --- UC6
+    User --- UC7
+    User --- UC8
+    User --- UC9
+    User --- UC10
+    User --- UC11
+    User --- UC12
+    User --- UC13
+    User --- UC14
+    User --- UC15
+    User --- UC16
+    User --- UC17
+    User --- UC18
+    User --- UC19
+    User --- UC20
+    User --- UC21
+    User --- UC22
+    User --- UC23
+    User --- UC24
+    User --- UC25
+    
+    %% Styling
+    classDef usecase fill:#E8F5E8,stroke:#388E3C,stroke-width:2px,color:#1B5E20
+    classDef actor fill:#FFF3E0,stroke:#F57C00,stroke-width:2px,color:#E65100
+    classDef profileUC fill:#E3F2FD,stroke:#1976D2,stroke-width:2px,color:#0D47A1
+    classDef quizUC fill:#FCE4EC,stroke:#C2185B,stroke-width:2px,color:#880E4F
+    classDef questionUC fill:#F3E5F5,stroke:#7B1FA2,stroke-width:2px,color:#4A148C
+    classDef system fill:#F5F5F5,stroke:#424242,stroke-width:3px,color:#212121
+    
+    class UC1,UC2,UC3,UC4,UC5 profileUC
+    class UC6,UC7,UC8,UC9,UC10,UC11,UC12,UC13,UC14 quizUC
+    class UC15,UC16,UC17,UC18,UC19,UC20,UC21,UC22 questionUC
+    class UC23,UC24,UC25 usecase
+    class User actor
+    class System system
