@@ -27,7 +27,6 @@ Route::get('/quizzes', [QuizController::class, 'index'])->middleware(['auth', 'v
 // quizzes
 Route::post('/quiz', [QuizController::class, 'store'])->middleware(['auth', 'verified'])->name('quiz.store');
 Route::post('/quiz/{quiz}/submit', [QuizController::class, 'submitAnswers'])->middleware(['auth', 'verified'])->name('quiz.submitAnswers');
-Route::post('/quiz/{quiz}', [QuizController::class, 'show'])->middleware(['auth', 'verified'])->name('quiz.show');
 Route::get('/quiz/create', [QuizController::class, 'create'])->middleware(['auth', 'verified'])->name('quiz.create');
 Route::put('/quiz/{quiz}', [QuizController::class, 'update'])->middleware(['auth', 'verified'])->name('quiz.update');
 Route::post('/quiz/{quiz}', [QuizController::class, 'multiply'])->middleware(['auth', 'verified'])->name('quiz.multiply');

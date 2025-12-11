@@ -11,17 +11,17 @@
                     @if (!Auth::id())
                         <div class="bg-white overflow-hidden shadow-sm sm:rounded-md mb-6">
                             <div class="p-6 text-gray-900">
-                                <h2 class="text-2xl font-semibold mb-4">@lang('messages.guestWelcomeTitle', [], 'en')</h2>
+                                <h2 class="text-2xl font-semibold mb-4">{{ __('messages.guestWelcomeTitle') }}</h2>
                                 <ul class="list-disc pl-5 space-y-2">
-                                    <li>@lang('messages.guestRegisterToParticipate', [], 'en')</li>
-                                    <li>@lang('messages.guestCreateOwnQuizzes', [], 'en')</li>
-                                    <li>@lang('messages.guestAddQuestions', [], 'en')</li>
+                                    <li>{{ __('messages.guestRegisterToParticipate') }}</li>
+                                    <li>{{ __('messages.guestCreateOwnQuizzes') }}</li>
+                                    <li>{{ __('messages.guestAddQuestions') }}</li>
                                 </ul>
                                 <div class="mt-4">
                                     <a href="{{ route('register') }}"
                                         class="inline-flex items-center justify-center px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md border border-transparent focus:outline-none transition ease-in-out duration-150">
                                         @svg('mdi-account-plus', 'w-5 h-5 mr-2')
-                                        @lang('messages.registerNow', [], 'en')
+                                        {{ __('messages.registerNow') }}
                                     </a>
                                 </div>
                             </div>
