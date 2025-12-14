@@ -21,7 +21,7 @@ Silno odporúčame spúšťať cez WSL2. Dá sa spustiť aj čisto na Windowse, 
 10. Vystúp z php kontajneru pomocou `exit`
 11. Mal by si mať funkčnú web aplikáciu s dátami na `localhost:8082`
 
-### Mac
+### MacOS
 
 1. Stačí dať clone do Vami zvoleného adresára a pokračovať s krokom 2.
 

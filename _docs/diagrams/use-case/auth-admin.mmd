@@ -9,7 +9,6 @@ flowchart TD
         UC4((Zmeniť heslo používateľa))
         UC5((Povýšiť na administrátora))
         UC6((Zmazať používateľa))
-        UC7((Zobraziť profil používateľa))
         
         %% Quiz management
         UC8((Zobraziť všetky kvízy))
@@ -36,7 +35,6 @@ flowchart TD
     Admin --- UC4
     Admin --- UC5
     Admin --- UC6
-    Admin --- UC7
     Admin --- UC8
     Admin --- UC9
     Admin --- UC10
@@ -55,7 +53,7 @@ flowchart TD
     classDef actor fill:#FFCDD2,stroke:#D32F2F,stroke-width:3px,color:#B71C1C
     classDef system fill:#F5F5F5,stroke:#424242,stroke-width:3px,color:#212121
     
-    class UC1,UC2,UC3,UC4,UC5,UC6,UC7 userMgmt
+    class UC1,UC2,UC3,UC4,UC5,UC6 userMgmt
     class UC8,UC9,UC10,UC11,UC12,UC13 contentMgmt
     class UC14,UC15,UC16 systemUC
     class Admin actor
